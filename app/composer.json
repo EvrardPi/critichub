@@ -1,0 +1,22 @@
+{
+    "name": "jecap/challenge",
+    "description": "project",
+    "require": {
+        "mpdf/mpdf": "^8.1",
+        "symfony/dotenv": "^3.4",
+        "fakerphp/faker": "^1.22",
+        "maximebf/debugbar": "^1.15",
+        "ramsey/uuid": "^3.9"
+    },
+    "autoload": {
+        "psr-4": {
+                "Jecap\\Challenge\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Umbrenite",
+            "email": "blandin.arthur20@gmail.com"
+        }
+    ]
+}
