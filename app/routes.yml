@@ -25,3 +25,23 @@ logout:
 s-inscrire:
   controller: Auth
   action: register
+
+404:
+  controller: Error
+  action: error404  
+
+403:
+  controller: Error
+  action: error403
+
+500:
+  controller: Error
+  action: error500
+
+401:
+  controller: Error
+  action: error401
+
+410:
+  controller: Error
+  action: error410

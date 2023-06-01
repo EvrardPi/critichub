@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Controllers\Error;
+
 //require "Core/View.php";
 
 spl_autoload_register(function ($class) {
@@ -35,41 +37,54 @@ if(empty($uri)){
 }
 
 if(!file_exists("routes.yml")){
+    $error = new Error();
+    $error->error410();
+    exit;
     die("Le fichier routes.yml n'existe pas");
 }
 
 $routes = yaml_parse_file("routes.yml");
 
 if(empty($routes[$uri])){
-    die("Page 404");
+    $error = new Error();
+    $error->error404();
+    exit;
+    // die("Page 404");
 }
 
 if(empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"]) ){
+    $error = new Error();
+    $error->error403();
+    exit;
     die("Cette route ne possède pas de controller ou d'action dans le fichier de routing");
 }
 
 $controller = $routes[$uri]["controller"];
 $action = $routes[$uri]["action"];
 
-
-// $controller => Auth ou Main
-// $action=> home ou login
-
-
 if(!file_exists("Controllers/".$controller.".php")){
-    die("Le fichier Controllers/".$controller.".php n'existe pas");
+    $error = new Controllers\Error();
+    $error->error500();
+    exit;
+    // die("Le fichier Controllers/".$controller.".php n'existe pas");
 }
 include "Controllers/".$controller.".php";
 
 $controller = "\\App\\Controllers\\".$controller;
 
 if(!class_exists($controller)){
-    die("La classe ".$controller." n'existe pas");
+    $error = new Error();
+    $error->error500();
+    exit;
+    // die("La classe ".$controller." n'existe pas");
 }
 $objController = new $controller();
 
 if(!method_exists($objController, $action)){
-    die("L'action ".$action." n'existe pas");
+    $error = new Error();
+    $error->error500();
+    exit;
+    // die("L'action ".$action." n'existe pas");
 }
 
 $objController->$action();
