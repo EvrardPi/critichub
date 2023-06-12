@@ -9,7 +9,7 @@ class Main
     public function home(): void
     {
         $pseudo = "Prof";
-        $view = new View("Main/home", "front");
+        $view = new View("BackOffice/userGestion", "back");
         $view->assign("pseudo", $pseudo);
         $view->assign("age", 30);
         $view->assign("titleseo", "supernouvellepage");
