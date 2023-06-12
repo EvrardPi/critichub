@@ -1,0 +1,6 @@
+@for $i from 1 through 20 {
+    .container-#{$i*5} {
+        width: percentage($i * 0.05);
+        margin: 0 auto;
+    }
+}
