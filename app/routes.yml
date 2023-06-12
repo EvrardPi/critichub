@@ -2,6 +2,10 @@ default:
   controller: Main
   action: home
 
+media:
+  controller: Main
+  action: media
+  
 a-propos:
   controller: Main
   action: aboutUs

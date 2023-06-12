@@ -6,13 +6,11 @@ use App\Core\View;
 
 class Main
 {
-    public function home(): void
+  
+    public function media(): void
     {
-        $pseudo = "Prof";
-        $view = new View("BackOffice/userGestion", "back");
-        $view->assign("pseudo", $pseudo);
-        $view->assign("age", 30);
-        $view->assign("titleseo", "supernouvellepage");
+        $view = new View("Main/media", "front");
+        $view->assign("pageName", "MédiaName");
     }
 
     public function contact(): void
