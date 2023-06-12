@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    padding-left:0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+body{
+    margin:0;
+    background-color:$blackFont;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+span {
+    font-weight:400;
+}
+
+footer {
+    background-color: $gray;
+    margin-top: 50px !important;
+}

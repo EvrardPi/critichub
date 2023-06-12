@@ -1,0 +1,62 @@
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    nav {
+        position: relative;
+        background-color: $blackFont;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        color: white;
+        background-color: rgb(17, 17, 17);
+
+        .logo {
+            display: flex;
+            flex-direction: row;
+
+            &-title {
+                font-style: normal;
+                font-size: 30px;
+                padding-left: 0.75rem;
+                line-height: 49px;
+                color: $white;
+
+                span {
+                    font-weight: 700;
+                }
+            }
+        }
+
+        .list-of-medias {
+            width: 30vw;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            li {
+                cursor: pointer;
+                padding: 10px;
+                width: 110px;
+                text-align: center;
+                border-radius: 15px;
+                transition: all 0.3s ease;
+                &:hover {
+                    background-color: $red;
+                }
+            }
+        }
+        .menu-nav {
+            li {
+                display: inline;
+                margin: 3px;
+            }
+            .login {
+                font-size: 12px;
+            }
+        }
+    }    
+}

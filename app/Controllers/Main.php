@@ -8,11 +8,14 @@ class Main
 {
     public function home(): void
     {
-        $pseudo = "Prof";
         $view = new View("Main/home", "front");
-        $view->assign("pseudo", $pseudo);
-        $view->assign("age", 30);
-        $view->assign("titleseo", "supernouvellepage");
+        $view->assign("pageName", "CriticHub");
+    }
+
+    public function media(): void
+    {
+        $view = new View("Main/media", "front");
+        $view->assign("pageName", "MédiaName");
     }
 
     public function contact(): void
