@@ -25,6 +25,7 @@
 <section id="movie-description">
 
     <div class="description container-50">
+        <a href="review" class="button button-review">Créer ma review</a>
         <span class="white-text description-title"><i><strong><u>Une humanité détruite</u></strong></i></span>
         <span class="white-text description-subtext">L'humanité a été décimée à la suite de la mutation d'un champignon parasite, le Cordyceps.
             Vingt ans après le début de cette pandémie, Joel, Ellie et Tess, un trio lié par la dureté du monde dans lequel ils vivent, se lancent dans un périple à travers ce qu'il reste des États-Unis.</span>

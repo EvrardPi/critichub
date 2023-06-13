@@ -132,8 +132,8 @@ footer {
       background-color: #FF1B1B;
       opacity: 0.8; }
   .button-review {
-    color: #111111;
-    background-color: #FFFFFF;
+    color: #FFFFFF;
+    background-color: #FF1B1B;
     border-radius: 10px; }
   .button-news-details {
     border-radius: 1rem;
@@ -585,5 +585,36 @@ header {
     flex-direction: column;
     align-items: center;
     font-size: 1rem; }
+
+.elementscms {
+  display: flex;
+  flex-direction: row; }
+
+.container {
+  max-width: 75rem;
+  display: grid;
+  grid-template-columns: repeat(5, auto); }
+  .container-display {
+    grid-template-columns: repeat(1, auto); }
+
+.empty {
+  height: 8rem;
+  width: 15vw;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+
+.fill {
+  cursor: grab; }
+  .fill textarea {
+    resize: none; }
+  .fill img {
+    width: 5vw;
+    height: 5vw; }
+
+.hidden {
+  visibility: hidden; }
 
 /*# sourceMappingURL=main.css.map */

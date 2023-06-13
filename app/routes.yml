@@ -6,6 +6,10 @@ media:
   controller: Main
   action: media
   
+review:
+  controller: Main
+  action: review
+
 a-propos:
   controller: Main
   action: aboutUs
