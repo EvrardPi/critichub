@@ -8,6 +8,24 @@
       </tr>
     </thead>
     <tbody>
+    <?php foreach ($rows as $row): ?>
+        <tr>
+            <td><?php echo $row->getFirstname() . ' ' . $row->getLastname(); ?></td>
+            <td><?php echo $row->getEmail(); ?></td>
+            <td>
+                <button type="button" class="btn btn-warning update-btn" data-id="<?php echo $row->getId(); ?>" data-bs-toggle="modal" data-bs-target="#updateModal">Modifier</button>
+
+            </td>
+            <td>
+                <form method="post" action="delete">
+                    <input type="hidden" name="id" value="<?php echo $row->getId(); ?>">
+                    <button class="btn btn-danger" type="submit">
+                        Supprimer
+                    </button>
+                </form>
+            </td>
+        </tr>
+    <?php endforeach; ?>
     </tbody>
   </table>
 
