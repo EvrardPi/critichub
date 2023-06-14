@@ -18,7 +18,7 @@ abstract class SQL{
 
         //$this->table = static::class;
         $classExploded = explode("\\", get_called_class());
-        $this->table = "esgi_".end($classExploded);
+        $this->table = "paya4_".end($classExploded);
     }
 
     public static function populate(Int $id): object
@@ -63,6 +63,22 @@ abstract class SQL{
 
         $queryPrepared->execute($columns);
 
+    }
+
+    public function delete(Int $id): void
+    {
+
+        if (is_numeric($id) && $id > 0) {
+            $queryPrepared = $this->pdo->prepare("DELETE FROM ".$this->table." WHERE id=".$id);
+            $queryPrepared->execute();
+        }
+    }
+
+    public function getAll(): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM ".$this->table);
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 
 }

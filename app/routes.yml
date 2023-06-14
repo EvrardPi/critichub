@@ -53,3 +53,23 @@ s-inscrire:
 410:
   controller: Error
   action: error410
+
+backoffice:
+  controller: Users
+  action: readUser
+
+create:
+  controller: Users
+  action: createUser
+
+delete:
+  controller: Users
+  action: deleteUser
+
+update:
+  controller: Users
+  action: updateUser
+
+user:
+  controller: Users
+  action: getUser
