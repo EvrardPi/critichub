@@ -3,6 +3,8 @@ services:
   web:
     restart: unless-stopped
     build: configDocker
+    env_file:
+      - .env
     ports :
      - "80:80"
     volumes:
