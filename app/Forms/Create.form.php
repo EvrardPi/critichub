@@ -27,7 +27,8 @@ class Create extends Validator
                     "error"=>"Le prénom doit faire entre 2 et 60 caractères",
                     "min"=>2,
                     "max"=>60,
-                    "required"=>true
+                    "required"=>true,
+                    "value"=>""
                 ],
                 "lastname"=>[
                     "id"=>"register-form-lastname",
@@ -37,7 +38,8 @@ class Create extends Validator
                     "error"=>"Le nom doit faire entre 2 et 120 caractères",
                     "min"=>2,
                     "max"=>120,
-                    "required"=>true
+                    "required"=>true,
+                    "value"=>""
                 ],
                 "email"=>[
                     "id"=>"register-form-email",
@@ -45,32 +47,49 @@ class Create extends Validator
                     "placeholder"=>"Son email",
                     "type"=>"email",
                     "error"=>"L'email est incorrect",
-                    "required"=>true
+                    "required"=>true,
+                    "value"=>""
                 ],
-                "country"=>[
-                    "id"=>"register-form-country",
+
+                "role"=>[
+                    "id"=>"register-form-role",
                     "class"=>"form-input",
-                    "placeholder"=>"Son pays",
-                    "type"=>"texte",
-                    "error"=>"Le pays est incorrect",
-                    "required"=>true
+                    "placeholder"=>"Son statut",
+                    "type"=>"select",
+                    "error"=>"Le statut est incorrect",
+                    "required"=>true,
+                    "options" => [
+                        "1" => "Administrateur",
+                        "2" => "Utilisateur"
+                    ],
+                    "value"=>""
                 ],
-                "pwd"=>[
+                "birth_date" => [
+                    "id" => "register-form-birthdate",
+                    "class" => "form-input",
+                    "placeholder" => "Sa date de naissance",
+                    "type" => "date",
+                    "required" => true,
+                    "value" => ""
+                ],
+                "password"=>[
                     "id"=>"register-form-pwd",
                     "class"=>"form-input",
                     "placeholder"=>"Son mot de passe",
                     "type"=>"password",
                     "error"=>"Le mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
-                    "required"=>true
+                    "required"=>true,
+                    "value"=>""
                 ],
-                "pwdConfirm"=>[
+                "passwordConfirm"=>[
                     "id"=>"register-form-pwd-confirm",
                     "class"=>"form-input",
                     "placeholder"=>"Confirmation",
                     "type"=>"password",
                     "error"=>"Le mot de passe de confirmation ne correspond pas",
                     "required"=>true,
-                    "confirm"=>"pwd"
+                    "confirm"=>"pwd",
+                    "value"=>""
                 ],
             ]
         ];

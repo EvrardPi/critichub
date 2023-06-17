@@ -27,7 +27,9 @@ class Update extends Validator
                     "error"=>"Votre prénom doit faire entre 2 et 60 caractères",
                     "min"=>2,
                     "max"=>60,
-                    "required"=>true
+                    "required"=>true,
+                    "value"=>""
+
                 ],
                 "lastname"=>[
                     "id"=>"update-form-lastname",
@@ -37,7 +39,8 @@ class Update extends Validator
                     "error"=>"Votre nom doit faire entre 2 et 120 caractères",
                     "min"=>2,
                     "max"=>120,
-                    "required"=>true
+                    "required"=>true,
+                    "value"=>""
                 ],
                 "email"=>[
                     "id"=>"update-form-email",
@@ -45,7 +48,8 @@ class Update extends Validator
                     "placeholder"=>"Votre email",
                     "type"=>"email",
                     "error"=>"Votre email est incorrect",
-                    "required"=>true
+                    "required"=>true,
+                    "value"=>""
                 ],
                 "country"=>[
                     "id"=>"update-form-country",
@@ -53,25 +57,10 @@ class Update extends Validator
                     "placeholder"=>"Votre pays",
                     "type"=>"text",
                     "error"=>"Votre pays est incorrect",
-                    "required"=>true
-                ],
-                "pwd"=>[
-                    "id"=>"update-form-pwd",
-                    "class"=>"form-input",
-                    "placeholder"=>"Votre mot de passe",
-                    "type"=>"password",
-                    "error"=>"Votre mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
-                    "required"=>true
-                ],
-                "pwdConfirm"=>[
-                    "id"=>"update-form-pwd-confirm",
-                    "class"=>"form-input",
-                    "placeholder"=>"Confirmation",
-                    "type"=>"password",
-                    "error"=>"Votre mot de passe de confirmation ne correspond pas",
                     "required"=>true,
-                    "confirm"=>"pwd"
+                    "value"=>""
                 ],
+
             ]
         ];
         return $this->config;

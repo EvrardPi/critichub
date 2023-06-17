@@ -1,23 +1,24 @@
 <?php
 
 namespace App\Models;
-
 use App\Core\SQL;
 class User extends SQL
 {
-    private Int $id = 0;
-    protected String $firstname;
-    protected String $lastname;
-    protected String $email;
-    protected String $pwd;
-    protected String $country;
-    protected Int $status = 0;
-    private ?String $date_inserted;
-    private ?String $date_updated;
+    private int $id = 0;
+    public string $firstname;
+    public string $lastname;
+    public string $email;
+    protected string $password;
+    public int $role = 0;
+    protected string $birth_date;
+    private ?string $date_inserted;
+    private ?string $date_updated;
+
 
     public function __construct(){
         parent::__construct();
     }
+
 
     /**
      * @return Int
@@ -33,22 +34,6 @@ class User extends SQL
     public function setId(int $id): void
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return String
-     */
-    public function getFirstname(): string
-    {
-        return $this->firstname;
-    }
-
-    /**
-     * @param String $firstname
-     */
-    public function setFirstname(string $firstname): void
-    {
-        $this->firstname = ucwords(strtolower(trim($firstname)));
     }
 
     /**
@@ -70,6 +55,24 @@ class User extends SQL
     /**
      * @return String
      */
+    public function getFirstname(): string
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param String $firstname
+     */
+    public function setFirstname(string $firstname): void
+    {
+        $this->firstname = ucwords(strtolower(trim($firstname)));
+    }
+
+
+
+    /**
+     * @return String
+     */
     public function getEmail(): string
     {
         return $this->email;
@@ -86,49 +89,47 @@ class User extends SQL
     /**
      * @return String
      */
-    public function getPwd(): string
+    public function getPassword(): string
     {
-        return $this->pwd;
+        return $this->password;
     }
 
     /**
-     * @param String $pwd
+     * @param String $password
      */
-    public function setPwd(string $pwd): void
+    public function setPassword(string $password): void
     {
-        $this->pwd = password_hash($pwd, PASSWORD_DEFAULT);
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
-    /**
-     * @return String
-     */
-    public function getCountry(): string
-    {
-        return $this->country;
-    }
 
-    /**
-     * @param String $country
-     */
-    public function setCountry(string $country): void
-    {
-        $this->country = strtoupper(trim($country));
-    }
+
+
 
     /**
      * @return Int
      */
-    public function getStatus(): int
+    public function getRole(): int
     {
-        return $this->status;
+        return $this->role;
     }
 
     /**
-     * @param Int $status
+     * @param Int $role
      */
-    public function setStatus(int $status): void
+    public function setRole(int $role): void
     {
-        $this->status = $status;
+        $this->role = $role;
+    }
+
+    public function setBirthDate($birthDate)
+    {
+        $this->birth_date = $birthDate;
+    }
+
+    public function getBirthDate()
+    {
+        return $this->birth_date;
     }
 
     /**

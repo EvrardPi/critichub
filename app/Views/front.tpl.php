@@ -15,6 +15,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link href="../../Components/fontawesome/css/fontawesome.css" rel="stylesheet">
+  <link href="../../Components/fontawesome/css/brands.css" rel="stylesheet">
+  <link href="../../Components/fontawesome/css/solid.css" rel="stylesheet">   
 </head>
 
 <body>
@@ -26,20 +29,6 @@
                     <a href="/"><h1 class="logo-title">Critic<span class="red-text">Hub</span></h1></a>
                 </div>
 
-                <ul class="list-of-medias">
-                    <li><a href="#" class="white-text">MOVIES</a></li>
-                    <li><a href="#" class="white-text">SERIES</a></li>
-                    <li><a href="#" class="white-text">TV</a></li>
-                    <li><a href="#" class="white-text">CARTOON</a></li>
-                </ul>
-
-                <ul class="menu-nav">
-                    <li><a href="#" class="button button-register">Inscription</a></li>
-                    <li class="login"><a href="#" class="button button-login">Connexion</a></li>
-                    </li>
-                </ul>
-            </nav>
-        </header>
 
         <!-- inclure la vue -->
         <?php include $this->view; ?>

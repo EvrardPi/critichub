@@ -4,33 +4,33 @@ namespace App\Core;
 
 class Validator
 {
-    private array $data = [];
+    public array $data = [];
     public array $errors = [];
-    public function isSubmited(): bool
+
+    public function __construct()
     {
+        $this->method = $_SERVER["REQUEST_METHOD"];
         $this->data = ($this->method == "POST")?$_POST:$_GET;
-        if(isset($this->data["submit"])){
-            return true;
-        }
-        return false;
     }
+
     public function isValid(): bool
     {
+        $this->config = $this->getConfig();
         //La bonne method ?
         if($_SERVER["REQUEST_METHOD"] != $this->method){
-            die("Tentative de Hack");
+            die("Tentative de Hack youri");
         }
         //Le nb de inputs
         if(count($this->config["inputs"])+1 != count($this->data)){
-            die("Tentative de Hack");
+            die("Tentative de Hack valentin");
         }
 
         foreach ($this->config["inputs"] as $name=>$configInput){
             if(!isset($this->data[$name])){
-                die("Tentative de Hack");
+                die("Tentative de Hack sperme");
             }
             if(isset($configInput["required"]) && self::isEmpty($this->data[$name])){
-                die("Tentative de Hack");
+                die("Tentative de Hack pierre");
             }
             if(isset($configInput["min"]) && !self::isMinLength($this->data[$name], $configInput["min"])){
                 $this->errors[]=$configInput["error"];
