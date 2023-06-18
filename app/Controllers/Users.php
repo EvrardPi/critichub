@@ -15,8 +15,10 @@ class Users
 
     public function view(): void
     {
+        
         $view = new View("BackOffice/userGestion", "back");
         $createForm = new Create();
+        
         $view->assign("createForm", $createForm->getConfig());
         $updateForm = new Update();
         $view->assign("updateForm", $updateForm->getConfig());
@@ -25,7 +27,7 @@ class Users
     public function createUser(): void
     {
         $form = new Create();
-        if (!$form->isValid()){
+        if (!$form->isValid()) {
             echo "error";
             die();
         }
@@ -42,7 +44,7 @@ class Users
     }
 
 
-    public function updateUser($updateForm):void
+    public function updateUser($updateForm): void
     {
         if ($updateForm->isSubmited() && $updateForm->isValid()) {
             $user = new User();

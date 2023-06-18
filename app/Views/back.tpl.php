@@ -63,7 +63,7 @@
   <!-- inclure la vue -->
   <?php include $this->view;?>
   
-  <script src="./assets/js/side-nav-bar.js"></script>
+  <script src="assets/js/side-nav-bar.js"></script>
 </body>
 
 </html>

@@ -4,11 +4,31 @@ namespace App;
 
 use App\Controllers\Error;
 
+
 class Autoloader
 {
 
-    public static function registerAutoload()
+
+    static function autoload($class)
     {
+        // On récupère dans $class la totalité du namespace de la classe concernée (App\Client\Compte)
+        // On retire App\ (Client\Compte)
+        $class = str_replace(__NAMESPACE__ . '\\', '', $class);
+
+        // On remplace les \ par des / 
+        $class = str_replace('\\', '/', $class);
+
+        // On vérifie si le fichier existe
+        $file = __DIR__ . '/' . $class . '.php';
+        if (file_exists($file)) {
+            require_once $file;
+        }
+    }
+    
+    public static function registerAutoload()
+    {   
+
+       
         spl_autoload_register(function ($class) {
             //$class = App\Core\View
             $class = str_replace("App\\", "", $class);
@@ -25,6 +45,11 @@ class Autoloader
             }
         });
 
+
+
+        
+
+    
 
 
 

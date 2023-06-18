@@ -4,7 +4,7 @@ use App\Core\Validator;
 
 class Create extends Validator
 {
-    public $method = "POST";
+    public string $method = "POST";
     protected array $config = [];
     public function getConfig(): array
     {
