@@ -2,6 +2,33 @@
     cursor:pointer;
 }
 
+// Partie CMS User
+.cmsArea{
+    text-align: center;
+
+    &-title {
+        .empty{
+            width:17vw;
+        }
+    }
+
+    &-description {
+        .empty{
+            width:20vw;
+            height:25vh;
+        }
+    }
+
+    &-around{
+        background-color: $light_gray;
+        padding: 2rem;
+        border:3px solid $dark_gray;
+    }
+}
+
+
+
+
 .elementscms{
     display:flex;
     flex-direction: row;
@@ -12,6 +39,8 @@
     position:relative;
     max-width: 75rem;
     display: grid;
+    justify-content: center;
+    align-content: center;
     grid-template-columns: repeat(5, auto);
     &-display {grid-template-columns: repeat(1, auto);}
     
@@ -187,15 +216,102 @@
 
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: $blue_slider;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px $blue_slider;
 }
 
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
+}
+
+//Stars Rating
+.rating {
+    display: inline-block;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    font-size: 50px;
+  }
+  
+  .rating label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .rating label:last-child {
+    position: static;
+  }
+  
+  .rating label:nth-child(1) {
+    z-index: 5;
+  }
+  
+  .rating label:nth-child(2) {
+    z-index: 4;
+  }
+  
+  .rating label:nth-child(3) {
+    z-index: 3;
+  }
+  
+  .rating label:nth-child(4) {
+    z-index: 2;
+  }
+  
+  .rating label:nth-child(5) {
+    z-index: 1;
+  }
+  
+  .rating label input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  
+  .rating label .icon {
+    float: left;
+    color: transparent;
+  }
+  
+  .rating label:last-child .icon {
+    color: #000;
+  }
+  
+  .rating:not(:hover) label input:checked ~ .icon,
+  .rating:hover label:hover input ~ .icon {
+    color: $yellow_mark;
+  }
+  
+  .rating label input:focus:not(:checked) ~ .icon:last-child {
+    color: #000;
+    text-shadow: 0 0 5px $yellow_mark;
+  }
+
+
+// Partie CMS Admin
+.new-admin {
+    textarea{
+        resize: none;
+    }
+
+    &-inside-img{
+        position: absolute;
+        top: 50%; right: 50%;
+        transform: translate(50%,-50%);
+        background-color: transparent;
+        border: none;
+    }
+    &-prompt{
+        border-radius: 2rem;
+    }
+
 }

@@ -18,9 +18,15 @@ class Main
         $view->assign("pageName", "MédiaName");
     }
 
-    public function review(): void
+    public function userReview(): void
     {
-        $view = new View("Main/review", "front");
+        $view = new View("Main/userReview", "front");
+        $view->assign("pageName", "Create a new review");
+    }
+
+    public function adminReview(): void
+    {
+        $view = new View("Main/adminReview", "front");
         $view->assign("pageName", "Review");
     }
 

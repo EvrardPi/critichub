@@ -11,7 +11,7 @@
   <script src="/Views/Modules/datatables.js"></script>
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">   
@@ -22,7 +22,7 @@
         <header id="navbar">
             <nav class="header">
                 <div class="logo">
-                    <img src="./assets/images/logo.svg" alt="logo">
+                    <img src="/assets/images/logo.svg" alt="logo">
                     <a href="/"><h1 class="logo-title">Critic<span class="red-text">Hub</span></h1></a>
                 </div>
 
@@ -47,7 +47,7 @@
 
         <footer>
             <div class="footer footer-logo">
-                <img src="./assets/images/logo.svg" alt="">
+                <img src="/assets/images/logo.svg" alt="">
                 <h2 class="logo-title">Critic<span class="red-text">Hub</span></h2>
             </div>
 
