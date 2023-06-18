@@ -25,7 +25,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY composer* .
 
-RUN composer install
+#RUN composer install
 
 WORKDIR /var/www/html
 

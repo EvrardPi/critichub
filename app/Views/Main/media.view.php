@@ -11,10 +11,10 @@
             <span class="white-text">☆</span>
             <span class="white-text">4.0</span>
         </div>
-        <img class="banner-image" src="../../Components/src/images/tlou-banner.jpg" alt="">
-        <!-- <img class="banner-image" src="../../Components/src/images/white-font.png" alt=""> -->
+        <img class="banner-image" src="assets/images/tlou-banner.jpg" alt="">
+        <!-- <img class="banner-image" src="assets/images/white-font.png" alt=""> -->
         <div class="img-position">
-            <img class="banner-logo" src="../../Components/src/images/the-last-of-us-firefly.svg" alt="logo-game">
+            <img class="banner-logo" src="assets/images/the-last-of-us-firefly.svg" alt="logo-game">
         </div>
     </div>
 
@@ -40,12 +40,12 @@
 
     <div class="actors container-90">
         <div class="horizontal-line horizontal-line-movies">
-            <a href="#"><img src="../../Components/src/images/pedro-pascal.jpg" alt="actor"></a>
-            <a href="#"><img src="../../Components/src/images/pedro-pascal.jpg" alt="actor"></a>
-            <a href="#"><img src="../../Components/src/images/pedro-pascal.jpg" alt="actor"></a>
-            <a href="#"><img src="../../Components/src/images/pedro-pascal.jpg" alt="actor"></a>
-            <a href="#"><img src="../../Components/src/images/pedro-pascal.jpg" alt="actor"></a>
-            <a href="#"><img src="../../Components/src/images/pedro-pascal.jpg" alt="actor"></a>
+            <a href="#"><img src="assets/images/pedro-pascal.jpg" alt="actor"></a>
+            <a href="#"><img src="assets/images/pedro-pascal.jpg" alt="actor"></a>
+            <a href="#"><img src="assets/images/pedro-pascal.jpg" alt="actor"></a>
+            <a href="#"><img src="assets/images/pedro-pascal.jpg" alt="actor"></a>
+            <a href="#"><img src="assets/images/pedro-pascal.jpg" alt="actor"></a>
+            <a href="#"><img src="assets/images/pedro-pascal.jpg" alt="actor"></a>
         </div>
     </div>
 </section>
@@ -56,14 +56,14 @@
             <hr>
                 <div class="critics-content">
                     <div class="critics-user">
-                        <img src="../../Components/src/images/icon-circle-man.png" alt="">
+                        <img src="assets/images/icon-circle-man.png" alt="">
                         <span class="white-text"><b>Umbrenite</b></span>
                     </div>
 
                     <span class="container-40 white-text critics-description">Découvrez un effet visuel à couper le souffle qui ajoutera une touche d'enchantement à votre expérience...</span>
                 
                     <div class="critics-more">
-                        <a href="#"><img src="../../Components/src/images/white-plus-icon.png" alt=""></a>
+                        <a href="#"><img src="assets/images/white-plus-icon.png" alt=""></a>
                         <span class="red-text">Lire la suite</span>
                     </div>
                 </div>
@@ -72,14 +72,14 @@
 
                 <div class="critics-content">
                     <div class="critics-user">
-                        <img src="../../Components/src/images/icon-circle-man.png" alt="">
+                        <img src="assets/images/icon-circle-man.png" alt="">
                         <span class="white-text"><b>Umbrenite</b></span>
                     </div>
 
                     <span class="container-40 white-text critics-description">Découvrez un effet visuel à couper le souffle qui ajoutera une touche d'enchantement à votre expérience...</span>
                 
                     <div class="critics-more">
-                        <a href="#"><img src="../../Components/src/images/white-plus-icon.png" alt=""></a>
+                        <a href="#"><img src="assets/images/white-plus-icon.png" alt=""></a>
                         <span class="red-text">Lire la suite</span>
                     </div>
                 </div>
@@ -88,14 +88,14 @@
 
                 <div class="critics-content">
                     <div class="critics-user">
-                        <img src="../../Components/src/images/icon-circle-man.png" alt="">
+                        <img src="assets/images/icon-circle-man.png" alt="">
                         <span class="white-text"><b>Umbrenite</b></span>
                     </div>
 
                     <span class="container-40 white-text critics-description">Découvrez un effet visuel à couper le souffle qui ajoutera une touche d'enchantement à votre expérience...</span>
                 
                     <div class="critics-more">
-                        <a href="#"><img src="../../Components/src/images/white-plus-icon.png" alt=""></a>
+                        <a href="#"><img src="assets/images/white-plus-icon.png" alt=""></a>
                         <span class="red-text">Lire la suite</span>
                     </div>
                 </div>

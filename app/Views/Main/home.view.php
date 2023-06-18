@@ -2,9 +2,9 @@
     <span id="left-slider-top-arrow"> ◄ </span>
     <div class="slider-container">
         <div class="slider-img">
-            <img id="slide-1" src="./../../Components/src/images/pexels-quark-studio-2507025.jpg" alt="" />
-            <img id="slide-2" src="./../../Components/src/images/pexels-martin-lopez-1117132.jpg" alt="" />
-            <img id="slide-3" src="./../../Components/src/images/pexels-pixabay-269140.jpg" alt="" />
+            <img id="slide-1" src="assets/images/pexels-quark-studio-2507025.jpg" alt="" />
+            <img id="slide-2" src="./assets/images/pexels-martin-lopez-1117132.jpg" alt="" />
+            <img id="slide-3" src="./assets/images/pexels-pixabay-269140.jpg" alt="" />
         </div>
         <div class="slider-navigation">
             <a class="slide-a active" href="#slide-1"></a>
@@ -19,21 +19,21 @@
 
     <div class="container-60 news">
         <div class="news-card">
-            <img src="../../Components/src/images/cyberpunk.jpg" alt="">
+            <img src="assets/images/cyberpunk.jpg" alt="">
             <div class="container-90 news-card-text">Lorem Ispum sheesh Lorem Ispum sheesh Lorem Ispum sheesh
                 Lorem Ispum sheesh Lorem Ispum sheesh Lorem Ispum sheesh</div>
             <a href="#" class="button button-news-details">Plus de détails</a>
         </div>
 
         <div class="news-card">
-            <img src="../../Components/src/images/bleach.jpg" alt="">
+            <img src="assets/images/bleach.jpg" alt="">
             <div class="container-90 news-card-text">Lorem Ispum sheesh Lorem Ispum sheesh Lorem Ispum sheesh
                 Lorem Ispum sheesh Lorem Ispum sheesh Lorem Ispum sheesh</div>
             <a href="#" class="button button-news-details">Plus de détails</a>
         </div>
 
         <div class="news-card">
-            <img src="../../Components/src/images/twd.jpg" alt="">
+            <img src="assets/images/twd.jpg" alt="">
             <div class="container-90 news-card-text">Lorem Ispum sheesh Lorem Ispum sheesh Lorem Ispum sheesh
                 Lorem Ispum sheesh Lorem Ispum sheesh Lorem Ispum sheesh</div>
             <a href="#" class="button button-news-details">Plus de détails</a>
@@ -47,12 +47,12 @@
         <h2 class="white-text">Films populaires</h2>
         <div class="horizontal-line horizontal-line-movies">
             <div class="white-text"> Left </div>
-            <a href="media"><img src="../../Components/src/images/tlou.png" alt=""></a>
-            <img src="../../Components/src/images/tlou.png" alt="">
-            <img src="../../Components/src/images/tlou.png" alt="">
-            <img src="../../Components/src/images/tlou.png" alt="">
-            <img src="../../Components/src/images/tlou.png" alt="">
-            <img src="../../Components/src/images/tlou.png" alt="">
+            <a href="media"><img src="assets/images/tlou.png" alt=""></a>
+            <img src="assets/images/tlou.png" alt="">
+            <img src="assets/images/tlou.png" alt="">
+            <img src="assets/images/tlou.png" alt="">
+            <img src="assets/images/tlou.png" alt="">
+            <img src="assets/images/tlou.png" alt="">
             <div class="white-text"> Right </div>
         </div>
     </div>
@@ -69,21 +69,21 @@
                 <div class="category-text">
                     <h2 class="white-text">Action</h2>
                 </div>
-                <img src="../../Components/src/images/category1.jpg" alt="">
+                <img src="assets/images/category1.jpg" alt="">
             </div>
 
             <div class="category">
                 <div class="category-text">
                     <h2 class="white-text">Disney</h2>
                 </div>
-                <img src="../../Components/src/images/category2.jpg" alt="">
+                <img src="assets/images/category2.jpg" alt="">
             </div>
 
             <div class="category">
                 <div class="category-text">
                     <h2 class="white-text">Horreur</h2>
                 </div>
-                <img src="../../Components/src/images/category3.jpg" alt="">
+                <img src="assets/images/category3.jpg" alt="">
             </div>
 
             <div class="white-text"> Right </div>
@@ -127,14 +127,14 @@
 
         <div class="review">
             <div class="review review-profile">
-                <img src="../../Components/src/images/icon-circle-man.png" alt="">
+                <img src="assets/images/icon-circle-man.png" alt="">
                 <div class="mark white-text">
                     <span class="mark-star">☆</span>
                     <b>5</b>
                 </div>
 
                 <div class="thumbs">
-                    <img src="../../Components/src/images/thumbs-up.png" alt="">
+                    <img src="assets/images/thumbs-up.png" alt="">
                     <span class="white-text">59</span>
                 </div>
             </div>
@@ -150,11 +150,11 @@
 
         <div class="review">
             <div class="review review-profile">
-                <img src="../../Components/src/images/icon-circle-man.png" alt="">
+                <img src="assets/images/icon-circle-man.png" alt="">
                 <span class="mark mark-circle-yellow white-text"><b>3</b></span>
 
                 <div class="thumbs">
-                    <img src="../../Components/src/images/thumbs-up.png" alt="">
+                    <img src="assets/images/thumbs-up.png" alt="">
                     <span class="white-text">59</span>
                 </div>
             </div>
@@ -170,11 +170,11 @@
 
         <div class="review">
             <div class="review review-profile">
-                <img src="../../Components/src/images/icon-circle-man.png" alt="">
+                <img src="assets/images/icon-circle-man.png" alt="">
                 <span class="mark mark-circle-orange white-text"><b>2</b></span>
 
                 <div class="thumbs">
-                    <img src="../../Components/src/images/thumbs-up.png" alt="">
+                    <img src="assets/images/thumbs-up.png" alt="">
                     <span class="white-text">59</span>
                 </div>
             </div>
@@ -190,11 +190,11 @@
 
         <div class="review">
             <div class="review review-profile">
-                <img src="../../Components/src/images/icon-circle-man.png" alt="">
+                <img src="assets/images/icon-circle-man.png" alt="">
                 <span class="mark mark-circle-green white-text"><b>4</b></span>
 
                 <div class="thumbs">
-                    <img src="../../Components/src/images/thumbs-up.png" alt="">
+                    <img src="assets/images/thumbs-up.png" alt="">
                     <span class="white-text">59</span>
                 </div>
             </div>
@@ -209,11 +209,11 @@
         </div>
         <div class="review">
             <div class="review review-profile">
-                <img src="../../Components/src/images/icon-circle-man.png" alt="">
+                <img src="assets/images/icon-circle-man.png" alt="">
                 <span class="mark mark-circle-green white-text"><b>4</b></span>
 
                 <div class="thumbs">
-                    <img src="../../Components/src/images/thumbs-up.png" alt="">
+                    <img src="assets/images/thumbs-up.png" alt="">
                     <span class="white-text">59</span>
                 </div>
             </div>
@@ -229,11 +229,11 @@
 
         <div class="review">
             <div class="review review-profile">
-                <img src="../../Components/src/images/icon-circle-man.png" alt="">
+                <img src="assets/images/icon-circle-man.png" alt="">
                 <span class="mark mark-circle-green white-text"><b>4</b></span>
 
                 <div class="thumbs">
-                    <img src="../../Components/src/images/thumbs-up.png" alt="">
+                    <img src="assets/images/thumbs-up.png" alt="">
                     <span class="white-text">59</span>
                 </div>
             </div>

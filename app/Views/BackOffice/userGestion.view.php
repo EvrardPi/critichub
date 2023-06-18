@@ -48,7 +48,7 @@
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
 
-<script src="/public/js/userBackoffice/userDatatable.js"></script>
+<script src="./assets/js/userBackoffice/userDatatable.js"></script>
 
 <script>
 
