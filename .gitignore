@@ -1,3 +1,6 @@
 app/vendor
 .env
 .DS_Store
+.idea/
+app/.sass-cache
+app/Assets/.sass-cache
