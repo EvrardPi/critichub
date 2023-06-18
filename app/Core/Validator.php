@@ -10,6 +10,7 @@ class Validator
     public function __construct()
     {
         $this->method = $_SERVER["REQUEST_METHOD"];
+
         $this->data = ($this->method == "POST") ? $_POST : $_GET;
     }
 

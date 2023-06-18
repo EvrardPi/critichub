@@ -43,12 +43,14 @@
             </div>
         </div>
 
+
         <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
 
         <script src="/assets/js/userBackoffice/userDatatable.js"></script>
+
 
         <script>
             
