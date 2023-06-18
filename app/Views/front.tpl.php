@@ -29,6 +29,20 @@
                     <a href="/"><h1 class="logo-title">Critic<span class="red-text">Hub</span></h1></a>
                 </div>
 
+                <ul class="list-of-medias">
+                    <li><a href="#" class="white-text">MOVIES</a></li>
+                    <li><a href="#" class="white-text">SERIES</a></li>
+                    <li><a href="#" class="white-text">TV</a></li>
+                    <li><a href="#" class="white-text">CARTOON</a></li>
+                </ul>
+
+                <ul class="menu-nav">
+                    <li><a href="#" class="button button-register">Inscription</a></li>
+                    <li class="login"><a href="#" class="button button-login">Connexion</a></li>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
         <!-- inclure la vue -->
         <?php include $this->view; ?>
