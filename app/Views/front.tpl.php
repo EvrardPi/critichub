@@ -19,7 +19,6 @@
 
 <body>
     <main>
-
         <header id="navbar">
             <nav class="header">
                 <div class="logo">

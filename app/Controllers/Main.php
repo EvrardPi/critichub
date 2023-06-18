@@ -31,7 +31,7 @@ class Main
 
     public function aboutUs(): void
     {
-        echo "Page à propos";
+        $view = new View("Main/test", "back"); //juste pour test le back office
     }
 
 }

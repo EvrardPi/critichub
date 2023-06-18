@@ -251,4 +251,4 @@
 
 </section>
 
-<script type="module" src="../../Components/index..js"></script>
+<script type="module" src="/Components/index.js"></script>
