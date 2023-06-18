@@ -4,16 +4,26 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Forms\Register;
+use App\Forms\Login;
 use App\Models\User;
 
 class Auth
 {
+
+
     public function login(): void
     {
-        echo "Page de connexion";
+        $form = new Login();
+        $view = new View("Auth/login", "front");
+        $view->assign("form", $form->getConfig());
+
+        echo $form->getData()['email'];
+        echo $form->getData()['pwd'];
     }
 
-    public function register(): void
+
+
+    /*public function register(): void
     {
         $form = new Register();
         $view = new View("Auth/register", "front");
@@ -31,9 +41,7 @@ class Auth
             $user->save();
         }
         $view->assign("formErrors", $form->errors);
-
-
-    }
+    }*/
 
     public function logout(): void
     {
