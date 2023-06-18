@@ -4,24 +4,13 @@ namespace App\Core;
 
 class Validator
 {
-    protected array $data = [];
+    public array $data = [];
     public array $errors = [];
-    protected string $method = "POST";
-    protected array $config = [];
 
-    public function setData() {
-        $this->data = ($this->method == "POST") ? $_POST : $_GET;
-    }
-
-    public function getData() {
-        return $this->data;
-    }
-
-
-    public function isSubmited(): bool
+    public function __construct()
     {
-        return (isset($this->data["submit"])) ? true : false;
-
+        $this->method = $_SERVER["REQUEST_METHOD"];
+        $this->data = ($this->method == "POST")?$_POST:$_GET;
     }
 
     public function isValid(): bool

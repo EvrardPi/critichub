@@ -45,7 +45,7 @@ class View {
         if(!file_exists(dirname(__DIR__) ."/Views/Partials/".$name.".ptl.php")){
             die("Le partial ".$name." n'existe pas");
         }
-        include "Views/Partials/".$name.".ptl.php";
+        include dirname(__DIR__) ."/Views/Partials/".$name.".ptl.php";
     }
 
     public function __destruct(){
