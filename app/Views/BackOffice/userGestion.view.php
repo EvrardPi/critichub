@@ -3,7 +3,6 @@
     Créer un nouvel utilisateur
     </button>
     <thead>
-
     <tr>
         <th>Name</th>
         <th>E-mail</th>
@@ -15,8 +14,6 @@
     <tbody>
     </tbody>
 </table>
-
-
 
 <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -42,13 +39,22 @@
             <div class="modal-body">
                 <?php $this->partial("form", $updateForm) ?>
             </div>
-
         </div>
-    </div>s
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 
-<script src="../../public/js/userBackoffice/userDatatable.js" </script>
+
+<script src="/public/js/userBackoffice/userDatatable.js"></script>
+
+<script>
+
+
+</script>
+</body>
+</html>
+
+

@@ -2,7 +2,7 @@
 namespace App\Core;
 
 abstract class SQL{
-
+    private static $instance;
     private $pdo;
     private $table;
 
@@ -19,6 +19,13 @@ abstract class SQL{
         //$this->table = static::class;
         $classExploded = explode("\\", get_called_class());
         $this->table = "paya4_".end($classExploded);
+    }
+    public static function getInstance(): self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 
     public static function populate(Int $id): object
