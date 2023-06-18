@@ -21,16 +21,20 @@ RUN pecl install yaml
 RUN usermod -u 1000 www-data && a2enmod rewrite
 
 # Install composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-COPY composer* .
+# COPY --chown=www-data:www-data composer* .
 
+#USER www-data
 #RUN composer install
 
 WORKDIR /var/www/html
 
-COPY app/* .
+COPY --chown=www-data:www-data app/* .
 
+#USER root
 # Réglage des droits utilisateurs du projet
-RUN chown -R www-data:www-data ./
+# RUN chown -R www-data:www-data ./
 RUN chmod -R 755 ./
+
+USER www-data
