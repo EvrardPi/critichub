@@ -1,43 +1,60 @@
 <table id="myTable" class="table table-striped" style="width:100%">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" ">
+    Créer un nouvel utilisateur
+    </button>
     <thead>
-      <tr>
+    <tr>
         <th>Name</th>
         <th>E-mail</th>
         <th>Role</th>
-        <th>Action</th>
-      </tr>
+        <th>Modifier</th>
+        <th>Supprimer</th>
+    </tr>
     </thead>
     <tbody>
     </tbody>
-  </table>
+</table>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Création d'un utilisateur</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php $this->partial("form", $createForm) ?>
+            </div>
+        </div>
+    </div>
+</div>
 
-  <script>
-    let data = [
-      {
-        name: "Youri le BG",
-        email: "Youri69@gmail.com",
-        role: "Admin",
-        button: "Button"
-      },
-      {
-        name: "Pierre l'aigri",
-        email: "GoldValo@gmail.com",
-        role: "Admin",
-        button: "Button"
-      }
-    ];
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php $this->partial("form", $updateForm) ?>
+            </div>
+        </div>
+    </div>
+</div>
 
-    $(document).ready(function () {
-      $('#myTable').DataTable({
-        data: data,
-        columns: [
-          { data: "name" },
-          { data: "email" },
-          { data: "role" },
-          { data: "button" }
-        ]
-      });
-    });
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+
+
+<script src="/public/js/userBackoffice/userDatatable.js"></script>
+
+<script>
+
+
+</script>
+</body>
+</html>
+
+

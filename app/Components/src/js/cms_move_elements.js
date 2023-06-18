@@ -1,14 +1,16 @@
 const fills = document.querySelectorAll('.fill');
 const empties = document.querySelectorAll('.empty');
+const closeParameters = document.getElementById("closeParameters");
+const parameters = document.getElementById("parameters");
 
 let activeFill = null;
 
 function dragStart() {
-  activeFill = this;
-  this.classList.add('hold');
-  setTimeout(() => {
-    this.classList.add('hidden');
-  }, 0);
+    activeFill = this;
+    this.classList.add('hold');
+    setTimeout(() => {
+      this.classList.add('hidden');
+    }, 0);
 }
 
 function dragEnd() {
@@ -31,10 +33,10 @@ function dragLeave() {
 
 function dragDrop() {
   this.classList.remove('hovered');
-  if (this.children.length === 0) {
+  if (this.children.length === 0 && activeFill !== null) {
     this.append(activeFill);
   } else {
-    e.preventDefault();
+    alert ("Vous ne pouvez pas prendre un élément vide !");
   }
 }
 
@@ -51,3 +53,8 @@ for (const empty of empties) {
   empty.addEventListener('dragleave', dragLeave);
   empty.addEventListener('drop', dragDrop);
 }
+
+
+closeParameters.addEventListener('click', function() {
+  parameters.classList.add("hidden");
+});

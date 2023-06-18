@@ -21,24 +21,27 @@ class Validator
     public function isSubmited(): bool
     {
         return (isset($this->data["submit"])) ? true : false;
+
     }
+
     public function isValid(): bool
     {
+        $this->config = $this->getConfig();
         //La bonne method ?
         if($_SERVER["REQUEST_METHOD"] != $this->method){
-            die("Tentative de Hack");
+            die("Tentative de Hack youri");
         }
         //Le nb de inputs
         if(count($this->config["inputs"])+1 != count($this->data)){
-            die("Tentative de Hack");
+            die("Tentative de Hack valentin");
         }
 
         foreach ($this->config["inputs"] as $name=>$configInput){
             if(!isset($this->data[$name])){
-                die("Tentative de Hack");
+                die("Tentative de Hack sperme");
             }
             if(isset($configInput["required"]) && self::isEmpty($this->data[$name])){
-                die("Tentative de Hack");
+                die("Tentative de Hack pierre");
             }
             if(isset($configInput["min"]) && !self::isMinLength($this->data[$name], $configInput["min"])){
                 $this->errors[]=$configInput["error"];

@@ -2,7 +2,7 @@
 namespace App\Core;
 
 abstract class SQL{
-
+    private static $instance;
     private $pdo;
     private $table;
 
@@ -18,7 +18,14 @@ abstract class SQL{
 
         //$this->table = static::class;
         $classExploded = explode("\\", get_called_class());
-        $this->table = "esgi_".end($classExploded);
+        $this->table = "paya4_".end($classExploded);
+    }
+    public static function getInstance(): self
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
     }
 
     public static function populate(Int $id): object
@@ -63,6 +70,22 @@ abstract class SQL{
 
         $queryPrepared->execute($columns);
 
+    }
+
+    public function delete(Int $id): void
+    {
+
+        if (is_numeric($id) && $id > 0) {
+            $queryPrepared = $this->pdo->prepare("DELETE FROM ".$this->table." WHERE id=".$id);
+            $queryPrepared->execute();
+        }
+    }
+
+    public function getAll(): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM ".$this->table);
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
     }
 
 }
