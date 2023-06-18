@@ -12,11 +12,11 @@
                 </div>
 
                 <div class="empty">
-                    <span class="fill"><img src="/Components/src/images/logo.svg" alt=""></span>
+                    <span class="fill"><img src="assets/images/logo.svg" alt=""></span>
                 </div>
 
                 <div class="empty">
-                    <span class="fill"><img src="/Components/src/images/icon-circle-man.png" alt=""></span>
+                    <span class="fill"><img src="assets/images/icon-circle-man.png" alt=""></span>
                 </div>
             </div>
             
@@ -112,5 +112,5 @@
 
         </div>
     </section>
-    <script src="../../Components/src/js/cms_move_elements.js"></script>
+    <script src="assets/js/cms_move_elements.js"></script>
 </div>
