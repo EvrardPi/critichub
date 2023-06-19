@@ -147,6 +147,9 @@ footer {
     border: solid 2px #111111;
     color: #111111;
     padding: 0.3rem 1rem; }
+  .button-submit {
+    display: flex;
+    justify-content: center; }
 
 header {
   position: sticky;
@@ -319,33 +322,6 @@ header {
       font-size: 1rem;
       padding-top: 1rem;
       text-align: center; }
-
-.horizontal-line {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 5rem; }
-  .horizontal-line img {
-    border-radius: 0.8rem; }
-  .horizontal-line-movies img {
-    width: 13vw;
-    height: 39vh;
-    filter: brightness(100%);
-    transition: all 0.5s ease; }
-    .horizontal-line-movies img:hover {
-      filter: brightness(40%); }
-  .horizontal-line-categories img {
-    width: 25vw;
-    height: 25vh; }
-  .horizontal-line-categories .category {
-    position: relative; }
-    .horizontal-line-categories .category-text {
-      position: absolute;
-      bottom: 0;
-      left: 1vw;
-      font-size: 1.2rem; }
 
 .sliderContainer {
   align-self: center;
@@ -591,6 +567,33 @@ header {
     align-items: center;
     font-size: 1rem; }
 
+.horizontal-line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 5rem; }
+  .horizontal-line img {
+    border-radius: 0.8rem; }
+  .horizontal-line-movies img {
+    width: 13vw;
+    height: 39vh;
+    filter: brightness(100%);
+    transition: all 0.5s ease; }
+    .horizontal-line-movies img:hover {
+      filter: brightness(40%); }
+  .horizontal-line-categories img {
+    width: 25vw;
+    height: 25vh; }
+  .horizontal-line-categories .category {
+    position: relative; }
+    .horizontal-line-categories .category-text {
+      position: absolute;
+      bottom: 0;
+      left: 1vw;
+      font-size: 1.2rem; }
+
 .closeParamaters {
   cursor: pointer; }
 
@@ -807,7 +810,10 @@ input:checked + .slider:before {
   text-shadow: 0 0 5px #EBFF00; }
 
 .new-admin textarea {
-  resize: none; }
+  resize: none;
+  background-color: transparent;
+  border: none;
+  color: white; }
 .new-admin-inside-img {
   position: absolute;
   top: 50%;
@@ -817,5 +823,10 @@ input:checked + .slider:before {
   border: none; }
 .new-admin-prompt {
   border-radius: 2rem; }
+.new-admin-logo img {
+  width: 8vw; }
+.new-admin-actor img {
+  width: 10vw;
+  height: 30vh; }
 
 /*# sourceMappingURL=main.css.map */

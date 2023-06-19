@@ -301,6 +301,9 @@ input:checked + .slider:before {
 .new-admin {
     textarea{
         resize: none;
+        background-color:transparent;
+        border:none;
+        color:white;
     }
 
     &-inside-img{
@@ -312,6 +315,19 @@ input:checked + .slider:before {
     }
     &-prompt{
         border-radius: 2rem;
+    }
+
+    &-logo{
+      img{
+        width:8vw;
+      }
+    }
+
+    &-actor{
+      img{
+        width:10vw;
+        height:30vh;
+      }
     }
 
 }

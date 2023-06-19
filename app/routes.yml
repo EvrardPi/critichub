@@ -7,11 +7,11 @@ media:
   action: media
   
 create-review:
-  controller: Main
+  controller: Cms
   action: userReview
 
 new-admin-review:
-  controller: Main
+  controller: Cms
   action: adminReview
 
 a-propos:

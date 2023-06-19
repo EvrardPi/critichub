@@ -47,4 +47,9 @@
         color:$blackFont;
         padding: 0.3rem 1rem;
     }
+
+    &-submit{
+        display: flex;
+        justify-content: center;
+    }
 }
