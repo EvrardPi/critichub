@@ -2,7 +2,7 @@
 namespace App\Forms;
 use App\Core\Validator;
 
-class Create extends Validator
+class Update extends Validator
 {
     public $method = "POST";
     protected array $config = [];
@@ -11,48 +11,57 @@ class Create extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"create",
-                "id"=>"register-form",
-                "class"=>"create",
+                "action"=>"update",
+                "id"=>"update-form",
+                "class"=>"updateForm",
                 "enctype"=>"",
-                "submit"=>"Créer",
-
+                "submit"=>"Mettre à jour",
+                "reset"=>"Annuler"
             ],
             "inputs"=>[
-                "firstname"=>[
-                    "id"=>"register-form-firstname",
+                "id"=>[
+                    "id"=>"update-form-id",
                     "class"=>"form-input",
-                    "placeholder"=>"Son prénom",
+                    "placeholder"=>"Son id",
+                    "type"=>"hidden",
+                    "error"=>"L'id est incorrect",
+                    "required"=>true,
+                    "value"=>""
+                ],
+                "firstname"=>[
+                    "id"=>"update-form-firstname",
+                    "class"=>"form-input",
+                    "placeholder"=>"Votre prénom",
                     "type"=>"text",
-                    "error"=>"Le prénom doit faire entre 2 et 60 caractères",
+                    "error"=>"Votre prénom doit faire entre 2 et 60 caractères",
                     "min"=>2,
                     "max"=>60,
                     "required"=>true,
                     "value"=>""
+
                 ],
                 "lastname"=>[
-                    "id"=>"register-form-lastname",
+                    "id"=>"update-form-lastname",
                     "class"=>"form-input",
-                    "placeholder"=>"Son nom",
+                    "placeholder"=>"Votre nom",
                     "type"=>"text",
-                    "error"=>"Le nom doit faire entre 2 et 120 caractères",
+                    "error"=>"Votre nom doit faire entre 2 et 120 caractères",
                     "min"=>2,
                     "max"=>120,
                     "required"=>true,
                     "value"=>""
                 ],
                 "email"=>[
-                    "id"=>"register-form-email",
+                    "id"=>"update-form-email",
                     "class"=>"form-input",
-                    "placeholder"=>"Son email",
+                    "placeholder"=>"Votre email",
                     "type"=>"email",
-                    "error"=>"L'email est incorrect",
+                    "error"=>"Votre email est incorrect",
                     "required"=>true,
                     "value"=>""
                 ],
-
                 "role"=>[
-                    "id"=>"register-form-role",
+                    "id"=>"update-form-role",
                     "class"=>"form-input",
                     "placeholder"=>"Son statut",
                     "type"=>"select",
@@ -65,32 +74,16 @@ class Create extends Validator
                     "value"=>""
                 ],
                 "birth_date" => [
-                    "id" => "register-form-birthdate",
+                    "id" => "update-form-birth_date",
                     "class" => "form-input",
                     "placeholder" => "Sa date de naissance",
                     "type" => "date",
                     "required" => true,
                     "value" => ""
                 ],
-                "password"=>[
-                    "id"=>"register-form-pwd",
-                    "class"=>"form-input",
-                    "placeholder"=>"Son mot de passe",
-                    "type"=>"password",
-                    "error"=>"Le mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
-                    "required"=>true,
-                    "value"=>""
-                ],
-                "passwordConfirm"=>[
-                    "id"=>"register-form-pwd-confirm",
-                    "class"=>"form-input",
-                    "placeholder"=>"Confirmation",
-                    "type"=>"password",
-                    "error"=>"Le mot de passe de confirmation ne correspond pas",
-                    "required"=>true,
-                    "confirm"=>"pwd",
-                    "value"=>""
-                ],
+
+
+
             ]
         ];
         return $this->config;

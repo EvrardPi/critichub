@@ -11,9 +11,9 @@ class Register extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"create",
+                "action"=>"s-inscrire",
                 "id"=>"register-form",
-                "class"=>"create",
+                "class"=>"register",
                 "enctype"=>"",
                 "submit"=>"Créer",
 
@@ -50,16 +50,6 @@ class Register extends Validator
                     "required"=>true,
                     "value"=>""
                 ],
-                "country"=>[
-                    "id"=>"register-form-country",
-                    "class"=>"form-input",
-                    "placeholder"=>"Son pays",
-                    "type"=>"texte",
-                    "error"=>"Le pays est incorrect",
-                    "required"=>true,
-                    "value"=>""
-                ],
-
                 "birth_date" => [
                     "id" => "register-form-birthdate",
                     "class" => "form-input",

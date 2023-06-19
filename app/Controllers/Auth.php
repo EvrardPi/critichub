@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Core\Validator;
 use App\Core\View;
 use App\Forms\Register;
 use App\Forms\Login;
@@ -23,25 +24,28 @@ class Auth
 
 
 
-    /*public function register(): void
+    public function register(): void
     {
-        $form = new Register();
         $view = new View("Auth/register", "front");
+        $form = new Register();
         $view->assign("form", $form->getConfig());
-        $user = new User();
+        $view->assign("pageName", "Inscription");
 
-        //Form validé ? et correct ?
-        if ($form->isSubmited() && $form->isValid()) {
+        if (!$form->isValid()){
+            echo "error";
+            die();
+        }
+            $user = new User();
             $user->setFirstname($_POST['firstname']);
             $user->setLastname($_POST['lastname']);
             $user->setEmail($_POST['email']);
-            $user->setCountry($_POST['country']);
             $user->setPassword($_POST['password']);
             $user->setBirthDate($_POST['birth_date']);
+        $user->setRole($_POST['role']);
             $user->save();
-        }
-        $view->assign("formErrors", $form->errors);
-    }*/
+
+
+    }
 
     public function logout(): void
     {
