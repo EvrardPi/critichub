@@ -1,3 +1,4 @@
+// ------------------------------ ANIMATION OPACITY ------------------------------
 @keyframes fadeIn {
     from { 
       opacity:0;
@@ -7,6 +8,8 @@
     }
 }
 
+
+// ------------------------------ MEDIA PAGE BANNER ------------------------------
 .banner {
     box-shadow: inset 0 0 250px 200px $blackFont;
 
@@ -48,6 +51,8 @@
     animation:fadeIn 1s ease-in;
 }
 
+
+// ------------------------------ MEDIA DESCRIPTION ------------------------------
 .description {
     display: flex;
     align-items: center; 
@@ -66,57 +71,7 @@
     }
 }
 
-.main-actors{
-    display: flex;
-    justify-content: center;
-    font-size: 1.5rem;
-}
-
-.critics {
-    display:flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-size: 1.5rem;
-    hr{
-        width:100%;
-        border:1px solid $dark_gray
-    }
-
-    &-content{
-        display:flex;
-        justify-content: space-around;
-        align-items: center;
-        width:100%;
-        padding: 1rem 0;
-    }
-
-    &-user{
-        display:flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-        img{
-            width: 5rem;
-            height: 5rem;
-            border-radius: 50%;
-            margin-right: 1rem;
-        }
-    }
-
-    &-description{
-        font-size: 1.2rem;
-    }
-
-    &-more{
-        display:flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        font-size:1rem;
-    }
-}
-
-
+// ------------------------------ ACTORS LIST ------------------------------
 .horizontal-line {
     display: flex;
     flex-direction: row;
@@ -163,4 +118,57 @@
 
     }
 
+}
+
+.main-actors{
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+
+
+// ------------------------------ CRITICS ------------------------------
+.critics {
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.5rem;
+    hr{
+        width:100%;
+        border:1px solid $dark_gray
+    }
+
+    &-content{
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        width:100%;
+        padding: 1rem 0;
+    }
+
+    &-user{
+        display:flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        img{
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+    }
+
+    &-description{
+        font-size: 1.2rem;
+    }
+
+    &-more{
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        font-size:1rem;
+    }
 }

@@ -1,8 +1,5 @@
-.closeParamaters{
-    cursor:pointer;
-}
 
-// Partie CMS User
+// ------------------------------ USER CMS ------------------------------
 .cmsArea{
     text-align: center;
 
@@ -26,15 +23,13 @@
     }
 }
 
-
-
-
 .elementscms{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
+// ------------------------------ CONTAINER WITH EMPTY SPACES TO PUT ELEMENTS IN ------------------------------
 .container {
     position:relative;
     max-width: 75rem;
@@ -73,6 +68,8 @@
     visibility: hidden;
  }
 
+
+// ------------------------------ PARAMETERS FROM USER CMS ------------------------------
  .parameters {
     background-color:$light_gray;
     display:flex;
@@ -167,137 +164,11 @@
     }
 }
 
-
- /* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  
-  input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+.closeParamaters{
+  cursor:pointer;
 }
 
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-
-  &.round {
-    border-radius: 34px;
-    &:before {
-      border-radius: 50%;
-    }
-  }
-
-  &:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-}
-
-
-input:checked + .slider {
-  background-color: $blue_slider;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px $blue_slider;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-//Stars Rating
-.rating {
-    display: inline-block;
-    position: relative;
-    height: 50px;
-    line-height: 50px;
-    font-size: 50px;
-  }
-  
-  .rating label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    cursor: pointer;
-  }
-  
-  .rating label:last-child {
-    position: static;
-  }
-  
-  .rating label:nth-child(1) {
-    z-index: 5;
-  }
-  
-  .rating label:nth-child(2) {
-    z-index: 4;
-  }
-  
-  .rating label:nth-child(3) {
-    z-index: 3;
-  }
-  
-  .rating label:nth-child(4) {
-    z-index: 2;
-  }
-  
-  .rating label:nth-child(5) {
-    z-index: 1;
-  }
-  
-  .rating label input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-  }
-  
-  .rating label .icon {
-    float: left;
-    color: transparent;
-  }
-  
-  .rating label:last-child .icon {
-    color: #000;
-  }
-  
-  .rating:not(:hover) label input:checked ~ .icon,
-  .rating:hover label:hover input ~ .icon {
-    color: $yellow_mark;
-  }
-  
-  .rating label input:focus:not(:checked) ~ .icon:last-child {
-    color: #000;
-    text-shadow: 0 0 5px $yellow_mark;
-  }
-
-
-// Partie CMS Admin
+// ------------------------------ ADMIN CMS ------------------------------
 .new-admin {
     textarea{
         resize: none;
