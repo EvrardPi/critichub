@@ -18,12 +18,6 @@ class Main
         $view->assign("pageName", "MédiaName");
     }
 
-    public function review(): void
-    {
-        $view = new View("Main/review", "front");
-        $view->assign("pageName", "Review");
-    }
-
     public function contact(): void
     {
         echo "Page de contact";

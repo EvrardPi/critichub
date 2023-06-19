@@ -6,9 +6,13 @@ media:
   controller: Main
   action: media
   
-review:
-  controller: Main
-  action: review
+create-review:
+  controller: Cms
+  action: userReview
+
+new-admin-review:
+  controller: Cms
+  action: adminReview
 
 a-propos:
   controller: Main

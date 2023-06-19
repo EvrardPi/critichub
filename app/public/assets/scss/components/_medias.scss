@@ -1,3 +1,4 @@
+// ------------------------------ ANIMATION OPACITY ------------------------------
 @keyframes fadeIn {
     from { 
       opacity:0;
@@ -7,6 +8,8 @@
     }
 }
 
+
+// ------------------------------ MEDIA PAGE BANNER ------------------------------
 .banner {
     box-shadow: inset 0 0 250px 200px $blackFont;
 
@@ -48,6 +51,8 @@
     animation:fadeIn 1s ease-in;
 }
 
+
+// ------------------------------ MEDIA DESCRIPTION ------------------------------
 .description {
     display: flex;
     align-items: center; 
@@ -66,12 +71,64 @@
     }
 }
 
+// ------------------------------ ACTORS LIST ------------------------------
+.horizontal-line {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom:5rem;
+
+    img {
+        border-radius: 0.8rem;
+    }
+
+
+    &-movies {
+        img {
+            width: 13vw;
+            height: 39vh;
+            filter: brightness(100%);
+            transition: all 0.5s ease;
+
+            &:hover {
+                filter: brightness(40%);
+            }
+        }
+    }
+
+    &-categories {
+
+        img {
+            width: 25vw;
+            height: 25vh;
+        }
+
+        .category {
+            position: relative;
+
+            &-text {
+                position: absolute;
+                bottom: 0;
+                left: 1vw;
+                font-size: 1.2rem;
+            }
+        }
+
+    }
+
+}
+
 .main-actors{
     display: flex;
     justify-content: center;
     font-size: 1.5rem;
 }
 
+
+
+// ------------------------------ CRITICS ------------------------------
 .critics {
     display:flex;
     flex-direction: column;
