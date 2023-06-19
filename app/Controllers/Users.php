@@ -42,18 +42,30 @@ class Users
     }
 
 
-    public function updateUser($updateForm):void
+    public function updateUser(): void
     {
-        if ($updateForm->isSubmited() && $updateForm->isValid()) {
-            $user = new User();
-            $user->setId($_POST['update-form-id']);
-            $user->setFirstname($_POST['update-form-firstname']);
-            $user->setLastname($_POST['update-form-lastname']);
-            $user->setEmail($_POST['update-form-email']);
-            $user->setBirthDate($_POST['birth_date']);
-            $user->save();
+        $form = new Update();
+        if (!$form->isValid()) {
+            echo "error";
+            die();
         }
+        $formdata = $form->data;
+
+
+        $user = User::populate($formdata['id']); // Récupérer l'utilisateur à partir de la base de données*/
+
+        // Mettre à jour les propriétés de l'utilisateur
+        $user->setFirstname($formdata['firstname']);
+        $user->setLastname($formdata['lastname']);
+        $user->setEmail($formdata['email']);
+        $user->setRole($formdata['role']);
+        $user->setBirthDate($formdata['birth_date']);
+
+        // Enregistrer les modifications dans la base de données
+        $user->save();
+        $this->view();
     }
+
 
     public function getUser()
     {

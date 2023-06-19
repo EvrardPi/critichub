@@ -12,7 +12,7 @@ class Create extends Validator
             "config"=>[
                 "method"=>$this->method,
                 "action"=>"create",
-                "id"=>"register-form",
+                "id"=>"create-form",
                 "class"=>"create",
                 "enctype"=>"",
                 "submit"=>"Créer",
@@ -20,7 +20,7 @@ class Create extends Validator
             ],
             "inputs"=>[
                 "firstname"=>[
-                    "id"=>"register-form-firstname",
+                    "id"=>"create-form-firstname",
                     "class"=>"form-input",
                     "placeholder"=>"Son prénom",
                     "type"=>"text",
@@ -31,7 +31,7 @@ class Create extends Validator
                     "value"=>""
                 ],
                 "lastname"=>[
-                    "id"=>"register-form-lastname",
+                    "id"=>"create-form-lastname",
                     "class"=>"form-input",
                     "placeholder"=>"Son nom",
                     "type"=>"text",
@@ -42,7 +42,7 @@ class Create extends Validator
                     "value"=>""
                 ],
                 "email"=>[
-                    "id"=>"register-form-email",
+                    "id"=>"create-form-email",
                     "class"=>"form-input",
                     "placeholder"=>"Son email",
                     "type"=>"email",
@@ -52,7 +52,7 @@ class Create extends Validator
                 ],
 
                 "role"=>[
-                    "id"=>"register-form-role",
+                    "id"=>"create-form-role",
                     "class"=>"form-input",
                     "placeholder"=>"Son statut",
                     "type"=>"select",
@@ -65,7 +65,7 @@ class Create extends Validator
                     "value"=>""
                 ],
                 "birth_date" => [
-                    "id" => "register-form-birthdate",
+                    "id" => "create-form-birthdate",
                     "class" => "form-input",
                     "placeholder" => "Sa date de naissance",
                     "type" => "date",
@@ -73,7 +73,7 @@ class Create extends Validator
                     "value" => ""
                 ],
                 "password"=>[
-                    "id"=>"register-form-pwd",
+                    "id"=>"create-form-pwd",
                     "class"=>"form-input",
                     "placeholder"=>"Son mot de passe",
                     "type"=>"password",
@@ -82,7 +82,7 @@ class Create extends Validator
                     "value"=>""
                 ],
                 "passwordConfirm"=>[
-                    "id"=>"register-form-pwd-confirm",
+                    "id"=>"create-form-pwd-confirm",
                     "class"=>"form-input",
                     "placeholder"=>"Confirmation",
                     "type"=>"password",

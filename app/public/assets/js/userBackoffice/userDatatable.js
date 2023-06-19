@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Utilisez les données retournées pour effectuer les actions souhaitées
             var tableData = data.map(function(row) {
-                console.log(row, "ça marche");
+
                 var roleText = (row.role === 1) ? "Administrateur" : "Utilisateur";
                 return {
 
@@ -61,19 +61,24 @@ document.addEventListener('DOMContentLoaded', function() {
                         return response.json(); // Convertir la réponse en JSON
                     })
                     .then(function(data) {
-                        console.log(data);
+                        console.log(userId);
                         // Pré-remplir les champs du formulaire avec les données de l'utilisateur
                         let firstnameInput = document.getElementById('update-form-firstname');
                         let lastnameInput = document.getElementById('update-form-lastname');
                         let emailInput = document.getElementById('update-form-email');
-                        let countryInput = document.getElementById('update-form-country');
+                        let roleInput = document.getElementById('update-form-role');
+                        let idInput = document.getElementById('update-form-id');
 
-                        console.log(firstnameInput);
-                        if (firstnameInput && lastnameInput && emailInput && countryInput) {
+                        if (firstnameInput && lastnameInput && emailInput && roleInput && idInput) {
                             firstnameInput.value = data.firstname;
                             lastnameInput.value = data.lastname;
                             emailInput.value = data.email;
-                            countryInput.value = data.country;
+                            roleInput.value = data.role;
+                            idInput.value = userId;
+
+
+
+
 
                             // Afficher la modal de mise à jour
                             let updateModal = new bootstrap.Modal(document.getElementById('updateModal'));

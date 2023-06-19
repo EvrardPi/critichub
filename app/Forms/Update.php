@@ -11,7 +11,7 @@ class Update extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"",
+                "action"=>"update",
                 "id"=>"update-form",
                 "class"=>"updateForm",
                 "enctype"=>"",
@@ -19,6 +19,15 @@ class Update extends Validator
                 "reset"=>"Annuler"
             ],
             "inputs"=>[
+                "id"=>[
+                    "id"=>"update-form-id",
+                    "class"=>"form-input",
+                    "placeholder"=>"Son id",
+                    "type"=>"hidden",
+                    "error"=>"L'id est incorrect",
+                    "required"=>true,
+                    "value"=>""
+                ],
                 "firstname"=>[
                     "id"=>"update-form-firstname",
                     "class"=>"form-input",
@@ -51,15 +60,29 @@ class Update extends Validator
                     "required"=>true,
                     "value"=>""
                 ],
-                "country"=>[
-                    "id"=>"update-form-country",
+                "role"=>[
+                    "id"=>"update-form-role",
                     "class"=>"form-input",
-                    "placeholder"=>"Votre pays",
-                    "type"=>"text",
-                    "error"=>"Votre pays est incorrect",
+                    "placeholder"=>"Son statut",
+                    "type"=>"select",
+                    "error"=>"Le statut est incorrect",
                     "required"=>true,
+                    "options" => [
+                        "1" => "Administrateur",
+                        "2" => "Utilisateur"
+                    ],
                     "value"=>""
                 ],
+                "birth_date" => [
+                    "id" => "update-form-birth_date",
+                    "class" => "form-input",
+                    "placeholder" => "Sa date de naissance",
+                    "type" => "date",
+                    "required" => true,
+                    "value" => ""
+                ],
+
+
 
             ]
         ];
