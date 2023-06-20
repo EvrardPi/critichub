@@ -3,35 +3,34 @@
     <div class="new-admin container-75">
         <div class="inside-img">
             <!-- <h2 class="white-text">The Last of us</h2> -->
-            <h2 class="white-text"><i><textarea name="new-admin-title" id="new-admin-title" cols="15" rows="1" placeholder="Title"></textarea></i></h2>
+            <!-- <h2 class="white-text"><i><textarea name="new-admin-title" id="new-admin-title" cols="15" rows="1" placeholder="Title"></textarea></i></h2> -->
+            <h1 class="white-text"><b><?= $_GET["titleMedia"]?></b></h1> 
+
             <h4>
-                <select id="media-category" name="media-category">
-                    <option value="0">Category</option>
-                    <option value="Horreur">Horreur</option>
-                    <option value="Comédie">Comédie</option>
-                    <option value="Drama">Drama</option>
-                    <option value="Action">Action</option>
-                </select>
+                <div class="white-text"><?= $_GET["category"]?></div>
             </h4>
             <h5>
-                <select id="media-stars" name="media-stars">
-                    <option value="0">Stars</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                <?php for ($i=0; $i< 5; $i++) { 
+                   
+                   if ($i < $_GET["stars"]) { ?>
+                    <span class="white-text">&#9733;</span>
+                   <?php } else { ?>
+                    <span class="white-text">☆</span>
+                   <?php }
+                   
+                } ?>
+                <span class="white-text"><?= sprintf("%.1f",$_GET["stars"]) ?></span>
             </h5>
         </div>
-        <!-- <img class="banner-image" src="/assets/images/tlou-banner.jpg" alt=""> -->
         <div>
             <div>
                 <button class="new-admin-inside-img white-text" onclick="document.getElementById('getFileBanner').click()">Image bannière</button>
                 <input type="file" id="getFileBanner" class="image-input new-admin-inside-img" accept="image/*" style="display:none;">
 
             </div>
-            <div class="banner-image image-preview-container"></div>
+            <div class="banner-image image-preview-container">
+                <img class="banner-image" src="/assets/images/white-font.png" alt="">
+            </div>
 
         </div>
 
@@ -47,10 +46,9 @@
 </section>
 
 <section id="movie-description">
-
     <div class="new-admin description container-50">
-        <span class="white-text description-title"><i><strong><u><textarea name="new-admin-slogan" id="new-admin-slogan" cols="30" rows="1" placeholder="Slogan"></textarea></u></strong></i></span>
-        <span class="white-text description-subtext"><textarea name="new-admin-description" id="new-admin-description" cols="60" rows="10" placeholder="Description"></textarea></span>
+        <span class="white-text description-title"><i><strong><u><?= $_GET["slogan"]?></u></strong></i></span>
+        <span class="white-text description-subtext"><?= $_GET["description"]?></span>
     </div>
 
 </section>

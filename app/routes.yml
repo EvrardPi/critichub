@@ -14,6 +14,10 @@ new-admin-review:
   controller: Cms
   action: adminReview
 
+admin-preview:
+  controller: Cms
+  action: adminPreview
+
 a-propos:
   controller: Main
   action: aboutUs

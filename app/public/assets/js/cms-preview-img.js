@@ -22,8 +22,9 @@ imageInputs.forEach((input, index) => {
         // Crée un élément d'image pour la prévisualisation
         const imageElement = document.createElement('img');
         imageElement.src = e.target.result;
-        imageElement.style.maxWidth = '100%';
-        imageElement.style.maxHeight = '100%';
+        imageElement.style.width = '100%';
+        imageElement.style.height = '100%';
+        imageElement.style.objectFit = "cover";
 
         // Efface le contenu précédent du conteneur de prévisualisation
         previewContainer.innerHTML = '';

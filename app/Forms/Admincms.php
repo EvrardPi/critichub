@@ -4,25 +4,24 @@ use App\Core\Validator;
 
 class Admincms extends Validator
 {
-    public $method = "POST";
     protected array $config = [];
     public function getConfig(): array
     {
         $this->config = [
             "config"=>[
-                "method"=>$this->method,
-                "action"=>"publish",
+                "method"=>"GET",
+                "action"=>"admin-preview",
                 "id"=>"admin-cms-form",
-                "class"=>"publish",
+                "class"=>"new-admin-form",
                 "enctype"=>"",
-                "submit"=>"Publier",
+                "submit"=>"Voir la preview de la review",
 
             ],
             "inputs"=>[
                 "titleMedia"=>[
                     "id"=>"admin-cms-form-titleMedia",
-                    "class"=>"form-input",
-                    "placeholder"=>"Title",
+                    "class"=>"new-admin-form-input",
+                    "placeholder"=>"Titre",
                     "type"=>"text",
                     "error"=>"Le titre du film ne doit pas être vide ou dépasser 80 caractères",
                     "min"=>1,
@@ -30,44 +29,11 @@ class Admincms extends Validator
                     "required"=>true,
                     "value"=>""
                 ],
-                "category"=>[
-                    "id"=>"admin-cms-form-category",
-                    "class"=>"form-input",
-                    "placeholder"=>"Sa catégorie",
-                    "type"=>"select",
-                    "error"=>"Une catégorie doit être sélectionnée",
-                    "required"=>true,
-                    "options" => [
-                        "0" => "Category",
-                        "Horreur" => "Horreur",
-                        "Comédie" => "Comédie",
-                        "Drama" => "Drama",
-                        "Action" => "Action"
-                    ],
-                    "value"=>""
-                ],
-                "stars"=>[
-                    "id"=>"admin-cms-form-stars",
-                    "class"=>"form-input",
-                    "placeholder"=>"Sa notation",
-                    "type"=>"select",
-                    "error"=>"Il faut un nombre d'étoiles par défaut",
-                    "required"=>true,
-                    "options" => [
-                        "0" => "Stars",
-                        "1" => "1",
-                        "2" => "2",
-                        "3" => "3",
-                        "4" => "4",
-                        "5" => "5"
-                    ],
-                    "value"=>""
-                ],
 
                 "slogan"=>[
                     "id"=>"admin-cms-form-slogan",
-                    "class"=>"form-input",
-                    "placeholder"=>"Son slogan",
+                    "class"=>"new-admin-form-input",
+                    "placeholder"=>"Slogan",
                     "type"=>"select",
                     "error"=>"Il faut un slogan pour le film",
                     "required"=>true,
@@ -79,14 +45,50 @@ class Admincms extends Validator
                 ],
                 "description" => [
                     "id" => "admin-cms-form-description",
-                    "class" => "form-input",
-                    "placeholder" => "Sa description",
+                    "class" => "new-admin-form-input",
+                    "placeholder" => "Description",
                     "type" => "text",
                     "error" => "il faut une description au média que vous souhaitez rajouter",
                     "required" => true,
                     "value" => ""
                 ],
+            ],
+            "select"=>[
+                "category"=>[
+                    "id"=>"admin-cms-form-category",
+                    "class"=>"new-admin-form-input",
+                    "placeholder"=>"Catégorie",
+                    "type"=>"select",
+                    "error"=>"Une catégorie doit être sélectionnée",
+                    "required"=>true,
+                    "options" => [
+                        "0" => "Selectionnez une catégorie",
+                        "Horreur" => "Horreur",
+                        "Comédie" => "Comédie",
+                        "Drama" => "Drama",
+                        "Action" => "Action"
+                    ],
+                    "value"=>""
+                ],
+                "stars"=>[
+                    "id"=>"admin-cms-form-stars",
+                    "class"=>"new-admin-form-input",
+                    "placeholder"=>"Notation",
+                    "type"=>"select",
+                    "error"=>"Une notation doit être sélectionnée",
+                    "required"=>true,
+                    "options" => [
+                        "0" => "Sélectionnez une notation",
+                        "1" => "1",
+                        "2" => "2",
+                        "3" => "3",
+                        "4" => "4",
+                        "5" => "5"
+                    ],
+                    "value"=>""
+                ],
             ]
+
         ];
         return $this->config;
     }

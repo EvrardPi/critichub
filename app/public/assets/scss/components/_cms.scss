@@ -173,7 +173,10 @@
     textarea{
         resize: none;
         background-color:transparent;
-        border:none;
+        &::placeholder{
+            color:white;
+        }
+        border:1px solid $gray;
         color:white;
     }
 
@@ -201,4 +204,48 @@
       }
     }
 
+    &-form-input{
+        background-color: transparent;
+        color:$white;
+        font-size: 1.5rem;
+        padding:1.5rem;
+        margin:1.5rem;
+    }
+
+    &-form-editor{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+        input{
+            width:25vw;
+        }
+        select{
+            overflow:auto;
+            width:25vw;
+        }
+        input[type="submit"] {
+            border-radius:8px;
+            color:$white;
+            background-color:$red;
+            border-radius : 25px;
+            padding: 0.3rem 1rem;
+            
+        }
+    }
+
+}
+
+div[contenteditable]{
+    border:1px solid $gray;
+    text-shadow: none;
+    max-width:30vw;
+    max-height:25vh;
+    font-size:2.5rem;
+    overflow: hidden;
 }
