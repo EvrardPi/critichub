@@ -18,7 +18,7 @@ class Cms
 
     public function adminReview(): void
     {
-        $view = new View("CMS/adminEditor", "front");
+        $view = new View("CMS/adminEditor", "adminMenu");
         $view->assign("pageName", "New Admin Review");
         $publishForm = new Admincms();
         $view->assign("publishForm", $publishForm->getConfig());

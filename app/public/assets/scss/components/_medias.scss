@@ -41,6 +41,11 @@
     h4{
         margin: 1rem 0;
     }
+    & > h5 {.fa{
+        font-size:1rem;
+        padding:0 0.2rem;
+        color:$white;
+    }}
 }
 
 .img-position{

@@ -1,22 +1,21 @@
 <section id="media-creator">
 
-    <div class="new-admin container-75">
+    <div class="banner container-75">
         <div class="inside-img">
-            <!-- <h2 class="white-text">The Last of us</h2> -->
-            <!-- <h2 class="white-text"><i><textarea name="new-admin-title" id="new-admin-title" cols="15" rows="1" placeholder="Title"></textarea></i></h2> -->
-            <h1 class="white-text"><b><?= $_GET["titleMedia"]?></b></h1> 
+            <h2 class="white-text"><?= $_GET["titleMedia"]?></h2> 
 
             <h4>
-                <div class="white-text"><?= $_GET["category"]?></div>
+                <div class="white-text"><i><?= $_GET["category"]?></i></div>
             </h4>
             <h5>
-                <?php for ($i=0; $i< 5; $i++) { 
-                   
-                   if ($i < $_GET["stars"]) { ?>
-                    <span class="white-text">&#9733;</span>
-                   <?php } else { ?>
-                    <span class="white-text">☆</span>
-                   <?php }
+                <?php for ($i=1; $i<= 5; $i++) { 
+                    if ($i <= $_GET['stars']) {
+                        echo "<i class='fa fa-star'></i>";
+                    } elseif ($i - $_GET['stars'] <= 0.5) {
+                        echo "<i class='fa fa-star-half-full'></i>";
+                    } else {
+                        echo "<i class='fa fa-star-o'></i>";
+                    }
                    
                 } ?>
                 <span class="white-text"><?= sprintf("%.1f",$_GET["stars"]) ?></span>
@@ -25,7 +24,7 @@
         <div>
             <div>
                 <button class="new-admin-inside-img white-text" onclick="document.getElementById('getFileBanner').click()">Image bannière</button>
-                <input type="file" id="getFileBanner" class="image-input new-admin-inside-img" accept="image/*" style="display:none;">
+                <input type="file" id="getFileBanner" class="image-input new-admin-inside-img" accept="image/png" style="display:none;">
 
             </div>
             <div class="banner-image image-preview-container">
@@ -36,7 +35,7 @@
 
         <div class="img-position">
             <button class="new-admin-prompt" onclick="document.getElementById('getFileLogo').click()">Votre logo ici</button>
-            <input type="file" id="getFileLogo" class="image-input" accept="image/*" style="display:none;">
+            <input type="file" id="getFileLogo" class="image-input" accept="image/png" style="display:none;">
             <div class="image-preview-container new-admin-logo"></div>
         </div>
     </div>
@@ -62,32 +61,32 @@
         <div class="horizontal-line horizontal-line-movies">
             <div>
                 <button class="new-admin-prompt" onclick="document.getElementById('getFileActor1').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor1" class="image-input" accept="image/*" style="display:none;">
+                <input type="file" id="getFileActor1" class="image-input" accept="image/png" style="display:none;">
                 <div class="image-preview-container new-admin-actor"></div>
             </div>
             <div>
                 <button class="new-admin-prompt" onclick="document.getElementById('getFileActor2').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor2" class="image-input" accept="image/*" style="display:none;">
+                <input type="file" id="getFileActor2" class="image-input" accept="image/png" style="display:none;">
                 <div class="image-preview-container new-admin-actor"></div>
             </div>
             <div>
                 <button class="new-admin-prompt" onclick="document.getElementById('getFileActor3').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor3" class="image-input" accept="image/*" style="display:none;">
+                <input type="file" id="getFileActor3" class="image-input" accept="image/png" style="display:none;">
                 <div class="image-preview-container new-admin-actor"></div>
             </div>
             <div>
                 <button class="new-admin-prompt" onclick="document.getElementById('getFileActor4').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor4" class="image-input" accept="image/*" style="display:none;">
+                <input type="file" id="getFileActor4" class="image-input" accept="image/png" style="display:none;">
                 <div class="image-preview-container new-admin-actor"></div>
             </div>
             <div>
                 <button class="new-admin-prompt" onclick="document.getElementById('getFileActor5').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor5" class="image-input" accept="image/*" style="display:none;">
+                <input type="file" id="getFileActor5" class="image-input" accept="image/png" style="display:none;">
                 <div class="image-preview-container new-admin-actor"></div>
             </div>
             <div>
                 <button class="new-admin-prompt" onclick="document.getElementById('getFileActor6').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor6" class="image-input" accept="image/*" style="display:none;">
+                <input type="file" id="getFileActor6" class="image-input" accept="image/png" style="display:none;">
                 <div class="image-preview-container new-admin-actor"></div>
             </div>
         </div>
