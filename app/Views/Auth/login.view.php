@@ -1,7 +1,8 @@
 <h2>S'inscrire</h2>
 
-<?php 
+<?php
 
-$this->partial("form", $form, $formErrors);
+// $this->partial("form", $form, $formErrors);
+$this->partial("form", $form);
 
 ?>
