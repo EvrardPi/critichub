@@ -9,7 +9,7 @@ class Admincms extends Validator
     {
         $this->config = [
             "config"=>[
-                "method"=>"GET",
+                "method"=>"POST",
                 "action"=>"admin-preview",
                 "id"=>"admin-cms-form",
                 "class"=>"new-admin-form",
@@ -51,6 +51,44 @@ class Admincms extends Validator
                     "error" => "il faut une description au média que vous souhaitez rajouter",
                     "required" => true,
                     "value" => ""
+                ],
+                "banner" => [
+                    "id" => "admin-cms-form-banner",
+                    "class" => "new-admin-form-input image-input new-admin-hidden",
+                    "placeholder" => "",
+                    "type" => "file",
+                    "error" => "Une image de bannière est requise",
+                    "required" => true,
+                    "value" => ""
+                ],
+                "logo" => [
+                    "id" => "admin-cms-form-logo",
+                    "class" => "new-admin-form-input image-input new-admin-hidden",
+                    "placeholder" => "",
+                    "type" => "file",
+                    "error" => "Une image de logo est requis",
+                    "required" => true,
+                    "value" => ""
+                ],
+            ],
+            "button"=>[
+                "banner-preview" => [
+                    "id" => "button-banner",
+                    "type" => "button",
+                    "class" => "new-admin-form-input white-text button button-form-banner",
+                    "textToDisplay" => "Banner",
+                    "onclick" => "document.getElementById('admin-cms-form-banner').click()",
+                    "error" => "Une image de bannière est requise",
+                    "required" => true,
+                ],
+                "logo" => [
+                    "id" => "button-logo",
+                    "type" => "button",
+                    "class" => "new-admin-form-input white-text button button-form-logo",
+                    "textToDisplay" => "Logo",
+                    "onclick" => "document.getElementById('admin-cms-form-logo').click()",
+                    "error" => "Une image de logo est requise",
+                    "required" => true,
                 ],
             ],
             "select"=>[

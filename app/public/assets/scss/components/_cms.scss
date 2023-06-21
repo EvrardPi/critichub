@@ -195,6 +195,12 @@
       img{
         width:8vw;
       }
+      &-preview{
+        img{
+        width:8vw;
+        height:8vw;
+        }
+      }
     }
 
     &-actor{
@@ -207,14 +213,14 @@
     &-form-input{
         background-color: transparent;
         color:$white;
-        font-size: 1.5rem;
-        padding:1.5rem;
+        font-size: 1.3rem;
+        padding:1rem;
         margin:1.5rem;
     }
 
     &-form-editor{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         form{
             display: flex;
@@ -224,6 +230,10 @@
         }
         input{
             width:25vw;
+        }
+        button{
+            width:25vw;
+            box-shadow: 1px 1px 1px $light_gray;
         }
         select{
             overflow:auto;
@@ -237,6 +247,10 @@
             padding: 0.3rem 1rem;
             
         }
+    }
+
+    &-hidden{
+        display:none;
     }
 
 }

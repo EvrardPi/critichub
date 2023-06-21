@@ -156,6 +156,10 @@ footer {
   .button-submit {
     display: flex;
     justify-content: center; }
+  .button-form-banner {
+    background-color: #FF1B1B; }
+  .button-form-logo {
+    background-color: #FF1B1B; }
 
 .cmsArea {
   text-align: center; }
@@ -289,18 +293,21 @@ footer {
   border-radius: 2rem; }
 .new-admin-logo img {
   width: 8vw; }
+.new-admin-logo-preview img {
+  width: 8vw;
+  height: 8vw; }
 .new-admin-actor img {
   width: 10vw;
   height: 30vh; }
 .new-admin-form-input {
   background-color: transparent;
   color: #FFFFFF;
-  font-size: 1.5rem;
-  padding: 1.5rem;
+  font-size: 1.3rem;
+  padding: 1rem;
   margin: 1.5rem; }
 .new-admin-form-editor {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center; }
   .new-admin-form-editor form {
     display: flex;
@@ -308,6 +315,9 @@ footer {
     align-items: center; }
   .new-admin-form-editor input {
     width: 25vw; }
+  .new-admin-form-editor button {
+    width: 25vw;
+    box-shadow: 1px 1px 1px #cacaca; }
   .new-admin-form-editor select {
     overflow: auto;
     width: 25vw; }
@@ -317,6 +327,8 @@ footer {
     background-color: #FF1B1B;
     border-radius: 25px;
     padding: 0.3rem 1rem; }
+.new-admin-hidden {
+  display: none; }
 
 div[contenteditable] {
   border: 1px solid #616161;
@@ -511,6 +523,10 @@ header {
     filter: brightness(70%);
     animation: fadeIn 1s ease-in;
     z-index: -1; }
+    .banner-image-preview-banner {
+      width: 25vw; }
+    .banner-image-preview-logo {
+      width: 10vw; }
   .banner-logo {
     position: relative;
     width: 100%;
@@ -539,6 +555,9 @@ header {
   width: 25vh;
   transform: translate(50%, -50%);
   animation: fadeIn 1s ease-in; }
+  .img-position-preview {
+    top: 25%;
+    right: 10%; }
 
 .description {
   display: flex;

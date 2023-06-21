@@ -21,6 +21,12 @@
         animation:fadeIn 1s ease-in;
         z-index: -1;
 
+        &-preview-banner{
+            width: 25vw;
+        }
+        &-preview-logo{
+            width: 10vw;
+        }
     }
     &-logo {
         position:relative;
@@ -54,6 +60,9 @@
     width:25vh;
     transform: translate(50%,-50%);  
     animation:fadeIn 1s ease-in;
+    &-preview{
+        top: 25%; right: 10%;
+    }
 }
 
 

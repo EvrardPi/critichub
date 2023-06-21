@@ -52,4 +52,13 @@
         display: flex;
         justify-content: center;
     }
+    &-form{
+        &-banner{
+            background-color: $red;
+        }
+        &-logo{
+            background-color: $red;
+        }
+    }
+
 }
