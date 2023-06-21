@@ -13,6 +13,8 @@ class User extends SQL
     protected string $birth_date;
     private ?string $date_inserted;
     private ?string $date_updated;
+    private string $confirm_key;
+    private int $confirm;
 
 
     public function __construct(){
@@ -162,6 +164,38 @@ class User extends SQL
     public function setDateUpdated(\DateTime $date_updated): void
     {
         $this->date_updated = $date_updated;
+    }
+
+    /**
+     * @return Int
+     */
+    public function getConfirmKey(): int
+    {
+        return $this->confirm_key;
+    }
+
+    /**
+     * @param String $confirm_key
+     */
+    public function setConfirmKey(string $confirm_key): void
+    {
+        $this->confirm_key = $confirm_key;
+    }
+
+    /**
+     * @return Int
+     */
+    public function getConfirm(): int
+    {
+        return $this->confirm;
+    }
+
+    /**
+     * @param Int $confirm
+     */
+    public function setConfirm(int $confirm): void
+    {
+        $this->confirm = $confirm;
     }
 
 

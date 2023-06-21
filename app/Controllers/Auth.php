@@ -54,21 +54,12 @@ class Auth
         $user->setPassword($formdata['password']);
         $user->setBirthDate($formdata['birth_date']);
         $user->setRole(3);
+        $user->setConfirmKey(bin2hex(random_bytes(32)));
+        $user->setConfirm(0);
         $user->save();
-        $mail = new PHPMailer(true);
         // Envoi de l'e-mail de validation
         try {
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-            $mail->isSMTP();
-            $mail->Host = 'critichub-web-1';
-            $mail->Port = 1025;
-            $mail->CharSet = 'utf-8';
-            $mail->addAddress('brouette@site.fr');
-            $mail->setFrom('no-reply@site.fr', );
-            $mail->Subject = 'Validation d\'inscription';
-            $mail->Body = 'Bonjour, veuillez cliquer sur le lien suivant pour valider votre inscription : <a href="https://example.com/validate.php?token=XYZ123">Valider</a>';
-            $mail->AltBody = 'Bonjour, veuillez copier et coller le lien suivant dans votre navigateur pour valider votre inscription : https://example.com/validate.php?token=XYZ123';
-            $mail->send();
+            Mailer::sendMail($user->getEmail(),"valadition du compte","valide bien gros bouffon tiens ton lien de validation gros chien : http://localhost:8000/confirm/".$user->getConfirmKey());
 
             echo "Inscription réussie. Veuillez vérifier votre boîte de réception pour valider votre compte.";
         } catch (Exception $e) {
@@ -80,5 +71,16 @@ class Auth
     public function logout(): void
     {
         echo "Page de déconnexion";
+    }
+
+    public function valideToken ($token) {
+        $user = User::populate($token);
+        if ($user->getConfirm() == 1) {
+            echo "Votre compte est déjà validé.";
+        } else {
+            $user->setConfirm(1);
+            $user->save();
+            echo "Votre compte a bien été validé.";
+        }
     }
 }
