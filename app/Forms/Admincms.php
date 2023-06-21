@@ -125,6 +125,25 @@ class Admincms extends Validator
                     ],
                     "value"=>""
                 ],
+
+                "actors"=>[
+                    "id"=>"admin-cms-form-actors",
+                    "class"=>"new-admin-form-input",
+                    "placeholder"=>"Notation",
+                    "type"=>"select",
+                    "error"=>"Un nombre d'acteurs doit être sélectionné",
+                    "required"=>true,
+                    "options" => [
+                        "0" => "Nombre d'acteurs à montrer",
+                        "1" => "1",
+                        "2" => "2",
+                        "3" => "3",
+                        "4" => "4",
+                        "5" => "5",
+                        "6" => "6"
+                    ],
+                    "value"=>""
+                ],
             ]
 
         ];

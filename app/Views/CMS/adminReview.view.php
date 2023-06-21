@@ -22,24 +22,15 @@
             </h5>
         </div>
         <div>
-            <div>
-                <!-- <button class="new-admin-inside-img white-text" onclick="document.getElementById('getFileBanner').click()">Image bannière</button>
-                <input type="file" id="getFileBanner" class="image-input new-admin-inside-img" accept="image/png" style="display:none;"> -->
-
-            </div>
             <div class="banner-image image-preview-container">
                 <img class="banner-image" src="<?= $_POST["banner"]?>" alt="">
             </div>
-
         </div>
 
         <div class="img-position">
-        <div class="image-preview-container">
-            <img class="banner-logo" src="<?= $_POST["logo"]?>" alt="">
-        </div>
-            <!-- <button class="new-admin-prompt" onclick="document.getElementById('getFileLogo').click()">Votre logo ici</button>
-            <input type="file" id="getFileLogo" class="image-input" accept="image/png" style="display:none;">
-            <div class="image-preview-container new-admin-logo"></div> -->
+            <div class="image-preview-container">
+                <img class="banner-logo" src="<?= $_POST["logo"]?>" alt="">
+            </div>
         </div>
     </div>
 
@@ -61,7 +52,7 @@
     </div>
 
     <div class="actors container-90">
-        <div class="horizontal-line horizontal-line-movies">
+        <!-- <div class="horizontal-line horizontal-line-movies">
             <div>
                 <button class="new-admin-prompt" onclick="document.getElementById('getFileActor1').click()">Insérer Acteur</button>
                 <input type="file" id="getFileActor1" class="image-input" accept="image/png" style="display:none;">
@@ -92,7 +83,7 @@
                 <input type="file" id="getFileActor6" class="image-input" accept="image/png" style="display:none;">
                 <div class="image-preview-container new-admin-actor"></div>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 

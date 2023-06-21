@@ -208,6 +208,19 @@
         width:10vw;
         height:30vh;
       }
+      &-list{
+        display:flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+
+      &-preview{
+        img{
+            width:10vw;
+            height:18vw;
+            border-radius: 1.5rem;
+        }
+      }
     }
 
     &-form-input{
@@ -221,7 +234,7 @@
     &-form-editor{
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
         form{
             display: flex;
             flex-direction: column;
@@ -231,7 +244,7 @@
         input{
             width:25vw;
         }
-        button{
+        .button{
             width:25vw;
             box-shadow: 1px 1px 1px $light_gray;
         }
@@ -253,6 +266,13 @@
         display:none;
     }
 
+
+}
+
+.actors {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 div[contenteditable]{
