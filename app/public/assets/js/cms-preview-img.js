@@ -2,30 +2,32 @@
 const imageInputs = document.querySelectorAll('.image-input');
 const previewContainers = document.querySelectorAll('.image-preview-container');
 
-// Parcourt tous les éléments d'entrée de type fichier
-imageInputs.forEach((input, index) => {
+
+imageInputs.forEach((input, index) => {         // Parcourt tous les éléments d'entrée de type fichier
   const previewContainer = previewContainers[index];
 
-  // Ajoute un écouteur d'événements pour chaque élément d'entrée de type fichier
-  input.addEventListener('change', function() {
+  
+  input.addEventListener('change', function() { // Ajoute un écouteur d'événements pour chaque élément d'entrée de type fichier
     if (input.files && input.files[0]) {
       const selectedFile = input.files[0];
 
       const reader = new FileReader();
 
-      // Configure la fonction onload du FileReader
-      reader.onload = function(e) {
+      
+      reader.onload = function(e) { // Configure la fonction onload du FileReader
         const imageElement = document.createElement('img');
         imageElement.src = e.target.result;
+        if (!imageInputs[index].classList.contains("actor")) { // Mise en place d'une vérif pour ne pas attribuer la taille aux images qui correspondent aux acteurs
         imageElement.style.width = '100%';
         imageElement.style.height = '100%';
+        }
         imageElement.style.objectFit = "cover";
 
-      // Création de constantes pour faciliter la suite
-      const fileEncodedBase64 = imageElement.src;
 
-      // Cette constante va servir à modifier la valeur envoyée en POST par les boutons de preview d'image
-      const myFile = new File(['datasent'], fileEncodedBase64, {
+      
+      const fileEncodedBase64 = imageElement.src; // Création de constantes pour faciliter la suite
+
+      const myFile = new File(['datasent'], fileEncodedBase64, {      // Cette constante va servir à modifier la valeur envoyée en POST par les boutons de preview d'image
           type: 'text/plain',
           lastModified: new Date(),
       });
@@ -37,15 +39,15 @@ imageInputs.forEach((input, index) => {
       
       console.log(imageElement.files);
 
-        // Efface le contenu précédent du conteneur de prévisualisation
-        previewContainer.innerHTML = '';
+        
+        previewContainer.innerHTML = ''; // Efface le contenu précédent du conteneur de prévisualisation
 
-        // Ajout de l'image dans le conteneur
-        previewContainer.appendChild(imageElement);
+        
+        previewContainer.appendChild(imageElement); // Ajout de l'image dans le conteneur
       };
 
-      // Lit le fichier sélectionné en tant qu'URL de données
-      reader.readAsDataURL(selectedFile);
+      
+      reader.readAsDataURL(selectedFile); // Lit le fichier sélectionné en tant qu'URL de données
       
     }
   });

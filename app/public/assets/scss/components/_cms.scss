@@ -216,6 +216,7 @@
 
       &-preview{
         img{
+            display: block;
             width:10vw;
             height:18vw;
             border-radius: 1.5rem;
@@ -247,6 +248,10 @@
         .button{
             width:25vw;
             box-shadow: 1px 1px 1px $light_gray;
+            &.button-actor{
+                width:10vw;
+                margin: 2rem 0;
+            }
         }
         select{
             overflow:auto;

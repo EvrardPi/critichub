@@ -156,10 +156,6 @@ footer {
   .button-submit {
     display: flex;
     justify-content: center; }
-  .button-form-banner {
-    background-color: #FF1B1B; }
-  .button-form-logo {
-    background-color: #FF1B1B; }
 
 .cmsArea {
   text-align: center; }
@@ -304,6 +300,7 @@ footer {
   flex-direction: row;
   justify-content: space-evenly; }
 .new-admin-actor-preview img {
+  display: block;
   width: 10vw;
   height: 18vw;
   border-radius: 1.5rem; }
@@ -326,6 +323,9 @@ footer {
   .new-admin-form-editor .button {
     width: 25vw;
     box-shadow: 1px 1px 1px #cacaca; }
+    .new-admin-form-editor .button.button-actor {
+      width: 10vw;
+      margin: 2rem 0; }
   .new-admin-form-editor select {
     overflow: auto;
     width: 25vw; }
