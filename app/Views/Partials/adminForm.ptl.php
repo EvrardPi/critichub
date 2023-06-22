@@ -45,6 +45,8 @@
                    </select>
     <?php endforeach; ?>
 
+    <div id="showActorsPreview" class="showActorsPreview"></div>
+
     <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
 
 </form>

@@ -52,38 +52,13 @@
     </div>
 
     <div class="actors container-90">
-        <!-- <div class="horizontal-line horizontal-line-movies">
-            <div>
-                <button class="new-admin-prompt" onclick="document.getElementById('getFileActor1').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor1" class="image-input" accept="image/png" style="display:none;">
-                <div class="image-preview-container new-admin-actor"></div>
-            </div>
-            <div>
-                <button class="new-admin-prompt" onclick="document.getElementById('getFileActor2').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor2" class="image-input" accept="image/png" style="display:none;">
-                <div class="image-preview-container new-admin-actor"></div>
-            </div>
-            <div>
-                <button class="new-admin-prompt" onclick="document.getElementById('getFileActor3').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor3" class="image-input" accept="image/png" style="display:none;">
-                <div class="image-preview-container new-admin-actor"></div>
-            </div>
-            <div>
-                <button class="new-admin-prompt" onclick="document.getElementById('getFileActor4').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor4" class="image-input" accept="image/png" style="display:none;">
-                <div class="image-preview-container new-admin-actor"></div>
-            </div>
-            <div>
-                <button class="new-admin-prompt" onclick="document.getElementById('getFileActor5').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor5" class="image-input" accept="image/png" style="display:none;">
-                <div class="image-preview-container new-admin-actor"></div>
-            </div>
-            <div>
-                <button class="new-admin-prompt" onclick="document.getElementById('getFileActor6').click()">Insérer Acteur</button>
-                <input type="file" id="getFileActor6" class="image-input" accept="image/png" style="display:none;">
-                <div class="image-preview-container new-admin-actor"></div>
-            </div>
-        </div> -->
+        <div class="horizontal-line horizontal-line-movies">
+        <?php for ($i = 1; $i <= $_POST["actors"]; $i++ ) {
+            $actor_data = "actor" . $i; ?>
+            
+            <img class="banner-image" src="<?= $_POST[$actor_data];?>" alt=""> 
+        <?php } ?>
+        </div>
     </div>
 </section>
 
@@ -95,8 +70,8 @@
     </div>
 </section>
 
-<div class="container-100 button-submit">
-    <a href="/new-admin-review" class="button button-review">Revenir en arrière</a>
+<div class="button-submit">
+    <a href="/new-admin-review" class="button button-review">Recommencer une preview</a>
     <a href="#" class="button button-review">Publier la review administrateur</a>
 </div>
 

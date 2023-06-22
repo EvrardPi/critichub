@@ -2,6 +2,9 @@ const actorsCount = document.getElementById("admin-cms-form-actors");
 const actorsContainer = document.getElementById("actorsList");
 var options = actorsCount.querySelectorAll("option");
 
+const listOfButtons = document.getElementsByClassName("button-actor");
+const listOfInputs = document.getElementsByClassName("actor")
+
 
 console.log(actorsContainer);
 
@@ -16,34 +19,32 @@ actorsCount.addEventListener("change", function(){
     totalToAdd = actorsCount.value - actualElements;
 
     console.log("Valeur d'input : " + actorsCount.value + " / " + "Actuel : " + actualElements);
+    console.log(listOfButtons);
+    console.log(listOfInputs);
+
 
     if (totalToAdd > 0) {
         console.log("Addition");
         for(i = actualElements; i < actorsCount.value; i++) {
-            // var htmlContent = "<div class=\"actor-element image-preview-container new-admin-actor-preview\"><img class=\"banner-image\" src=\"/assets/images/white-font.png\" alt=\"\"></div>"
-            // var htmlContent = "<div class=\"actor-element\"><button type=\"button\" class=\"new-admin-form-input white-text button button-actor\" onclick=\"document.getElementById('admin-cms-form-actor1').click()\">Actor</button><input name=\"actor\" placeholder class=\"new-admin-form-input image-input new-admin-hidden actor\" id=\"admin-cms-form-actor1\" type=\"file\" required value><div class=\"actor-image image-preview-container new-admin-actor-preview\"><img class=\"banner-image\" src=\"/assets/images/white-font.png\" alt=\"\"></div></div>"
-            // var htmlContent = `
-            // <div class="actor-element">
-            //     <button type="button" class="new-admin-form-input white-text button button-actor" onclick="document.getElementById('admin-cms-form-actor1').click()">Actor</button>
-            //     <input name="actor" placeholder class="new-admin-form-input image-input new-admin-hidden actor" id="admin-cms-form-actor1" type="file" required value>
-            //     <div class="actor-image image-preview-container new-admin-actor-preview">
-            //     <img class="banner-image" src="/assets/images/white-font.png" alt="">
-            //     </div>
-            // </div>
-            // `;
-            
-            // actorsContainer.innerHTML += htmlContent;
             CreateElement(i+1);
         }
     } else {
         console.log("Remove");
         for(i = actualElements-1; i >= actorsCount.value; i--) {
             existingElements[i].outerHTML = "";
+            listOfButtons[i].outerHTML = "";
+            listOfInputs[i].outerHTML = "";
         }
     }
 });
 
+
+
+
+//PARTIE FONCTIONS
 function CreateElement(number) {
+    const buttonsInput = document.getElementById("showActorsPreview")
+
     // Créez les éléments nécessaires
     var actorElement = document.createElement('div');
     actorElement.classList.add('actor-element');
@@ -51,13 +52,13 @@ function CreateElement(number) {
     var button = document.createElement('button');
     button.type = 'button';
     button.classList.add('new-admin-form-input', 'white-text', 'button', 'button-actor');
-    button.textContent = 'Actor';
+    button.textContent = 'Image acteur N°'+number;
     button.onclick = function() {
     document.getElementById('admin-cms-form-actor'+number).click();
     };
 
     var input = document.createElement('input');
-    input.name = 'actor';
+    input.name = 'actor'+number;
     input.placeholder = ' ';
     input.classList.add('new-admin-form-input', 'image-input', 'new-admin-hidden', 'actor');
     input.id = 'admin-cms-form-actor'+number;
@@ -73,6 +74,8 @@ function CreateElement(number) {
     image.classList.add('banner-image');
     image.src = '/assets/images/white-font.png';
     image.alt = '';
+    image.style.objectFit="cover";
+    image.style.filter="brightness(100%)";
 
     input.addEventListener('change', function() {
         const file = input.files[0];
@@ -80,15 +83,29 @@ function CreateElement(number) {
           const reader = new FileReader();
           reader.onload = function(e) {
             image.src = e.target.result;
+
+            console.log(image.src); // Base 64 image
+            const fileEncodedBase64 = image.src; // Création de constantes pour faciliter la suite
+
+            const myFile = new File(['datasent'], fileEncodedBase64, {      // Cette constante va servir à modifier la valeur envoyée en POST par les boutons de preview d'image
+                type: 'text/plain',
+                lastModified: new Date(),
+            });
+      
+            // Datatransfer dans la variable
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(myFile);
+            input.files = dataTransfer.files;
+
           };
           reader.readAsDataURL(file);
         }
       });
 
-    // Ajoutez les éléments dans la structure appropriée
+    // On ajoute les éléments dans leur structure appropriée
     imageContainer.appendChild(image);
-    actorElement.appendChild(button);
-    actorElement.appendChild(input);
+    buttonsInput.appendChild(button);
+    buttonsInput.appendChild(input);
     actorElement.appendChild(imageContainer);
 
     // Ajoutez l'élément au conteneur existant

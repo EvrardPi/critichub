@@ -155,7 +155,7 @@ footer {
     padding: 0.3rem 1rem; }
   .button-submit {
     display: flex;
-    justify-content: center; }
+    justify-content: space-evenly; }
 
 .cmsArea {
   text-align: center; }
@@ -323,9 +323,6 @@ footer {
   .new-admin-form-editor .button {
     width: 25vw;
     box-shadow: 1px 1px 1px #cacaca; }
-    .new-admin-form-editor .button.button-actor {
-      width: 10vw;
-      margin: 2rem 0; }
   .new-admin-form-editor select {
     overflow: auto;
     width: 25vw; }
@@ -343,13 +340,11 @@ footer {
   flex-direction: row;
   justify-content: space-evenly; }
 
-div[contenteditable] {
-  border: 1px solid #616161;
-  text-shadow: none;
-  max-width: 30vw;
-  max-height: 25vh;
-  font-size: 2.5rem;
-  overflow: hidden; }
+.showActorsPreview {
+  display: flex;
+  flex-direction: column; }
+  .showActorsPreview button {
+    width: 25vw; }
 
 header {
   position: sticky;
