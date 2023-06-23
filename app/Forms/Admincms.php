@@ -4,13 +4,14 @@ use App\Core\Validator;
 
 class Admincms extends Validator
 {
+    public $method = "POST";
     protected array $config = [];
     public function getConfig(): array
     {
         $this->config = [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"admin-preview",
+                "action"=>"send-cms-data",
                 "id"=>"admin-cms-form",
                 "class"=>"new-admin-form",
                 "enctype"=>"",
@@ -34,13 +35,9 @@ class Admincms extends Validator
                     "id"=>"admin-cms-form-slogan",
                     "class"=>"new-admin-form-input",
                     "placeholder"=>"Slogan",
-                    "type"=>"select",
+                    "type"=>"text",
                     "error"=>"Il faut un slogan pour le film",
                     "required"=>true,
-                    "options" => [
-                        "1" => "Administrateur",
-                        "2" => "Utilisateur"
-                    ],
                     "value"=>""
                 ],
                 "description" => [
@@ -70,28 +67,6 @@ class Admincms extends Validator
                     "required" => true,
                     "value" => ""
                 ],
-            ],
-            "button"=>[
-                "banner-preview" => [
-                    "id" => "button-banner",
-                    "type" => "button",
-                    "class" => "new-admin-form-input white-text button button-form-banner",
-                    "textToDisplay" => "Banner",
-                    "onclick" => "document.getElementById('admin-cms-form-banner').click()",
-                    "error" => "Une image de bannière est requise",
-                    "required" => true,
-                ],
-                "logo" => [
-                    "id" => "button-logo",
-                    "type" => "button",
-                    "class" => "new-admin-form-input white-text button button-form-logo",
-                    "textToDisplay" => "Logo",
-                    "onclick" => "document.getElementById('admin-cms-form-logo').click()",
-                    "error" => "Une image de logo est requise",
-                    "required" => true,
-                ],
-            ],
-            "select"=>[
                 "category"=>[
                     "id"=>"admin-cms-form-category",
                     "class"=>"new-admin-form-input",
@@ -125,7 +100,6 @@ class Admincms extends Validator
                     ],
                     "value"=>""
                 ],
-
                 "actors"=>[
                     "id"=>"admin-cms-form-actors",
                     "class"=>"new-admin-form-input",
@@ -144,8 +118,27 @@ class Admincms extends Validator
                     ],
                     "value"=>""
                 ],
-            ]
-
+            ],
+            "button"=>[
+                "banner-preview" => [
+                    "id" => "button-banner",
+                    "type" => "button",
+                    "class" => "new-admin-form-input white-text button button-form-banner",
+                    "textToDisplay" => "Banner",
+                    "onclick" => "document.getElementById('admin-cms-form-banner').click()",
+                    "error" => "Une image de bannière est requise",
+                    "required" => true,
+                ],
+                "logo-preview" => [
+                    "id" => "button-logo",
+                    "type" => "button",
+                    "class" => "new-admin-form-input white-text button button-form-logo",
+                    "textToDisplay" => "Logo",
+                    "onclick" => "document.getElementById('admin-cms-form-logo').click()",
+                    "error" => "Une image de logo est requise",
+                    "required" => true,
+                ],
+            ],
         ];
         return $this->config;
     }

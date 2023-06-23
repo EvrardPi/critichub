@@ -9,6 +9,20 @@ class Adminreview extends SQL {
     public int $stars;
     protected string $slogan;
     public string $description;
+
+    public string $banner;
+
+    public string $logo;
+
+    public string $actors;
+
+    public string $actor1;
+    public ?string $actor2;
+    public ?string $actor3;
+    public ?string $actor4;
+    public ?string $actor5;
+    public ?string $actor6;
+
     private ?string $created_at;
     private ?string $updated_at;
 
@@ -127,5 +141,131 @@ class Adminreview extends SQL {
     */
     public function setUpdated_at(string $updated_at): void {
     	$this->updated_at = $updated_at;
+    }
+
+    /**
+    * @return string
+    */
+    public function getBanner(): string {
+    	return $this->banner;
+    }
+
+    /**
+    * @param string $banner
+    */
+    public function setBanner(string $banner): void {
+    	$this->banner = $banner;
+    }
+
+    /**
+    * @return string
+    */
+    public function getLogo(): string {
+    	return $this->logo;
+    }
+
+    /**
+    * @param string $logo
+    */
+    public function setLogo(string $logo): void {
+    	$this->logo = $logo;
+    }
+
+    /**
+    * @return string
+    */
+    public function getActors(): string {
+    	return $this->actors;
+    }
+
+    /**
+    * @param string $actors
+    */
+    public function setActors(string $actors): void {
+    	$this->actors = $actors;
+    }
+
+    /**
+    * @return string
+    */
+    public function getActor1(): string {
+    	return $this->actor1;
+    }
+
+    /**
+    * @param string $actor1
+    */
+    public function setActor1(string $actor1): void {
+    	$this->actor1 = $actor1;
+    }
+
+    /**
+    * @return string
+    */
+    public function getActor2(): string {
+    	return $this->actor2;
+    }
+
+    /**
+    * @param string $actor2
+    */
+    public function setActor2(string $actor2): void {
+    	$this->actor2 = $actor2;
+    }
+
+    /**
+    * @return string
+    */
+    public function getActor3(): string {
+    	return $this->actor3;
+    }
+
+    /**
+    * @param string $actor3
+    */
+    public function setActor3(string $actor3): void {
+    	$this->actor3 = $actor3;
+    }
+
+    /**
+    * @return string
+    */
+    public function getActor4(): string {
+    	return $this->actor4;
+    }
+
+    /**
+    * @param string $actor4
+    */
+    public function setActor4(string $actor4): void {
+    	$this->actor4 = $actor4;
+    }
+
+    /**
+    * @return string
+    */
+    public function getActor5(): string {
+    	return $this->actor5;
+    }
+
+    /**
+    * @param string $actor5
+    */
+    public function setActor5(string $actor5): void {
+    	$this->actor5 = $actor5;
+    }
+
+    /**
+    * @return string
+    */
+    public function getActor6(): string {
+    	return $this->actor6;
+    }
+
+    /**
+    * @param string $actor6
+    */
+    public function setActor6(string $actor6): void {
+    	$this->actor6 = $actor6;
     }
 }

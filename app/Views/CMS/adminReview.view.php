@@ -1,3 +1,5 @@
+<?php use App\Models\Adminreview; ?>
+
 <section id="media-creator">
 
     <div class="banner container-75">
@@ -80,9 +82,19 @@
     </div>
 </section>
 
+
+<?php 
+
+$dataToSend = new Adminreview();
+
+?>
+
 <div class="button-submit">
     <a href="/new-admin-review" class="button button-review">Recommencer une preview</a>
-    <a href="#" class="button button-review">Publier la review administrateur</a>
+    <form action="send-cms-data" method="post">
+        <button class="button button-review">Publier la Review Administrateur</button>
+    </form>
+    
 </div>
 
 <script src="/assets/js/cms-preview-img.js"></script>

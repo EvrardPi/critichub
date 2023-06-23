@@ -18,6 +18,10 @@ admin-preview:
   controller: Cms
   action: adminPreview
 
+send-cms-data:
+  controller: Cms
+  action: sendData
+
 a-propos:
   controller: Main
   action: aboutUs
