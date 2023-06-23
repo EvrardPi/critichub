@@ -22,10 +22,19 @@ imageInputs.forEach((input, index) => {         // Parcourt tous les éléments 
         imageElement.style.height = '100%';
         imageElement.style.objectFit = "cover";
         }
-
+      const fileName = input.files[0].name.replace(" ", "_");
       const fileEncodedBase64 = imageElement.src; // Création de constantes pour faciliter la suite
 
-      const myFile = new File(['datasent'], fileEncodedBase64, {      // Cette constante va servir à modifier la valeur envoyée en POST par les boutons de preview d'image
+      const dataToSend = [
+        {
+            "base64img" : fileEncodedBase64,
+            "file_name" : fileName
+        }
+    ];
+
+    console.log(JSON.stringify(dataToSend));
+
+      const myFile = new File(['datasent'], JSON.stringify(dataToSend), {      // Cette constante va servir à modifier la valeur envoyée en POST par les boutons de preview d'image
           type: 'text/plain',
           lastModified: new Date(),
       });
@@ -33,7 +42,7 @@ imageInputs.forEach((input, index) => {         // Parcourt tous les éléments 
       // Datatransfer dans la variable
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(myFile);
-      imageInputs[index].files = dataTransfer.files;
+      input.files = dataTransfer.files;
       
         previewContainer.innerHTML = ''; // Efface le contenu précédent du conteneur de prévisualisation
 

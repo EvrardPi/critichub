@@ -23,13 +23,15 @@
         </div>
         <div>
             <div class="banner-image image-preview-container">
-                <img class="banner-image" src="<?= $_POST["banner"]?>" alt="">
+                <?php $jsonBannerData = json_decode($_POST["banner"], true);?>
+                <img class="banner-image" src="<?= $jsonBannerData[0]["base64img"]?>" alt="">
             </div>
         </div>
 
         <div class="img-position">
             <div class="image-preview-container">
-                <img class="banner-logo" src="<?= $_POST["logo"]?>" alt="">
+                <?php $jsonLogoData = json_decode($_POST["logo"], true);?>
+                <img class="banner-logo" src="<?= $jsonLogoData[0]["base64img"]?>" alt="">
             </div>
         </div>
     </div>
@@ -52,11 +54,19 @@
     </div>
 
     <div class="actors container-90">
-        <div class="horizontal-line horizontal-line-movies">
+        <div class="horizontal-line horizontal-line-movies container-75">
         <?php for ($i = 1; $i <= $_POST["actors"]; $i++ ) {
-            $actor_data = "actor" . $i; ?>
-            
-            <img class="banner-image" src="<?= $_POST[$actor_data];?>" alt=""> 
+            $actor_data = "actor" . $i;
+            $jsonActorData = json_decode($_POST[$actor_data], true);?>
+
+            <div class="actors-libelle">
+                <div class="actors-libelle-inside-img">
+                    <h2><b><?= $jsonActorData[0]["actor_name"] ?></b></h2>
+                </div>
+                <img class="banner-image" src="<?= $jsonActorData[0]["base64img"] ?>" alt="">
+
+            </div>
+
         <?php } ?>
         </div>
     </div>

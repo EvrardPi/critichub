@@ -19,9 +19,6 @@ actorsCount.addEventListener("change", function(){
     totalToAdd = actorsCount.value - actualElements;
 
     console.log("Valeur d'input : " + actorsCount.value + " / " + "Actuel : " + actualElements);
-    console.log(listOfButtons);
-    console.log(listOfInputs);
-
 
     if (totalToAdd > 0) {
         console.log("Addition");
@@ -78,16 +75,34 @@ function CreateElement(number) {
     image.style.filter="brightness(100%)";
 
     input.addEventListener('change', function() {
+        const actorName = input.files[0].name.replace(".png","")
+        const fileName = input.files[0].name.replace(" ", "_");
         const file = input.files[0];
         if (file) {
           const reader = new FileReader();
           reader.onload = function(e) {
             image.src = e.target.result;
 
-            console.log(image.src); // Base 64 image
-            const fileEncodedBase64 = image.src; // Création de constantes pour faciliter la suite
+            //Boucle pour mettre en majuscule le couple nom/prénom -> éviter sensibilité à la casse
+            splitActorName = actorName.toLowerCase().split(" ");
+            for (var i = 0; i < splitActorName.length; i++) {
+                splitActorName[i] = splitActorName[i].charAt(0).toUpperCase() + splitActorName[i].slice(1);
+            }
+            var treatedActorName = splitActorName.join(" ");
+            console.log(treatedActorName);
+            image.name = treatedActorName;
 
-            const myFile = new File(['datasent'], fileEncodedBase64, {      // Cette constante va servir à modifier la valeur envoyée en POST par les boutons de preview d'image
+            // Image converted as Base64
+            const fileEncodedBase64 = image.src; // Création de constantes pour faciliter la suite
+            const dataToSend = [
+                {
+                    "base64img" : fileEncodedBase64,
+                    "actor_name" : treatedActorName,
+                    "file_name" : fileName
+                }
+            ];
+
+            const myFile = new File(['datasent'], JSON.stringify(dataToSend), {      // Cette constante va servir à modifier la valeur envoyée en POST par les boutons de preview d'image
                 type: 'text/plain',
                 lastModified: new Date(),
             });
@@ -97,9 +112,12 @@ function CreateElement(number) {
             dataTransfer.items.add(myFile);
             input.files = dataTransfer.files;
 
+            console.log(input.files);
+
           };
           reader.readAsDataURL(file);
         }
+        
       });
 
     // On ajoute les éléments dans leur structure appropriée

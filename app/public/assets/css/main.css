@@ -339,6 +339,18 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly; }
+  .actors-libelle {
+    position: relative; }
+    .actors-libelle-inside-img {
+      color: #FFFFFF;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem 0;
+      position: absolute;
+      background: black;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.75) 40%, rgba(0, 0, 0, 0) 100%);
+      bottom: 0; }
 
 .showActorsPreview {
   display: flex;
@@ -584,7 +596,7 @@ header {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   padding-bottom: 5rem; }
   .horizontal-line img {

@@ -14,6 +14,9 @@
                    class="<?= $configInput["class"] ?>"
                    id="<?= $configInput["id"] ?>"
                    type="<?= $configInput["type"] ?>"
+                   <?php if ( $configInput["type"] === "file") { ?>
+                    accept="image/png"
+                    <?php } ?>
                 <?= $configInput["required"] ? "required" : "" ?>
                    value="<?= $configInput["value"] ?>">
     <?php endforeach; ?>
