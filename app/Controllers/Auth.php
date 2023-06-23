@@ -12,6 +12,8 @@ use App\Core\SQL;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
+use App\Core\Mailer;
+
 
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -38,9 +40,10 @@ class Auth
         $form = new Register();
         $formdata = $form->data;
         $user = new User();
-        if (!$form->isValid()){
+        if (!$form->isValid()) {
             $_SESSION['error_message'] = "Erreur : le formulaire n'est pas valide.";
             $this->view();
+            return;
         }
         $email = ["email" => $formdata['email']];
         $mailVerif = $user->emailExists($email);
@@ -57,14 +60,11 @@ class Auth
         $user->setConfirmKey(bin2hex(random_bytes(32)));
         $user->setConfirm(0);
         $user->save();
-        // Envoi de l'e-mail de validation
-        try {
-            Mailer::sendMail($user->getEmail(),"valadition du compte","valide bien gros bouffon tiens ton lien de validation gros chien : http://localhost:8000/confirm/".$user->getConfirmKey());
 
-            echo "Inscription réussie. Veuillez vérifier votre boîte de réception pour valider votre compte.";
-        } catch (Exception $e) {
-            echo "Erreur lors de l'envoi de l'e-mail : " . $mail->ErrorInfo;
-        }
+        // Envoi de l'e-mail de validation
+        Mailer::sendMail($user->getEmail(), "valadition du compte", "Veuillez validé votre compte: http://localhost:80/confirm?mail=" . $user->getEmail() . '&key=' . $user->getConfirmKey());
+        echo "Inscription réussie. Veuillez vérifier votre boîte de réception pour valider votre compte.";
+
         $this->view();
     }
 
@@ -73,14 +73,24 @@ class Auth
         echo "Page de déconnexion";
     }
 
-    public function valideToken ($token) {
-        $user = User::populate($token);
-        if ($user->getConfirm() == 1) {
-            echo "Votre compte est déjà validé.";
-        } else {
-            $user->setConfirm(1);
-            $user->save();
-            echo "Votre compte a bien été validé.";
+    public function valideToken()
+    {
+        $view = new View("Auth/confirm", "front");
+        if (isset($_GET['mail'], $_GET['mail'])) {
+            var_dump($_GET['mail'], $_GET['key']);
+            $user = new User();
+            $getMail = htmlspecialchars(urldecode($_GET['mail']));
+            $getKey = htmlspecialchars($_GET['key']);
+            $response = $user->getToken($getMail, $getKey);
+            $return_value = match ($response['user']) {
+                0 => "Compte inexistant",
+                1 => "sheeeesh",
+                default => "Autre cas"
+            };
+            if ($response['confirm'] == 1) {
+                echo "Votre compte à deja été confirmé ";
+            };
+            $response = $user->confirmAccount($getMail);
         }
     }
 }

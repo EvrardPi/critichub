@@ -89,3 +89,7 @@ view:
 register:
   controller: Auth
   action: register
+
+confirm:
+   controller: Auth
+   action: valideToken

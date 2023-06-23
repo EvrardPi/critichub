@@ -58,6 +58,8 @@ class Mailer
         // set gmail password
         $mail->Password = "Paya2023";
 
+        $mail->SMTPDebug = 0;
+
         $mail->setFrom("OfficialCritichub@outlook.fr");
 
         return $mail;
