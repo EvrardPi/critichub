@@ -25,7 +25,7 @@
                    id="<?= $configInput["id"] ?>"
                    type="<?= $configInput["type"] ?>"
                 <?= $configInput["required"] ? "required" : "" ?>
-                   value="<?= $configInput["value"] ?>"><br>
+                   value="<?= $configInput["value"] ?? "" ?>"><br>
         <?php endif; ?>
     <?php endforeach; ?>
 
