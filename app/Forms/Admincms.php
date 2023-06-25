@@ -11,7 +11,7 @@ class Admincms extends Validator
         $this->config = [
             "config"=>[
                 "method"=>"POST",
-                "action"=>"send-cms-data",
+                "action"=>"admin-preview",
                 "id"=>"admin-cms-form",
                 "class"=>"new-admin-form",
                 "enctype"=>"",

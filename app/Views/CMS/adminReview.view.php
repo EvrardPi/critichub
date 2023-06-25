@@ -92,7 +92,17 @@ $dataToSend = new Adminreview();
 <div class="button-submit">
     <a href="/new-admin-review" class="button button-review">Recommencer une preview</a>
     <form action="send-cms-data" method="post">
-        <button class="button button-review">Publier la Review Administrateur</button>
+        <?php foreach ($_POST as $key => $value) {
+            if ($key == "banner" || $key == "logo" || $key == "actor1") {
+                $decodedData = json_decode($value, true);
+                echo '<input type="hidden" name="'.$key.'" value="'. $decodedData[0]["file_name"]. '">';
+            } else {
+                echo '<input type="hidden" name="'.$key.'" value="'. $value. '">';
+            }
+        } ?>
+
+    <input type="submit" class="button button-review" value="Publier la Review Administrateur"></input>
+
     </form>
     
 </div>
