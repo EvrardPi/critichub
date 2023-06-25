@@ -48,6 +48,15 @@ body .form-container .login-form .register {
 body .form-container .login-form .register .form-input {
   text-align: center;
 }
+body .form-container .login-form .login-form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+body .form-container .login-form .login-form .form-input {
+  text-align: center;
+}
 body .form-container .login-form input {
   background-color: #332d2d;
   height: 51px;

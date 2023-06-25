@@ -48,7 +48,7 @@ class Login extends Validator
                 "method"=> "POST",
                 "action"=>"",
                 "id"=>"login-form",
-                "class"=>"form",
+                "class"=>"login-form",
                 "enctype"=>"",
                 "submit"=>"Se connecter",
                 "reset"=>"Annuler"

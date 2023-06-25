@@ -46,7 +46,7 @@ class Auth
             // GET
         }
 
-        $view = new View("Auth/login", "front");
+        $view = new View("Auth/login", "auth");
         $view->assign("form", $form->getConfig());
         $view->assign("errors", $errors);
 
@@ -62,7 +62,10 @@ class Auth
         $where = ['email' => $email];
         $user = $user->getOneWhere($where);
         if (!$user) {
-            echo "PAS BON";
+            // echo "PAS BON";
+            echo '<div class="alert alert-danger register-alert" role="alert">
+            Authentification échouée.
+        </div>';
             // erreurs
             return;
         }
