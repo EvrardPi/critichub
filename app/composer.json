@@ -1,0 +1,17 @@
+{
+    "name": "youri/app",
+    "require": {
+        "phpmailer/phpmailer": "^6.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Youri\\App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Youri Ghlis",
+            "email": "ghlisyouri@gmail.com"
+        }
+    ]
+}

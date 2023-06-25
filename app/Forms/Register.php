@@ -11,7 +11,7 @@ class Register extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"s-inscrire",
+                "action"=>"register",
                 "id"=>"register-form",
                 "class"=>"register",
                 "enctype"=>"",
