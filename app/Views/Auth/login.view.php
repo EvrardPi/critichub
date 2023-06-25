@@ -1,4 +1,4 @@
-<h2>S'inscrire</h2>
+<h2>Se connecter</h2>
 
 <?php
 

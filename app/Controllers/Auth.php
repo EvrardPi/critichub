@@ -126,11 +126,6 @@ class Auth
         $this->view();
     }
 
-    public function logout(): void
-    {
-        echo "Page de déconnexion";
-    }
-
     public function valideToken()
     {
         $view = new View("Auth/confirm", "front");
