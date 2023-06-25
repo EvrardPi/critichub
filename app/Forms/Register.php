@@ -16,13 +16,12 @@ class Register extends Validator
                 "class"=>"register",
                 "enctype"=>"",
                 "submit"=>"Créer",
-
             ],
             "inputs"=>[
                 "firstname"=>[
                     "id"=>"register-form-firstname",
                     "class"=>"form-input",
-                    "placeholder"=>"Son prénom",
+                    "placeholder"=>"Prénom",
                     "type"=>"text",
                     "error"=>"Le prénom doit faire entre 2 et 60 caractères",
                     "min"=>2,
@@ -33,7 +32,7 @@ class Register extends Validator
                 "lastname"=>[
                     "id"=>"register-form-lastname",
                     "class"=>"form-input",
-                    "placeholder"=>"Son nom",
+                    "placeholder"=>"Nom",
                     "type"=>"text",
                     "error"=>"Le nom doit faire entre 2 et 120 caractères",
                     "min"=>2,
@@ -44,7 +43,7 @@ class Register extends Validator
                 "email"=>[
                     "id"=>"register-form-email",
                     "class"=>"form-input",
-                    "placeholder"=>"Son email",
+                    "placeholder"=>"Email",
                     "type"=>"email",
                     "error"=>"L'email est incorrect",
                     "required"=>true,
@@ -61,7 +60,7 @@ class Register extends Validator
                 "password"=>[
                     "id"=>"register-form-pwd",
                     "class"=>"form-input",
-                    "placeholder"=>"Son mot de passe",
+                    "placeholder"=>"Mot de passe",
                     "type"=>"password",
                     "error"=>"Le mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
                     "required"=>true,
@@ -70,7 +69,7 @@ class Register extends Validator
                 "passwordConfirm"=>[
                     "id"=>"register-form-pwd-confirm",
                     "class"=>"form-input",
-                    "placeholder"=>"Confirmation",
+                    "placeholder"=>"Confirmer votre mot de passe",
                     "type"=>"password",
                     "error"=>"Le mot de passe de confirmation ne correspond pas",
                     "required"=>true,

@@ -17,7 +17,7 @@
                 <?php foreach ($configInput["options"] as $value => $label): ?>
                     <option value="<?= $value ?>"><?= $label ?></option>
                 <?php endforeach; ?>
-            </select><br>
+            </select>
         <?php else: ?>
             <input name="<?= $name ?>"
                    placeholder="<?= $configInput["placeholder"] ?>"
@@ -25,10 +25,10 @@
                    id="<?= $configInput["id"] ?>"
                    type="<?= $configInput["type"] ?>"
                 <?= $configInput["required"] ? "required" : "" ?>
-                   value="<?= $configInput["value"] ?? "" ?>"><br>
+                   value="<?= $configInput["value"] ?? "" ?>">
         <?php endif; ?>
     <?php endforeach; ?>
 
-    <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
+    <input type="submit" class="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
 
 </form>

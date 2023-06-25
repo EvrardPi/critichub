@@ -82,7 +82,7 @@ class Auth
 
     public function view(): void
     {
-        $view = new View("Auth/register", "front");
+        $view = new View("Auth/register", "auth");
         $form = new Register();
         $view->assign("registerForm", $form->getConfig());
         $view->assign("pageName", "Inscription");
@@ -108,6 +108,7 @@ class Auth
         if ($mailVerif) {
             $_SESSION['error_message'] = "Erreur : Le mail existe déjà, veuillez rentrer un autre mail";
             $this->view();
+            return;
         }
         $user->setFirstname($formdata['firstname']);
         $user->setLastname($formdata['lastname']);
