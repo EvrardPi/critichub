@@ -3,18 +3,40 @@
 namespace App\Forms;
 
 use App\Core\Validator;
+use App\Helper;
 
 class Login extends Validator
 {
-    public const METHOD_POST = "POST";
-    protected string $method = self::METHOD_POST;
     protected array $config = [];
 
     public function __construct() {
-        $this->method = $_SERVER['REQUEST_METHOD'];
         $this->setData();
         $this->data = $this->getData();
     }
+
+
+    /**
+     * Set data for the Login form
+     *
+     * @return void
+     */
+    public function setData(): void
+    {
+        $this->data = (Helper::methodUsed() === Helper::POST) ? $_POST : $_GET;
+
+        
+    }
+
+    
+    /**
+     * Get data for the Login form
+     * @return array The data for the Login form
+     */
+    public function getData(): array
+    {
+        return $this->data;
+    }
+
 
     /**
      * Set configuration for the Login form
@@ -23,7 +45,7 @@ class Login extends Validator
     {
         $this->config = [
             "config"=>[
-                "method"=>$this->method,
+                "method"=> "POST",
                 "action"=>"",
                 "id"=>"login-form",
                 "class"=>"form",
