@@ -58,11 +58,7 @@ class Auth
     public function login_post(array $data)
     {
 
-        // Vérification du jeton CSRF
-        if (!hash_equals($_SESSION['csrf_token'], $data['csrf_token'])) {
-            // Le jeton CSRF est invalide, arrêter le traitement du formulaire
-            die('Erreur : Jeton CSRF invalide.');
-        }
+
 
         $email = $data['email'];
         $password = $data['pwd'];

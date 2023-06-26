@@ -15,6 +15,12 @@ class Validator
 
     public function isValid(): bool
     {
+
+        // Vérification du jeton CSRF
+        if (!hash_equals($_SESSION['csrf_token'], $data['csrf_token'])) {
+            // Le jeton CSRF est invalide, arrêter le traitement du formulaire
+            die('Erreur : Jeton CSRF invalide.');
+        }
         $this->config = $this->getConfig();
         //La bonne method ?
         if ($_SERVER["REQUEST_METHOD"] != $this->method) {
