@@ -1,6 +1,9 @@
-<?php if (!empty($errors)): ?>
-    <?php print_r($errors); ?>
-<?php endif; ?>
+<?php 
+namespace App\Views\Partials;
+
+use App\Helper;
+
+if (!empty($errors)) print_r($errors); ?>
 
 <form method="<?= $config["config"]["method"] ?>"
       action="<?= $config["config"]["action"] ?>"
@@ -8,7 +11,7 @@
       id="<?= $config["config"]["id"] ?>"
       class="<?= $config["config"]["class"] ?>">
 
-    <input type="hidden" name="csrf_token" value="<?= $config["config"]["csrf_token"] ?>">
+    <input type="hidden" name="csrf_token" value="<?= Helper::generateCSRFToken() ?>">
 
     <?php foreach ($config["inputs"] as $name => $configInput): ?>
         <?php if ($name === "role"): ?>
@@ -31,6 +34,6 @@
         <?php endif; ?>
     <?php endforeach; ?>
 
-    <input type="submit" class="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
+    <button type="submit" class="submit"><?= $config["config"]["submit"] ?></button>
 
 </form>

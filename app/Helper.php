@@ -18,5 +18,17 @@ class Helper
         header('Location: ' . $url);
         die();
     }
+
+    /**
+     * Génère un jeton CSRF et le stocke en session
+     *
+     * @return string
+     */
+    static public function generateCSRFToken(): string
+    {
+        $token = bin2hex(random_bytes(32));
+        $_SESSION['csrf_token'] = $token;
+        return $token;
+    }
     
 }
