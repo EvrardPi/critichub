@@ -8,6 +8,8 @@
       id="<?= $config["config"]["id"] ?>"
       class="<?= $config["config"]["class"] ?>">
 
+    <input type="hidden" name="csrf_token" value="<?= $config["config"]["csrf_token"] ?>">
+
     <?php foreach ($config["inputs"] as $name => $configInput): ?>
         <?php if ($name === "role"): ?>
             <select name="<?= $name ?>"
@@ -20,11 +22,11 @@
             </select>
         <?php else: ?>
             <input name="<?= $name ?>"
-                   placeholder="<?= $configInput["placeholder"] ?>"
-                   class="<?= $configInput["class"] ?>"
-                   id="<?= $configInput["id"] ?>"
+                   placeholder="<?= $configInput["placeholder"] ?? "" ?>"
+                   class="<?= $configInput["class"] ?? "" ?>"
+                   id="<?= $configInput["id"] ?? "" ?>"
                    type="<?= $configInput["type"] ?>"
-                <?= $configInput["required"] ? "required" : "" ?>
+                <?= !empty($configInput["required"]) ? "required" : "" ?>
                    value="<?= $configInput["value"] ?? "" ?>">
         <?php endif; ?>
     <?php endforeach; ?>

@@ -10,36 +10,36 @@ class Validator
     public function __construct()
     {
         $this->method = $_SERVER["REQUEST_METHOD"];
-        $this->data = ($this->method == "POST")?$_POST:$_GET;
+        $this->data = ($this->method == "POST") ? $_POST : $_GET;
     }
 
     public function isValid(): bool
     {
         $this->config = $this->getConfig();
         //La bonne method ?
-        if($_SERVER["REQUEST_METHOD"] != $this->method){
+        if ($_SERVER["REQUEST_METHOD"] != $this->method) {
             die("Tentative de Hack youri");
         }
         //Le nb de inputs
-        if(count($this->config["inputs"])+1 != count($this->data)){
+        if (count($this->config["inputs"]) + 1 != count($this->data)) {
             die("Tentative de Hack valentin");
         }
 
-        foreach ($this->config["inputs"] as $name=>$configInput){
-            if(!isset($this->data[$name])){
+        foreach ($this->config["inputs"] as $name => $configInput) {
+            if (!isset($this->data[$name])) {
                 die("Tentative de Hack sperme");
             }
-            if(isset($configInput["required"]) && self::isEmpty($this->data[$name])){
+            if (isset($configInput["required"]) && self::isEmpty($this->data[$name])) {
                 die("Tentative de Hack pierre");
             }
-            if(isset($configInput["min"]) && !self::isMinLength($this->data[$name], $configInput["min"])){
-                $this->errors[]=$configInput["error"];
+            if (isset($configInput["min"]) && !self::isMinLength($this->data[$name], $configInput["min"])) {
+                $this->errors[] = $configInput["error"];
             }
-            if(isset($configInput["max"]) && !self::isMaxLength($this->data[$name], $configInput["max"])){
-                $this->errors[]=$configInput["error"];
+            if (isset($configInput["max"]) && !self::isMaxLength($this->data[$name], $configInput["max"])) {
+                $this->errors[] = $configInput["error"];
             }
         }
-        if(empty($this->errors)){
+        if (empty($this->errors)) {
             return true;
         }
         return false;
@@ -51,11 +51,22 @@ class Validator
     }
     public static function isMinLength(String $string, $length): bool
     {
-        return strlen(trim($string))>=$length;
+        return strlen(trim($string)) >= $length;
     }
     public static function isMaxLength(String $string, $length): bool
     {
-        return strlen(trim($string))<=$length;
+        return strlen(trim($string)) <= $length;
     }
 
+    /**
+     * Génère un jeton CSRF et le stocke en session
+     *
+     * @return string
+     */
+    public function generateCSRFToken(): string
+    {
+        $token = bin2hex(random_bytes(32));
+        $_SESSION['csrf_token'] = $token;
+        return $token;
+    }
 }

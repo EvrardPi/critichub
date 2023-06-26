@@ -20,8 +20,10 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 class Auth
 {
+
     public function logout(): void
     {
+        unset($_SESSION['csrf_token']);
         session_destroy();
         Helper::redirectTo();
         // rediriger vers l'index
@@ -29,6 +31,7 @@ class Auth
 
     public function login(): void
     {
+
         // Si déjà enregistré dans session, rediriger vers l'index car déjà loggé
         if ((Helper::methodUsed() === Helper::GET) && CheckAuth::isLoggedIn()) {
             Helper::redirectTo();
@@ -49,11 +52,18 @@ class Auth
         $view = new View("Auth/login", "auth");
         $view->assign("form", $form->getConfig());
         $view->assign("errors", $errors);
-
+        $view->assign("csrf_token", $_SESSION['csrf_token']); // Passe le jeton CSRF à la vue
     }
 
-    public function login_post(Array $data) 
+    public function login_post(array $data)
     {
+
+        // Vérification du jeton CSRF
+        if (!hash_equals($_SESSION['csrf_token'], $data['csrf_token'])) {
+            // Le jeton CSRF est invalide, arrêter le traitement du formulaire
+            die('Erreur : Jeton CSRF invalide.');
+        }
+
         $email = $data['email'];
         $password = $data['pwd'];
 
@@ -80,6 +90,7 @@ class Auth
         $_SESSION['userId'] = $user->getId();
         $_SESSION['email'] = $user->getEmail();
 
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         Helper::redirectTo();
     }
 
