@@ -88,7 +88,7 @@ function CreateElement(number) {
             for (var i = 0; i < splitActorName.length; i++) {
                 splitActorName[i] = splitActorName[i].charAt(0).toUpperCase() + splitActorName[i].slice(1);
             }
-            var treatedActorName = splitActorName.join(" ");
+            var treatedActorName = splitActorName.join("-");
             console.log(treatedActorName);
             image.name = treatedActorName;
 

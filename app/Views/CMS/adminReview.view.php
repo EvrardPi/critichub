@@ -83,21 +83,14 @@
 </section>
 
 
-<?php 
-
-$dataToSend = new Adminreview();
-
-?>
-
 <div class="button-submit">
     <a href="/new-admin-review" class="button button-review">Recommencer une preview</a>
     <form action="send-cms-data" method="post">
         <?php foreach ($_POST as $key => $value) {
-            if ($key == "banner" || $key == "logo" || $key == "actor1") {
-                $decodedData = json_decode($value, true);
-                echo '<input type="hidden" name="'.$key.'" value="'. $decodedData[0]["file_name"]. '">';
+            if ($key == "banner" || $key == "logo" || $key == "actor1" || $key == "actor2" || $key == "actor3" || $key == "actor4" || $key == "actor5" || $key == "actor6") {
+                echo '<input type="hidden" name="'.$key.'" value='. $value . '>';
             } else {
-                echo '<input type="hidden" name="'.$key.'" value="'. $value. '">';
+                echo '<input type="hidden" name="'.$key.'" value="'. $value . '">';
             }
         } ?>
 
