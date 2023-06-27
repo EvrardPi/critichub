@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Models;
+
 use App\Core\SQL;
+
 class User extends SQL
 {
     private int $id = 0;
@@ -13,9 +15,12 @@ class User extends SQL
     protected string $birth_date;
     private ?string $date_inserted;
     private ?string $date_updated;
+    protected ?string $confirm_key;
+    public int $confirm;
 
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -102,10 +107,6 @@ class User extends SQL
         $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
-
-
-
-
     /**
      * @return Int
      */
@@ -164,6 +165,35 @@ class User extends SQL
         $this->date_updated = $date_updated;
     }
 
+    /**
+     * @return String
+     */
+    public function getConfirmKey(): string
+    {
+        return $this->confirm_key;
+    }
 
+    /**
+     * @param String $confirm_key
+     */
+    public function setConfirmKey(string $confirm_key): void
+    {
+        $this->confirm_key = $confirm_key;
+    }
 
+    /**
+     * @return Int
+     */
+    public function getConfirm(): int
+    {
+        return $this->confirm;
+    }
+
+    /**
+     * @param Int $confirm
+     */
+    public function setConfirm(int $confirm): void
+    {
+        $this->confirm = $confirm;
+    }
 }

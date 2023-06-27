@@ -44,7 +44,7 @@ logout:
 
 s-inscrire:
   controller: Auth
-  action: register
+  action: view
 
 404:
   controller: Error
@@ -93,3 +93,11 @@ read:
 view:
   controller: Users
   action: view
+
+register:
+  controller: Auth
+  action: register
+
+confirm:
+   controller: Auth
+   action: valideToken
