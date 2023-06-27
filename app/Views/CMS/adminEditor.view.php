@@ -23,5 +23,5 @@
 
 </div>
 
-<script src="/assets/js/cms-preview-img.js"></script>
-<script src="/assets/js/show-actors.js"></script>
+<script src="/assets/js/cms/cms-preview-img.js"></script>
+<script src="/assets/js/cms/show-actors.js"></script>

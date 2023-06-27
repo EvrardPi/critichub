@@ -37,10 +37,7 @@ class Cms
     {
         $prefix = "assets/images/";
         $dataForm = new Admincms();
-        echo "<pre>";
-        echo $_SESSION['csrf_token'];
         unset($dataForm->data['submit']);
-        var_dump($dataForm->data);
         if (!$dataForm->isValid()) {
             echo "error";
             die();
@@ -100,5 +97,6 @@ class Cms
 
         // $dataToSend->save();
         echo "Opération réussie !";
+        header( "refresh:3;url=/" );
     }
 }
