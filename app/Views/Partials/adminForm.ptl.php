@@ -1,4 +1,9 @@
-<?php if (!empty($errors)): ?>
+<?php 
+namespace App\Views\Partials;
+
+use App\Helper;
+
+if (!empty($errors)): ?>
     <?php print_r($errors); ?>
 <?php endif; ?>
 
@@ -7,6 +12,8 @@
       enctype="<?= $config["config"]["enctype"] ?>"
       id="<?= $config["config"]["id"] ?>"
       class="<?= $config["config"]["class"] ?>">
+
+      <input type="hidden" name="csrf_token" value="<?= Helper::generateCSRFToken() ?>">
 
     <?php foreach ($config["inputs"] as $name => $configInput): ?>
         <?php if ($configInput["type"] !== "select"): ?>

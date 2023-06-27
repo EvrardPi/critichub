@@ -59,6 +59,7 @@ class Validator
         // print_r($this->data);
         // echo "</pre>";
         
+        
         if (count($this->config["inputs"]) != count($this->data) - 1) { // -1 pour le jeton CSRF
             die("Tentative de Hack valentin");
         }
