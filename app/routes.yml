@@ -93,3 +93,7 @@ register:
 confirm:
    controller: Auth
    action: valideToken
+
+category:
+  controller: Categorys
+  action: view

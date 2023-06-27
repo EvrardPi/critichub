@@ -4,18 +4,18 @@ namespace App\Controllers;
 
 use App\Core\Validator;
 use App\Core\View;
-use App\Forms\User\Create;
+use App\Forms\Category\Create;
 use App\Forms\Register;
-use App\Forms\User\Update;
+use App\Forms\Category\Update;
 use App\Models\User;
 use App\Core\SQL;
 
-class Users
+class Categorys
 {
 
     public function view(): void
     {
-        $view = new View("BackOffice/userGestion", "back");
+        $view = new View("BackOffice/categoryGestion", "back");
         $createForm = new Create();
         $view->assign("createForm", $createForm->getConfig());
         $updateForm = new Update();
