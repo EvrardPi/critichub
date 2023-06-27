@@ -1,12 +1,17 @@
-<?php if (!empty($errors)): ?>
-    <?php print_r($errors); ?>
-<?php endif; ?>
+<?php 
+namespace App\Views\Partials;
+
+use App\Helper;
+
+if (!empty($errors)) print_r($errors); ?>
 
 <form method="<?= $config["config"]["method"] ?>"
       action="<?= $config["config"]["action"] ?>"
       enctype="<?= $config["config"]["enctype"] ?>"
       id="<?= $config["config"]["id"] ?>"
       class="<?= $config["config"]["class"] ?>">
+
+    <input type="hidden" name="csrf_token" value="<?= Helper::generateCSRFToken() ?>">
 
     <?php foreach ($config["inputs"] as $name => $configInput): ?>
         <?php if ($name === "role"): ?>
@@ -20,15 +25,15 @@
             </select>
         <?php else: ?>
             <input name="<?= $name ?>"
-                   placeholder="<?= $configInput["placeholder"] ?>"
-                   class="<?= $configInput["class"] ?>"
-                   id="<?= $configInput["id"] ?>"
+                   placeholder="<?= $configInput["placeholder"] ?? "" ?>"
+                   class="<?= $configInput["class"] ?? "" ?>"
+                   id="<?= $configInput["id"] ?? "" ?>"
                    type="<?= $configInput["type"] ?>"
-                <?= $configInput["required"] ? "required" : "" ?>
+                <?= !empty($configInput["required"]) ? "required" : "" ?>
                    value="<?= $configInput["value"] ?? "" ?>">
         <?php endif; ?>
     <?php endforeach; ?>
 
-    <input type="submit" class="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
+    <button type="submit" class="submit"><?= $config["config"]["submit"] ?></button>
 
 </form>

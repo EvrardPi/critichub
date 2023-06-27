@@ -20,16 +20,16 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 class Auth
 {
+
     public function logout(): void
     {
         session_destroy();
-        Helper::redirectTo();
-        // rediriger vers l'index
+        Helper::redirectTo(); // redirige vers l'index
     }
 
     public function login(): void
     {
-        // Si déjà enregistré dans session, rediriger vers l'index car déjà loggé
+        // Si déjà enregistré dans session, redirige vers l'index
         if ((Helper::methodUsed() === Helper::GET) && CheckAuth::isLoggedIn()) {
             Helper::redirectTo();
             return;
@@ -37,22 +37,26 @@ class Auth
 
         // Juste la View
         $form = new Login();
-        $errors = [];
 
         // Puis vérif si POST ou GET
         if (Helper::methodUsed() === Helper::POST) {
-            $errors = self::login_post($form->getData());
+            
+            // token CSRF
+            if (!$form->isValid()) {
+                array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
+                $this->view_login();
+                return;
+            }
+
+            self::login_post($form->getData());
         } else {
             // GET
         }
 
-        $view = new View("Auth/login", "auth");
-        $view->assign("form", $form->getConfig());
-        $view->assign("errors", $errors);
-
+        $this->view_login();
     }
 
-    public function login_post(Array $data) 
+    public function login_post(array $data): void
     {
         $email = $data['email'];
         $password = $data['pwd'];
@@ -61,73 +65,104 @@ class Auth
         $user = new User();
         $where = ['email' => $email];
         $user = $user->getOneWhere($where);
+
         if (!$user) {
-            // echo "PAS BON";
-            echo '<div class="alert alert-danger register-alert" role="alert">
-            Authentification échouée.
-        </div>';
-            // erreurs
+            // Pas de user trouvé
+            array_push($_SESSION['error_messages'], "Connexion échouée.");
             return;
         }
 
         if (!password_verify($password, $user->getPassword())) {
-            // login invalid
-            echo "BON";
+            // Mauvais mot de passe
+            array_push($_SESSION['error_messages'], "Connexion échouée.");
             return;
         }
 
+        if ($user->getConfirm() == 0) {
+            // Compte non confirmé
+            array_push($_SESSION['error_messages'], "Compte non confirmé.");
+            return;
+        }
+
+        // Connexion réussie
         $_SESSION['isAuth'] = true;
         $_SESSION['userId'] = $user->getId();
         $_SESSION['email'] = $user->getEmail();
-
+        Helper::generateCSRFToken();
         Helper::redirectTo();
     }
 
-    public function view(): void
+    public function view_login(): void
+    {
+        $view = new View("Auth/login", "auth");
+        $form = new Login();
+        $view->assign("loginForm", $form->getConfig());
+        $view->assign("pageName", "Connexion");
+    }
+
+    public function view_register(): void
     {
         $view = new View("Auth/register", "auth");
         $form = new Register();
         $view->assign("registerForm", $form->getConfig());
         $view->assign("pageName", "Inscription");
-        if (isset($_SESSION['error_message'])) {
-            $view->assign("errorMessage", $_SESSION['error_message']);
-            // Suppression de la variable de session d'erreur
-            unset($_SESSION['error_message']);
-        }
     }
 
     public function register(): void
     {
+        // Si déjà enregistré dans session, redirige vers l'index
+        if ((Helper::methodUsed() === Helper::GET) && CheckAuth::isLoggedIn()) {
+            Helper::redirectTo();
+            return;
+        }
+
+        // Juste la View
         $form = new Register();
-        $formdata = $form->data;
+
+        // Puis vérif si POST ou GET
+        if (Helper::methodUsed() === Helper::POST) {
+            
+            // token CSRF
+            if (!$form->isValid()) {
+                array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
+                $this->view_register();
+                return;
+            }
+
+            self::register_post($form->getData());
+        } else {
+            // GET
+        }
+
+        $this->view_register();
+    }
+
+    public function register_post(array $data): void
+    {
+        $email = ["email" => $data['email']];
+
         $user = new User();
-        if (!$form->isValid()) {
-            $_SESSION['error_message'] = "Erreur : le formulaire n'est pas valide.";
-            $this->view();
+
+        if ($user->emailExists($email)) {
+            array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
+            $this->view_register();
             return;
         }
-        $email = ["email" => $formdata['email']];
-        $mailVerif = $user->emailExists($email);
-        if ($mailVerif) {
-            $_SESSION['error_message'] = "Erreur : Le mail existe déjà, veuillez rentrer un autre mail";
-            $this->view();
-            return;
-        }
-        $user->setFirstname($formdata['firstname']);
-        $user->setLastname($formdata['lastname']);
-        $user->setEmail($formdata['email']);
-        $user->setPassword($formdata['password']);
-        $user->setBirthDate($formdata['birth_date']);
+
+        $user->setFirstname($data['firstname']);
+        $user->setLastname($data['lastname']);
+        $user->setEmail($data['email']);
+        $user->setPassword($data['password']);
+        $user->setBirthDate($data['birth_date']);
         $user->setRole(3);
         $user->setConfirmKey(bin2hex(random_bytes(32)));
         $user->setConfirm(0);
         $user->save();
 
         // Envoi de l'e-mail de validation
-        Mailer::sendMail($user->getEmail(), "valadition du compte", "Veuillez validé votre compte: http://localhost:80/confirm?mail=" . $user->getEmail() . '&key=' . $user->getConfirmKey());
-        echo "Inscription réussie. Veuillez vérifier votre boîte de réception pour valider votre compte.";
-
-        $this->view();
+        Mailer::sendMail($user->getEmail(), "validation du compte", "Veuillez validé votre compte: http://localhost:80/confirm?mail=" . $user->getEmail() . '&key=' . $user->getConfirmKey());
+        //Helper::redirectTo('/login');
+        Helper::successAlert('FEUR');
     }
 
     public function valideToken()

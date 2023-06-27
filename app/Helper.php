@@ -18,5 +18,24 @@ class Helper
         header('Location: ' . $url);
         die();
     }
+
+    // Affiche une alerte success
+    static public function successAlert(String $message) {
+        echo "<div class='alert alert-success' role='alert'>
+        $message
+        </div>";
+    }
+
+    /**
+     * Génère un jeton CSRF et le stocke en session
+     *
+     * @return string
+     */
+    static public function generateCSRFToken(): string
+    {
+        $token = bin2hex(random_bytes(32));
+        $_SESSION['csrf_token'] = $token;
+        return $token;
+    }
     
 }
