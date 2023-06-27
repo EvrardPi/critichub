@@ -37,9 +37,9 @@ class Cms
     {
         $prefix = "assets/images/";
         $dataForm = new Admincms();
-        // echo "<pre>";
-        unset($dataForm->data['submit']);
-        // var_dump($dataForm->data);
+        echo "<pre>";
+        // unset($dataForm->data['submit']);
+        var_dump($dataForm->data);
         if (!$dataForm->isValid()) {
             echo "error";
             die();
@@ -63,15 +63,6 @@ class Cms
             file_put_contents($prefix . $logoImgPath[0]["file_name"], $logoImageToSave);
         }
 
-        //Création variable qui prend que le nom du fichier, afin de l'envoyer en BDD
-        $actor1ImgPath = json_decode($verifiedDataForm['actor1'], true);
-        //Enregistrement de l'acteur 1 dans le dossier assets/images
-        $actor1ImageToSave = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $actor1ImgPath[0]["base64img"]));
-        if (!file_exists($prefix . $actor1ImgPath[0]["file_name"])) {
-            file_put_contents($prefix . $actor1ImgPath[0]["file_name"], $actor1ImageToSave);
-        }
-
-
         // Envoi des données dans la BDD
         $dataToSend = new Adminreview();
         $dataToSend->setTitleMedia($verifiedDataForm['titleMedia']);
@@ -82,21 +73,26 @@ class Cms
         $dataToSend->setActors($verifiedDataForm['actors']);
         $dataToSend->setBanner($prefix . $bannerImgPath[0]["file_name"]);
         $dataToSend->setLogo($prefix .  $logoImgPath[0]["file_name"]);
-        $dataToSend->setActor1($prefix . $actor1ImgPath[0]["file_name"]);
-        if (isset($verifiedDataForm['actor2'])) {
-            $dataToSend->setActor2($prefix . $verifiedDataForm['actor2']);
-        }
-        if (isset($verifiedDataForm['actor3'])) {
-            $dataToSend->setActor3($prefix . $verifiedDataForm['actor3']);
-        }
-        if (isset($verifiedDataForm['actor4'])) {
-            $dataToSend->setActor4($prefix . $verifiedDataForm['actor4']);
-        }
-        if (isset($verifiedDataForm['actor5'])) {
-            $dataToSend->setActor5($prefix . $verifiedDataForm['actor5']);
-        }
-        if (isset($verifiedDataForm['actor6'])) {
-            $dataToSend->setActor6($prefix . $verifiedDataForm['actor6']);
+
+        //Mise en place des valeurs des acteurs en fonction de leur nombre déterminé par le "actors" du formulaire
+        for ($i = 0; $i < $verifiedDataForm['actors']; $i++ ) {
+            if (isset($verifiedDataForm['actor'.$i+1])) {
+                // Décodage de l'array envoyé dans le formulaire
+                $actorImgPath = json_decode($verifiedDataForm['actor'.$i+1], true);
+                // Enregistrement de l'acteur dans le dossier assets/images
+                $actorImageToSave = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $actorImgPath[0]["base64img"]));
+                if (!file_exists($prefix . $actorImgPath[0]["file_name"])) {
+                    file_put_contents($prefix . $actorImgPath[0]["file_name"], $actorImageToSave);
+                }
+
+                $method = "setActor".$i+1;
+                if (method_exists($dataToSend, $method)) {
+                    $dataToSend->$method($prefix . $actorImgPath[0]["file_name"]);
+                } else {
+                    echo "La méthode n'existe pas";
+                }
+
+            }
         }
         // echo "<pre>";
         // var_dump($dataToSend);

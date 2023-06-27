@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Forms;
+
 use App\Core\Validator;
 
 class Admincms extends Validator
@@ -9,36 +11,36 @@ class Admincms extends Validator
     public function getConfig(): array
     {
         $this->config = [
-            "config"=>[
-                "method"=>"POST",
-                "action"=>"admin-preview",
-                "id"=>"admin-cms-form",
-                "class"=>"new-admin-form",
-                "enctype"=>"",
-                "submit"=>"Voir la preview de la review",
+            "config" => [
+                "method" => "POST",
+                "action" => "admin-preview",
+                "id" => "admin-cms-form",
+                "class" => "new-admin-form",
+                "enctype" => "",
+                "submit" => "Voir la preview de la review",
 
             ],
-            "inputs"=>[
-                "titleMedia"=>[
-                    "id"=>"admin-cms-form-titleMedia",
-                    "class"=>"new-admin-form-input",
-                    "placeholder"=>"Titre",
-                    "type"=>"text",
-                    "error"=>"Le titre du film ne doit pas être vide ou dépasser 80 caractères",
-                    "min"=>1,
-                    "max"=>80,
-                    "required"=>true,
-                    "value"=>""
+            "inputs" => [
+                "titleMedia" => [
+                    "id" => "admin-cms-form-titleMedia",
+                    "class" => "new-admin-form-input",
+                    "placeholder" => "Titre",
+                    "type" => "text",
+                    "error" => "Le titre du film ne doit pas être vide ou dépasser 80 caractères",
+                    "min" => 1,
+                    "max" => 80,
+                    "required" => true,
+                    "value" => ""
                 ],
 
-                "slogan"=>[
-                    "id"=>"admin-cms-form-slogan",
-                    "class"=>"new-admin-form-input",
-                    "placeholder"=>"Slogan",
-                    "type"=>"text",
-                    "error"=>"Il faut un slogan pour le film",
-                    "required"=>true,
-                    "value"=>""
+                "slogan" => [
+                    "id" => "admin-cms-form-slogan",
+                    "class" => "new-admin-form-input",
+                    "placeholder" => "Slogan",
+                    "type" => "text",
+                    "error" => "Il faut un slogan pour le film",
+                    "required" => true,
+                    "value" => ""
                 ],
                 "description" => [
                     "id" => "admin-cms-form-description",
@@ -67,13 +69,13 @@ class Admincms extends Validator
                     "required" => true,
                     "value" => ""
                 ],
-                "category"=>[
-                    "id"=>"admin-cms-form-category",
-                    "class"=>"new-admin-form-input",
-                    "placeholder"=>"Catégorie",
-                    "type"=>"select",
-                    "error"=>"Une catégorie doit être sélectionnée",
-                    "required"=>true,
+                "category" => [
+                    "id" => "admin-cms-form-category",
+                    "class" => "new-admin-form-input",
+                    "placeholder" => "Catégorie",
+                    "type" => "select",
+                    "error" => "Une catégorie doit être sélectionnée",
+                    "required" => true,
                     "options" => [
                         "0" => "Selectionnez une catégorie",
                         "Horreur" => "Horreur",
@@ -81,15 +83,15 @@ class Admincms extends Validator
                         "Drama" => "Drama",
                         "Action" => "Action"
                     ],
-                    "value"=>""
+                    "value" => ""
                 ],
-                "stars"=>[
-                    "id"=>"admin-cms-form-stars",
-                    "class"=>"new-admin-form-input",
-                    "placeholder"=>"Notation",
-                    "type"=>"select",
-                    "error"=>"Une notation doit être sélectionnée",
-                    "required"=>true,
+                "stars" => [
+                    "id" => "admin-cms-form-stars",
+                    "class" => "new-admin-form-input",
+                    "placeholder" => "Notation",
+                    "type" => "select",
+                    "error" => "Une notation doit être sélectionnée",
+                    "required" => true,
                     "options" => [
                         "0" => "Sélectionnez une notation",
                         "1" => "1",
@@ -98,15 +100,15 @@ class Admincms extends Validator
                         "4" => "4",
                         "5" => "5"
                     ],
-                    "value"=>""
+                    "value" => ""
                 ],
-                "actors"=>[
-                    "id"=>"admin-cms-form-actors",
-                    "class"=>"new-admin-form-input",
-                    "placeholder"=>"Notation",
-                    "type"=>"select",
-                    "error"=>"Un nombre d'acteurs doit être sélectionné",
-                    "required"=>true,
+                "actors" => [
+                    "id" => "admin-cms-form-actors",
+                    "class" => "new-admin-form-input",
+                    "placeholder" => "Notation",
+                    "type" => "select",
+                    "error" => "Un nombre d'acteurs doit être sélectionné",
+                    "required" => true,
                     "options" => [
                         "0" => "Nombre d'acteurs à montrer",
                         "1" => "1",
@@ -116,10 +118,10 @@ class Admincms extends Validator
                         "5" => "5",
                         "6" => "6"
                     ],
-                    "value"=>""
+                    "value" => ""
                 ],
             ],
-            "button"=>[
+            "button" => [
                 "banner-preview" => [
                     "id" => "button-banner",
                     "type" => "button",
@@ -140,6 +142,22 @@ class Admincms extends Validator
                 ],
             ],
         ];
+
+        // Ajouter les champs d'acteurs en fonction de la valeur sélectionnée
+        $actorsCount = isset($_POST['actors']) ? intval($_POST['actors']) : 0;
+        if ($actorsCount > 0) {
+            for ($i = 1; $i <= $actorsCount; $i++) {
+                $this->config['inputs']['actor' . $i] = [
+                    "id" => "admin-cms-form-actor" . $i,
+                    "class" => "new-admin-form-input",
+                    "placeholder" => "Acteur " . $i,
+                    "type" => "text",
+                    "error" => "Le nom de l'acteur " . $i . " ne doit pas être vide",
+                    "required" => true,
+                    "value" => ""
+                ];
+            }
+        }
         return $this->config;
     }
 }

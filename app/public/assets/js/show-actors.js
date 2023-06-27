@@ -1,15 +1,13 @@
+// Définition des variables globales d'acteurs + options
 const actorsCount = document.getElementById("admin-cms-form-actors");
 const actorsContainer = document.getElementById("actorsList");
 var options = actorsCount.querySelectorAll("option");
 
+// On liste l'ensemble des boutons et Inputs présents dans le formulaire
 const listOfButtons = document.getElementsByClassName("button-actor");
 const listOfInputs = document.getElementsByClassName("actor")
 
-
-console.log(actorsContainer);
-
-console.log(options);
-
+// Event Listener sur le selecteur du nombre d'acteurs
 actorsCount.addEventListener("change", function(){
     if (actorsCount.value === "Nombre d'acteurs à montrer") {
         actorsCount.value = 0;
@@ -40,7 +38,7 @@ actorsCount.addEventListener("change", function(){
 
 //PARTIE FONCTIONS
 function CreateElement(number) {
-    const buttonsInput = document.getElementById("showActorsPreview")
+    const buttonsInput = document.getElementById("admin-cms-form")
 
     // Créez les éléments nécessaires
     var actorElement = document.createElement('div');
