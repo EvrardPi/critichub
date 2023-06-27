@@ -19,6 +19,13 @@ class Helper
         die();
     }
 
+    // Affiche une alerte success
+    static public function successAlert(String $message) {
+        echo "<div class='alert alert-success' role='alert'>
+        $message
+        </div>";
+    }
+
     /**
      * Génère un jeton CSRF et le stocke en session
      *
