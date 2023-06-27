@@ -57,7 +57,7 @@ class Admincms extends Validator
                     "placeholder" => "",
                     "type" => "file",
                     "error" => "Une image de bannière est requise",
-                    "required" => true,
+                    "required" => false,
                     "value" => ""
                 ],
                 "logo" => [
@@ -66,7 +66,7 @@ class Admincms extends Validator
                     "placeholder" => "",
                     "type" => "file",
                     "error" => "Une image de logo est requis",
-                    "required" => true,
+                    "required" => false,
                     "value" => ""
                 ],
                 "category" => [
@@ -77,7 +77,6 @@ class Admincms extends Validator
                     "error" => "Une catégorie doit être sélectionnée",
                     "required" => true,
                     "options" => [
-                        "0" => "Selectionnez une catégorie",
                         "Horreur" => "Horreur",
                         "Comédie" => "Comédie",
                         "Drama" => "Drama",
@@ -93,7 +92,6 @@ class Admincms extends Validator
                     "error" => "Une notation doit être sélectionnée",
                     "required" => true,
                     "options" => [
-                        "0" => "Sélectionnez une notation",
                         "1" => "1",
                         "2" => "2",
                         "3" => "3",
@@ -105,12 +103,11 @@ class Admincms extends Validator
                 "actors" => [
                     "id" => "admin-cms-form-actors",
                     "class" => "new-admin-form-input",
-                    "placeholder" => "Notation",
+                    "placeholder" => "Nombre d'acteurs",
                     "type" => "select",
                     "error" => "Un nombre d'acteurs doit être sélectionné",
                     "required" => true,
                     "options" => [
-                        "0" => "Nombre d'acteurs à montrer",
                         "1" => "1",
                         "2" => "2",
                         "3" => "3",

@@ -59,7 +59,7 @@ function CreateElement(number) {
     input.id = 'admin-cms-form-actor'+number;
     input.type = 'file';
     input.accept = 'image/png';
-    input.required = true;
+    input.required = false;
     input.value = '';
 
     var imageContainer = document.createElement('div');

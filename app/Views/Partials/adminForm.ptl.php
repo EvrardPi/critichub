@@ -37,6 +37,7 @@ if (!empty($errors)): ?>
                 <?= $configInput["required"] ? "required" : "" ?>
                    value="<?= $configInput["value"] ?>">
 
+                   <option value="" selected disabled><?= $configInput["placeholder"] ?></option>
                    <?php foreach ($configInput["options"] as $option): ?>
                         <option value="<?= $option ?>"><?= $option ?></option>
                     <?php endforeach; ?>
@@ -55,9 +56,6 @@ if (!empty($errors)): ?>
                 <?= $configButton["textToDisplay"] ?>
             </button>
     <?php endforeach; ?>
-
-    <div id="showActorsPreview" class="showActorsPreview"></div>
-
     <input type="submit" name="submit" value="<?= $config["config"]["submit"] ?>">
 
 </form>
