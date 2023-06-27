@@ -1,9 +1,12 @@
 <h2>S'inscrire</h2>
 
-<?php if (isset($errorMessage)): ?>
-    <div class="alert alert-danger register-alert" role="alert">
-        <?php echo $errorMessage; ?>
-    </div>
-<?php endif; ?>
+<?php foreach ($_SESSION['error_messages'] as $error) { ?>
+<div class="alert alert-danger register-alert" role="alert">
+    <?php echo $error; ?>
+    <br>
+</div>
+<?php
+}
 
-<?php $this->partial("form", $registerForm) ?>
+$this->partial("form", $registerForm);
+?>

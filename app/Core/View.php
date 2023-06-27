@@ -10,7 +10,6 @@ class View {
     public function __construct(String $view, String $template = "back") {
         $this->setView($view);
         $this->setTemplate($template);
-
     }
 
     public function assign(String $key, $value): void
