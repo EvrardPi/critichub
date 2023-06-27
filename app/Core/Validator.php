@@ -35,55 +35,27 @@ class Validator
 
     public function isValid(): bool
     {
-        // echo $_SESSION['csrf_token'];
-        // echo "<br>";
-        // echo "<pre>";
-        // print_r($this->data);
-        // echo "</pre>";
-        
-        // Vérification du jeton CSRF
-        if (!hash_equals($_SESSION['csrf_token'], $this->data['csrf_token'])) {
-            return false;
-        }
+        if (!hash_equals($_SESSION['csrf_token'], $this->data['csrf_token'])) return false;
         
         $this->config = $this->getConfig();
-
-        // Le nb de inputs
-        // echo "CONFIG<br>";
-        // echo "<pre>";
-        // print_r($this->config["inputs"]);
-        // echo "</pre>";
-
-        // echo "DATA<br>";
-        // echo "<pre>";
-        // print_r($this->data);
-        // echo "</pre>";
         
-        if (count($this->config["inputs"]) != count($this->data) - 1) { // -1 pour le jeton CSRF
-            die("Tentative de Hack valentin");
-        }
+        if (count($this->config["inputs"]) != count($this->data) - 1) return false; // -1 pour le jeton CSRF
 
         foreach ($this->config["inputs"] as $name => $configInput) {
-            if (!isset($this->data[$name])) {
-                // die("Données manquantes");
-                // erreurs
-            }
 
-            if (isset($configInput["required"]) && self::isEmpty($this->data[$name])) {
-                // erreurs
-                die("Champs requis vide");
-            }
+            if (!isset($this->data[$name])) return false;
 
-            if (isset($configInput["min"]) && !self::isMinLength($this->data[$name], $configInput["min"])) {
-                $this->errors[] = $configInput["error"];
-            }
+            if (isset($configInput["required"]) && self::isEmpty($this->data[$name])) return false;
 
-            if (isset($configInput["max"]) && !self::isMaxLength($this->data[$name], $configInput["max"])) {
-                $this->errors[] = $configInput["error"];
-            }
+            if (isset($configInput["min"]) && ($configInput["min"] > $this->data[$name])) return false;
+            if (isset($configInput["max"]) && ($configInput["max"] < $this->data[$name])) return false;
+
+            if (isset($configInput["minlength"]) && !self::isMinLength($this->data[$name], $configInput["minlength"])) return false;
+            if (isset($configInput["maxlength"]) && !self::isMaxLength($this->data[$name], $configInput["maxlength"])) return false;
         }
 
-        return empty($this->errors);
+        // return empty($this->errors);
+        return true;
     }
 
     public static function isEmpty(String $string): bool

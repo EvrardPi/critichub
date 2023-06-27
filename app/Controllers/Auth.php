@@ -40,7 +40,7 @@ class Auth
 
         // Puis vérif si POST ou GET
         if (Helper::methodUsed() === Helper::POST) {
-            
+
             // token CSRF
             if (!$form->isValid()) {
                 array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
@@ -121,7 +121,7 @@ class Auth
 
         // Puis vérif si POST ou GET
         if (Helper::methodUsed() === Helper::POST) {
-            
+
             // token CSRF
             if (!$form->isValid()) {
                 array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
@@ -141,13 +141,23 @@ class Auth
     {
         $email = ["email" => $data['email']];
 
+        $birth_date = ["birth_date" => $data['birth_date']];
+        $role = ["role" => $data['role']];
+        $confirm_key = ["confirm_key" => $data['confirm_key']];
+        $confirm = ["confirm" => $data['confirm']];
+
         $user = new User();
 
-        if ($user->emailExists($email)) {
-            array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
-            $this->view_register();
-            return;
+        if (!filter_var($user->lastname, FILTER_VALIDATE_EMAIL)) $this->addErrorAndRedirect("Adresse mail non valide");
+        if ($user->emailExists($email)) $this->addErrorAndRedirect("Le mail existe déjà, veuillez rentrer un autre mail");
+
+        if ($data['password'] != $data['passwordConfirm']) $this->addErrorAndRedirect("Les mots de passe sont différents");
+
+        if (!preg_match('/^(?=.*\d)(?=.*[&\-é_èçà^ù:!ù#~@°%§+.])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z&\-é_èçà^ù*:!ù#~@°%§+.]{4,50}$/', $data['password'])) {
+            $this->addErrorAndRedirect("Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial parmi: &-é_èçà^ù:!ù#~@°%§+.");
         }
+
+        isset($data['birth_date']) && (new \DateTime($data['birth_date'])) > new \DateTime() ? $this->addErrorAndRedirect("La date de naissance ne peut pas être dans le futur") : null;
 
         $user->setFirstname($data['firstname']);
         $user->setLastname($data['lastname']);
@@ -162,7 +172,7 @@ class Auth
         // Envoi de l'e-mail de validation
         Mailer::sendMail($user->getEmail(), "validation du compte", "Veuillez validé votre compte: http://localhost:80/confirm?mail=" . $user->getEmail() . '&key=' . $user->getConfirmKey());
         //Helper::redirectTo('/login');
-        Helper::successAlert('FEUR');
+        Helper::successAlert('Votre compte a bien été créé, veuillez valider votre compte via le mail qui vous a été envoyé');
     }
 
     public function valideToken()
@@ -184,5 +194,12 @@ class Auth
             };
             $response = $user->confirmAccount($getMail);
         }
+    }
+
+    private function addErrorAndRedirect(string $errorMessage): void
+    {
+        array_push($_SESSION['error_messages'], $errorMessage);
+        $this->view_register();
+        return;
     }
 }
