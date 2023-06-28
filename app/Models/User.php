@@ -20,12 +20,6 @@ class User extends SQL
     public int $confirm;
 
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-
     /**
      * @return int
      */

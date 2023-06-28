@@ -48,7 +48,7 @@ class Auth
                 return;
             }
 
-            self::login_post($form->getData());
+            $this->login_post($form->getData());
         } else {
             // GET
         }
@@ -122,14 +122,13 @@ class Auth
         // Puis vérif si POST ou GET
         if (Helper::methodUsed() === Helper::POST) {
 
-            // token CSRF
             if (!$form->isValid()) {
-                array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
                 $this->view_register();
                 return;
             }
 
-            self::register_post($form->getData());
+            $this->register_post($form->getData());
+            
         } else {
             // GET
         }
@@ -139,25 +138,15 @@ class Auth
 
     public function register_post(array $data): void
     {
-        $email = ["email" => $data['email']];
-
-        $birth_date = ["birth_date" => $data['birth_date']];
-        $role = ["role" => $data['role']];
-        $confirm_key = ["confirm_key" => $data['confirm_key']];
-        $confirm = ["confirm" => $data['confirm']];
+        // $email = ["email" => $data['email']];
 
         $user = new User();
 
-        if (!filter_var($user->lastname, FILTER_VALIDATE_EMAIL)) $this->addErrorAndRedirect("Adresse mail non valide");
-        if ($user->emailExists($email)) $this->addErrorAndRedirect("Le mail existe déjà, veuillez rentrer un autre mail");
-
-        if ($data['password'] != $data['passwordConfirm']) $this->addErrorAndRedirect("Les mots de passe sont différents");
-
-        if (!preg_match('/^(?=.*\d)(?=.*[&\-é_èçà^ù:!ù#~@°%§+.])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z&\-é_èçà^ù*:!ù#~@°%§+.]{4,50}$/', $data['password'])) {
-            $this->addErrorAndRedirect("Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial parmi: &-é_èçà^ù:!ù#~@°%§+.");
-        }
-
-        isset($data['birth_date']) && (new \DateTime($data['birth_date'])) > new \DateTime() ? $this->addErrorAndRedirect("La date de naissance ne peut pas être dans le futur") : null;
+        // if ($user->emailExists($email)) {
+        //     array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
+        //     $this->view_register();
+        //     return;
+        // }
 
         $user->setFirstname($data['firstname']);
         $user->setLastname($data['lastname']);
@@ -179,7 +168,6 @@ class Auth
     {
         $view = new View("Auth/confirm", "front");
         if (isset($_GET['mail'], $_GET['mail'])) {
-            var_dump($_GET['mail'], $_GET['key']);
             $user = new User();
             $getMail = htmlspecialchars(urldecode($_GET['mail']));
             $getKey = htmlspecialchars($_GET['key']);
@@ -194,12 +182,5 @@ class Auth
             };
             $response = $user->confirmAccount($getMail);
         }
-    }
-
-    private function addErrorAndRedirect(string $errorMessage): void
-    {
-        array_push($_SESSION['error_messages'], $errorMessage);
-        $this->view_register();
-        return;
     }
 }

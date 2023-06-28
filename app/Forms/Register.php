@@ -56,7 +56,6 @@ class Register extends Validator
                     "placeholder" => "Sa date de naissance",
                     "type" => "date",
                     "error"=>"La date de naissance doit être au format jj/mm/aaaa et être antérieure à aujourd'hui",
-                    "min" => $today,
                     "required" => true,
                     "value" => ""
                 ],
@@ -66,7 +65,7 @@ class Register extends Validator
                     "placeholder"=>"Mot de passe",
                     "type"=>"password",
                     "error"=>"Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial parmi: &-é_èçà^ù:!ù#~@°%§+.",
-                    "minlength"=>8,
+                    "minlength"=>4,
                     "required"=>true,
                     "value"=>""
                 ],
@@ -76,7 +75,7 @@ class Register extends Validator
                     "placeholder"=>"Confirmer votre mot de passe",
                     "type"=>"password",
                     "error"=>"Le mot de passe de confirmation ne correspond pas",
-                    "minlength"=>8,
+                    "minlength"=>4,
                     "required"=>true,
                     "value"=>"",
                     "confirm"=>"pwd"
