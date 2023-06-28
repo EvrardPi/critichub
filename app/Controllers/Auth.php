@@ -206,6 +206,13 @@ class Auth
         }
 
         $emailToSend = $forgotForm->getData()['email'];
+
+        $user = new User();
+        if (!$user->emailExists(['email' => $emailToSend])) {
+            array_push($_SESSION['error_messages'], "Si votre adresse mail existe, un mail vous sera envoyé à cette adresse : " . $emailToSend);
+            $this->view_forgotPwd();
+            return;
+        }
         Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : http://localhost:80/reset-password?mail=" . $emailToSend);
         $this->view_forgotPwd();
     }

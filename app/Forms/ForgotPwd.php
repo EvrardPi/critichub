@@ -20,7 +20,7 @@ class ForgotPwd extends Validator
                 "id" => "login-form",
                 "class" => "login-form",
                 "enctype" => "",
-                "submit" => "Se connecter",
+                "submit" => "Envoyer un mail",
                 "reset" => "Annuler",
             ],
             "inputs" => [
