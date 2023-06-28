@@ -13,10 +13,10 @@ class Admincms extends Validator
         $this->config = [
             "config" => [
                 "method" => "POST",
-                "action" => "admin-preview",
+                "action" => "",
                 "id" => "admin-cms-form",
                 "class" => "new-admin-form",
-                "enctype" => "",
+                "enctype" => "multipart/form-data",
                 "submit" => "Voir la preview de la review",
 
             ],
