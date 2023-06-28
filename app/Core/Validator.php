@@ -42,9 +42,9 @@ class Validator
         // echo "</pre>";
         
         // Vérification du jeton CSRF
-        if (!hash_equals($_SESSION['csrf_token'], $this->data['csrf_token'])) {
-            return false;
-        }
+        // if (!hash_equals($_SESSION['csrf_token'], $this->data['csrf_token'])) {
+        //     return false;
+        // }
         
         $this->config = $this->getConfig();
 
@@ -58,8 +58,9 @@ class Validator
         // echo "<pre>";
         // print_r($this->data);
         // echo "</pre>";
-        
-        if (count($this->config["inputs"]) != count($this->data) - 1) { // -1 pour le jeton CSRF
+        // var_dump($this->config["inputs"]);
+        // var_dump($this->data);
+        if (count($this->config["inputs"]) != count($this->data) -1) { // -1 pour le jeton CSRF
             die("Tentative de Hack valentin");
         }
 

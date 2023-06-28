@@ -6,6 +6,8 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Forms\Create;
 use App\Forms\Register;
+use App\Forms\ForgotPwd;
+use App\Forms\ResetPwd;
 use App\Forms\Login;
 use App\Models\User;
 use App\Core\SQL;
@@ -184,5 +186,69 @@ class Auth
             };
             $response = $user->confirmAccount($getMail);
         }
+    }
+
+    public function view_forgotPwd() {
+        $view = new View("Auth/forgotPwd", "auth");
+        $forgotForm = new ForgotPwd();
+        $view->assign("forgotForm", $forgotForm->getConfig());
+        $view->assign("pageName", "Forgot Password");
+
+    }
+
+    public function forgotPassword() {
+        $forgotForm = new ForgotPwd();
+
+        if (!$forgotForm->isValid()) {
+            array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
+            $this->view_forgotPwd();
+            return;
+        }
+
+        $emailToSend = $forgotForm->getData()['email'];
+        Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : http://localhost:80/reset-password?mail=" . $emailToSend);
+        $this->view_forgotPwd();
+    }
+
+
+    public function view_resetPassword() {
+        $view = new View("Auth/resetPwd", "auth");
+        $resetForm = new ResetPwd();
+        $view->assign("resetForm", $resetForm->getConfig());
+        $view->assign("pageName", "Reset Password");
+
+    }
+
+    public function resetPassword() {
+        $resetPwd = new ResetPwd();
+        $user = new User();
+        if (!$user->emailExists(['email' => $_GET['mail']])) {
+            array_push($_SESSION['error_messages'], "Nous ne trouvons pas votre compte. Veuillez créer un nouveau compte.");
+            $this->view_resetPassword();
+            return;
+        } else {
+            $user->getUserInfo(['email' => $_GET['mail']]);
+        }
+        // var_dump($user);
+        if (!$resetPwd->isValid()) {
+            array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
+            $this->view_resetPassword();
+            return;
+        }
+        if ($resetPwd->getData()['newPwd'] != $resetPwd->getData()['confirmNewPwd']) {
+            array_push($_SESSION['error_messages'], "Les mots de passe ne correspondent pas.");
+            $this->view_resetPassword();
+            return;
+        }
+
+        if ($resetPwd->getData()['newPwd'] === $resetPwd->getData()['confirmNewPwd'] && empty($_SESSION['error_messages'])) {
+            $user->updateUserPwd(['email' => $_GET['mail']], ['password' => password_hash($resetPwd->getData()['newPwd'],PASSWORD_DEFAULT)]);
+            header('Location: /login');
+        }
+        
+        
+
+        // echo($resetPwd->getData()['oldPwd']);
+        $this->view_resetPassword();
     }
 }

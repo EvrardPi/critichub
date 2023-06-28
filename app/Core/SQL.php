@@ -61,6 +61,19 @@ abstract class SQL
         }
     }
 
+    public function getUserInfo(array $email): array {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function updateUserPwd(array $email, array $pwd): array {
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET password = :password  WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email'], 'password' => $pwd['password']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
 
 
     public function save(): void

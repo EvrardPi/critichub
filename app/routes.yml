@@ -93,3 +93,19 @@ register:
 confirm:
    controller: Auth
    action: valideToken
+
+forgot:
+   controller: Auth
+   action: view_forgotPwd
+
+forgot-confirmation:
+   controller: Auth
+   action: forgotPassword
+
+reset-password:
+   controller: Auth
+   action: view_resetPassword
+
+confirm-reset-password:
+   controller: Auth
+   action: resetPassword
