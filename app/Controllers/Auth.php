@@ -138,16 +138,7 @@ class Auth
 
     public function register_post(array $data): void
     {
-        // $email = ["email" => $data['email']];
-
         $user = new User();
-
-        // if ($user->emailExists($email)) {
-        //     array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
-        //     $this->view_register();
-        //     return;
-        // }
-
         $user->setFirstname($data['firstname']);
         $user->setLastname($data['lastname']);
         $user->setEmail($data['email']);
