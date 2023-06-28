@@ -75,6 +75,24 @@ abstract class SQL
         return $result;
     }
 
+    public function updateForgotToken(array $email, array $tokenForgot): array {
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET forgot_token = :forgot_token  WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email'], 'forgot_token' => $tokenForgot['forgot_token']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function isTokenValid(array $email, array $tokenForgotToVerify): bool {
+        $queryPrepared = $this->pdo->prepare("SELECT forgot_token FROM " . $this->table . " WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email']]);
+        $result = $queryPrepared->fetch();
+        if ($result['forgot_token'] === $tokenForgotToVerify['forgot_token']) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public function save(): void
     {

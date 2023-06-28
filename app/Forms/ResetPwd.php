@@ -16,7 +16,7 @@ class ResetPwd extends Validator
         $this->config = [
             "config" => [
                 "method" => "POST",
-                "action" => "confirm-reset-password?mail=".$_GET['mail'],
+                "action" => "confirm-reset-password?mail=".$_GET['mail']."&token=".$_GET['token'],
                 "id" => "login-form",
                 "class" => "login-form",
                 "enctype" => "",

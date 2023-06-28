@@ -213,7 +213,9 @@ class Auth
             $this->view_forgotPwd();
             return;
         }
-        Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : http://localhost:80/reset-password?mail=" . $emailToSend);
+        $fotgotToken = $this->generateToken(32);
+        Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : http://localhost:80/reset-password?mail=" . $emailToSend . "&token=" . $fotgotToken);
+        $user->updateForgotToken(['email' => $emailToSend], ['forgot_token' => $fotgotToken]);
         $this->view_forgotPwd();
     }
 
@@ -230,11 +232,11 @@ class Auth
         $resetPwd = new ResetPwd();
         $user = new User();
         if (!$user->emailExists(['email' => $_GET['mail']])) {
-            array_push($_SESSION['error_messages'], "Nous ne trouvons pas votre compte. Veuillez créer un nouveau compte.");
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
             $this->view_resetPassword();
             return;
         } else {
-            $user->getUserInfo(['email' => $_GET['mail']]);
+            $userInfo = $user->getUserInfo(['email' => $_GET['mail']]);
         }
         // var_dump($user);
         if (!$resetPwd->isValid()) {
@@ -248,14 +250,46 @@ class Auth
             return;
         }
 
+        $isTokenValid = $user->isTokenValid(['email' => $_GET['mail']], ['forgot_token' => $_GET['token']]);
+
+        // if ($isTokenValid === false){
+        //     array_push($_SESSION['error_messages'], "Token faux");
+        //     $this->view_resetPassword();
+        //     return;
+        // } else {
+        //     array_push($_SESSION['error_messages'], "Token vrai");
+        //     $this->view_resetPassword();
+        //     return;
+        // }
+
         if ($resetPwd->getData()['newPwd'] === $resetPwd->getData()['confirmNewPwd'] && empty($_SESSION['error_messages'])) {
+            if ($isTokenValid === true){
             $user->updateUserPwd(['email' => $_GET['mail']], ['password' => password_hash($resetPwd->getData()['newPwd'],PASSWORD_DEFAULT)]);
             header('Location: /login');
+            } else {
+                array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+                $this->view_resetPassword();
+                return;
+            }
+        } else {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            $this->view_resetPassword();
+            return;
         }
-        
-        
-
-        // echo($resetPwd->getData()['oldPwd']);
         $this->view_resetPassword();
+    }
+
+    //Génération Token -> Sécurité Reset password
+    function generateToken($length = 32) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $token = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomIndex = random_int(0, $charactersLength - 1);
+            $token .= $characters[$randomIndex];
+        }
+
+        return $token;
     }
 }
