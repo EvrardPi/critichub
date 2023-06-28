@@ -40,7 +40,7 @@ class Auth
 
         // Puis vérif si POST ou GET
         if (Helper::methodUsed() === Helper::POST) {
-            
+
             // token CSRF
             if (!$form->isValid()) {
                 array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
@@ -48,7 +48,7 @@ class Auth
                 return;
             }
 
-            self::login_post($form->getData());
+            $this->login_post($form->getData());
         } else {
             // GET
         }
@@ -121,15 +121,14 @@ class Auth
 
         // Puis vérif si POST ou GET
         if (Helper::methodUsed() === Helper::POST) {
-            
-            // token CSRF
+
             if (!$form->isValid()) {
-                array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
                 $this->view_register();
                 return;
             }
 
-            self::register_post($form->getData());
+            $this->register_post($form->getData());
+            
         } else {
             // GET
         }
@@ -139,15 +138,15 @@ class Auth
 
     public function register_post(array $data): void
     {
-        $email = ["email" => $data['email']];
+        // $email = ["email" => $data['email']];
 
         $user = new User();
 
-        if ($user->emailExists($email)) {
-            array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
-            $this->view_register();
-            return;
-        }
+        // if ($user->emailExists($email)) {
+        //     array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
+        //     $this->view_register();
+        //     return;
+        // }
 
         $user->setFirstname($data['firstname']);
         $user->setLastname($data['lastname']);
@@ -162,14 +161,13 @@ class Auth
         // Envoi de l'e-mail de validation
         Mailer::sendMail($user->getEmail(), "validation du compte", "Veuillez validé votre compte: http://localhost:80/confirm?mail=" . $user->getEmail() . '&key=' . $user->getConfirmKey());
         //Helper::redirectTo('/login');
-        Helper::successAlert('FEUR');
+        Helper::successAlert('Votre compte a bien été créé, veuillez valider votre compte via le mail qui vous a été envoyé');
     }
 
     public function valideToken()
     {
         $view = new View("Auth/confirm", "front");
         if (isset($_GET['mail'], $_GET['mail'])) {
-            var_dump($_GET['mail'], $_GET['key']);
             $user = new User();
             $getMail = htmlspecialchars(urldecode($_GET['mail']));
             $getKey = htmlspecialchars($_GET['key']);

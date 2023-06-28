@@ -8,6 +8,8 @@ class Register extends Validator
     protected array $config = [];
     public function getConfig(): array
     {
+        $today = date("Y-m-d");
+
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
@@ -23,9 +25,8 @@ class Register extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Prénom",
                     "type"=>"text",
-                    "error"=>"Le prénom doit faire entre 2 et 60 caractères",
-                    "min"=>2,
-                    "max"=>60,
+                    "error"=>"Le prénom doit faire entre 1 et 60 caractères",
+                    "maxlength"=>60,
                     "required"=>true,
                     "value"=>""
                 ],
@@ -34,9 +35,8 @@ class Register extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Nom",
                     "type"=>"text",
-                    "error"=>"Le nom doit faire entre 2 et 120 caractères",
-                    "min"=>2,
-                    "max"=>120,
+                    "error"=>"Le nom doit faire entre 1 et 120 caractères",
+                    "maxlength"=>120,
                     "required"=>true,
                     "value"=>""
                 ],
@@ -46,6 +46,7 @@ class Register extends Validator
                     "placeholder"=>"Email",
                     "type"=>"email",
                     "error"=>"L'email est incorrect",
+                    "maxlength"=>320,
                     "required"=>true,
                     "value"=>""
                 ],
@@ -54,6 +55,7 @@ class Register extends Validator
                     "class" => "form-input",
                     "placeholder" => "Sa date de naissance",
                     "type" => "date",
+                    "error"=>"La date de naissance doit être au format jj/mm/aaaa et être antérieure à aujourd'hui",
                     "required" => true,
                     "value" => ""
                 ],
@@ -62,7 +64,8 @@ class Register extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Mot de passe",
                     "type"=>"password",
-                    "error"=>"Le mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
+                    "error"=>"Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial parmi: &-é_èçà^ù:!ù#~@°%§+.",
+                    "minlength"=>4,
                     "required"=>true,
                     "value"=>""
                 ],
@@ -72,9 +75,10 @@ class Register extends Validator
                     "placeholder"=>"Confirmer votre mot de passe",
                     "type"=>"password",
                     "error"=>"Le mot de passe de confirmation ne correspond pas",
+                    "minlength"=>4,
                     "required"=>true,
-                    "confirm"=>"pwd",
-                    "value"=>""
+                    "value"=>"",
+                    "confirm"=>"pwd"
                 ],
             ]
         ];
