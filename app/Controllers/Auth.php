@@ -195,16 +195,17 @@ class Auth
         }
 
         $emailToSend = $forgotForm->getData()['emailForgot'];
+        $_SESSION['error_mail_sent'] = [];
 
         $user = new User();
         if (!$user->emailExists($emailToSend)) {
-            array_push($_SESSION['error_messages'], "Si votre adresse mail existe, un mail vous sera envoyé à cette adresse : " . $emailToSend);
             $this->view_forgotPwd();
             return;
         }
-        $fotgotToken = $this->generateToken(32);
-        Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : http://localhost:80/reset-password?mail=" . $emailToSend . "&token=" . $fotgotToken);
-        $user->updateForgotToken(['email' => $emailToSend], ['forgot_token' => $fotgotToken]);
+        $forgotToken = $this->generateToken(32);
+        $_SESSION['tokenExpiration'] = time() + 300;
+        Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : http://localhost:80/reset-password?mail=" . $emailToSend . "&token=" . $forgotToken . ". La demande expirera dans 5 minutes.");
+        $user->updateForgotToken(['email' => $emailToSend], ['forgot_token' => $forgotToken]);
         $this->view_forgotPwd();
     }
 
@@ -225,37 +226,20 @@ class Auth
 
         if (!$resetPwd->isValid() || !$user->isTokenValid(['email' => $_GET['mail']], ['forgot_token' => $_GET['token']])) {
             $this->view_resetPassword();
+
         } else {
-            $user->updateUserPwd(['email' => $_GET['mail']], ['password' => password_hash($resetPwd->getData()['newPwd'],PASSWORD_DEFAULT)]);
-            $user->updateForgotToken(['email' => $_GET['mail']], ['forgot_token' => null]);
-            header('Location: /login');
+            if (time() < $_SESSION['tokenExpiration']) {
+                $user->updateUserPwd(['email' => $_GET['mail']], ['password' => password_hash($resetPwd->getData()['newPwd'],PASSWORD_DEFAULT)]);
+                $user->updateForgotToken(['email' => $_GET['mail']], ['forgot_token' => null]);
+                header('Location: /login');
+            } else {
+                $user->updateForgotToken(['email' => $_GET['mail']], ['forgot_token' => null]);
+                array_push($_SESSION['error_messages'], "Le token a expiré.");
+                $this->view_forgotPwd();
+
+            }
         }
         }
-
-        // if ($resetPwd->getData()['newPwd'] != $resetPwd->getData()['confirmNewPwd']) {
-        //     array_push($_SESSION['error_messages'], "Les mots de passe ne correspondent pas.");
-        //     $this->view_resetPassword();
-        //     return;
-        // }
-
-        // $isTokenValid = 
-
-
-        // if ($resetPwd->getData()['newPwd'] === $resetPwd->getData()['confirmNewPwd'] && empty($_SESSION['error_messages'])) {
-        //     if ($isTokenValid === true){
-
-        //     } else {
-        //         // array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
-        //         $this->view_resetPassword();
-        //         return;
-        //     // }
-        // } else {
-        //     array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
-        //     $this->view_resetPassword();
-        //     return;
-        // }
-        // $this->view_resetPassword();
-        // }
     }
 
     //Génération Token -> Sécurité Reset password

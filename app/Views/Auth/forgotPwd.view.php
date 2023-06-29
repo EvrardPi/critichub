@@ -5,9 +5,14 @@
 <?php } ?>
 
 <?php 
+if (!empty($_SESSION['error_mail_sent'])) {
+    var_dump($_SESSION['error_mail_sent']);
+
+}
+
 if (!empty($_SESSION['error_messages'])) {
     foreach ($_SESSION['error_messages'] as $error) {?>
-        <div class="success">
+        <div class="alert alert-danger register-alert" role="alert">
             <?php echo $error; ?>
             <br>
         </div>
