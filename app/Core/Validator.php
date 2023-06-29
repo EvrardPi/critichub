@@ -121,7 +121,6 @@ class Validator
             return false;
         }
 
-        // return empty($this->errors);
         return true;
     }
 
