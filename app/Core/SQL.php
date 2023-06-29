@@ -93,6 +93,30 @@ abstract class SQL
         }
     }
 
+    public function namePictureExists(array $name): bool
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE picture = :picture");
+        $queryPrepared->execute(['picture' => $name['picture']]);
+        $result = $queryPrepared->fetch();
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function nameExists(array $name): bool
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE name = :name");
+        $queryPrepared->execute(['name' => $name['name']]);
+        $result = $queryPrepared->fetch();
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getAll(): array
     {
         $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table);
@@ -100,7 +124,7 @@ abstract class SQL
         return $queryPrepared->fetchAll();
     }
 
-    public function getToken(String $email, String $confirm_key): array
+    public function getToken(String $email): array
     {
         $reqConfirm = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE email = ?");
         $reqConfirm->execute(array($email));

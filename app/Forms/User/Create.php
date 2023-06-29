@@ -24,9 +24,9 @@ class Create extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Son prénom",
                     "type"=>"text",
+                    "maxlength"=>60,
+                    "accept"=>"",
                     "error"=>"Le prénom doit faire entre 2 et 60 caractères",
-                    "min"=>2,
-                    "max"=>60,
                     "required"=>true,
                     "value"=>""
                 ],
@@ -35,9 +35,9 @@ class Create extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Son nom",
                     "type"=>"text",
+                    "accept"=>"",
                     "error"=>"Le nom doit faire entre 2 et 120 caractères",
-                    "min"=>2,
-                    "max"=>120,
+                    "maxlength"=>120,
                     "required"=>true,
                     "value"=>""
                 ],
@@ -46,6 +46,8 @@ class Create extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Son email",
                     "type"=>"email",
+                    "accept"=>"",
+                    "maxlength"=>320,
                     "error"=>"L'email est incorrect",
                     "required"=>true,
                     "value"=>""
@@ -56,6 +58,7 @@ class Create extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Son statut",
                     "type"=>"select",
+                    "accept"=>"",
                     "error"=>"Le statut est incorrect",
                     "required"=>true,
                     "options" => [
@@ -69,6 +72,7 @@ class Create extends Validator
                     "class" => "form-input",
                     "placeholder" => "Sa date de naissance",
                     "type" => "date",
+                    "accept"=>"",
                     "required" => true,
                     "value" => ""
                 ],
@@ -77,6 +81,8 @@ class Create extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Son mot de passe",
                     "type"=>"password",
+                    "accept"=>"",
+                    "minlength"=>4,
                     "error"=>"Le mot de passe doit faire au minimum 8 caractères avec minuscules, majuscules et chiffres",
                     "required"=>true,
                     "value"=>""
@@ -86,6 +92,8 @@ class Create extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Confirmation",
                     "type"=>"password",
+                    "accept"=>"",
+                    "minlength"=>4,
                     "error"=>"Le mot de passe de confirmation ne correspond pas",
                     "required"=>true,
                     "confirm"=>"pwd",

@@ -4,97 +4,155 @@ namespace App\Controllers;
 
 use App\Core\Validator;
 use App\Core\View;
-use App\Forms\Category\Create;
-use App\Forms\Register;
-use App\Forms\Category\Update;
+use App\Forms\Category\CreateCategory;
+use App\Forms\Category\UpdateCategory;
+use App\Models\Category;
 use App\Models\User;
 use App\Core\SQL;
 
 class Categorys
 {
 
-    public function view(): void
+    public function view(array $errors = []): void
     {
         $view = new View("BackOffice/categoryGestion", "back");
-        $createForm = new Create();
+        $createForm = new CreateCategory();
         $view->assign("createForm", $createForm->getConfig());
-        $updateForm = new Update();
+        $updateForm = new UpdateCategory();
         $view->assign("updateForm", $updateForm->getConfig());
+        $view->assign("errors", $errors);
     }
 
-    public function createUser(): void
+    public function createCategory(): void
     {
-        $form = new Create();
-        if (!$form->isValid()){
-            echo "error";
-            die();
-        }
+        $form = new CreateCategory();
         $formdata = $form->data;
-        $user = new User();
-        $user->setFirstname($formdata['firstname']);
-        $user->setLastname($formdata['lastname']);
-        $user->setEmail($formdata['email']);
-        $user->setPassword($formdata['password']);
-        $user->setBirthDate($formdata['birth_date']);
-        $user->setRole($formdata['role']);
-        $user->save();
+
+        if (!$form->isValid()){
+            //var_dump($form, $_SESSION['error_messages']);
+          //  die();
+            $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
+            unset($_SESSION['error_messages']); // Supprimer les erreurs de la session
+            $this->view($errors);
+            return;
+        }
+
+        //Préparation de l'image
+        $prefix = "assets/images/category/";
+        $uploadedFile = $_FILES['picture'];
+        $fileName = $uploadedFile['name'];
+        $tempFilePath = $uploadedFile['tmp_name'];
+        $nomFichier = $formdata['name'] . ".png";
+        $category = new Category();
+
+        //Enregistrement de l'image
+        $destinationPath = $prefix . $nomFichier;
+        if (!move_uploaded_file($tempFilePath, $destinationPath)) {
+            array_push($_SESSION['error_messages'], "Erreur lors du téléchargement du fichier.");
+            $this->view();
+            return;
+        }
+        //Enrengistrement dans la bdd
+        $category->setName($formdata['name']);
+        $category->setPicture($fileName);
+        $category->save();
         $this->view();
+
+       /* //Vérification de la duplication du nom du fichier picture
+        if ($category->namePictureExists(['picture' => $fileName])) {
+            array_push($_SESSION['error_messages'], "Le nom du fichier existe déjà, veuillez choisir un autre fichier.");
+            $this->view();
+            return;
+        }
+
+        //Vérification de la duplication du nom de la catégorie
+        if ($category->nameExists(['name' => $formdata['name']])) {
+            array_push($_SESSION['error_messages'], "Le nom de la catégorie existe déjà, veuillez en choisir un autre.");
+            $this->view();
+            return;
+        }
+
+        // Vérification de l'extension du fichier
+        $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        if ($fileExtension !== 'png') {
+            array_push($_SESSION['error_messages'], "Le fichier doit être au format PNG.");
+            $this->view();
+            return;
+        }
+
+        // Déplacer le fichier téléchargé vers le répertoire souhaité
+        $destinationPath = $prefix . $fileName;
+        if (!move_uploaded_file($uploadedFile, $destinationPath)) {
+            array_push($_SESSION['error_messages'], "Erreur lors du téléchargement du fichier.");
+            $this->view();
+            return;
+        }*/
+
+
     }
 
 
-    public function updateUser(): void
+    public function updateCategory(): void
     {
-        $form = new Update();
+
+        $form = new UpdateCategory();
         if (!$form->isValid()) {
             echo "error";
             die();
         }
         $formdata = $form->data;
-
-
-        $user = User::populate($formdata['id']); // Récupérer l'utilisateur à partir de la base de données*/
-
+        $category = Category::populate($formdata['id']);
+        $oldName = $category->getName();
+        //Ajout de la nouvelle image
+        $prefix = "assets/images/category/";
+        $base64 = $formdata['base64'];
+        $nomFichier= $formdata['name'] .".png";
+        $imageToSave = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64));
+        file_put_contents($prefix . $nomFichier, $imageToSave);
+        //Suppression de l'ancienne image
+        $filePath = 'assets/images/category/' . $oldName . '.png';
+        unlink($filePath);
         // Mettre à jour les propriétés de l'utilisateur
-        $user->setFirstname($formdata['firstname']);
-        $user->setLastname($formdata['lastname']);
-        $user->setEmail($formdata['email']);
-        $user->setRole($formdata['role']);
-        $user->setBirthDate($formdata['birth_date']);
-
+        $category->setName($formdata['name']);
+        $category->setPicture($formdata['picture']);
         // Enregistrer les modifications dans la base de données
-        $user->save();
+        $category->save();
         $this->view();
     }
 
 
-    public function getUser()
+    public function getCategory()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
             $id = $_GET['id'];
-            $user = new User();
+            $category = new Category();
             $where = ['id' => $id];
-            $userData = $user->getOneWhere($where);
+            $categoryData = $category->getOneWhere($where);
             header('Content-Type: application/json');
-            echo json_encode($userData);
+            echo json_encode($categoryData);
         }
     }
 
-    public function deleteUser()
+    public function deleteCategory(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 
             $id = intval($_POST['id']);
-            $user = new User();
-            $user->delete($id);
+            $name = $_POST['name'];
+            $filePath = 'assets/images/category/' . $name . '.png';
+            unlink($filePath);
+            $category = new Category();
+            $category->delete($id);
         }
         $this->view();
     }
 
-    public function readUser(): void
+    public function readCategory(): void
     {
-        $user = new User();
-        $rows = $user->getAll();
+        $category = new Category();
+        $rows = $category->getAll();
         header('Content-Type: application/json');
+
         echo json_encode($rows);
     }
 

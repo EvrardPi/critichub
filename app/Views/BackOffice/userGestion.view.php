@@ -1,3 +1,12 @@
+<?php if (!empty($errors)): ?>
+    <div class="errors">
+        <ul>
+            <?php foreach ($errors as $error): ?>
+                <li><?php echo $error; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
 <table id="myTable" class="table table-striped" style="width:100%">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" ">
     Créer un nouvel utilisateur

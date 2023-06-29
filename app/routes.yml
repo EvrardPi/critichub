@@ -97,3 +97,23 @@ confirm:
 category:
   controller: Categorys
   action: view
+
+tam:
+  controller: Categorys
+  action: createCategory
+
+cateread:
+  controller: Categorys
+  action: readCategory
+
+catedelete:
+  controller: Categorys
+  action: deleteCategory
+
+tap:
+  controller: Categorys
+  action: getCategory
+
+updatetam:
+  controller: Categorys
+  action: updateCategory

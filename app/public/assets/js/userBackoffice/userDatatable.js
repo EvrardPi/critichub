@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(function(data) {
-
-
             // Utilisez les données retournées pour effectuer les actions souhaitées
             var tableData = data.map(function(row) {
 

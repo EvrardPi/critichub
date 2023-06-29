@@ -6,7 +6,23 @@ class Category extends SQL {
     private int $id = 0;
     public string $name;
     public string $picture;
+    public string $base64;
 
+    /**
+     * @return string
+     */
+    public function getBase64(): string
+    {
+        return $this->base64;
+    }
+
+    /**
+     * @param string $base64
+     */
+    public function setBase64(string $base64): void
+    {
+        $this->base64 = $base64;
+    }
     /**
      * @return int
      */

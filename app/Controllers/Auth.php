@@ -167,11 +167,11 @@ class Auth
     public function valideToken()
     {
         $view = new View("Auth/confirm", "front");
-        if (isset($_GET['mail'], $_GET['mail'])) {
+        if (isset($_GET['mail']) && isset($_GET['key'])) {
             $user = new User();
             $getMail = htmlspecialchars(urldecode($_GET['mail']));
             $getKey = htmlspecialchars($_GET['key']);
-            $response = $user->getToken($getMail, $getKey);
+            $response = $user->getToken($getMail);
             $return_value = match ($response['user']) {
                 0 => "Compte inexistant",
                 1 => "sheeeesh",

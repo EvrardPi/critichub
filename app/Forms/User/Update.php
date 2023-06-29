@@ -24,6 +24,7 @@ class Update extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Son id",
                     "type"=>"hidden",
+                    "accept"=>"",
                     "error"=>"L'id est incorrect",
                     "required"=>true,
                     "value"=>""
@@ -33,6 +34,7 @@ class Update extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Votre prénom",
                     "type"=>"text",
+                    "accept"=>"",
                     "error"=>"Votre prénom doit faire entre 2 et 60 caractères",
                     "min"=>2,
                     "max"=>60,
@@ -45,6 +47,7 @@ class Update extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Votre nom",
                     "type"=>"text",
+                    "accept"=>"",
                     "error"=>"Votre nom doit faire entre 2 et 120 caractères",
                     "min"=>2,
                     "max"=>120,
@@ -56,6 +59,7 @@ class Update extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Votre email",
                     "type"=>"email",
+                    "accept"=>"",
                     "error"=>"Votre email est incorrect",
                     "required"=>true,
                     "value"=>""
@@ -65,6 +69,7 @@ class Update extends Validator
                     "class"=>"form-input",
                     "placeholder"=>"Son statut",
                     "type"=>"select",
+                    "accept"=>"",
                     "error"=>"Le statut est incorrect",
                     "required"=>true,
                     "options" => [
@@ -76,6 +81,7 @@ class Update extends Validator
                 "birth_date" => [
                     "id" => "update-form-birth_date",
                     "class" => "form-input",
+
                     "placeholder" => "Sa date de naissance",
                     "type" => "date",
                     "required" => true,
