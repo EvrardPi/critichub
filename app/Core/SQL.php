@@ -49,10 +49,10 @@ abstract class SQL
         return $queryPrepared->fetch();
     }
 
-    public function emailExists(array $email): bool
+    public function emailExists(string $email): bool
     {
         $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE email = :email");
-        $queryPrepared->execute(['email' => $email['email']]);
+        $queryPrepared->execute(['email' => $email]);
         $result = $queryPrepared->fetch();
         if ($result) {
             return true;
