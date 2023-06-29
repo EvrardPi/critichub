@@ -194,10 +194,10 @@ class Auth
             return;
         }
 
-        $emailToSend = $forgotForm->getData()['email'];
+        $emailToSend = $forgotForm->getData()['emailForgot'];
 
         $user = new User();
-        if (!$user->emailExists(['email' => $emailToSend])) {
+        if (!$user->emailExists($emailToSend)) {
             array_push($_SESSION['error_messages'], "Si votre adresse mail existe, un mail vous sera envoyé à cette adresse : " . $emailToSend);
             $this->view_forgotPwd();
             return;
@@ -218,54 +218,44 @@ class Auth
     }
 
     public function resetPassword() {
-        $resetPwd = new ResetPwd();
         $user = new User();
-        if (!$user->emailExists(['email' => $_GET['mail']])) {
-            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+
+        if (Helper::methodUsed() === Helper::POST) {
+            $resetPwd = new ResetPwd();
+
+        if (!$resetPwd->isValid() || !$user->isTokenValid(['email' => $_GET['mail']], ['forgot_token' => $_GET['token']])) {
             $this->view_resetPassword();
-            return;
         } else {
-            $userInfo = $user->getUserInfo(['email' => $_GET['mail']]);
+            $user->updateUserPwd(['email' => $_GET['mail']], ['password' => password_hash($resetPwd->getData()['newPwd'],PASSWORD_DEFAULT)]);
+            $user->updateForgotToken(['email' => $_GET['mail']], ['forgot_token' => null]);
+            header('Location: /login');
         }
-        // var_dump($user);
-        if (!$resetPwd->isValid()) {
-            array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
-            $this->view_resetPassword();
-            return;
-        }
-        if ($resetPwd->getData()['newPwd'] != $resetPwd->getData()['confirmNewPwd']) {
-            array_push($_SESSION['error_messages'], "Les mots de passe ne correspondent pas.");
-            $this->view_resetPassword();
-            return;
         }
 
-        $isTokenValid = $user->isTokenValid(['email' => $_GET['mail']], ['forgot_token' => $_GET['token']]);
-
-        // if ($isTokenValid === false){
-        //     array_push($_SESSION['error_messages'], "Token faux");
-        //     $this->view_resetPassword();
-        //     return;
-        // } else {
-        //     array_push($_SESSION['error_messages'], "Token vrai");
+        // if ($resetPwd->getData()['newPwd'] != $resetPwd->getData()['confirmNewPwd']) {
+        //     array_push($_SESSION['error_messages'], "Les mots de passe ne correspondent pas.");
         //     $this->view_resetPassword();
         //     return;
         // }
 
-        if ($resetPwd->getData()['newPwd'] === $resetPwd->getData()['confirmNewPwd'] && empty($_SESSION['error_messages'])) {
-            if ($isTokenValid === true){
-            $user->updateUserPwd(['email' => $_GET['mail']], ['password' => password_hash($resetPwd->getData()['newPwd'],PASSWORD_DEFAULT)]);
-            header('Location: /login');
-            } else {
-                array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
-                $this->view_resetPassword();
-                return;
-            }
-        } else {
-            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
-            $this->view_resetPassword();
-            return;
-        }
-        $this->view_resetPassword();
+        // $isTokenValid = 
+
+
+        // if ($resetPwd->getData()['newPwd'] === $resetPwd->getData()['confirmNewPwd'] && empty($_SESSION['error_messages'])) {
+        //     if ($isTokenValid === true){
+
+        //     } else {
+        //         // array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+        //         $this->view_resetPassword();
+        //         return;
+        //     // }
+        // } else {
+        //     array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+        //     $this->view_resetPassword();
+        //     return;
+        // }
+        // $this->view_resetPassword();
+        // }
     }
 
     //Génération Token -> Sécurité Reset password

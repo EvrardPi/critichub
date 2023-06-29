@@ -69,6 +69,10 @@ abstract class SQL
     }
 
     public function updateUserPwd(array $email, array $pwd): array {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
         $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET password = :password  WHERE email = :email");
         $queryPrepared->execute(['email' => $email['email'], 'password' => $pwd['password']]);
         $result = $queryPrepared->fetch();
@@ -76,6 +80,10 @@ abstract class SQL
     }
 
     public function updateForgotToken(array $email, array $tokenForgot): array {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
         $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET forgot_token = :forgot_token  WHERE email = :email");
         $queryPrepared->execute(['email' => $email['email'], 'forgot_token' => $tokenForgot['forgot_token']]);
         $result = $queryPrepared->fetch();
@@ -86,9 +94,14 @@ abstract class SQL
         $queryPrepared = $this->pdo->prepare("SELECT forgot_token FROM " . $this->table . " WHERE email = :email");
         $queryPrepared->execute(['email' => $email['email']]);
         $result = $queryPrepared->fetch();
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
         if ($result['forgot_token'] === $tokenForgotToVerify['forgot_token']) {
             return true;
         } else {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
             return false;
         }
     }

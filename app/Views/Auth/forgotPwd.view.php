@@ -1,7 +1,7 @@
 <h2 class="align-text">Mot de passe oublié ?</h2>
 
-<?php  if (isset($_POST['email']) && empty($_SESSION['error_messages'])) { ?>
-    <div class="success">Si votre adresse mail existe, un mail vous sera envoyé à cette adresse : <?= $_POST['email'] ?></div>
+<?php  if (isset($_POST['emailForgot']) && empty($_SESSION['error_messages'])) { ?>
+    <div class="success">Si votre adresse mail existe, un mail vous sera envoyé à cette adresse : <?= $_POST['emailForgot'] ?></div>
 <?php } ?>
 
 <?php 

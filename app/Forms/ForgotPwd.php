@@ -24,7 +24,7 @@ class ForgotPwd extends Validator
                 "reset" => "Annuler",
             ],
             "inputs" => [
-                "email" => [
+                "emailForgot" => [
                     "id" => "login-form-email",
                     "class" => "form-input",
                     "placeholder" => "Votre email",

@@ -20,11 +20,11 @@ class ResetPwd extends Validator
                 "id" => "login-form",
                 "class" => "login-form",
                 "enctype" => "",
-                "submit" => "Se connecter",
+                "submit" => "Réinitialiser le mot de passe",
                 "reset" => "Annuler",
             ],
             "inputs" => [
-                "newPwd" => [
+                "password" => [
                     "id" => "reset-new-password",
                     "class" => "form-input",
                     "placeholder" => "Nouveau Mot de passe",
@@ -32,7 +32,7 @@ class ResetPwd extends Validator
                     "error" => "Vous ne pouvez pas utiliser un ancien mot de passe",
                     "required" => true
                 ],
-                "confirmNewPwd" => [
+                "confirmPassword" => [
                     "id" => "confirm-new-password",
                     "class" => "form-input",
                     "placeholder" => "Confirmation Nv. Mot de passe",
