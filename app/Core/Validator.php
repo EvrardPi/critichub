@@ -38,10 +38,12 @@ class Validator
 
     public function isValid(): bool
     {
-        if (!hash_equals($_SESSION['csrf_token'], $this->data['csrf_token'])) {
-        array_push($_SESSION['error_messages'], "Jeton CSRF invalide.");
-        return false;
-    }
+        if (!in_array($this->data['csrf_token'], $_SESSION['csrf_tokens'])) {
+            array_push($_SESSION['error_messages'], "Jeton CSRF invalide.");
+            return false;
+        } else {
+            unset($_SESSION['csrf_tokens'][array_search($this->data['csrf_token'], $_SESSION['csrf_tokens'])]);
+        }
 
         $this->config = $this->getConfig();
 
