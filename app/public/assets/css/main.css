@@ -698,15 +698,15 @@ header {
       cursor: pointer;
       color: #FFFFFF; }
     .sliderContainer .slide.one {
-      background: no-repeat center/100% url(../src/Assets/slider/1.svg); }
+      background: no-repeat center/100% url(../images/slider/1.svg); }
     .sliderContainer .slide.two {
-      background: no-repeat center/100% url(../src/Assets/slider/2.svg); }
+      background: no-repeat center/100% url(../images/slider/2.svg); }
     .sliderContainer .slide.tree {
-      background: no-repeat center/100% url(../src/Assets/slider/3.svg); }
+      background: no-repeat center/100% url(../images/slider/3.svg); }
     .sliderContainer .slide.four {
-      background: no-repeat center/100% url(../src/Assets/slider/4.svg); }
+      background: no-repeat center/100% url(../images/slider/4.svg); }
     .sliderContainer .slide.five {
-      background: no-repeat center/100% url(../src/Assets/slider/5.svg); }
+      background: no-repeat center/100% url(../images/slider/5.svg); }
     .sliderContainer .slide:hover {
       transform: translateY(-30px); }
 

@@ -47,7 +47,7 @@ class Validator
 
         $this->config = $this->getConfig();
 
-        if (count($this->config["inputs"]) != count($this->data) - 1) { // -1 pour le jeton CSRF
+        if (count($this->config["inputs"]) != count($this->data) -1) { // -1 pour le jeton CSRF
             array_push($_SESSION['error_messages'], "Une erreur est survenue");
             return false;
         }
@@ -94,7 +94,7 @@ class Validator
                         $user = new User();
                         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
                             array_push($_SESSION['error_messages'], "Adresse mail non valide");
-                        } elseif ($user->emailExists($value) && $this->config["inputs"]["email"]["id"] === "register-form-id") {
+                        } elseif ($user->emailExists($value) && $this->config["inputs"]["email"]["id"] === "register-form-email") {
                             array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
                         }
                         break;

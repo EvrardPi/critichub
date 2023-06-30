@@ -4,7 +4,7 @@ namespace App\Forms;
 
 use App\Core\Validator;
 
-class Login extends Validator
+class ForgotPwd extends Validator
 {
     protected array $config = [];
     /**
@@ -16,15 +16,15 @@ class Login extends Validator
         $this->config = [
             "config" => [
                 "method" => "POST",
-                "action" => "",
+                "action" => "forgot-confirmation",
                 "id" => "login-form",
                 "class" => "login-form",
                 "enctype" => "",
-                "submit" => "Se connecter",
+                "submit" => "Envoyer un mail",
                 "reset" => "Annuler",
             ],
             "inputs" => [
-                "email" => [
+                "emailForgot" => [
                     "id" => "login-form-email",
                     "class" => "form-input",
                     "placeholder" => "Votre email",
@@ -32,27 +32,8 @@ class Login extends Validator
                     "error" => "Connexion échouée",
                     "required" => true
                 ],
-                "pwd" => [
-                    "id" => "login-form-pwd",
-                    "class" => "form-input",
-                    "placeholder" => "Votre mot de passe",
-                    "type" => "password",
-                    "error" => "Connexion échouée",
-                    "required" => true
-                ],
             ],
-            "links" => [
-                "forgot" => [
-                    "class" => "button-link-forgot",
-                    "href" => "/forgot",
-                    "text" => "Mot de passe oublié ?",
-                ],
-                "register" => [
-                    "class" => "button-link-register",
-                    "href" => "/register",
-                    "text" => "S'incrire",
-                ]
-            ]
+            "links" => []
         ];
     }
 

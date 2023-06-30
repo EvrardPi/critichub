@@ -4,7 +4,7 @@ namespace App\Forms;
 
 use App\Core\Validator;
 
-class Login extends Validator
+class ResetPwd extends Validator
 {
     protected array $config = [];
     /**
@@ -16,43 +16,32 @@ class Login extends Validator
         $this->config = [
             "config" => [
                 "method" => "POST",
-                "action" => "",
+                "action" => "confirm-reset-password?mail=".$_GET['mail']."&token=".$_GET['token'],
                 "id" => "login-form",
                 "class" => "login-form",
                 "enctype" => "",
-                "submit" => "Se connecter",
+                "submit" => "Réinitialiser le mot de passe",
                 "reset" => "Annuler",
             ],
             "inputs" => [
-                "email" => [
-                    "id" => "login-form-email",
+                "password" => [
+                    "id" => "reset-new-password",
                     "class" => "form-input",
-                    "placeholder" => "Votre email",
-                    "type" => "email",
-                    "error" => "Connexion échouée",
+                    "placeholder" => "Nouveau Mot de passe",
+                    "type" => "password",
+                    "error" => "Vous ne pouvez pas utiliser un ancien mot de passe",
                     "required" => true
                 ],
-                "pwd" => [
-                    "id" => "login-form-pwd",
+                "confirmPassword" => [
+                    "id" => "confirm-new-password",
                     "class" => "form-input",
-                    "placeholder" => "Votre mot de passe",
+                    "placeholder" => "Confirmation Nv. Mot de passe",
                     "type" => "password",
-                    "error" => "Connexion échouée",
+                    "error" => "Le mots de passe de confirmation diffère du nouveau mot de passe",
                     "required" => true
                 ],
             ],
-            "links" => [
-                "forgot" => [
-                    "class" => "button-link-forgot",
-                    "href" => "/forgot",
-                    "text" => "Mot de passe oublié ?",
-                ],
-                "register" => [
-                    "class" => "button-link-register",
-                    "href" => "/register",
-                    "text" => "S'incrire",
-                ]
-            ]
+            "links" => []
         ];
     }
 

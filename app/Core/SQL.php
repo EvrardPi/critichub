@@ -61,6 +61,79 @@ abstract class SQL
         }
     }
 
+    public function getUserInfo(array $email): array {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function updateUserPwd(array $email, array $pwd): array {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET password = :password  WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email'], 'password' => $pwd['password']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function updateForgotToken(array $email, array $tokenForgot): array {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET forgot_token = :forgot_token  WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email'], 'forgot_token' => $tokenForgot['forgot_token']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function setExpirationTime(array $email, array $expiration_time): array {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET expiration_time = :expiration_time  WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email'], 'expiration_time' => $expiration_time['expiration_time']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function isTokenExpired(array $email): bool {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+        $queryPrepared = $this->pdo->prepare("SELECT expiration_time FROM " . $this->table . " WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email']]);
+        $result = $queryPrepared->fetch();
+        if (time() > $result['expiration_time']) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isTokenValid(array $email, array $tokenForgotToVerify): bool {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+        $queryPrepared = $this->pdo->prepare("SELECT forgot_token FROM " . $this->table . " WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email']]);
+        $result = $queryPrepared->fetch();
+
+        if ($result['forgot_token'] === $tokenForgotToVerify['forgot_token']) {
+            return true;
+        } else {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+    }
+
+
     public function save(): void
     {
         $columns = get_object_vars($this);

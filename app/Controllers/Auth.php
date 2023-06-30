@@ -6,6 +6,8 @@ use App\Core\Validator;
 use App\Core\View;
 use App\Forms\Create;
 use App\Forms\Register;
+use App\Forms\ForgotPwd;
+use App\Forms\ResetPwd;
 use App\Forms\Login;
 use App\Models\User;
 use App\Core\SQL;
@@ -191,5 +193,86 @@ class Auth
     {
         $view = new View("Auth/confirm", "auth");
         $view->assign("pageName", "Confirmation de compte");
+    }
+
+    public function view_forgotPwd() {
+        $view = new View("Auth/forgotPwd", "auth");
+        $forgotForm = new ForgotPwd();
+        $view->assign("forgotForm", $forgotForm->getConfig());
+        $view->assign("pageName", "Forgot Password");
+
+    }
+
+    public function forgotPassword() {
+        $forgotForm = new ForgotPwd();
+
+        if (!$forgotForm->isValid()) {
+            array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
+            $this->view_forgotPwd();
+            return;
+        }
+
+        $emailToSend = $forgotForm->getData()['emailForgot'];
+        $_SESSION['error_mail_sent'] = [];
+
+        $user = new User();
+        if (!$user->emailExists($emailToSend)) {
+            $this->view_forgotPwd();
+            return;
+        }
+        $forgotToken = $this->generateToken(32);
+        $tokenExpiration = time() + 300;
+        Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : http://localhost:80/reset-password?mail=" . $emailToSend . "&token=" . $forgotToken . ". La demande expirera dans 5 minutes.");
+        $user->updateForgotToken(['email' => $emailToSend], ['forgot_token' => $forgotToken]);
+        $user->setExpirationTime(['email' => $emailToSend], ['expiration_time' => $tokenExpiration]);
+        $this->view_forgotPwd();
+    }
+
+
+    public function view_resetPassword() {
+        $view = new View("Auth/resetPwd", "auth");
+        $resetForm = new ResetPwd();
+        $view->assign("resetForm", $resetForm->getConfig());
+        $view->assign("pageName", "Reset Password");
+
+    }
+
+    public function resetPassword() {
+        $user = new User();
+        $tokenValidity = $user->isTokenExpired(['email' => $_GET['mail']]);
+
+        if (Helper::methodUsed() === Helper::POST) {
+            $resetPwd = new ResetPwd();
+
+        if (!$resetPwd->isValid() || !$user->isTokenValid(['email' => $_GET['mail']], ['forgot_token' => $_GET['token']])) {
+            $this->view_resetPassword();
+
+        } else {
+            if ($tokenValidity === false) {
+                $user->updateUserPwd(['email' => $_GET['mail']], ['password' => password_hash($resetPwd->getData()['newPwd'],PASSWORD_DEFAULT)]);
+                $user->updateForgotToken(['email' => $_GET['mail']], ['forgot_token' => null]);
+                header('Location: /login');
+            } else {
+                $user->updateForgotToken(['email' => $_GET['mail']], ['forgot_token' => null]);
+                array_push($_SESSION['error_messages'], "Le token a expiré.");
+                $this->view_forgotPwd();
+
+            }
+        }
+        }
+    }
+
+    //Génération Token -> Sécurité Reset password
+    function generateToken($length = 32) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $token = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomIndex = random_int(0, $charactersLength - 1);
+            $token .= $characters[$randomIndex];
+        }
+
+        return $token;
     }
 }
