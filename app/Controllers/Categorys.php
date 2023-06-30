@@ -29,8 +29,12 @@ class Categorys
         $formdata = $form->data;
 
         if (!$form->isValid()){
-            //var_dump($form, $_SESSION['error_messages']);
-          //  die();
+            $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
+            unset($_SESSION['error_messages']); // Supprimer les erreurs de la session
+            $this->view($errors);
+            return;
+        }
+        if(!$form->checkCategoryCreate()){
             $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
             unset($_SESSION['error_messages']); // Supprimer les erreurs de la session
             $this->view($errors);
@@ -57,68 +61,76 @@ class Categorys
         $category->setPicture($fileName);
         $category->save();
         $this->view();
-
-       /* //Vérification de la duplication du nom du fichier picture
-        if ($category->namePictureExists(['picture' => $fileName])) {
-            array_push($_SESSION['error_messages'], "Le nom du fichier existe déjà, veuillez choisir un autre fichier.");
-            $this->view();
-            return;
-        }
-
-        //Vérification de la duplication du nom de la catégorie
-        if ($category->nameExists(['name' => $formdata['name']])) {
-            array_push($_SESSION['error_messages'], "Le nom de la catégorie existe déjà, veuillez en choisir un autre.");
-            $this->view();
-            return;
-        }
-
-        // Vérification de l'extension du fichier
-        $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-        if ($fileExtension !== 'png') {
-            array_push($_SESSION['error_messages'], "Le fichier doit être au format PNG.");
-            $this->view();
-            return;
-        }
-
-        // Déplacer le fichier téléchargé vers le répertoire souhaité
-        $destinationPath = $prefix . $fileName;
-        if (!move_uploaded_file($uploadedFile, $destinationPath)) {
-            array_push($_SESSION['error_messages'], "Erreur lors du téléchargement du fichier.");
-            $this->view();
-            return;
-        }*/
-
-
     }
 
 
     public function updateCategory(): void
     {
-
         $form = new UpdateCategory();
-        if (!$form->isValid()) {
-            echo "error";
-            die();
-        }
+        $form->data['id'] = $_POST['id'];
         $formdata = $form->data;
+
+        if (!$form->isValid()) {
+            $errors = $_SESSION['error_messages'];
+            unset($_SESSION['error_messages']);
+            $this->view($errors);
+            return;
+        }
+
+        if (!$form->checkCategoryUpdate()) {
+            $errors = $_SESSION['error_messages'];
+            unset($_SESSION['error_messages']);
+            $this->view($errors);
+            return;
+        }
+
         $category = Category::populate($formdata['id']);
         $oldName = $category->getName();
-        //Ajout de la nouvelle image
+
+        // Vérifier si le nom de la catégorie existe déjà
+        $newName = $formdata['name'];
+        if ($newName !== $oldName && $category->nameExists(['name' => $newName])) {
+            array_push($_SESSION['error_messages'], "Le nom de la catégorie existe déjà.");
+            $this->view();
+            return;
+        }
+
+        // Mise à jour de l'image si une nouvelle image est sélectionnée
         $prefix = "assets/images/category/";
-        $base64 = $formdata['base64'];
-        $nomFichier= $formdata['name'] .".png";
-        $imageToSave = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64));
-        file_put_contents($prefix . $nomFichier, $imageToSave);
-        //Suppression de l'ancienne image
-        $filePath = 'assets/images/category/' . $oldName . '.png';
-        unlink($filePath);
-        // Mettre à jour les propriétés de l'utilisateur
-        $category->setName($formdata['name']);
-        $category->setPicture($formdata['picture']);
+        $uploadedFile = $_FILES['picture'];
+        $fileName = $uploadedFile['name'];
+        $tempFilePath = $uploadedFile['tmp_name'];
+
+        if (!empty($fileName)) {
+            // Suppression de l'ancienne image
+            $filePath = $prefix . $oldName . ".png";
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+
+            // Ajout de la nouvelle image
+            $nomFichier = $newName . ".png";
+            $destinationPath = $prefix . $nomFichier;
+            if (!move_uploaded_file($tempFilePath, $destinationPath)) {
+                array_push($_SESSION['error_messages'], "Erreur lors du téléchargement du fichier.");
+                $this->view();
+                return;
+            }
+
+            // Mettre à jour le nom de l'image dans la base de données
+            $category->setPicture($fileName);
+        }
+
+        // Mettre à jour le nom de la catégorie si celui-ci a été modifié
+        if ($newName !== $oldName) {
+            $category->setName($newName);
+        }
+
         // Enregistrer les modifications dans la base de données
         $category->save();
         $this->view();
     }
+
 
 
     public function getCategory()

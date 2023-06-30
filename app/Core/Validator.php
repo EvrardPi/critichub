@@ -26,7 +26,7 @@ class Validator
     public function setData(): void
     {
         if (Helper::methodUsed() === Helper::POST) {
-            $this->data = $_POST + $_FILES;
+            $this->data = array_merge($_POST, $_FILES);
         } else {
             $this->data = $_GET;
         }
@@ -48,7 +48,6 @@ class Validator
         $this->config = $this->getConfig();
 
         if (count($this->config["inputs"]) != count($this->data) - 1) {
-            var_dump(count($this->config["inputs"]),count($this->data));
             array_push($_SESSION['error_messages'], "Une erreur est survenue");
             return false;
         } // -1 pour le jeton CSRF
@@ -61,6 +60,7 @@ class Validator
             }
 
             $value = $this->data[$name];
+
 
 
             if (isset($configInput["required"]) && self::isEmpty($value)) {
@@ -117,20 +117,20 @@ class Validator
                             array_push($_SESSION['error_messages'], "Les mots de passe sont différents");
                         }
                         break;
+
                     case "file":
+
                         //Vérification de l'extension du fichier
-                        $allowedExtensions = ["png", "jpg", "jpeg"]; // Liste des extensions autorisées
-                        $fileExtension = strtolower(pathinfo($value["name"], PATHINFO_EXTENSION));
+                        $allowedExtensions = ["png", "jpg", "jpeg"];
+                            $fileExtension = strtolower(pathinfo($value["name"], PATHINFO_EXTENSION));
                         if (!in_array($fileExtension, $allowedExtensions)) {
                             $allowedExtensionsString = implode(", ", $allowedExtensions);
                             array_push($_SESSION['error_messages'], "Le fichier doit être de type $allowedExtensionsString");
                         }
-
                         //Vérification de la taille du fichier
                         $maxFileSize = 5 * 1024 * 1024; // Taille maximale du fichier en octets (ici 5 Mo)
                         if ($value["size"] > $maxFileSize) {
                             array_push($_SESSION['error_messages'], "Le fichier ne doit pas dépasser 5 Mo");
-
                         }
                         // Vérification supplémentaire de l'image
                         $imageData = file_get_contents($value["tmp_name"]);
@@ -139,18 +139,7 @@ class Validator
                             array_push($_SESSION['error_messages'], "Le fichier n'est pas une image valide (PNG ou JPEG).");
                         }
 
-
                         //Permet de vérifier si la photo de la catégorie existe deja
-                        $category = new Category();
-                        if ($category->namePictureExists(['picture' => $value['name']])) {
-                            array_push($_SESSION['error_messages'], "L'image que vous utilisez est deja utilisez pour une autre catégorie.");
-                        }
-
-                        //Permets de vérifier si le nom de la catégorie existe deja
-                        $category = new Category();
-                        if($category->nameExists(['name' => $this->data['name']])){
-                            array_push($_SESSION['error_messages'], "Le nom de la catégorie existe deja.");
-                        }
 
                         break;
                 }
@@ -165,6 +154,53 @@ class Validator
         // return empty($this->errors);
         return true;
     }
+
+    public function checkCategoryCreate(): bool
+    {
+        $value = $this->data;
+        $category = new Category();
+        $pictureExists = $category->namePictureExists(['picture' => $value['picture']['name']]);
+        if ($pictureExists) {
+            array_push($_SESSION['error_messages'], "L'image que vous utilisez est déjà utilisée pour une autre catégorie.");
+            return false;
+        }
+
+        $categoryExists = $category->nameExists(['name' => $value['name']]);
+        if ($categoryExists) {
+            array_push($_SESSION['error_messages'], "Le nom de la catégorie existe déjà.");
+            return false;
+        }
+
+        return true;
+    }
+
+    public function checkCategoryUpdate(): bool
+    {
+        $value = $this->data;
+        $categoryId = $value['id']; // Supposons que l'ID de la catégorie soit présent dans le formulaire
+        $category = new Category();
+
+        // Vérifier si le nouveau nom de catégorie est différent de l'ancien nom
+        if ($value['name'] !== $category->getCategoryNameById($categoryId)) {
+            $categoryExists = $category->nameExists(['name' => $value['name']]);
+            if ($categoryExists) {
+                array_push($_SESSION['error_messages'], "Le nom de la catégorie existe déjà.");
+                return false;
+            }
+        }
+
+        // Vérifier si l'image a été modifiée
+        if ($value['picture']['name'] !== $category->getCategoryImageNameById($categoryId)) {
+            $pictureExists = $category->namePictureExists(['picture' => $value['picture']['name']]);
+            if ($pictureExists) {
+                array_push($_SESSION['error_messages'], "L'image que vous utilisez est déjà utilisée pour une autre catégorie.");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
 
 

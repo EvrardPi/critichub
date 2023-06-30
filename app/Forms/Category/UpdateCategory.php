@@ -14,7 +14,7 @@ class UpdateCategory extends Validator
                 "action"=>"updatetam",
                 "id"=>"category-update-form",
                 "class"=>"update",
-                "enctype"=>"",
+                "enctype"=>"multipart/form-data",
                 "submit"=>"Modifier",
 
             ],
@@ -35,9 +35,7 @@ class UpdateCategory extends Validator
                     "placeholder"=>"Son nom",
                     "type"=>"text",
                     "error"=>"Le nom doit faire entre 2 et 60 caractères",
-                    "min"=>2,
                     "accept"=>"",
-                    "max"=>60,
                     "required"=>true,
                     "value"=>""
                 ],
@@ -50,15 +48,7 @@ class UpdateCategory extends Validator
                     "required"=>true,
                     "value"=>""
                 ],
-                "base64"=>[
-                    "id"=>"update-form-category-base64",
-                    "class"=>"form-input",
-                    "placeholder"=>"Mettre l'image de la catégorie",
-                    "type"=>"hidden",
-                    "accept"=>"image/png",
-                    "required"=>true,
-                    "value"=>""
-                ],
+
             ]
         ];
         return $this->config;

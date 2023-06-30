@@ -93,7 +93,7 @@ abstract class SQL
         }
     }
 
-    public function namePictureExists(array $name): bool
+        public function namePictureExists(array $name): bool
     {
         $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE picture = :picture");
         $queryPrepared->execute(['picture' => $name['picture']]);
@@ -147,5 +147,29 @@ abstract class SQL
         $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table .
             " SET confirm = ? WHERE email = ? ");
         $queryPrepared->execute(array(1, $email));
+    }
+
+    public function getCategoryNameById($categoryId): string
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT name FROM " . $this->table . " WHERE id = :id");
+        $queryPrepared->execute(['id' => $categoryId]);
+        $result = $queryPrepared->fetch();
+        if ($result) {
+            return $result['name'];
+        } else {
+            return '';
+        }
+    }
+
+    public function getCategoryImageNameById($categoryId): string
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT picture FROM " . $this->table . " WHERE id = :id");
+        $queryPrepared->execute(['id' => $categoryId]);
+        $result = $queryPrepared->fetch();
+        if ($result) {
+            return $result['picture'];
+        } else {
+            return '';
+        }
     }
 }
