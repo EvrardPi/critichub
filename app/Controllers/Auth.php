@@ -203,9 +203,10 @@ class Auth
             return;
         }
         $forgotToken = $this->generateToken(32);
-        $_SESSION['tokenExpiration'] = time() + 300;
+        $tokenExpiration = time() + 300;
         Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : http://localhost:80/reset-password?mail=" . $emailToSend . "&token=" . $forgotToken . ". La demande expirera dans 5 minutes.");
         $user->updateForgotToken(['email' => $emailToSend], ['forgot_token' => $forgotToken]);
+        $user->setExpirationTime(['email' => $emailToSend], ['expiration_time' => $tokenExpiration]);
         $this->view_forgotPwd();
     }
 
@@ -220,6 +221,7 @@ class Auth
 
     public function resetPassword() {
         $user = new User();
+        $tokenValidity = $user->isTokenExpired(['email' => $_GET['mail']]);
 
         if (Helper::methodUsed() === Helper::POST) {
             $resetPwd = new ResetPwd();
@@ -228,7 +230,7 @@ class Auth
             $this->view_resetPassword();
 
         } else {
-            if (time() < $_SESSION['tokenExpiration']) {
+            if ($tokenValidity === false) {
                 $user->updateUserPwd(['email' => $_GET['mail']], ['password' => password_hash($resetPwd->getData()['newPwd'],PASSWORD_DEFAULT)]);
                 $user->updateForgotToken(['email' => $_GET['mail']], ['forgot_token' => null]);
                 header('Location: /login');
