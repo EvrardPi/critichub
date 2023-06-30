@@ -80,8 +80,19 @@ class Register extends Validator
                     "value"=>"",
                     "confirm"=>"pwd"
                 ],
-            ]
-        ];
+            ],
+            "links" => [
+                "forgot" => [
+                    "class" => "button-link-forgot",
+                    "href" => "/forgot",
+                    "text" => "Mot de passe oublié ?",
+                ],
+                "register" => [
+                    "class" => "button-link-register",
+                    "href" => "/login",
+                    "text" => "Se connecter",
+                ]
+            ]        ];
         return $this->config;
     }
 }

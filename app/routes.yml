@@ -92,8 +92,8 @@ register:
 
 confirm:
    controller: Auth
-   action: valideToken
-
+   action: confirmAccount
+   
 category:
   controller: Categorys
   action: view
@@ -117,3 +117,19 @@ tap:
 updatetam:
   controller: Categorys
   action: updateCategory
+
+forgot:
+   controller: Auth
+   action: view_forgotPwd
+
+forgot-confirmation:
+   controller: Auth
+   action: forgotPassword
+
+reset-password:
+   controller: Auth
+   action: view_resetPassword
+
+confirm-reset-password:
+   controller: Auth
+   action: resetPassword

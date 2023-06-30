@@ -11,7 +11,7 @@ if (!empty($errors)) print_r($errors); ?>
       id="<?= $config["config"]["id"] ?>"
       class="<?= $config["config"]["class"] ?>">
 
-    <input type="hidden" name="csrf_token" value="<?= Helper::generateCSRFToken() ?>">
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token_next'] ?>">
 
     <?php foreach ($config["inputs"] as $name => $configInput): ?>
         <?php if ($name === "role"): ?>
@@ -36,5 +36,13 @@ if (!empty($errors)) print_r($errors); ?>
     <?php endforeach; ?>
 
     <button type="submit" class="submit"><?= $config["config"]["submit"] ?></button>
+
+        <?php foreach ($config["links"] as $name => $configLink): ?>
+            <a 
+                href="<?= $configLink["href"] ?>"
+                class="<?= $configLink["class"] ?? "" ?>">
+                    <?= $configLink["text"] ?>
+            </a>
+        <?php endforeach; ?>
 
 </form>

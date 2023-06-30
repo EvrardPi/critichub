@@ -2,19 +2,8 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title><?= $pageName ?></title>
-    <meta name="description" content="CriticHub, where your critics begin">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/Views/Modules/datatables.css" />
-    <script src="/Views/Modules/datatables.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <?php include("includes.tpl.php"); ?>
 </head>
 
 <body>
@@ -55,60 +44,76 @@
 
 
         <footer>
-            <div class="footer footer-logo">
-                <img src="/assets/images/logo.svg" alt="">
-                <h2 class="logo-title">Critic<span class="red-text">Hub</span></h2>
-            </div>
+            <div class="footer footer-parameters">
+                <div class="footer-left-content">
 
-            <div class="footer footer-categories">
+                    <div class="footer footer-name">
+                        <h2 class="logo-title">Critic<span class="red-text">Hub</span></h2>
+                    </div>
 
-                <div class="footer footer-category">
-                    <h2 class="white-text">FILMS</h2>
-                    <a href="#" class="white-text">Derniers films ajoutés</a>
-                    <a href="#" class="white-text">Dernier article posté : Est-ce que ce ratio va vous plaire ?</a>
-                    <a href="#" class="white-text">Actualités films</a>
+                    <h5>
+                        CriticHub est un site internet dynamique dédié aux critiques où les passionnés de cinéma peuvent partager leurs opinions.
+                    </h5>
+
+                    <div class="footer-icons">
+                    <a href="https://twitter.com" ><i class="fa fa-twitter"></i></a>
+                    <a href="https://instagram.com" ><i class="fa fa-instagram"></i></a>
+                    <a href="https://facebook.com" ><i class="fa fa-facebook"></i></a>
+                    <a href="https://youtube.com" ><i class="fa fa-youtube"></i></a>
+                    <a href="https://wordpress.com" ><i class="fa fa-wordpress"></i></a>
+                    </div>
+
+                    <div class="footer footer-follow">
+                        <span>Suivez notre avancée sur</span>
+                        <div class="footer footer-follow-icons">
+                            <a href="https://github.com" ><i class="fa fa-github"> Github</i></a>
+                            <a href="https://gitlab.com" ><i class="fa fa-gitlab"> Gitlab</i></a>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="footer footer-category">
-                    <h2 class="white-text">SÉRIES</h2>
-                    <a href="#" class="white-text">Derniers films ajoutés</a>
-                    <a href="#" class="white-text">Dernier article posté : Est-ce que ce ratio va vous plaire ?</a>
-                    <a href="#" class="white-text">Actualités films</a>
-                </div>
+                <div class="footer footer-categories">
+                    <div class="footer footer-category">
+                        <span class="white-text ">Services</span>
+                        <a href="#" >Fonctionnalités </a>
+                        <a href="#" >Support Client</a>
+                        <a href="#" >F.A.Q Produit</a>
+                        <a href="#" >Notre CMS </a>
+                        <a href="#" >Suggestions</a>
+                    </div>
 
-                <div class="footer footer-category">
-                    <h2 class="white-text">ANIMÉS</h2>
-                    <a href="#" class="white-text">Derniers films ajoutés</a>
-                    <a href="#" class="white-text">Dernier article posté : Est-ce que ce ratio va vous plaire ?</a>
-                    <a href="#" class="white-text">Actualités films</a>
-                </div>
+                    <div class="footer footer-category">
+                        <span class="white-text ">
+                            Sécurité du CMS
+                        </span>
+                        <a href="#" >Conseils de sécurité </a>
+                        <a href="#" >Mises à jour de sécurité</a>
+                        <a href="#" >Politique d'utilisation</a>
+                        <a href="#" >Rapports de vulnérabilités </a>
+                        <a href="#" >Protection des données</a>
+                    </div>
 
-                <div class="footer footer-category">
-                    <h2 class="white-text">JEUX-VIDÉOS</h2>
-                    <a href="#" class="white-text">Derniers films ajoutés</a>
-                    <a href="#" class="white-text">Dernier article posté : Est-ce que ce ratio va vous plaire ?</a>
-                    <a href="#" class="white-text">Actualités films</a>
-                </div>
+                    <div class="footer footer-category">
+                        <span class="white-text ">
+                            À propos de nous
+                        </span>
+                        <a href="#" >Qui sommes nous</a>
+                        <a href="#" >Notre Clientèle</a>
+                        <a href="#" >Nos carrières</a>
+                        <a href="#" >Nous contacter</a>
+                        <a href="#" >Knowledge base</a>
+                    </div>
 
-                <div class="footer footer-category">
-                    <h2 class="white-text">CATÉGORIES</h2>
-                    <a href="#" class="white-text">Derniers films ajoutés</a>
-                    <a href="#" class="white-text">Dernier article posté : Est-ce que ce ratio va vous plaire ?</a>
-                    <a href="#" class="white-text">Actualités films</a>
-                </div>
-
-                <div class="footer footer-category">
-                    <h2 class="white-text">À PROPOS</h2>
-                    <a href="#" class="white-text">Derniers films ajoutés</a>
-                    <a href="#" class="white-text">Dernier article posté : Est-ce que ce ratio va vous plaire ?</a>
-                    <a href="#" class="white-text">Actualités films</a>
-                </div>
-
-                <div class="footer footer-category">
-                    <h2 class="white-text">RÉSEAUX</h2>
-                    <a href="#" class="white-text">Derniers films ajoutés</a>
-                    <a href="#" class="white-text">Dernier article posté : Est-ce que ce ratio va vous plaire ?</a>
-                    <a href="#" class="white-text">Actualités films</a>
+                    <div class="footer footer-category">
+                        <span class="white-text ">
+                            Ressources
+                        </span>
+                        <a href="#" >Politique de confidentialité </a>
+                        <a href="#" >Mentions Légales</a>
+                        <a href="#" >Conditions d'utlisations</a>
+                        <a href="#" >F.A.Q</a>
+                        <a href="#" >Nos Partenaires</a>
+                    </div>
                 </div>
 
             </div>

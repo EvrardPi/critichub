@@ -126,6 +126,22 @@ body .form-container .login-form a:hover {
   z-index: 100;
 }
 
+.align-text{
+  text-align: center;
+}
+
+.white-text{
+  color: #fff;
+}
+
+.success{
+  background-color: #008500;
+  color:#fff;
+  text-align:center;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
 @media (max-height: 980px) {
     body .form-container{
         overflow-y: auto;

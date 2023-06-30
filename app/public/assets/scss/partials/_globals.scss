@@ -24,6 +24,8 @@ span {
 }
 
 footer {
-    background-color: $gray;
+    // background-color: $gray;
     margin-top: 50px !important;
+    background-color: $footer_background_color;
+    border-radius: 4rem 4rem 0 0;
 }
