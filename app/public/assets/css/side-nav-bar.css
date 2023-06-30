@@ -150,3 +150,19 @@ body {
 #generateButton {
   position: absolute;
 }
+
+.categorie-img {
+
+  width: 100px;
+  height: 100px;
+  aspect-ratio: auto;
+  object-fit: cover;
+
+}
+
+#image-preview {
+  width: 100px;
+  height: 100px;
+  aspect-ratio: auto;
+  object-fit: cover;
+}

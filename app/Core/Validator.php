@@ -4,6 +4,7 @@ namespace App\Core;
 
 use App\Helper;
 use App\Models\User;
+use App\Models\Category;
 
 class Validator
 {
@@ -22,7 +23,11 @@ class Validator
      */
     public function setData(): void
     {
-        $this->data = (Helper::methodUsed() === Helper::POST) ? $_POST : $_GET;
+        if (Helper::methodUsed() === Helper::POST) {
+            $this->data = array_merge($_POST, $_FILES);
+        } else {
+            $this->data = $_GET;
+        }
     }
 
     /**
@@ -50,7 +55,8 @@ class Validator
 
         foreach ($this->config["inputs"] as $name => $configInput) {
             if (!isset($this->data[$name])) {
-                array_push($_SESSION['error_messages'], "Erreur de validation du formulaire");
+
+                array_push($_SESSION['error_messages'], "Erreur de validation du formulaire ici");
                 continue;
             }
 
@@ -110,8 +116,34 @@ class Validator
                             array_push($_SESSION['error_messages'], "Les mots de passe sont différents");
                         }
                         break;
+
+                    case "file":
+
+                        //Vérification de l'extension du fichier
+                        $allowedExtensions = ["png", "jpg", "jpeg"];
+                            $fileExtension = strtolower(pathinfo($value["name"], PATHINFO_EXTENSION));
+                        if (!in_array($fileExtension, $allowedExtensions)) {
+                            $allowedExtensionsString = implode(", ", $allowedExtensions);
+                            array_push($_SESSION['error_messages'], "Le fichier doit être de type $allowedExtensionsString");
+                        }
+                        //Vérification de la taille du fichier
+                        $maxFileSize = 5 * 1024 * 1024; // Taille maximale du fichier en octets (ici 5 Mo)
+                        if ($value["size"] > $maxFileSize) {
+                            array_push($_SESSION['error_messages'], "Le fichier ne doit pas dépasser 5 Mo");
+                        }
+                        // Vérification supplémentaire de l'image
+                        $imageData = file_get_contents($value["tmp_name"]);
+                        $imageSize = getimagesizefromstring($imageData);
+                        if ($imageSize === false || !in_array($imageSize['mime'], ['image/png', 'image/jpeg'])) {
+                            array_push($_SESSION['error_messages'], "Le fichier n'est pas une image valide (PNG ou JPEG).");
+                        }
+
+                        //Permet de vérifier si la photo de la catégorie existe deja
+
+                        break;
                 }
             }
+
         }
 
         if (count($_SESSION['error_messages']) > 0) {
@@ -121,10 +153,66 @@ class Validator
         return true;
     }
 
-    public static function isEmpty(String $string): bool
+    public function checkCategoryCreate(): bool
     {
-        return empty(trim($string));
+        $value = $this->data;
+        $category = new Category();
+        $pictureExists = $category->namePictureExists(['picture' => $value['picture']['name']]);
+        if ($pictureExists) {
+            array_push($_SESSION['error_messages'], "L'image que vous utilisez est déjà utilisée pour une autre catégorie.");
+            return false;
+        }
+
+        $categoryExists = $category->nameExists(['name' => $value['name']]);
+        if ($categoryExists) {
+            array_push($_SESSION['error_messages'], "Le nom de la catégorie existe déjà.");
+            return false;
+        }
+
+        return true;
     }
+
+    public function checkCategoryUpdate(): bool
+    {
+        $value = $this->data;
+        $categoryId = $value['id']; // Supposons que l'ID de la catégorie soit présent dans le formulaire
+        $category = new Category();
+
+        // Vérifier si le nouveau nom de catégorie est différent de l'ancien nom
+        if ($value['name'] !== $category->getCategoryNameById($categoryId)) {
+            $categoryExists = $category->nameExists(['name' => $value['name']]);
+            if ($categoryExists) {
+                array_push($_SESSION['error_messages'], "Le nom de la catégorie existe déjà.");
+                return false;
+            }
+        }
+
+        // Vérifier si l'image a été modifiée
+        if ($value['picture']['name'] !== $category->getCategoryImageNameById($categoryId)) {
+            $pictureExists = $category->namePictureExists(['picture' => $value['picture']['name']]);
+            if ($pictureExists) {
+                array_push($_SESSION['error_messages'], "L'image que vous utilisez est déjà utilisée pour une autre catégorie.");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+
+
+    public static function isEmpty($value): bool
+    {
+        if (is_string($value)) {
+            return empty(trim($value));
+        }
+        if (is_array($value)) {
+            return empty(array_filter($value)); // Vérifie si tous les éléments du tableau sont vides
+        }
+        return true; // Autre type de données, considéré comme vide
+    }
+
     public static function isMinLength(String $string, $length): bool
     {
         return strlen(trim($string)) >= $length;

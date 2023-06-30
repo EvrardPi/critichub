@@ -29,6 +29,7 @@ if (!empty($errors)) print_r($errors); ?>
                    class="<?= $configInput["class"] ?? "" ?>"
                    id="<?= $configInput["id"] ?? "" ?>"
                    type="<?= $configInput["type"] ?>"
+                   accept="<?= $configInput["accept"] ?>"
                 <?= !empty($configInput["required"]) ? "required" : "" ?>
                    value="<?= $configInput["value"] ?? "" ?>">
         <?php endif; ?>

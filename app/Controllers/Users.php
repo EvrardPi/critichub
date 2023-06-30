@@ -4,30 +4,35 @@ namespace App\Controllers;
 
 use App\Core\Validator;
 use App\Core\View;
-use App\Forms\Create;
+use App\Forms\User\Create;
 use App\Forms\Register;
-use App\Forms\Update;
+use App\Forms\User\Update;
+use App\Helper;
 use App\Models\User;
 use App\Core\SQL;
 
 class Users
 {
 
-    public function view(): void
+    public function view(array $errors = []): void
     {
         $view = new View("BackOffice/userGestion", "back");
         $createForm = new Create();
         $view->assign("createForm", $createForm->getConfig());
         $updateForm = new Update();
         $view->assign("updateForm", $updateForm->getConfig());
+        $view->assign("errors", $errors);
     }
 
     public function createUser(): void
     {
         $form = new Create();
         if (!$form->isValid()){
-            echo "error";
-            die();
+            $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
+            // var_dump($errors, $_SESSION['error_messages'], $form);
+            unset($_SESSION['error_messages']); // Supprimer les erreurs de la session
+            $this->view($errors);
+            return;
         }
         $formdata = $form->data;
         $user = new User();
@@ -46,8 +51,7 @@ class Users
     {
         $form = new Update();
         if (!$form->isValid()) {
-            echo "error";
-            die();
+            $this->view();
         }
         $formdata = $form->data;
 
@@ -66,7 +70,7 @@ class Users
         $this->view();
     }
 
-
+//pour l'installer ne pas le faire dans un controller mais le mettre dans le systeme de routing
     public function getUser()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
