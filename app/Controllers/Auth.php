@@ -249,7 +249,7 @@ class Auth
 
         } else {
             if ($tokenValidity === false) {
-                $user->updateUserPwd(['email' => $_GET['mail']], ['password' => password_hash($resetPwd->getData()['newPwd'],PASSWORD_DEFAULT)]);
+                $user->updateUserPwd(['email' => $_GET['mail']], ['password' => password_hash($resetPwd->getData()['password'],PASSWORD_DEFAULT)]);
                 $user->updateForgotToken(['email' => $_GET['mail']], ['forgot_token' => null]);
                 header('Location: /login');
             } else {
