@@ -38,10 +38,12 @@ class Validator
 
     public function isValid(): bool
     {
-    //     if (!hash_equals($_SESSION['csrf_token'], $this->data['csrf_token'])) {
-    //     array_push($_SESSION['error_messages'], "Jeton CSRF invalide.");
-    //     return false;
-    // }
+        if (!in_array($this->data['csrf_token'], $_SESSION['csrf_tokens'])) {
+            array_push($_SESSION['error_messages'], "Jeton CSRF invalide.");
+            return false;
+        } else {
+            unset($_SESSION['csrf_tokens'][array_search($this->data['csrf_token'], $_SESSION['csrf_tokens'])]);
+        }
 
         $this->config = $this->getConfig();
 
@@ -85,13 +87,14 @@ class Validator
             }
 
 
+
             if (isset($configInput["type"])) {
                 switch ($configInput["type"]) {
                     case "email":
                         $user = new User();
                         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
                             array_push($_SESSION['error_messages'], "Adresse mail non valide");
-                        } elseif (isset($this->data['email']) && $user->emailExists($value && $this->config["inputs"]["email"]["id"] === "register-form-email")) {
+                        } elseif ($user->emailExists($value) && $this->config["inputs"]["email"]["id"] === "register-form-email") {
                             array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
                         }
                         break;
@@ -121,7 +124,6 @@ class Validator
             return false;
         }
 
-        // return empty($this->errors);
         return true;
     }
 

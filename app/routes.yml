@@ -92,7 +92,7 @@ register:
 
 confirm:
    controller: Auth
-   action: valideToken
+   action: confirmAccount
 
 forgot:
    controller: Auth

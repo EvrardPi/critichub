@@ -37,11 +37,10 @@ class Auth
             return;
         }
 
-        // Juste la View
-        $form = new Login();
-
         // Puis vérif si POST ou GET
         if (Helper::methodUsed() === Helper::POST) {
+
+            $form = new Login();
 
             // token CSRF
             if (!$form->isValid()) {
@@ -51,9 +50,9 @@ class Auth
             }
 
             $this->login_post($form->getData());
-        } else {
-            // GET
-        }
+        } // else {
+        //     // GET
+        // }
 
         $this->view_login();
     }
@@ -130,7 +129,6 @@ class Auth
             }
 
             $this->register_post($form->getData());
-            
         } else {
             // GET
         }
@@ -152,29 +150,49 @@ class Auth
         $user->save();
 
         // Envoi de l'e-mail de validation
-        Mailer::sendMail($user->getEmail(), "validation du compte", "Veuillez validé votre compte: http://localhost:80/confirm?mail=" . $user->getEmail() . '&key=' . $user->getConfirmKey());
+        Mailer::sendMail($user->getEmail(), "validation du compte", "Veuillez validé votre compte: http://localhost:80/confirm?key=" . $user->getConfirmKey());
         //Helper::redirectTo('/login');
         Helper::successAlert('Votre compte a bien été créé, veuillez valider votre compte via le mail qui vous a été envoyé');
     }
 
-    public function valideToken()
+    public function confirmAccount()
     {
-        $view = new View("Auth/confirm", "front");
-        if (isset($_GET['mail'], $_GET['mail'])) {
-            $user = new User();
-            $getMail = htmlspecialchars(urldecode($_GET['mail']));
-            $getKey = htmlspecialchars($_GET['key']);
-            $response = $user->getToken($getMail, $getKey);
-            $return_value = match ($response['user']) {
-                0 => "Compte inexistant",
-                1 => "sheeeesh",
-                default => "Autre cas"
-            };
-            if ($response['confirm'] == 1) {
-                echo "Votre compte à deja été confirmé ";
-            };
-            $response = $user->confirmAccount($getMail);
+        if (isset($_SESSION['isAuth']) && $_SESSION['isAuth']) {
+            header('Refresh: 0; URL=/');
+            return;
         }
+
+        if (isset($_GET['key'])) {
+
+            $userModel = new User();
+
+            $getKey = htmlspecialchars($_GET['key']);
+
+            $user = $userModel->getUserToConfirm($getKey);
+
+            if (is_array($user)) {
+                if (!$user['confirm']) {
+                    $userModel->confirmAccount($user['id']);
+                    Helper::successAlert('Votre compte a bien été confirmé, vous allez être redirigé vers la page de connexion');
+                    header('Refresh: 5; URL=/login');
+                } else {
+                    array_push($_SESSION['error_messages'], "Compte déja confirmé");
+                }
+            } else {
+                array_push($_SESSION['error_messages'], "Token invalid");
+            }
+        } else {
+            array_push($_SESSION['error_messages'], "Aucun token présent");
+        }
+
+        $this->view_confirm();
+        $_SESSION['error_messages'] = [];
+    }
+
+    public function view_confirm(): void
+    {
+        $view = new View("Auth/confirm", "auth");
+        $view->assign("pageName", "Confirmation de compte");
     }
 
     public function view_forgotPwd() {
