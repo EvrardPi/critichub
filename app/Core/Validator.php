@@ -87,13 +87,14 @@ class Validator
             }
 
 
+
             if (isset($configInput["type"])) {
                 switch ($configInput["type"]) {
                     case "email":
                         $user = new User();
                         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
                             array_push($_SESSION['error_messages'], "Adresse mail non valide");
-                        } elseif ($user->emailExists($value)) {
+                        } elseif ($user->emailExists($value) && $this->config["inputs"]["email"]["id"] === "register-form-id") {
                             array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
                         }
                         break;
