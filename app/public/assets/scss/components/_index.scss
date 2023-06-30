@@ -64,25 +64,82 @@ header {
 // ------------------------------ FOOTER ------------------------------
 .footer{
     display:flex;
-    
-    
-    &-logo{
-        justify-content: center;
-        padding: 3rem 0 5rem 0;
+    flex-direction: row;
+    padding-top: 3rem;
+
+    &-left-content{
+        width:25vw;
+        padding-left: 5rem;
+        margin-right:10rem;
+    }
+
+    &-icons{
+        i{
+            background-color: $footer_color;
+            width:2vw;
+            height:2vw;
+            text-align: center;
+            font-size:1.25rem;
+            padding-top: 0.25rem;
+            border-radius: 25%;
+            margin: 0.25rem;
+            color:$blackFont;
+        }
+    }
+
+    .logo-title{
+        margin:0;
+        font-size: 2.5rem;
+    }
+
+    h5{
+        font-size: 0.85rem;
+        line-height: 1.5rem;
+        color: $footer_color;
+
     }
 
     &-categories{
         justify-content: space-evenly;
+        width:100%;
+        span{
+            padding-bottom:1.25rem;
+            color: $footer_color;
+
+        }
     }
 
     &-category {
         flex-direction: column;
-        width:10vw;
+        align-items: flex-start;
+        padding-top: 0;
+        margin-right:5rem;
         
         a{ 
-            font-weight:400;
-            padding:0.75rem 0;
+            padding:1rem 0;
+            color: $light_gray;
+
         }
+    }
+
+    &-follow{
+        padding-top: 3rem;
+        flex-direction: column;
+        a{
+            color: $footer_color;
+            text-align:center;
+            font-size: 1.5rem;
+        }
+
+        &-icons{
+            flex-direction: row;
+            justify-content: space-between;
+            padding-top: 1rem;
+        }
+    }
+
+    &-parameters{
+        padding-bottom: 5rem;
     }
 }
 
