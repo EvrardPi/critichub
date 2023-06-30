@@ -5,11 +5,9 @@ namespace App\Core;
 use App\Helper;
 use App\Models\User;
 
-
 class Validator
 {
     public array $data = [];
-    public array $errors = [];
     protected array $config = [];
 
     public function __construct()
@@ -19,7 +17,7 @@ class Validator
     }
 
     /**
-     * Set data for the Login form
+     * Set data for the current form
      * @return void
      */
     public function setData(): void
@@ -28,7 +26,7 @@ class Validator
     }
 
     /**
-     * Get data for the Login form
+     * Get data for the current form
      * @return array The data for the Login form
      */
     public function getData(): array
@@ -39,15 +37,13 @@ class Validator
     public function isValid(): bool
     {
         if (!in_array($this->data['csrf_token'], $_SESSION['csrf_tokens'])) {
-            array_push($_SESSION['error_messages'], "Jeton CSRF invalide.");
+            array_push($_SESSION['error_messages'], "Une erreur est survenue");
             return false;
         } else {
             unset($_SESSION['csrf_tokens'][array_search($this->data['csrf_token'], $_SESSION['csrf_tokens'])]);
         }
 
-        $this->config = $this->getConfig();
-
-        if (count($this->config["inputs"]) != count($this->data) -1) { // -1 pour le jeton CSRF
+        if (count($this->config["inputs"]) != count($this->data) - 1) { // -1 pour le jeton CSRF
             array_push($_SESSION['error_messages'], "Une erreur est survenue");
             return false;
         }
@@ -58,8 +54,8 @@ class Validator
                 continue;
             }
 
+            // On récupère la valeur du champ pour factoriser le code
             $value = $this->data[$name];
-
 
             if (isset($configInput["required"]) && self::isEmpty($value)) {
                 array_push($_SESSION['error_messages'], "Le champ '{$name}' est requis.");
@@ -86,18 +82,14 @@ class Validator
                 continue;
             }
 
-
-
             if (isset($configInput["type"])) {
                 switch ($configInput["type"]) {
                     case "email":
                         $user = new User();
                         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
                             array_push($_SESSION['error_messages'], "Adresse mail non valide");
-                        } elseif (isset($this->config["inputs"]["email"]) && $user->emailExists($value)) {
-                            if($this->config["inputs"]["email"]["id"] === "register-form-email") {
-                                array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
-                            }
+                        } elseif (isset($this->config["inputs"]["email"]) && $user->emailExists($value) && $this->config["inputs"]["email"]["id"] === "register-form-email") {
+                            array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
                         }
                         break;
 
@@ -140,5 +132,28 @@ class Validator
     public static function isMaxLength(String $string, $length): bool
     {
         return strlen(trim($string)) <= $length;
+    }
+
+    public static function loginVerify(Mixed $user, Mixed $password): bool
+    {
+        if (!$user) {
+            // Pas de user trouvé
+            array_push($_SESSION['error_messages'], "Connexion échouée.");
+            return false;
+        }
+
+        if (!password_verify($password, $user->getPassword())) {
+            // Mauvais mot de passe
+            array_push($_SESSION['error_messages'], "Connexion échouée.");
+            return false;
+        }
+
+        if ($user->getConfirm() == 0) {
+            // Compte non confirmé
+            array_push($_SESSION['error_messages'], "Compte non confirmé.");
+            return false;
+        }
+
+        return true;
     }
 }
