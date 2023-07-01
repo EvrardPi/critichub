@@ -35,7 +35,6 @@ class UpdateCategory extends Validator
                     "placeholder"=>"Son nom",
                     "type"=>"text",
                     "error"=>"Le nom doit faire entre 2 et 60 caractères",
-                    "accept"=>"",
                     "required"=>true,
                     "value"=>""
                 ],

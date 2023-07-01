@@ -15,6 +15,7 @@ if (!empty($errors)) print_r($errors); ?>
 
     <?php foreach ($config["inputs"] as $name => $configInput): ?>
         <?php if ($name === "role"): ?>
+            <!-- Code pour le champ "role" -->
             <select name="<?= $name ?>"
                     id="<?= $configInput["id"] ?>"
                     class="<?= $configInput["class"] ?>"
@@ -24,16 +25,18 @@ if (!empty($errors)) print_r($errors); ?>
                 <?php endforeach; ?>
             </select>
         <?php else: ?>
+            <!-- Code pour les autres champs -->
             <input name="<?= $name ?>"
                    placeholder="<?= $configInput["placeholder"] ?? "" ?>"
                    class="<?= $configInput["class"] ?? "" ?>"
                    id="<?= $configInput["id"] ?? "" ?>"
                    type="<?= $configInput["type"] ?>"
-                   accept="<?= $configInput["accept"] ?>"
+                <?= isset($configInput["accept"]) ? 'accept="' . $configInput["accept"] . '"' : "" ?>
                 <?= !empty($configInput["required"]) ? "required" : "" ?>
                    value="<?= $configInput["value"] ?? "" ?>">
         <?php endif; ?>
     <?php endforeach; ?>
+
 
     <button type="submit" class="submit"><?= $config["config"]["submit"] ?></button>
     <?php if (isset($config["links"])): ?>

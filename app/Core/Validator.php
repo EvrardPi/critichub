@@ -55,7 +55,6 @@ class Validator
 
         foreach ($this->config["inputs"] as $name => $configInput) {
             if (!isset($this->data[$name])) {
-
                 array_push($_SESSION['error_messages'], "Erreur de validation du formulaire ici");
                 continue;
             }

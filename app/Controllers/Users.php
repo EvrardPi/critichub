@@ -5,9 +5,7 @@ namespace App\Controllers;
 use App\Core\Validator;
 use App\Core\View;
 use App\Forms\User\Create;
-use App\Forms\Register;
 use App\Forms\User\Update;
-use App\Helper;
 use App\Models\User;
 use App\Core\SQL;
 
@@ -53,20 +51,20 @@ class Users
     {
         $form = new Update();
         if (!$form->isValid()) {
-            $this->view();
+            $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
+            // var_dump($errors, $_SESSION['error_messages'], $form);
+            unset($_SESSION['error_messages']);
+            $this->view($errors);
+            return;
         }
         $formdata = $form->data;
-
-
         $user = User::populate($formdata['id']); // Récupérer l'utilisateur à partir de la base de données*/
-
         // Mettre à jour les propriétés de l'utilisateur
         $user->setFirstname($formdata['firstname']);
         $user->setLastname($formdata['lastname']);
         $user->setEmail($formdata['email']);
         $user->setRole($formdata['role']);
         $user->setBirthDate($formdata['birth_date']);
-
         // Enregistrer les modifications dans la base de données
         $user->save();
         $this->view();
