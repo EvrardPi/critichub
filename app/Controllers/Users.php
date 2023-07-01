@@ -17,6 +17,7 @@ class Users
     public function view(array $errors = []): void
     {
         $view = new View("BackOffice/userGestion", "back");
+        $view->assign("pageName", "Backoffice-Utilisateurs");
         $createForm = new Create();
         $view->assign("createForm", $createForm->getConfig());
         $updateForm = new Update();
@@ -42,6 +43,7 @@ class Users
         $user->setPassword($formdata['password']);
         $user->setBirthDate($formdata['birth_date']);
         $user->setRole($formdata['role']);
+        $user->setConfirm(1);
         $user->save();
         $this->view();
     }

@@ -12,19 +12,19 @@
 <body>
   <div class="side-bar">
     <div class="side-bar-header">
-      <span class="material-symbols-outlined"> token </span>
+
       <h2>Back Office</h2>
     </div>
     <div class="menu">
       <div class="item">
-        <a href="#" class="active"><span class="material-symbols-outlined">dashboard</span>
-          Dashboard
+        <a href="#" class="active"><span class="material-symbols-outlined">Dashboard</span>
+
         </a>
       </div>
       <div class="item">
-        <a href="#" class="sub-btn"><span class="material-symbols-outlined">table</span>
-          Table
-          <span class="material-symbols-outlined drop">navigate_next</span>
+        <a href="#" class="sub-btn"><span class="material-symbols-outlined">Table</span>
+
+
         </a>
         <div class="sub-menu">
           <a href="#" class="sub-item">Gestion Des Utilisateurs</a>
@@ -34,13 +34,11 @@
       </div>
       <div class="item">
         <a href="#" class="norm"><span class="material-symbols-outlined">assignment</span>
-          Formulaire
+
         </a>
       </div>
       <div class="item">
         <a href="#" class="sub-btn"><span class="material-symbols-outlined">Settings</span>
-          Paramètres
-          <span class="material-symbols-outlined drop">navigate_next</span>
         </a>
         <div class="sub-menu">
           <a href="#" class="sub-item">Sub Titre 1</a>

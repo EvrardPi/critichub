@@ -16,6 +16,7 @@ class Categorys
     public function view(array $errors = []): void
     {
         $view = new View("BackOffice/categoryGestion", "back");
+        $view->assign("pageName", "Backoffice-Catégories");
         $createForm = new CreateCategory();
         $view->assign("createForm", $createForm->getConfig());
         $updateForm = new UpdateCategory();

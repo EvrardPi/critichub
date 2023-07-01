@@ -36,7 +36,7 @@ if (!empty($errors)) print_r($errors); ?>
     <?php endforeach; ?>
 
     <button type="submit" class="submit"><?= $config["config"]["submit"] ?></button>
-
+    <?php if (isset($config["links"])): ?>
         <?php foreach ($config["links"] as $name => $configLink): ?>
             <a 
                 href="<?= $configLink["href"] ?>"
@@ -44,5 +44,6 @@ if (!empty($errors)) print_r($errors); ?>
                     <?= $configLink["text"] ?>
             </a>
         <?php endforeach; ?>
+    <?php endif; ?>
 
 </form>
