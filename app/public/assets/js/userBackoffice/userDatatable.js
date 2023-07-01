@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         '</form>'
                 };
             });
+
             // Initialisez le tableau DataTable avec les données récupérées
             $('#myTable').DataTable({
                 data: tableData,
