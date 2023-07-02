@@ -234,4 +234,14 @@ abstract class SQL
             return '';
         }
     }
+
+    public function getCount(string $tableName): int
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT COUNT(*) FROM " . $tableName);
+
+        $queryPrepared->execute();
+        $result = $queryPrepared->fetchColumn();
+
+        return (int) $result;
+    }
 }

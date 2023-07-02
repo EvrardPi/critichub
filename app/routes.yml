@@ -133,3 +133,8 @@ reset-password:
 confirm-reset-password:
    controller: Auth
    action: resetPassword
+
+dashboard:
+  controller: Dashboard
+  action: viewDashboard
+
