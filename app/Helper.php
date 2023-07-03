@@ -21,9 +21,17 @@ class Helper
 
     // Affiche une alerte success
     static public function successAlert(String $message) {
-        echo "<div class='alert alert-success' role='alert'>
-        $message
-        </div>";
+        echo "
+        <div id=\"success-message\"class=\"success-message\">
+            <div class=\"success-left-icon\"></div>
+            <img src=\"assets/images/check-mark-valid.png\">
+            <div class=\"success-navbar\">
+                <div class=\"success-title\">Compte Créé</div>
+                <div class=\"success-subtitle\">".$message."</div>
+            </div>
+            <button class=\"success-close\" onclick=\"document.getElementById('success-message').remove()\">FERMER</button>
+        </div>
+        ";
     }
 
     /**
