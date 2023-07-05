@@ -1,3 +1,4 @@
+AddType application/javascript .js
 Options -Indexes
 
 RewriteEngine on

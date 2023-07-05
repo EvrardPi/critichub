@@ -93,3 +93,15 @@ register:
 confirm:
    controller: Auth
    action: valideToken
+
+installer/setdata:
+  controller: Installer
+  action: getAjaxData
+
+installer/initDataBase:
+  controller: Installer
+  action: initDataBase
+
+installer/createAdminAccount:
+  controller: Installer
+  action: createAdminAccount

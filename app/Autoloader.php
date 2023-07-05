@@ -18,15 +18,12 @@ class Autoloader
             $classForm = $class . ".form.php";
             $class = $class . ".php";
             //$class = Core/View.php
-            if (file_exists(__DIR__."/".$class)) {
-                include __DIR__."/".$class;
+            if (file_exists(__DIR__ . "/" . $class)) {
+                include __DIR__ . "/" . $class;
             } else if (file_exists($classForm)) {
-                include __DIR__."/".$classForm;
+                include __DIR__ . "/" . $classForm;
             }
         });
-
-
-
 
         //Afficher le controller et l'action correspondant à l'URI
 
@@ -34,17 +31,23 @@ class Autoloader
         $uriExploded = explode("?", $uri);
         $uri = strtolower(trim($uriExploded[0], "/"));
 
+
+        // Ignore URLs that start with 'setup'
+        if (strpos($uri, 'setup') === 0) {
+            return;
+        }
+
         if (empty($uri)) {
             $uri = "default";
         }
 
-        if (!file_exists(__DIR__ ."/routes.yml")) {
+        if (!file_exists(__DIR__ . "/routes.yml")) {
             $error = new Error();
             $error->error410();
             exit;
         }
 
-        $routes = yaml_parse_file(__DIR__ ."/routes.yml");
+        $routes = yaml_parse_file(__DIR__ . "/routes.yml");
 
         if (empty($routes[$uri])) {
             $error = new Error();
@@ -62,13 +65,13 @@ class Autoloader
         $controller = $routes[$uri]["controller"];
         $action = $routes[$uri]["action"];
 
-        if (!file_exists(__DIR__ ."/Controllers/" . $controller . ".php")) {
+        if (!file_exists(__DIR__ . "/Controllers/" . $controller . ".php")) {
             $error = new Controllers\Error();
             $error->error500();
             exit;
             // die("Le fichier Controllers/".$controller.".php n'existe pas");
         }
-        include __DIR__ ."/Controllers/" . $controller . ".php";
+        include __DIR__ . "/Controllers/" . $controller . ".php";
 
         $controller = "\\App\\Controllers\\" . $controller;
 

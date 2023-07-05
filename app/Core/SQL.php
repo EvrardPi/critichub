@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+require_once '/var/www/html/config.php';
+
 abstract class SQL
 {
     private static $instance;
@@ -12,8 +14,9 @@ abstract class SQL
     {
         //Connexion à la bdd
         //SINGLETON à réaliser
+
         try {
-            $this->pdo = new \PDO("pgsql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'] . ";port=" . $_ENV['DB_PORT'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
+            $this->pdo = new \PDO("pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";port=" . DB_PORT, DB_USER, DB_PASSWORD);
         } catch (\Exception $e) {
             die("Erreur SQL : " . $e->getMessage());
         }
@@ -30,7 +33,7 @@ abstract class SQL
         return self::$instance;
     }
 
-    public static function populate(Int $id): object
+    public static function populate(int $id): object
     {
         $class = get_called_class();
         $objet = new $class();
@@ -84,7 +87,7 @@ abstract class SQL
         $queryPrepared->execute($columns);
     }
 
-    public function delete(Int $id): void
+    public function delete(int $id): void
     {
 
         if (is_numeric($id) && $id > 0) {
@@ -100,7 +103,7 @@ abstract class SQL
         return $queryPrepared->fetchAll();
     }
 
-    public function getToken(String $email, String $confirm_key): array
+    public function getToken(string $email, string $confirm_key): array
     {
         $reqConfirm = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE email = ?");
         $reqConfirm->execute(array($email));
@@ -118,10 +121,32 @@ abstract class SQL
         //return array d'un confirl key et user exist
     }
 
-    public function confirmAccount(String $email): void
+    public function confirmAccount(string $email): void
     {
         $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table .
             " SET confirm = ? WHERE email = ? ");
         $queryPrepared->execute(array(1, $email));
+    }
+
+
+    public function initializeDatabase(string $configFile): void
+    { //initialise la base de données avec le fichier sql passé en paramètre
+        $sql = file_get_contents($configFile);
+
+        $queries = explode(';', $sql);
+
+        foreach ($queries as $query) {
+            $query = trim($query);
+            if (!empty($query)) {
+                $this->pdo->exec($query);
+            }
+        }
+
+        echo "La base de données a été initialisée avec succès.";
+        
+        //pour initialiser la base de données, il faut appeler la méthode initializeDatabase() de la classe SQL
+
+        // $sqlInstance = SQL::getInstance();
+        // $sqlInstance->initializeDatabase('/chemin/vers/fichier_configuration.sql');
     }
 }
