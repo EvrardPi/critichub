@@ -244,4 +244,12 @@ abstract class SQL
 
         return (int) $result;
     }
+
+    public function getCreateAccount(): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT creation_date FROM " . $this->table);
+        $queryPrepared->execute();
+
+        return $queryPrepared->fetchAll();
+    }
 }
