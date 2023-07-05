@@ -102,8 +102,8 @@ function saveData() {
   }
   
   if (etape.innerHTML === "Étape 2:") {
-    data = true;
-    url = 'installer/initDataBase';
+    data['init'] = 'true';
+    url = 'installer/initdatabase';
   }
 
   if (etape.innerHTML === "Étape 3:") {
@@ -118,6 +118,7 @@ function saveData() {
 
   // Affichez l'objet data dans la console
   console.log(data);
+  console.log(url);
 
   // Créez une Promise pour gérer la requête AJAX de manière asynchrone
   const sendRequest = new Promise(function(resolve, reject) {

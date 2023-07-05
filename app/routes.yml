@@ -98,7 +98,7 @@ installer/setdata:
   controller: Installer
   action: getAjaxData
 
-installer/initDataBase:
+installer/initdatabase:
   controller: Installer
   action: initDataBase
 

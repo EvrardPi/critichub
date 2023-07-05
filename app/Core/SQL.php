@@ -7,7 +7,7 @@ require_once '/var/www/html/config.php';
 abstract class SQL
 {
     private static $instance;
-    private $pdo;
+    protected $pdo;
     private $table;
 
     public function __construct()
@@ -126,27 +126,5 @@ abstract class SQL
         $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table .
             " SET confirm = ? WHERE email = ? ");
         $queryPrepared->execute(array(1, $email));
-    }
-
-
-    public function initializeDatabase(string $configFile): void
-    { //initialise la base de données avec le fichier sql passé en paramètre
-        $sql = file_get_contents($configFile);
-
-        $queries = explode(';', $sql);
-
-        foreach ($queries as $query) {
-            $query = trim($query);
-            if (!empty($query)) {
-                $this->pdo->exec($query);
-            }
-        }
-
-        echo "La base de données a été initialisée avec succès.";
-        
-        //pour initialiser la base de données, il faut appeler la méthode initializeDatabase() de la classe SQL
-
-        // $sqlInstance = SQL::getInstance();
-        // $sqlInstance->initializeDatabase('/chemin/vers/fichier_configuration.sql');
     }
 }

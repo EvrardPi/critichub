@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Core\SQL;
+use App\Models\DatabaseInitializer;
 
 
 
@@ -78,10 +78,9 @@ class Installer
     {
         $data = json_decode(file_get_contents('php://input'), true);
 
-        if ($data = true) {
-
-            $sqlInstance = SQL::getInstance();
-            $sqlInstance->initializeDatabase('/chemin/vers/fichier_configuration.sql');
+        if ($data['init'] = true) {
+            $initializer = new DatabaseInitializer(); // Créez une instance de la classe DatabaseInitializer
+            $initializer->initializeDatabase('/var/www/html/initDB.sql'); //le fichier de configuration de la base de données
             $response = array('success' => true, 'message' => 'La base de données a été créée avec succès.');
         } else {
             $response = array('success' => false, 'message' => 'Une erreur s\'est produite lors de la création de la base de données.');

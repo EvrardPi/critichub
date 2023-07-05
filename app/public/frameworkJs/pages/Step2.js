@@ -88,7 +88,7 @@ export default function Step2() {
                         type: "h3",
                         children: [
                           { type: "span", children: ["Étape 2:"] },
-                          " Initialisations de la base de données",
+                          "Initialisation de la base de données",
                         ],
                       },
                       {
