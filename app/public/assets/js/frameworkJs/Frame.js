@@ -4,6 +4,8 @@ import routes from "./routes.js";
 let leftClickListener;
 let rightClickListener;
 
+window.history.pushState(null, null, 'setup1');
+
 BrowserRouter(routes, document);
 
 navigation();

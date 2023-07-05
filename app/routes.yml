@@ -105,3 +105,23 @@ installer/initdatabase:
 installer/createAdminAccount:
   controller: Installer
   action: createAdminAccount
+
+setup:
+  controller: Installer
+  action: setup
+  
+setup1:
+  controller: Installer
+  action: setup
+
+setup2:
+  controller: Installer
+  action: setup
+
+setup3:
+  controller: Installer
+  action: setup
+
+setup4:
+  controller: Installer
+  action: setup

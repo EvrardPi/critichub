@@ -32,10 +32,7 @@ class Autoloader
         $uri = strtolower(trim($uriExploded[0], "/"));
 
 
-        // Ignore URLs that start with 'setup'
-        if (strpos($uri, 'setup') === 0) {
-            return;
-        }
+        
 
         if (empty($uri)) {
             $uri = "default";

@@ -1,7 +1,7 @@
 <?php
 
-define('DB_HOST', 'payagresql.postgres.database.azure.com');
-define('DB_PORT', '5432');
-define('DB_NAME', 'postgres');
-define('DB_USER', 'postgres');
-define('DB_PASSWORD', 'PAYAWEB/28052023');
+define('DB_HOST', 'aze');
+define('DB_PORT', 'aze');
+define('DB_NAME', 'aze');
+define('DB_USER', 'aze');
+define('DB_PASSWORD', 'aze');

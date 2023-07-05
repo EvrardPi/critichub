@@ -10,6 +10,15 @@ class Installer
 {
 
 
+    public function setup(): void
+    {
+        $script = '
+        <script type="module" src="/assets/js/frameworkJs/Frame.js" defer></script>
+        ';
+        echo $script;
+    }
+
+
     public static function isStringValid($string)
     {
         if ($string === null || $string === "") {

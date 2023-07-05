@@ -11,12 +11,6 @@ require_once ROOT.'/Autoloader.php';
 
 Autoloader::registerAutoload();
 
-$script = '
-<script type="module" src="./frameworkJs/Frame.js" defer></script>
-';
-
-// Affichage du script
-echo $script;
 
 ?>
 
