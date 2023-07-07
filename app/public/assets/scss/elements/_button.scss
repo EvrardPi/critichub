@@ -30,15 +30,16 @@
         border-radius: 10px;
     }
 
-    &-news-details{
-        border-radius: 1rem;
-        margin:1rem;
-        background-color:$blackFont;
-    }
-
     &-event{
-        background-color:rgba(0,0,0,0.5);
-        border-radius:8px;
+        border-radius: 1rem;
+        background-color: $blackFont;
+        border:none;
+        box-shadow: 0 100px 100px -100px $blue_slider inset;
+        transition: all 0.2s ease-in-out;
+        &:hover{
+
+            box-shadow: 0 100px 100px -100px $white inset;
+        }
     }
 
     &-reset{

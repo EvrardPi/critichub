@@ -8,13 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let x = (window.innerWidth - e.pageX * speed) / 100
         let y = (window.innerHeight - e.pageY * speed) / 100
         img.style.transform = `translate(${x}px,${y}px)`
-      })
-  
-      let xAxe = (window.innerWidth / 2 - e.pageX * 1) / 50
-      let yAxe = (window.innerHeight / 2 - e.pageY * 1) / 25
-      titleCard.style.transform = `rotateX(${yAxe}deg) rotateY(${-xAxe}deg)`
-  
-      
+      })  
     }
     document.addEventListener('mousemove', mouseAnimation)
   });

@@ -17,32 +17,24 @@
     </div>
     <div class="menu">
       <div class="item">
-        <a href="#" class="active"><span class="material-symbols-outlined">Dashboard</span>
-
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="sub-btn"><span class="material-symbols-outlined">Table</span>
-
-
-        </a>
+        <a href="#" class="active sub-btn"><span class="material-symbols-outlined">Gestion Des Utilisateurs</span></a>
         <div class="sub-menu">
-          <a href="#" class="sub-item">Gestion Des Utilisateurs</a>
-          <a href="#" class="sub-item">Sub Titre 2</a>
-          <a href="#" class="sub-item">Sub Titre 3</a>
+          <a href="create" class="sub-item">Create</a>
+          <a href="read" class="sub-item">Read</a>
+          <a href="update" class="sub-item">Update</a>
+          <a href="delete" class="sub-item">Delete</a>
         </div>
       </div>
-      <div class="item">
-        <a href="#" class="norm"><span class="material-symbols-outlined">assignment</span>
 
-        </a>
-      </div>
+
       <div class="item">
-        <a href="#" class="sub-btn"><span class="material-symbols-outlined">Settings</span>
-        </a>
+        <a href="#" class="sub-btn"><span class="material-symbols-outlined">Catégories</span></a>
         <div class="sub-menu">
-          <a href="#" class="sub-item">Sub Titre 1</a>
-          <a href="#" class="sub-item">Sub Titre 2</a>
+        <a href="category" class="sub-item">Create</a>
+          <a href="cateread" class="sub-item">Read</a>
+          <a href="updatetam" class="sub-item">Update</a>
+          <a href="catedelete" class="sub-item">Delete</a>
+          <a href="tap" class="sub-item">Get</a>
         </div>
       </div>
     </div>
