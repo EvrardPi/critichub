@@ -70,27 +70,20 @@ class Installer
         echo json_encode($response);
     }
 
-    public function getAjaxUser()
-    {
-        $data = json_decode(file_get_contents('php://input'), true);
-
-        $dbHost = self::isStringValid($data['DB_HOST']);
-        $dbPort = self::isStringValid($data['DB_PORT']);
-        $dbName = self::isStringValid($data['DB_NAME']);
-        $dbUser = self::isStringValid($data['DB_USER']);
-        $dbPassword = self::isStringValid($data['DB_PASSWORD']);
-
-        //utliser la meme connexion que pour config.php
-    }
-
     public function initDataBase()
     {
         $data = json_decode(file_get_contents('php://input'), true);
 
         if ($data['init'] = true) {
-            $initializer = new DatabaseInitializer(); // Créez une instance de la classe DatabaseInitializer
-            $initializer->initializeDatabase('/var/www/html/initDB.sql'); //le fichier de configuration de la base de données
-            $response = array('success' => true, 'message' => 'La base de données a été créée avec succès.');
+            try {
+                $initializer = new DatabaseInitializer(); // Créez une instance de la classe DatabaseInitializer
+                $initializer->initializeDatabase('/var/www/html/initDB.sql'); //le fichier de configuration de la base de données
+                $response = array('success' => true, 'message' => 'La base de données a été créée avec succès.');
+            } catch (\PDOException $e) {
+                $response = array('success' => false, 'message' => 'Erreur de connexion à la base de données. Veuillez vérifier les informations de connexion.');
+            }catch (\Exception $e) {
+                $response = array('success' => false, 'message' => 'Une erreur s\'est produite lors de la création de la base de données.');
+            }
         } else {
             $response = array('success' => false, 'message' => 'Une erreur s\'est produite lors de la création de la base de données.');
         }

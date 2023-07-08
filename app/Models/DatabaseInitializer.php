@@ -16,7 +16,11 @@ class DatabaseInitializer extends SQL
         foreach ($queries as $query) {
             $query = trim($query);
             if (!empty($query)) {
-                $this->pdo->exec($query);
+                try {
+                    $this->pdo->exec($query);
+                } catch (\PDOException $e) {
+                    throw new \Exception("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
+                }
             }
         }
 

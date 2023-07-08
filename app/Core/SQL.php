@@ -18,7 +18,9 @@ abstract class SQL
         try {
             $this->pdo = new \PDO("pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";port=" . DB_PORT, DB_USER, DB_PASSWORD);
         } catch (\Exception $e) {
-            die("Erreur SQL : " . $e->getMessage());
+            //die("Erreur SQL : " . $e->getMessage());
+            // Laisser la gestion de l'erreur à l'appelant
+            throw $e;
         }
 
         //$this->table = static::class;

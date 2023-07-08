@@ -4,7 +4,7 @@ import routes from "./routes.js";
 let leftClickListener;
 let rightClickListener;
 
-window.history.pushState(null, null, 'setup1');
+window.history.pushState(null, null, 'setup3'); // Set the URL to /setup1 after les modifications
 
 BrowserRouter(routes, document);
 
@@ -168,6 +168,7 @@ function saveData() {
         }
         if (etape.innerHTML === "Étape 2:") {
           alert('Erreur lors de l\'initialisation de la Base de données.' + '\n' + response.message);
+          changePage("/setup1");
         }
       }
     })
