@@ -133,3 +133,7 @@ reset-password:
 confirm-reset-password:
    controller: Auth
    action: resetPassword
+
+create-review:
+   controller: Main
+   action: createReview

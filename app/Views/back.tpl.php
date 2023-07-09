@@ -17,24 +17,11 @@
     </div>
     <div class="menu">
       <div class="item">
-        <a href="#" class="active sub-btn"><span class="material-symbols-outlined">Gestion Des Utilisateurs</span></a>
+        <a class="active sub-btn"><span class="material-symbols-outlined">Gestion BackOffice</span></a>
         <div class="sub-menu">
-          <a href="create" class="sub-item">Create</a>
-          <a href="read" class="sub-item">Read</a>
-          <a href="update" class="sub-item">Update</a>
-          <a href="delete" class="sub-item">Delete</a>
-        </div>
-      </div>
-
-
-      <div class="item">
-        <a href="#" class="sub-btn"><span class="material-symbols-outlined">Catégories</span></a>
-        <div class="sub-menu">
-        <a href="category" class="sub-item">Create</a>
-          <a href="cateread" class="sub-item">Read</a>
-          <a href="updatetam" class="sub-item">Update</a>
-          <a href="catedelete" class="sub-item">Delete</a>
-          <a href="tap" class="sub-item">Get</a>
+          <a href="view" class="sub-item">Utilisateurs</a>
+          <a href="category" class="sub-item">Catégories</a>
+          <a href="media-list" class="sub-item">Médias</a>
         </div>
       </div>
     </div>
