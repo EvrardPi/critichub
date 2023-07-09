@@ -14,10 +14,7 @@ export default function Step4() {
             },
           },
           { type: "title", children: ["Installer"] },
-          {
-            type: "link",
-            attributes: { rel: "stylesheet", href: "assets/css/installer.css" },
-          },
+          { type: "link", attributes: { rel: "stylesheet", href: "/assets/css/installer.css" } },
           {
             type: "link",
             attributes: {
@@ -36,7 +33,8 @@ export default function Step4() {
           {
             type: "link",
             attributes: {
-              href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500&family=Roboto&display=swap",
+              href:
+                "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500&family=Roboto&display=swap",
               rel: "stylesheet",
             },
           },
@@ -44,7 +42,8 @@ export default function Step4() {
             type: "link",
             attributes: {
               rel: "stylesheet",
-              href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
+              href:
+                "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
             },
           },
         ],
@@ -72,7 +71,7 @@ export default function Step4() {
             type: "img",
             attributes: {
               class: "bg-installer",
-              src: "assets/images/bg-installer.jpg",
+              src: "/assets/images/bg-installer.jpg",
               alt: "bg-installer",
             },
           },
@@ -89,21 +88,31 @@ export default function Step4() {
                     type: "h3",
                     children: [
                       { type: "span", children: ["Étape 4:"] },
-                      " Entrer les informations de votre service d'envoi de mails",
+                      " Création du compte administrateur.",
                     ],
                   },
                   {
                     type: "div",
                     attributes: { class: "form-input" },
                     children: [
-                      { type: "span", children: ["E-mail"] },
-                      {
-                        type: "input",
-                        attributes: {
-                          type: "text",
-                          placeholder: "mailer_mail",
-                        },
-                      },
+                      { type: "span", children: ["Adresse e-mail:"] },
+                      { type: "input", attributes: { type: "email", placeholder: "E-Mail" } },
+                    ],
+                  },
+                  {
+                    type: "div",
+                    attributes: { class: "form-input" },
+                    children: [
+                      { type: "span", children: ["Nom"] },
+                      { type: "input", attributes: { type: "text", placeholder: "Nom" } },
+                    ],
+                  },
+                  {
+                    type: "div",
+                    attributes: { class: "form-input" },
+                    children: [
+                      { type: "span", children: ["Prénom"] },
+                      { type: "input", attributes: { type: "text", placeholder: "Prénom" } },
                     ],
                   },
                   {
@@ -111,13 +120,15 @@ export default function Step4() {
                     attributes: { class: "form-input" },
                     children: [
                       { type: "span", children: ["Mot de passe"] },
-                      {
-                        type: "input",
-                        attributes: {
-                          type: "text",
-                          placeholder: "mailer_password",
-                        },
-                      },
+                      { type: "input", attributes: { type: "password", placeholder: "Mot de passe" } },
+                    ],
+                  },
+                  {
+                    type: "div",
+                    attributes: { class: "form-input" },
+                    children: [
+                      { type: "span", children: ["Date de naissance"] },
+                      { type: "input", attributes: { type: "date", placeholder: "Date de naissance" } },
                     ],
                   },
                 ],
@@ -129,3 +140,4 @@ export default function Step4() {
     ],
   };
 }
+    

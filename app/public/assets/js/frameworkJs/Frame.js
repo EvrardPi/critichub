@@ -4,14 +4,12 @@ import routes from "./routes.js";
 let leftClickListener;
 let rightClickListener;
 
-window.history.pushState(null, null, 'setup3'); // Set the URL to /setup1 after les modifications
+window.history.pushState(null, null, "setup1"); // Set the URL to /setup1 after les modifications
 
 BrowserRouter(routes, document);
 
 navigation();
 arrowHandle();
-
-
 
 function navigation() {
   let leftArrow = document.querySelector(".navigation span:first-child");
@@ -28,7 +26,10 @@ function navigation() {
 
   leftClickListener = () => {
     if (etape.innerHTML === "Étape 3:") {
-      changePage("/setup");
+      changePage("/setup1");
+    }
+    if (etape.innerHTML === "Étape 4:") {
+      changePage("/setup3");
     }
   };
 
@@ -47,6 +48,9 @@ function navigation() {
     if (etape.innerHTML === "Étape 3:") {
       saveData();
     }
+    if (etape.innerHTML === "Étape 4:") {
+      saveData();
+    }
   };
 
   rightArrow.addEventListener("click", rightClickListener);
@@ -58,8 +62,6 @@ function changePage(pathname) {
   window.history.pushState(null, null, pathname);
   navigation();
 }
-
-
 
 function arrowHandle() {
   let leftArrow = document.querySelector(".navigation span:first-child");
@@ -78,15 +80,13 @@ function arrowHandle() {
   }
 }
 
-
-
 function saveData() {
   let etape = document.querySelector(".form-container h3 span");
   let data = {};
   let url = "";
 
   // Sélectionnez tous les éléments input de type texte
-  let inputs = document.querySelectorAll('input[type="text"]');
+  let inputs = document.querySelectorAll('input');
 
   // Parcourez chaque input et ajoutez sa valeur à l'objet data
   inputs.forEach(function (input) {
@@ -97,39 +97,38 @@ function saveData() {
     data[placeholder] = value;
   });
 
-
   if (etape.innerHTML === "Étape 1:") {
     sessionStorage.setItem("step1", JSON.stringify(data));
-    url = 'installer/setdata';
+    url = "installer/setdata";
   }
-  
+
   if (etape.innerHTML === "Étape 2:") {
-    data['init'] = 'true';
-    url = 'installer/initdatabase';
+    data["init"] = "true";
+    url = "installer/initdatabase";
   }
 
   if (etape.innerHTML === "Étape 3:") {
     sessionStorage.setItem("step3", JSON.stringify(data));
-    url = 'installer/createAdminAccount';
+    url = "installer/mailerconfig";
   }
-
-
-
-
-
+  
+  if (etape.innerHTML === "Étape 4:") {
+    sessionStorage.setItem("step4", JSON.stringify(data));
+    url = "installer/createadmin";
+  }
 
   // Affichez l'objet data dans la console
   console.log(data);
   console.log(url);
 
   // Créez une Promise pour gérer la requête AJAX de manière asynchrone
-  const sendRequest = new Promise(function(resolve, reject) {
+  const sendRequest = new Promise(function (resolve, reject) {
     // Envoyer les données via AJAX
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', url, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
 
-    xhr.onload = function() {
+    xhr.onload = function () {
       if (xhr.status === 200) {
         // Réponse avec succès
         let response = removeScriptTags(xhr.responseText);
@@ -137,13 +136,13 @@ function saveData() {
         resolve(response);
       } else {
         // Erreur lors de la requête
-        reject(new Error('Erreur lors de la requête.'));
+        reject(new Error("Erreur lors de la requête."));
       }
     };
 
-    xhr.onerror = function() {
+    xhr.onerror = function () {
       // Erreur lors de la requête
-      reject(new Error('Erreur lors de la requête.'));
+      reject(new Error("Erreur lors de la requête."));
     };
 
     xhr.send(JSON.stringify(data));
@@ -151,56 +150,83 @@ function saveData() {
 
   // Utilisez la Promise pour traiter la réponse de la requête
   sendRequest
-    .then(function(response) {
+    .then(function (response) {
       // Faites quelque chose avec la réponse
       if (response.success) {
         if (etape.innerHTML === "Étape 1:") {
-          alert('Données enregistrées avec succès !');
+          alert("Données enregistrées avec succès !");
           changePage("/setup2");
         }
         if (etape.innerHTML === "Étape 2:") {
-          alert('Base de données initialisée avec succès !');
+          alert("Base de données initialisée avec succès !");
           changePage("/setup3");
+          loadData();
+        }
+        if (etape.innerHTML === "Étape 3:") {
+          alert("Données du Mailer enregistrées avec succès !");
+          changePage("/setup4");
+        }
+        if (etape.innerHTML === "Étape 4:") {
+          alert("Admin créé avec succès !");
+          window.location.href = "/";
         }
       } else {
         if (etape.innerHTML === "Étape 1:") {
-          alert('Erreur lors de l\'enregistrement des données.' + '\n' + response.message);
+          alert(
+            "Erreur lors de l'enregistrement des données." +
+              "\n" +
+              response.message
+          );
         }
         if (etape.innerHTML === "Étape 2:") {
-          alert('Erreur lors de l\'initialisation de la Base de données.' + '\n' + response.message);
+          alert(
+            "Erreur lors de l'initialisation de la Base de données." +
+              "\n" +
+              response.message
+          );
           changePage("/setup1");
+        }
+        if (etape.innerHTML === "Étape 3:") {
+          alert(
+            "Erreur lors de l'enregistrement des données." +
+              "\n" +
+              response.message
+          );
+        }
+        if (etape.innerHTML === "Étape 4:") {
+          alert(
+            "Erreur lors de la création de l'admin" +
+              "\n" +
+              response.message
+          );
         }
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // Gérez les erreurs de la requête
       alert(error.message);
     });
 }
 
-
 function removeScriptTags(response) {
   const regex = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-  const cleanedResponse = response.replace(regex, '');
+  const cleanedResponse = response.replace(regex, "");
   return cleanedResponse;
 }
 
-
 function loadData() {
-  let valeur = sessionStorage.getItem('step1');
-  let valeur2 = sessionStorage.getItem('step3');
+  let valeur = sessionStorage.getItem("step1");
+  let valeur2 = sessionStorage.getItem("step3");
   let etape = document.querySelector(".form-container h3 span");
   if (valeur && etape.innerHTML === "Étape 1:") {
     valeur = JSON.parse(valeur);
     remplirChamps(valeur);
   }
-  if (valeur2 && etape === "Étape 3:") {
+  if (valeur2 && etape.innerHTML === "Étape 3:") {
     valeur2 = JSON.parse(valeur2);
     remplirChamps(valeur2);
   }
-
 }
-
 
 function remplirChamps(data) {
   let inputs = document.querySelectorAll('input[type="text"]');

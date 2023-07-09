@@ -102,7 +102,11 @@ installer/initdatabase:
   controller: Installer
   action: initDataBase
 
-installer/createAdminAccount:
+installer/mailerconfig:
+  controller: Installer
+  action: mailerConfig
+
+installer/createadmin:
   controller: Installer
   action: createAdminAccount
 

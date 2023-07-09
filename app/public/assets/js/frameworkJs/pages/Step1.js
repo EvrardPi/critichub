@@ -128,7 +128,7 @@ export default function Step1() {
                     attributes: { class: "form-input" },
                     children: [
                       { type: "span", children: ["DB_PASSWORD:"] },
-                      { type: "input", attributes: { type: "text", placeholder: "DB_PASSWORD" } },
+                      { type: "input", attributes: { type: "password", placeholder: "DB_PASSWORD" } },
                     ],
                   },
                 ],

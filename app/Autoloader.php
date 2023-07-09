@@ -32,8 +32,6 @@ class Autoloader
         $uri = strtolower(trim($uriExploded[0], "/"));
 
 
-        
-
         if (empty($uri)) {
             $uri = "default";
         }
@@ -45,6 +43,12 @@ class Autoloader
         }
 
         $routes = yaml_parse_file(__DIR__ . "/routes.yml");
+
+        if (!file_exists(__DIR__ . "/config.php") && !str_contains($uri, "installer")) {
+             $uri = "setup"; // Redirection vers l'URL de l'installer
+        }
+
+
 
         if (empty($routes[$uri])) {
             $error = new Error();
