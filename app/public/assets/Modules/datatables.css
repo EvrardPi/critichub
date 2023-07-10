@@ -442,3 +442,33 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^=col-]:last-
 }
 
 
+form{
+    display:flex;
+    flex-direction: column;
+  }
+
+  form input, form select{
+      margin: 1rem 0;
+      width:100%;
+  }
+
+.modal-form-row{
+  display:flex;
+  flex-direction: row;
+}
+
+.modal-left-element{
+  width:20%;
+  display:flex;
+  flex-direction: column;
+}
+
+.modal-left-element label{
+  margin: 1.1rem 0;
+}
+
+
+.modal-right-element{
+  width:80%;
+}
+

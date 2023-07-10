@@ -10,8 +10,8 @@
 <?php endif; ?>
 
 
-<table id="myTable" class="table table-striped" style="width:100%">
-    <button type="button" class="btn btn-success btn-spacing" data-bs-toggle="modal" data-bs-target="#createModal" ">
+<table id="myTable" class="display table table-hover table-bordered table-striped" style="width:60vw;">
+    <button type="button" class="btn btn-success btn-spacing" data-bs-toggle="modal" data-bs-target="#createModal">
     Créer un nouvel utilisateur
     </button>
     <thead>
@@ -46,11 +46,20 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modification d'un utilisateur</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <?php $this->partial("form", $updateForm) ?>
+            <div class="modal-body modal-form-row">
+                <div class="modal-left-element">
+                <label for="update-form-firstname"><b>Prénom</b></label>
+                <label for="update-form-firstname"><b>Nom</b></label>
+                <label for="update-form-firstname"><b>E-mail</b></label>
+                <label for="update-form-firstname"><b>Rôle</b></label>
+                <label for="update-form-firstname"><b>Date de naissance</b></label>
+                </div>
+                <div class="modal-right-element">
+                    <?php $this->partial("form", $updateForm); ?>
+                </div>
             </div>
         </div>
     </div>

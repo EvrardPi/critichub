@@ -10,7 +10,7 @@
 <?php endif; ?>
 
 
-<table id="myTable" class="table table-striped" style="width:100%">
+<table id="myTable" class="table table-striped" style="width:50vw;">
     <button type="button" class="btn btn-success btn-spacing" data-bs-toggle="modal" data-bs-target="#createModal">
         Créer une nouvelle catégorie
     </button>
