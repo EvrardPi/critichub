@@ -133,3 +133,7 @@ reset-password:
 confirm-reset-password:
    controller: Auth
    action: resetPassword
+
+gestionfront:
+  controller: GestionFront
+  action: view
