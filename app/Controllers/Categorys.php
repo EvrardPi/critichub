@@ -69,8 +69,11 @@ class Categorys
     public function updateCategory(): void
     {
         $form = new UpdateCategory();
-        $form->data['id'] = $_POST['id'];
+        if (isset($_POST['id'])) {
+            $form->data['id'] = $_POST['id'];
+        }
         $formdata = $form->data;
+
 
         if (!$form->isValid()) {
             $errors = $_SESSION['error_messages'];
