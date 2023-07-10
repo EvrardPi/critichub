@@ -14,14 +14,6 @@ new-admin-review:
   controller: Cms
   action: adminReview
 
-a-propos:
-  controller: Main
-  action: aboutUs
-
-about-us:
-  controller: Main
-  action: aboutUs
-
 contact:
   controller: Main
   action: contact
@@ -33,10 +25,6 @@ login:
 logout:
   controller: Auth
   action: logout
-
-s-inscrire:
-  controller: Auth
-  action: view
 
 404:
   controller: Error
@@ -133,3 +121,7 @@ reset-password:
 confirm-reset-password:
    controller: Auth
    action: resetPassword
+
+sitemap:
+    controller: Sitemap
+    action: sitemap
