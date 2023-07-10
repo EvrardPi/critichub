@@ -1,64 +1,64 @@
 <div class="container">
-    <h1>Dashboard</h1>
+    <h1><strong>Dashboard</strong></h1>
     <h2>Bienvenue sur le back office de votre site</h2>
     <br>
 
-    <div class="row justify-content-center text-center">
-        <div class="col-sm-2">
+    <div class="element-row justify-content-space-between text-center container-100 py-4">
+        <div class="">
             <div class="circle">
                 <span class="number"><?php echo $userCount; ?></span>
-                <p class="label" style="font-size: 22px;">Nombre de <br>comptes</p>
+                <p class="label" style="font-size: 22px;"><b>Comptes</b></p>
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="">
             <div class="circle">
                 <span class="number"><?php echo $categoryCount; ?></span>
-                <p class="label" style="font-size: 22px;">Nombre de <br>catégories</p>
+                <p class="label" style="font-size: 22px;"><b>Catégories</b></p>
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="">
             <div class="circle">
                 <span class="number">189</span><!-- Changer les données brutes pour mettre la variable pour le nombre de previews -->
-                <p class="label" style="font-size: 22px;">Nombre de <br>previews</p>
+                <p class="label" style="font-size: 22px;"><b>Previews</b></p>
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="">
             <div class="circle">
                 <span class="number">19865</span><!-- Changer les données brutes pour mettre la variable pour le nombre de vues -->
-                <p class="label" style="font-size: 22px;">Nombre de <br>vues</p>
+                <p class="label" style="font-size: 22px;"><b>Vues</b></p>
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="">
             <div class="circle">
                 <span class="number">985</span><!-- Changer les données brutes pour mettre la variable pour le nombre de commentaires -->
-                <p class="label" style="font-size: 22px;">Nombre de <br>commentaires</p>
+                <p class="label" style="font-size: 22px;"><b>Commentaires</b></p>
             </div>
         </div>
     </div>
 
-    <div class="row justify-content-center text-center">
-        <div class="col-sm-4">
-            <div class="card" style="width: 25rem;">
+    <div class="element-row justify-content-space-between text-center container-100">
+        <div class="col-md-3">
+            <div class="card" style="">
                 <div class="card-body">
-                    <h5 class="card-title">Nombre de signalements à gérer</h5>
+                    <h5 class="card-title"><b>Signalements</b></h5>
                     <p class="card-text"><span style="font-weight: bold; font-size: 45px;"><?php echo $reporting; ?></span></p>
                     <a href="#" class="card-link">Aller gérer les signalements -></a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card" style="width: 25rem;">
+        <div class="col-md-3">
+            <div class="card" style="">
                 <div class="card-body">
-                    <h5 class="card-title">Nombre de commentaires à gérer</h5>
+                    <h5 class="card-title"><b>Commentaires à gérer</b></h5>
                     <p class="card-text"><span style="font-weight: bold; font-size: 45px;"><?php echo $checkComment; ?></span></p>
                     <a href="#" class="card-link">Aller gérer les commentaires -></a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card" style="width: 25rem;">
+        <div class="col-md-3">
+            <div class="card" style="">
                 <div class="card-body">
-                    <h5 class="card-title">Nombre de tickets à gérer</h5>
+                    <h5 class="card-title"><b>Tickets</b></h5>
                     <p class="card-text"><span style="font-weight: bold; font-size: 45px;">29</span></p>
                     <a href="#" class="card-link">Aller gérer les tickets -></a>
                 </div>
@@ -70,7 +70,7 @@
 
     <!-- Statistique affichage de graphique -->
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12 col-md-12">
             <h4>Sélectionner l'année </h4>
             <select id="yearSelect" onchange="updateChart()">
                 <option value="2023">2023</option>
@@ -108,10 +108,15 @@
         justify-content: center;
         align-items: center;
         width: 200px;
-        height: 200px;
+        height: 200px; 
         border-radius: 50%;
         background-color: white;
         margin-bottom: 10px;
+    }
+
+    .element-row{
+            display:flex;
+            justify-content: space-between;
     }
 
     .number {

@@ -21,7 +21,9 @@ body {
   background-color: rgb(44, 44, 44);
   backdrop-filter: blur(15px);
   width: 200px;
-  height: 100vh;
+  height: 150%;
+  position:absolute;
+  top:0;
   overflow-y: auto;
 }
 
