@@ -19,18 +19,17 @@
         </div>
 
         <div class="create-review-description">
+
+            <button class="button button-create-review">Titre</button>
+            <br>
+            <input type="text" class="button button-create-review" style="border: 1px solid gray" id="titleReview">
+            <br>
+
             <button class="button button-create-review">
                 Description
             </button>
 
             <textarea id="descriptionHolder" placeholder="Entrez une description" value=""></textarea>
-
-            <button class="button button-create-review">
-                Preview
-            </button>
-
-            <div id="create-review-preview" class="create-review-preview"></div>
-
         </div>
 
 
