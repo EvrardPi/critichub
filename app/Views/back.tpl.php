@@ -1,3 +1,26 @@
+<?php
+
+namespace App;
+use App\Models\User;
+use App\Controllers\Error;
+
+$error = new Error();
+
+if (!isset($_SESSION['isAuth'])) {
+  $error->error404();
+  exit;
+}
+
+$userLoggedIn = new User();
+$userStatus = $userLoggedIn->getUserInfo(['email' => $_SESSION['email']]);
+
+if($userStatus['role'] != 1) {
+  $error->error404();
+  exit;
+}
+
+
+?>
 <!DOCTYPE html>
 <html>
 
