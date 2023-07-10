@@ -2,7 +2,7 @@
 namespace App\Forms\GestionFront;
 use App\Core\Validator;
 
-class Create extends Validator
+class CreateH2 extends Validator
 {
     public $method = "POST";
     protected array $config = [];
@@ -19,21 +19,29 @@ class Create extends Validator
 
             ],
             "inputs"=>[
-                "name"=>[
+                "color"=>[
                     "id"=>"create-form-category-name",
                     "class"=>"form-input",
                     "placeholder"=>"Son nom",
-                    "type"=>"text",
+                    "type"=>"color",
                     "error"=>"Le nom doit faire entre 2 et 60 caractères",
                     "required"=>true,
                     "value"=>""
                 ],
-                "picture"=>[
+                "police"=>[
                     "id"=>"create-form-category-picture",
                     "class"=>"form-input",
-                    "placeholder"=>"Mettre l'image de la catégorie",
-                    "type"=>"file",
-                    "accept"=>"image/png",
+                    "placeholder"=>"Séléctionner la police",
+                    "type"=>"text",
+                    "required"=>true,
+                    "value"=>"",
+
+                ],
+                "size"=>[
+                    "id"=>"create-form-category-picture",
+                    "class"=>"form-input",
+                    "placeholder"=>"Séléctionner la taille",
+                    "type"=>"number",
                     "required"=>true,
                     "value"=>"",
 
