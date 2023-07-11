@@ -137,3 +137,23 @@ confirm-reset-password:
 create-review:
    controller: Main
    action: createReview
+
+legals:
+  controller: Main
+  action: legals
+
+confidentiality:
+  controller: Main
+  action: confidentiality
+
+contact:
+  controller: Main
+  action: contact
+
+about-us:
+  controller: Main
+  action: aboutUs
+
+sitemap:
+  controller: Main
+  action: sitemap

@@ -8,6 +8,7 @@
 
 <body>
     <main>
+        <div id="up-page"></div>
         <header id="navbar">
             <nav class="header">
                 <div class="logo">
@@ -43,81 +44,53 @@
         <?php include $this->view; ?>
 
 
-        <footer>
-            <div class="footer footer-parameters">
-                <div class="footer-left-content">
-
-                    <div class="footer footer-name">
-                        <h2 class="logo-title">Critic<span class="red-text">Hub</span></h2>
-                    </div>
-
-                    <h5>
-                        CriticHub est un site internet dynamique dédié aux critiques où les passionnés de cinéma peuvent partager leurs opinions.
-                    </h5>
-
-                    <div class="footer-icons">
-                    <a href="https://twitter.com" ><i class="fa fa-twitter"></i></a>
-                    <a href="https://instagram.com" ><i class="fa fa-instagram"></i></a>
-                    <a href="https://facebook.com" ><i class="fa fa-facebook"></i></a>
-                    <a href="https://youtube.com" ><i class="fa fa-youtube"></i></a>
-                    <a href="https://wordpress.com" ><i class="fa fa-wordpress"></i></a>
-                    </div>
-
-                    <div class="footer footer-follow">
-                        <span>Suivez notre avancée sur</span>
-                        <div class="footer footer-follow-icons">
-                            <a href="https://github.com" ><i class="fa fa-github"> Github</i></a>
-                            <a href="https://gitlab.com" ><i class="fa fa-gitlab"> Gitlab</i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="footer footer-categories">
-                    <div class="footer footer-category">
-                        <span class="white-text ">Services</span>
-                        <a href="#" >Fonctionnalités </a>
-                        <a href="#" >Support Client</a>
-                        <a href="#" >F.A.Q Produit</a>
-                        <a href="#" >Notre CMS </a>
-                        <a href="#" >Suggestions</a>
-                    </div>
-
-                    <div class="footer footer-category">
-                        <span class="white-text ">
-                            Sécurité du CMS
-                        </span>
-                        <a href="#" >Conseils de sécurité </a>
-                        <a href="#" >Mises à jour de sécurité</a>
-                        <a href="#" >Politique d'utilisation</a>
-                        <a href="#" >Rapports de vulnérabilités </a>
-                        <a href="#" >Protection des données</a>
-                    </div>
-
-                    <div class="footer footer-category">
-                        <span class="white-text ">
-                            À propos de nous
-                        </span>
-                        <a href="#" >Qui sommes nous</a>
-                        <a href="#" >Notre Clientèle</a>
-                        <a href="#" >Nos carrières</a>
-                        <a href="#" >Nous contacter</a>
-                        <a href="#" >Knowledge base</a>
-                    </div>
-
-                    <div class="footer footer-category">
-                        <span class="white-text ">
-                            Ressources
-                        </span>
-                        <a href="#" >Politique de confidentialité </a>
-                        <a href="#" >Mentions Légales</a>
-                        <a href="#" >Conditions d'utlisations</a>
-                        <a href="#" >F.A.Q</a>
-                        <a href="#" >Nos Partenaires</a>
-                    </div>
-                </div>
-
+        <footer class="footer">
+            <div class="waves">
+                <div class="wave" id="wave1"></div>
+                <div class="wave" id="wave2"></div>
+                <div class="wave" id="wave3"></div>
+                <div class="wave" id="wave4"></div>
             </div>
+            <div class="footer footer-name">
+                <h2 class="logo-title">Critic<span class="red-text">Hub</span></h2>
+            </div>
+            <ul class="social-icon">
+                <li class="social-icon__item"><a class="social-icon__link" href="https://facebook.com">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://twitter.com">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://linkedin.com">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://instagram.com">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://github.com">
+                        <ion-icon name="logo-github"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item"><a class="social-icon__link" href="https://gitlab.com">
+                        <ion-icon name="logo-gitlab"></ion-icon>
+                    </a></li>
+            </ul>
+            <ul class="menu">
+                <li class="menu__item"><a class="menu__link" href="#up-page">Haut de page</a></li>
+                <li class="menu__item"><span class="white-text">•</span></li>
+                <li class="menu__item"><a class="menu__link" href="/">Accueil</a></li>
+                <li class="menu__item"><span class="white-text">•</span></li>
+                <li class="menu__item"><a class="menu__link" href="/legals">Mentions légales</a></li>
+                <li class="menu__item"><span class="white-text">•</span></li>
+                <li class="menu__item"><a class="menu__link" href="/confidentiality">Politique de confidentialité</a></li>
+                <li class="menu__item"><span class="white-text">•</span></li>
+                <li class="menu__item"><a class="menu__link" href="/contact">Contact</a></li>
+                <li class="menu__item"><span class="white-text">•</span></li>
+                <li class="menu__item"><a class="menu__link" href="/sitemap">Sitemap</a></li>
+
+            </ul>
         </footer>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     </main>
 </body>
 

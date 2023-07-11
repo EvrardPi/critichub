@@ -18,6 +18,10 @@ body{
     }
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 ul {
     list-style-type: none;
 }
@@ -32,7 +36,5 @@ span {
 }
 
 footer {
-    margin-top: 50px !important;
-    background-color: $footer_background_color;
-    border-radius: 4rem 4rem 0 0;
+    margin-top: 200px;
 }
