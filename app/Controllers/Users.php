@@ -8,6 +8,9 @@ use App\Forms\User\Create;
 use App\Forms\User\Update;
 use App\Models\User;
 use App\Core\SQL;
+use App\Controllers\Error;
+
+
 
 class Users
 {
@@ -97,9 +100,27 @@ class Users
     public function readUser(): void
     {
         $user = new User();
+        $error = new Error();
+
+        if (!isset($_SESSION['isAuth'])) {
+            $error->error404();
+            exit;
+          }
+          
+          $userStatus = $user->getUserInfo(['email' => $_SESSION['email']]);
+          
+          if($userStatus['role'] != 1) {
+            $error->error404();
+            exit;
+        }
+
+        
         $rows = $user->getAll();
         header('Content-Type: application/json');
         echo json_encode($rows);
+
+
+          
     }
 
 

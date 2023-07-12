@@ -26,7 +26,7 @@ confirm:
 
 forgot:
   controller: Auth
-  action: view_forgotPwd
+  action: viewForgotPwd
 
 forgot-confirmation:
   controller: Auth
@@ -34,7 +34,7 @@ forgot-confirmation:
 
 reset-password:
   controller: Auth
-  action: view_resetPassword
+  action: viewResetPassword
 
 confirm-reset-password:
   controller: Auth

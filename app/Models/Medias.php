@@ -2,7 +2,7 @@
 
 namespace App\Models;
 use App\Core\SQL;
-class Adminreview extends SQL {
+class Medias extends SQL {
     private int $id = 0;
     public string $titleMedia;
     public string $category;

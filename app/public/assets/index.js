@@ -1,4 +1,4 @@
-import { topSlider } from "./js/top-slider.js";
+import { topSlider } from "./js/slider/top-slider.js";
 import { slider } from "./js/slider/slider.js";
 
 document.addEventListener("DOMContentLoaded", function () {
