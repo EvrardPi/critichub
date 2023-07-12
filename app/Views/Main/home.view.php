@@ -61,4 +61,5 @@
 
 </section>
 
-<script type="module" src="/assets/index.js"></script>
+<script type="module" src="/assets/js/gestionFront/applyFront.js"></script>
+
