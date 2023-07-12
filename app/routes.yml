@@ -1,3 +1,4 @@
+# Main 
 default:
   controller: Main
   action: home
@@ -5,27 +6,8 @@ default:
 media:
   controller: Main
   action: media
-  
-create-review:
-  controller: Cms
-  action: userReview
 
-new-admin-review:
-  controller: Cms
-  action: adminReview
-
-a-propos:
-  controller: Main
-  action: aboutUs
-
-about-us:
-  controller: Main
-  action: aboutUs
-
-contact:
-  controller: Main
-  action: contact
-
+# Authentification
 login:
   controller: Auth
   action: login
@@ -34,10 +16,31 @@ logout:
   controller: Auth
   action: logout
 
-s-inscrire:
+register:
   controller: Auth
-  action: view
+  action: register
 
+confirm:
+  controller: Auth
+  action: confirmAccount
+
+forgot:
+  controller: Auth
+  action: viewForgotPwd
+
+forgot-confirmation:
+  controller: Auth
+  action: forgotPassword
+
+reset-password:
+  controller: Auth
+  action: viewResetPassword
+
+confirm-reset-password:
+  controller: Auth
+  action: resetPassword
+
+# Error pages
 404:
   controller: Error
   action: error404  
@@ -58,82 +61,60 @@ s-inscrire:
   controller: Error
   action: error410
 
-backoffice:
+# Backoffice
+back-backoffice:
   controller: Users
   action: readUser
 
-create:
+back-create:
   controller: Users
   action: createUser
 
-delete:
+back-delete:
   controller: Users
   action: deleteUser
 
-update:
+back-update:
   controller: Users
   action: updateUser
 
-user:
+back-user:
   controller: Users
   action: getUser
 
-read:
+back-read:
   controller: Users
   action: readUser
 
-view:
+back-view:
   controller: Users
   action: view
-
-register:
-  controller: Auth
-  action: register
-
-confirm:
-   controller: Auth
-   action: confirmAccount
    
-category:
+back-category:
   controller: Categorys
   action: view
 
-tam:
+back-tam:
   controller: Categorys
   action: createCategory
 
-cateread:
+back-cateread:
   controller: Categorys
   action: readCategory
 
-catedelete:
+back-catedelete:
   controller: Categorys
   action: deleteCategory
 
-tap:
+back-tap:
   controller: Categorys
   action: getCategory
 
-updatetam:
+back-updatetam:
   controller: Categorys
   action: updateCategory
 
-forgot:
-   controller: Auth
-   action: viewForgotPwd
-
-forgot-confirmation:
-   controller: Auth
-   action: forgotPassword
-
-reset-password:
-   controller: Auth
-   action: viewResetPassword
-
-confirm-reset-password:
-   controller: Auth
-   action: resetPassword
-
-create-review:
-   controller: Main
-   action: createReview
+# Sitemap
+sitemap:
+  controller: Sitemap
+  action: sitemap
