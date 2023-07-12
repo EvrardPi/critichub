@@ -133,3 +133,18 @@ sitemap:
   controller: Sitemap
   action: sitemap
 
+create-review:
+   controller: Main
+   action: createReview
+
+legals:
+  controller: Main
+  action: legals
+
+confidentiality:
+  controller: Main
+  action: confidentiality
+
+about-us:
+  controller: Main
+  action: aboutUs

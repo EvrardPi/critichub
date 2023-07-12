@@ -24,15 +24,26 @@ class Main
         $view->assign("pageName", "Média");
     }
 
-    public function contact(): void
-    {
-        echo "Page de contact";
-    }
-
     public function createReview(): void
     {
         $view = new View("Main/createReview", "front");
         $view->assign("pageName", "Créer un commentaire");
+    }
+    public function legals(): void
+    {
+        $view = new View("Main/legals", "front");
+        $view->assign("pageName", "Mentions légales");
+    }
+
+    public function confidentiality(): void
+    {
+        $view = new View("Main/confidentiality", "front");
+        $view->assign("pageName", "Politique de confidentialité");
+    }
+
+    public function sitemap(): void
+    {
+        echo "Page de sitemap";
     }
 
 }
