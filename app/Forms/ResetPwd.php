@@ -32,7 +32,7 @@ class ResetPwd extends Validator
                     "error" => "Vous ne pouvez pas utiliser un ancien mot de passe",
                     "required" => true
                 ],
-                "confirmPassword" => [
+                "passwordConfirm" => [
                     "id" => "confirm-new-password",
                     "class" => "form-input",
                     "placeholder" => "Confirmation Nv. Mot de passe",

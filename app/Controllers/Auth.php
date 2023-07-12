@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Core\Mailer;
 use App\Helper;
 use App\Middlewares\CheckAuth;
+use App\Controllers\Error;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -185,6 +186,12 @@ class Auth
     {
         $forgotForm = new ForgotPwd();
 
+        if (!isset($forgotForm->getData()['emailForgot'])){
+            $error = new Error();
+            $error->error403();
+            exit();
+        }
+
         if (!$forgotForm->isValid()) {
             array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
             $this->viewForgotPwd();
@@ -192,6 +199,7 @@ class Auth
         }
 
         $emailToSend = $forgotForm->getData()['emailForgot'];
+
         $_SESSION['error_mail_sent'] = [];
 
         $user = new User();
@@ -209,6 +217,12 @@ class Auth
 
     public function viewResetPassword()
     {
+        if (!isset($_GET['mail']) || !isset($_GET['token'])) {
+            $error = new Error();
+            $error->error403();
+            exit();
+        }
+
         $view = new View("Auth/resetPwd", "auth");
         $resetForm = new ResetPwd();
         $view->assign("resetForm", $resetForm->getConfig());
@@ -216,6 +230,13 @@ class Auth
     }
     public function resetPassword()
     {
+
+        if (!isset($_GET['mail']) || !isset($_GET['token'])) {
+            $error = new Error();
+            $error->error403();
+            exit();
+        }
+        
         $user = new User();
         $tokenValidity = $user->isTokenExpired(['email' => $_GET['mail']]);
 
