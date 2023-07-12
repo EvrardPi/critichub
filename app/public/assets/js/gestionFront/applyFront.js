@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Appliquer les styles en fonction des données à tous les éléments h2
             h2Elements.forEach(function(h2Element) {
-                h2Element.style.color = data.h2.color;
-                h2Element.style.fontFamily = data.h2.police;
-                h2Element.style.fontSize = data.h2.size + 'px';
+                    h2Element.style.color = data.h2.color;
+                    h2Element.style.fontFamily = data.h2.police;
+                    h2Element.style.fontSize = data.h2.size + 'px';
             });
 
             // Appliquer les styles en fonction des données à tous les éléments h3
