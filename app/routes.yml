@@ -135,5 +135,17 @@ confirm-reset-password:
    action: resetPassword
 
 gestionfront:
-  controller: GestionFront
+  controller: GestionFronts
   action: view
+
+wafwaf:
+  controller: GestionFronts
+  action: createContent
+
+get-content:
+  controller: GestionFronts
+  action: getContent
+
+wafwouf:
+  controller: GestionFronts
+  action: createBackground

@@ -2,7 +2,7 @@
 namespace App\Forms\GestionFront;
 use App\Core\Validator;
 
-class CreateH2 extends Validator
+class CreateBackground extends Validator
 {
     public $method = "POST";
     protected array $config = [];
@@ -11,8 +11,8 @@ class CreateH2 extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"tam",
-                "id"=>"create-form",
+                "action"=>"wafwouf",
+                "id"=>"create-form-gestion-front",
                 "class"=>"create-gestion-front",
                 "enctype"=>"multipart/form-data",
                 "submit"=>"Modifier",
@@ -20,7 +20,7 @@ class CreateH2 extends Validator
             ],
             "inputs"=>[
                 "color"=>[
-                    "id"=>"create-form-category-name",
+                    "id"=>"create-form-gestion-front-color",
                     "class"=>"form-input",
                     "placeholder"=>"Son nom",
                     "type"=>"color",
@@ -28,24 +28,14 @@ class CreateH2 extends Validator
                     "required"=>true,
                     "value"=>""
                 ],
-                "police"=>[
+                "selected_tab" => [
                     "id"=>"create-form-category-picture",
                     "class"=>"form-input",
-                    "placeholder"=>"Séléctionner la police",
-                    "type"=>"text",
+                    "placeholder"=>"Séléctionner le titre",
+                    "type"=>"hidden",
                     "required"=>true,
-                    "value"=>"",
-
-                ],
-                "size"=>[
-                    "id"=>"create-form-category-picture",
-                    "class"=>"form-input",
-                    "placeholder"=>"Séléctionner la taille",
-                    "type"=>"number",
-                    "required"=>true,
-                    "value"=>"",
-
-                ],
+                    "value"=>""
+                ]
 
             ]
         ];

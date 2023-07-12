@@ -1,3 +1,13 @@
+<?php if (!empty($errors)): ?>
+    <div class="errors">
+        <ul>
+            <?php foreach ($errors as $error): ?>
+                <li><?php echo $error; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
 <h1>Gestion du front </h1>
 
 
@@ -75,6 +85,42 @@
     >
         H6
     </button>
+    <button
+            class="nav-link"
+            id="nav-text-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-text"
+            type="button"
+            role="tab"
+            aria-controls="nav-contact"
+            aria-selected="false"
+    >
+        Texte
+    </button>
+    <button
+            class="nav-link"
+            id="nav-link-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-link"
+            type="button"
+            role="tab"
+            aria-controls="nav-contact"
+            aria-selected="false"
+    >
+        Lien
+    </button>
+    <button
+            class="nav-link"
+            id="nav-background-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-background"
+            type="button"
+            role="tab"
+            aria-controls="nav-contact"
+            aria-selected="false"
+    >
+        Background
+    </button>
 </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
@@ -85,7 +131,10 @@
             aria-labelledby="nav-h1-tab"
             tabindex="0"
     >
-        <?php $this->partial("form", $createFormH1); ?>
+        <?php
+        $createForm['inputs']['selected_tab']['value'] = 'H1';
+        $this->partial("form", $createForm);
+        ?>
 
     </div>
     <div
@@ -95,7 +144,10 @@
             aria-labelledby="nav-h2-tab"
             tabindex="0"
     >
-        <?php $this->partial("form", $createFormH2); ?>
+        <?php
+        $createForm['inputs']['selected_tab']['value'] = 'H2';
+        $this->partial("form", $createForm);
+        ?>
 
     </div>
     <div
@@ -105,7 +157,10 @@
             aria-labelledby="nav-h3-tab"
             tabindex="0"
     >
-        <?php $this->partial("form", $createFormH3); ?>
+        <?php
+        $createForm['inputs']['selected_tab']['value'] = 'H3';
+        $this->partial("form", $createForm);
+        ?>
     </div>
     <div
             class="tab-pane fade"
@@ -114,7 +169,10 @@
             aria-labelledby="nav-h4-tab"
             tabindex="0"
     >
-        <?php $this->partial("form", $createFormH4); ?>
+        <?php
+        $createForm['inputs']['selected_tab']['value'] = 'H4';
+        $this->partial("form", $createForm);
+        ?>
     </div>
     <div
             class="tab-pane fade"
@@ -123,7 +181,10 @@
             aria-labelledby="nav-h5-tab"
             tabindex="0"
     >
-    <p>H5</p>
+        <?php
+        $createForm['inputs']['selected_tab']['value'] = 'H5';
+        $this->partial("form", $createForm);
+        ?>
     </div>
     <div
             class="tab-pane fade"
@@ -132,16 +193,48 @@
             aria-labelledby="nav-h6-tab"
             tabindex="0"
     >
-       <p>H6</p>
+        <?php
+        $createForm['inputs']['selected_tab']['value'] = 'H6';
+        $this->partial("form", $createForm);
+        ?>
     </div>
     <div
             class="tab-pane fade"
-            id="nav-disabled"
+            id="nav-text"
             role="tabpanel"
-            aria-labelledby="nav-disabled-tab"
+            aria-labelledby="nav-text-tab"
             tabindex="0"
     >
-        <!-- element of Page nav bar here -->
+        <?php
+        $createForm['inputs']['selected_tab']['value'] = 'Text';
+        $this->partial("form", $createForm);
+        ?>
+    </div>
+    <div
+            class="tab-pane fade"
+            id="nav-link"
+            role="tabpanel"
+            aria-labelledby="nav-link-tab"
+            tabindex="0"
+    >
+        <?php
+        $createForm['inputs']['selected_tab']['value'] = 'link';
+        $this->partial("form", $createForm);
+        ?>
+    </div>
+    <div
+            class="tab-pane fade"
+            id="nav-background"
+            role="tabpanel"
+            aria-labelledby="nav-background-tab"
+            tabindex="0"
+    >
+        <?php
+        $createFormBackground['inputs']['selected_tab']['value'] = 'background';
+        $this->partial("form", $createFormBackground);
+        ?>
     </div>
 </div>
 </div>
+
+<script src="/assets/js/gestionFront/gestionFront.js"></script>

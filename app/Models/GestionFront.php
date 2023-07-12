@@ -11,6 +11,23 @@ class GestionFront extends SQL {
     public string $h6;
     public string $text;
     public string $background;
+    public string $link;
+
+    /**
+     * @return string
+     */
+    public function getLink(): string
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param string $link
+     */
+    public function setLink(string $link): void
+    {
+        $this->link = $link;
+    }
 
     /**
      * @return string

@@ -2,7 +2,7 @@
 namespace App\Forms\GestionFront;
 use App\Core\Validator;
 
-class CreateH4 extends Validator
+class Create extends Validator
 {
     public $method = "POST";
     protected array $config = [];
@@ -11,8 +11,8 @@ class CreateH4 extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"tam",
-                "id"=>"create-form",
+                "action"=>"wafwaf",
+                "id"=>"create-form-gestion-front",
                 "class"=>"create-gestion-front",
                 "enctype"=>"multipart/form-data",
                 "submit"=>"Modifier",
@@ -20,7 +20,7 @@ class CreateH4 extends Validator
             ],
             "inputs"=>[
                 "color"=>[
-                    "id"=>"create-form-category-name",
+                    "id"=>"create-form-gestion-front-color",
                     "class"=>"form-input",
                     "placeholder"=>"Son nom",
                     "type"=>"color",
@@ -29,23 +29,39 @@ class CreateH4 extends Validator
                     "value"=>""
                 ],
                 "police"=>[
-                    "id"=>"create-form-category-picture",
+                    "id"=>"create-form-gestion-front-police",
                     "class"=>"form-input",
                     "placeholder"=>"Séléctionner la police",
-                    "type"=>"text",
+                    "type"=>"select",
                     "required"=>true,
+                    "options" => [
+                        "Arial" => "Arial",
+                        "Times New Roman" => "Times New Roman",
+                        "Courier New" => "Courier New",
+                        "Verdana" => "Verdana",
+                        "Georgia" => "Georgia",
+                        "Comic Sans MS" => "Comic Sans MS",
+                        "Impact" => "Impact",
+                        "Lucida Console" => "Lucida Console",
+                    ],
                     "value"=>"",
-
                 ],
                 "size"=>[
-                    "id"=>"create-form-category-picture",
+                    "id"=>"create-form-gestion-front-size",
                     "class"=>"form-input",
                     "placeholder"=>"Séléctionner la taille",
                     "type"=>"number",
                     "required"=>true,
                     "value"=>"",
-
                 ],
+                "selected_tab" => [
+                    "id"=>"create-form-category-picture",
+                    "class"=>"form-input",
+                    "placeholder"=>"Séléctionner le titre",
+                    "type"=>"hidden",
+                    "required"=>true,
+                    "value"=>""
+                ]
 
             ]
         ];
