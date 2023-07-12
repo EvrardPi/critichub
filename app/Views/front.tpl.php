@@ -52,7 +52,7 @@
                 <div class="wave" id="wave4"></div>
             </div>
             <div class="footer footer-name">
-                <h2 class="logo-title">Critic<span class="red-text">Hub</span></h2>
+                <p class="logo-title">Critic<span class="red-text">Hub</span></p>
             </div>
             <ul class="social-icon">
                 <li class="social-icon__item"><a class="social-icon__link" href="https://facebook.com">
