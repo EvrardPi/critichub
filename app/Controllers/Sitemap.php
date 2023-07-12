@@ -24,6 +24,11 @@ class Sitemap
         $sitemap .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . PHP_EOL;
 
         foreach ($yaml as $slug => $route) {
+
+            if(strpos($slug, 'back-') === 0) {
+                continue; // Ignore les routes qui commencent par "back-..."
+            }
+            
             $sitemap .= "\t<url>" . PHP_EOL;
             $sitemap .= "\t\t<loc>";
             $sitemap .= htmlspecialchars(($slug == 'default') ? $baseURL : $baseURL . '/' . $slug);
@@ -37,9 +42,11 @@ class Sitemap
         $sitemap .= '</urlset>' . PHP_EOL;
 
         if (file_put_contents($sitemapFile, $sitemap)) {
-            echo "Sitemap généré avec succès !";
+            header("Content-type: text/xml");
+            echo $sitemap;
+            // echo "Sitemap généré avec succès !";
         } else {
-            echo "Erreur lors de la génération de la sitemap.";
+            // echo "Erreur lors de la génération de la sitemap.";
         }
     }
 }
