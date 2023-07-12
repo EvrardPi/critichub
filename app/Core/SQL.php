@@ -68,6 +68,20 @@ abstract class SQL
         return $result;
     }
 
+    public function getMediaInfo(array $id): array {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE id_movie = :id_movie");
+        $queryPrepared->execute(['id_movie' => $id['id_movie']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function getAllMediaIDs(): array {
+        $queryPrepared = $this->pdo->prepare("SELECT id_movie FROM " . $this->table);
+        $queryPrepared->execute();
+        $result = $queryPrepared->fetchAll();
+        return $result;
+    }
+
     public function updateUserPwd(array $email, array $pwd): array {
         if ($this->emailExists($email['email']) === false) {
             array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");

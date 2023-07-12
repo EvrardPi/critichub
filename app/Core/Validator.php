@@ -41,12 +41,14 @@ class Validator
 
     public function isValid(): bool
     {
-        if (!in_array($this->data['csrf_token'], $_SESSION['csrf_tokens'])) {
-            array_push($_SESSION['error_messages'], "Une erreur est survenue");
-            return false;
-        } else {
-            unset($_SESSION['csrf_tokens'][array_search($this->data['csrf_token'], $_SESSION['csrf_tokens'])]);
-        }
+        if (isset($this->data['csrf_token'])) {
+            if (!in_array($this->data['csrf_token'], $_SESSION['csrf_tokens'])) {
+                array_push($_SESSION['error_messages'], "Une erreur est survenue");
+                return false;
+            } else {
+                unset($_SESSION['csrf_tokens'][array_search($this->data['csrf_token'], $_SESSION['csrf_tokens'])]);
+            }
+        } 
 
         if (count($this->config["inputs"]) != count($this->data) - 1) { // -1 pour le jeton CSRF
             array_push($_SESSION['error_messages'], "Une erreur est survenue");

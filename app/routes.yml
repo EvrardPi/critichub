@@ -1,3 +1,4 @@
+# Main 
 default:
   controller: Main
   action: home
@@ -6,6 +7,7 @@ media:
   controller: Main
   action: media
 
+# Authentification
 login:
   controller: Auth
   action: login
@@ -38,6 +40,7 @@ confirm-reset-password:
   controller: Auth
   action: resetPassword
 
+# Error pages
 404:
   controller: Error
   action: error404
@@ -58,27 +61,9 @@ confirm-reset-password:
   controller: Error
   action: error410
 
-
-  
 create-review:
   controller: Cms
   action: userReview
-
-new-admin-review:
-  controller: Cms
-  action: adminReview
-
-a-propos:
-  controller: Main
-  action: aboutUs
-
-about-us:
-  controller: Main
-  action: aboutUs
-
-contact:
-  controller: Main
-  action: contact
 
 back-read-user:
   controller: Users
@@ -143,3 +128,8 @@ back-get-content:
 back-gestion-background:
   controller: GestionFronts
   action: createBackground
+# Sitemap
+sitemap:
+  controller: Sitemap
+  action: sitemap
+

@@ -3,6 +3,10 @@
 namespace App\Controllers;
 
 use App\Core\View;
+use App\Core\SQL;
+use App\Models\User;
+use App\Models\Medias;
+use App\Models\UserReview;
 
 class Main
 {
@@ -15,7 +19,9 @@ class Main
     public function media(): void
     {
         $view = new View("Main/media", "front");
-        $view->assign("pageName", "MédiaName");
+        $mediaList = new Medias();
+        $view->assign("medias", $mediaList);
+        $view->assign("pageName", "Média");
     }
 
     public function contact(): void
@@ -23,9 +29,10 @@ class Main
         echo "Page de contact";
     }
 
-    public function aboutUs(): void
+    public function createReview(): void
     {
-        $view = new View("Main/test", "back"); //juste pour test le back office
+        $view = new View("Main/createReview", "front");
+        $view->assign("pageName", "Créer un commentaire");
     }
 
 }
