@@ -7,7 +7,7 @@ session_start();
 $_SESSION['error_messages'] = [];
 
 // On importe l'Autoloader
-require_once ROOT.'/Autoloader.php';
+require_once '../Autoloader.php';
 
 Autoloader::registerAutoload();
 

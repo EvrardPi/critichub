@@ -11,7 +11,7 @@ class UpdateCategory extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"updatetam",
+                "action"=>"back-update-category",
                 "id"=>"category-update-form",
                 "class"=>"update",
                 "enctype"=>"multipart/form-data",

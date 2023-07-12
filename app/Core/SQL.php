@@ -248,4 +248,12 @@ abstract class SQL
             return '';
         }
     }
+
+    public function changeFront($selectedTab,$formdata): void
+    {
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET $selectedTab = :value");
+        $queryPrepared->bindParam(':value', $formdata);
+        $queryPrepared->execute();
+
+    }
 }

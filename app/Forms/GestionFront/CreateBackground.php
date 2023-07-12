@@ -1,8 +1,8 @@
 <?php
-namespace App\Forms\Category;
+namespace App\Forms\GestionFront;
 use App\Core\Validator;
 
-class CreateCategory extends Validator
+class CreateBackground extends Validator
 {
     public $method = "POST";
     protected array $config = [];
@@ -11,33 +11,31 @@ class CreateCategory extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"back-create-category",
-                "id"=>"create-form",
-                "class"=>"create",
+                "action"=>"back-gestion-background",
+                "id"=>"create-form-gestion-front",
+                "class"=>"create-gestion-front",
                 "enctype"=>"multipart/form-data",
-                "submit"=>"Créer",
+                "submit"=>"Modifier",
 
             ],
             "inputs"=>[
-                "name"=>[
-                    "id"=>"create-form-category-name",
+                "color"=>[
+                    "id"=>"create-form-gestion-front-color",
                     "class"=>"form-input",
                     "placeholder"=>"Son nom",
-                    "type"=>"text",
+                    "type"=>"color",
                     "error"=>"Le nom doit faire entre 2 et 60 caractères",
                     "required"=>true,
                     "value"=>""
                 ],
-                "picture"=>[
+                "selected_tab" => [
                     "id"=>"create-form-category-picture",
                     "class"=>"form-input",
-                    "placeholder"=>"Mettre l'image de la catégorie",
-                    "type"=>"file",
-                    "accept"=>"image/png",
+                    "placeholder"=>"Séléctionner le titre",
+                    "type"=>"hidden",
                     "required"=>true,
-                    "value"=>"",
-
-                ],
+                    "value"=>""
+                ]
 
             ]
         ];

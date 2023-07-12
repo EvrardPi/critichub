@@ -25,9 +25,6 @@ class Autoloader
             }
         });
 
-
-
-
         //Afficher le controller et l'action correspondant à l'URI
 
         $uri = $_SERVER["REQUEST_URI"];
@@ -62,15 +59,17 @@ class Autoloader
         $controller = $routes[$uri]["controller"];
         $action = $routes[$uri]["action"];
 
-        if (!file_exists(__DIR__ ."/Controllers/" . $controller . ".php")) {
+        $controllerPath = str_replace("-", "/", $controller); // converti - en /
+
+        if (!file_exists(__DIR__ ."/Controllers/" . $controllerPath . ".php")) {
             $error = new Controllers\Error();
             $error->error500();
             exit;
             // die("Le fichier Controllers/".$controller.".php n'existe pas");
         }
-        include __DIR__ ."/Controllers/" . $controller . ".php";
+        include __DIR__ ."/Controllers/" . $controllerPath . ".php";
 
-        $controller = "\\App\\Controllers\\" . $controller;
+        $controller = "\\App\\Controllers\\" . str_replace("/", "\\", $controllerPath); // convert / to \ for namespace
 
         if (!class_exists($controller)) {
             $error = new Error();
@@ -90,5 +89,3 @@ class Autoloader
         $objController->$action();
     }
 }
-
-//require "Core/View.php";
