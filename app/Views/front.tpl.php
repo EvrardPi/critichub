@@ -83,8 +83,6 @@
                 <li class="menu__item"><span class="white-text">•</span></li>
                 <li class="menu__item"><a class="menu__link" href="/confidentiality">Politique de confidentialité</a></li>
                 <li class="menu__item"><span class="white-text">•</span></li>
-                <li class="menu__item"><a class="menu__link" href="/contact">Contact</a></li>
-                <li class="menu__item"><span class="white-text">•</span></li>
                 <li class="menu__item"><a class="menu__link" href="/sitemap">Sitemap</a></li>
 
             </ul>

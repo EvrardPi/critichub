@@ -29,14 +29,6 @@ class Main
         $view = new View("Main/createReview", "front");
         $view->assign("pageName", "Créer un commentaire");
     }
-
-
-    public function contact(): void
-    {
-        $view = new View("Main/contact", "front");
-        $view->assign("pageName", "Nous contacter");
-    }
-
     public function legals(): void
     {
         $view = new View("Main/legals", "front");

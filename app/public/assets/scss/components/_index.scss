@@ -405,62 +405,6 @@ header {
   }
 }
 
-
-
-// ------------------------------ CONTACT ------------------------------
-
-.contact, .contact-left-side-inputs{
-    display:flex;
-    flex-direction: row;
-    &-left-side{
-        border-radius: 8px;
-        display:flex;
-        flex-direction: column;
-        background-color: $white;
-        padding:2rem;
-        text-align: center;
-        h2{
-            font-size:2.5rem;
-        }
-
-        span{
-            padding-top: 1rem;
-            font-weight:500;
-            margin-bottom: 3rem;
-        }
-
-        input{
-            background-color: transparent;
-            border:none;
-            border-bottom: 1px solid $light_gray;
-            padding:0.75rem;
-            &:focus{
-                outline:none;
-            }
-            font-weight:500;
-            width:45%;
-        }
-
-        textarea{
-            resize:none;
-            width:100%;
-        }
-
-        &-inputs{
-            justify-content: space-between;
-            padding-bottom: 2rem;
-        }
-
-    }
-    &-right-side{
-        border-radius: 0 8px 8px 0;
-        background-color: $light_gray;
-        padding:2rem;
-
-    }
-
-}
-
 // ------------------------------ LEGALS ------------------------------
 .center-text{
     text-align: center;

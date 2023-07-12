@@ -146,10 +146,6 @@ confidentiality:
   controller: Main
   action: confidentiality
 
-contact:
-  controller: Main
-  action: contact
-
 about-us:
   controller: Main
   action: aboutUs
