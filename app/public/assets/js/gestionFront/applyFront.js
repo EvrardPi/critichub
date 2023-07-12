@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('wouf');
-    fetch('/get-content', {
+    fetch('/back-get-content', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

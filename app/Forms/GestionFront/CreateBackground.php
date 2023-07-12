@@ -11,7 +11,7 @@ class CreateBackground extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"gestion-background",
+                "action"=>"back-gestion-background",
                 "id"=>"create-form-gestion-front",
                 "class"=>"create-gestion-front",
                 "enctype"=>"multipart/form-data",

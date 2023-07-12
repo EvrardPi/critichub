@@ -11,7 +11,7 @@ class Create extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"gestion-front",
+                "action"=>"back-create-gestionfront",
                 "id"=>"create-form-gestion-front",
                 "class"=>"create-gestion-front",
                 "enctype"=>"multipart/form-data",

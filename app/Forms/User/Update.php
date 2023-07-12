@@ -11,7 +11,7 @@ class Update extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"update",
+                "action"=>"back-update-user",
                 "id"=>"update-form",
                 "class"=>"updateForm",
                 "enctype"=>"",

@@ -5,6 +5,60 @@ default:
 media:
   controller: Main
   action: media
+
+login:
+  controller: Auth
+  action: login
+
+logout:
+  controller: Auth
+  action: logout
+
+register:
+  controller: Auth
+  action: register
+
+confirm:
+  controller: Auth
+  action: confirmAccount
+
+forgot:
+  controller: Auth
+  action: viewForgotPwd
+
+forgot-confirmation:
+  controller: Auth
+  action: forgotPassword
+
+reset-password:
+  controller: Auth
+  action: viewResetPassword
+
+confirm-reset-password:
+  controller: Auth
+  action: resetPassword
+
+404:
+  controller: Error
+  action: error404
+
+403:
+  controller: Error
+  action: error403
+
+500:
+  controller: Error
+  action: error500
+
+401:
+  controller: Error
+  action: error401
+
+410:
+  controller: Error
+  action: error410
+
+
   
 create-review:
   controller: Cms
@@ -26,126 +80,66 @@ contact:
   controller: Main
   action: contact
 
-login:
-  controller: Auth
-  action: login
-
-logout:
-  controller: Auth
-  action: logout
-
-s-inscrire:
-  controller: Auth
-  action: view
-
-404:
-  controller: Error
-  action: error404  
-
-403:
-  controller: Error
-  action: error403
-
-500:
-  controller: Error
-  action: error500
-
-401:
-  controller: Error
-  action: error401
-
-410:
-  controller: Error
-  action: error410
-
-backoffice:
+back-read-user:
   controller: Users
   action: readUser
 
-create:
+back-create-user:
   controller: Users
   action: createUser
 
-delete:
+back-delete-user:
   controller: Users
   action: deleteUser
 
-update:
+back-update-user:
   controller: Users
   action: updateUser
 
-user:
+back-get-user:
   controller: Users
   action: getUser
 
-read:
-  controller: Users
-  action: readUser
-
-view:
+back-view-user:
   controller: Users
   action: view
 
-register:
-  controller: Auth
-  action: register
-
-confirm:
-   controller: Auth
-   action: confirmAccount
-   
-category:
+back-view-category:
   controller: Categorys
   action: view
 
-tam:
+back-create-category:
   controller: Categorys
   action: createCategory
 
-cateread:
+back-read-category:
   controller: Categorys
   action: readCategory
 
-catedelete:
+back-delete-category:
   controller: Categorys
   action: deleteCategory
 
-tap:
-  controller: Categorys
-  action: getCategory
-
-updatetam:
+back-update-category:
   controller: Categorys
   action: updateCategory
 
-forgot:
-   controller: Auth
-   action: viewForgotPwd
+back-get-category:
+  controller: Categorys
+  action: getCategory
 
-forgot-confirmation:
-   controller: Auth
-   action: forgotPassword
-
-reset-password:
-   controller: Auth
-   action: viewResetPassword
-
-confirm-reset-password:
-   controller: Auth
-   action: resetPassword
-
-gestionfront:
+back-view-gestionfront:
   controller: GestionFronts
   action: view
 
-gestion-front:
+back-create-gestionfront:
   controller: GestionFronts
   action: createContent
 
-get-content:
+back-get-content:
   controller: GestionFronts
   action: getContent
 
-gestion-background:
+back-gestion-background:
   controller: GestionFronts
   action: createBackground

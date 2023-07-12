@@ -11,7 +11,7 @@ class CreateCategory extends Validator
         $this->config = [
             "config"=>[
                 "method"=>$this->method,
-                "action"=>"tam",
+                "action"=>"back-create-category",
                 "id"=>"create-form",
                 "class"=>"create",
                 "enctype"=>"multipart/form-data",
