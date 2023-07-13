@@ -3,6 +3,11 @@ namespace App\Views\Partials;
 
 use App\Helper;
 
+if (!isset($_SESSION['csrf_token_next'] )){
+    header("Location: /");
+}
+
+
 if (!empty($errors)) print_r($errors); ?>
 
 <form method="<?= $config["config"]["method"] ?>"
