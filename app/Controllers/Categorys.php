@@ -189,5 +189,14 @@ class Categorys
           
     }
 
+    public function pageCategory(): void
+    {
+        $view = new View("category", "front");
+        $view->assign("pageName", "CriticHub Catégories");
+        $category = new Category();
+        $rows = $category->getAll();
+        $view->assign("rows", $rows);
+    }
+
 
 }

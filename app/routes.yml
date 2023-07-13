@@ -148,3 +148,7 @@ confidentiality:
 about-us:
   controller: Main
   action: aboutUs
+
+categories:
+  controller: Categorys
+  action: pageCategory
