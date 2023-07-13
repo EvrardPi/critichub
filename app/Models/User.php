@@ -11,6 +11,7 @@ class User extends SQL
     public string $lastname;
     public string $email;
     protected string $password;
+    protected string $passwordConfirm;
     public int $role = 0;
     protected string $birth_date;
     private ?string $date_inserted;
@@ -19,14 +20,8 @@ class User extends SQL
     public int $confirm;
 
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-
     /**
-     * @return Int
+     * @return int
      */
     public function getId(): int
     {
@@ -34,7 +29,7 @@ class User extends SQL
     }
 
     /**
-     * @param Int $id
+     * @param int $id
      */
     public function setId(int $id): void
     {
@@ -42,7 +37,7 @@ class User extends SQL
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getLastname(): string
     {
@@ -50,7 +45,7 @@ class User extends SQL
     }
 
     /**
-     * @param String $lastname
+     * @param string $lastname
      */
     public function setLastname(string $lastname): void
     {
@@ -58,7 +53,7 @@ class User extends SQL
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getFirstname(): string
     {
@@ -66,7 +61,7 @@ class User extends SQL
     }
 
     /**
-     * @param String $firstname
+     * @param string $firstname
      */
     public function setFirstname(string $firstname): void
     {
@@ -76,7 +71,7 @@ class User extends SQL
 
 
     /**
-     * @return String
+     * @return string
      */
     public function getEmail(): string
     {
@@ -84,7 +79,7 @@ class User extends SQL
     }
 
     /**
-     * @param String $email
+     * @param string $email
      */
     public function setEmail(string $email): void
     {
@@ -92,7 +87,7 @@ class User extends SQL
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getPassword(): string
     {
@@ -100,7 +95,7 @@ class User extends SQL
     }
 
     /**
-     * @param String $password
+     * @param string $password
      */
     public function setPassword(string $password): void
     {
@@ -108,7 +103,23 @@ class User extends SQL
     }
 
     /**
-     * @return Int
+     * @return string
+     */
+    public function getPasswordConfirm(): ?string
+    {
+        return $this->passwordConfirm;
+    }
+
+    /**
+     * @param string $passwordConfirm
+     */
+    public function setPasswordConfirm(?string $passwordConfirm): void
+    {
+        $this->passwordConfirm = $passwordConfirm;
+    }
+
+    /**
+     * @return int
      */
     public function getRole(): int
     {
@@ -116,7 +127,7 @@ class User extends SQL
     }
 
     /**
-     * @param Int $role
+     * @param int $role
      */
     public function setRole(int $role): void
     {
@@ -138,7 +149,11 @@ class User extends SQL
      */
     public function getDateInserted(): \DateTime
     {
-        return $this->date_inserted;
+        if (empty($this->date_inserted)) {
+            return new \DateTime();
+        } else {
+            return new \DateTime($this->date_inserted);
+        }
     }
 
     /**
@@ -154,7 +169,11 @@ class User extends SQL
      */
     public function getDateUpdated(): \DateTime
     {
-        return $this->date_updated;
+        if (empty($this->date_updated)) {
+            return new \DateTime();
+        } else {
+            return new \DateTime($this->date_updated);
+        }
     }
 
     /**
@@ -166,7 +185,7 @@ class User extends SQL
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getConfirmKey(): string
     {
@@ -174,7 +193,7 @@ class User extends SQL
     }
 
     /**
-     * @param String $confirm_key
+     * @param string $confirm_key
      */
     public function setConfirmKey(string $confirm_key): void
     {
@@ -182,7 +201,7 @@ class User extends SQL
     }
 
     /**
-     * @return Int
+     * @return int
      */
     public function getConfirm(): int
     {
@@ -190,7 +209,7 @@ class User extends SQL
     }
 
     /**
-     * @param Int $confirm
+     * @param int $confirm
      */
     public function setConfirm(int $confirm): void
     {

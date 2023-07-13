@@ -4,23 +4,20 @@ namespace App\Controllers;
 
 use App\Core\Validator;
 use App\Core\View;
-use App\Forms\Create;
 use App\Forms\Register;
+use App\Forms\ForgotPwd;
+use App\Forms\ResetPwd;
 use App\Forms\Login;
 use App\Models\User;
-use App\Core\SQL;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
 use App\Core\Mailer;
 use App\Helper;
 use App\Middlewares\CheckAuth;
+use App\Controllers\Error;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 class Auth
 {
-
     public function logout(): void
     {
         session_destroy();
@@ -35,28 +32,23 @@ class Auth
             return;
         }
 
-        // Juste la View
-        $form = new Login();
-
-        // Puis vérif si POST ou GET
         if (Helper::methodUsed() === Helper::POST) {
-            
-            // token CSRF
+
+            $form = new Login();
+
             if (!$form->isValid()) {
                 array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
-                $this->view_login();
+                $this->viewLogin();
                 return;
             }
 
-            self::login_post($form->getData());
-        } else {
-            // GET
+            $this->loginPost($form->getData());
         }
 
-        $this->view_login();
+        $this->viewLogin();
     }
 
-    public function login_post(array $data): void
+    public function loginPost(array $data): void
     {
         $email = $data['email'];
         $password = $data['pwd'];
@@ -66,21 +58,8 @@ class Auth
         $where = ['email' => $email];
         $user = $user->getOneWhere($where);
 
-        if (!$user) {
-            // Pas de user trouvé
-            array_push($_SESSION['error_messages'], "Connexion échouée.");
-            return;
-        }
-
-        if (!password_verify($password, $user->getPassword())) {
-            // Mauvais mot de passe
-            array_push($_SESSION['error_messages'], "Connexion échouée.");
-            return;
-        }
-
-        if ($user->getConfirm() == 0) {
-            // Compte non confirmé
-            array_push($_SESSION['error_messages'], "Compte non confirmé.");
+        if (!Validator::loginVerify($user, $password)) {
+            $this->viewLogin();
             return;
         }
 
@@ -93,7 +72,7 @@ class Auth
         Helper::redirectTo();
     }
 
-    public function view_login(): void
+    public function viewLogin(): void
     {
         $view = new View("Auth/login", "auth");
         $form = new Login();
@@ -122,34 +101,23 @@ class Auth
 
         // Puis vérif si POST ou GET
         if (Helper::methodUsed() === Helper::POST) {
-            
-            // token CSRF
+
             if (!$form->isValid()) {
-                array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
                 $this->view_register();
                 return;
             }
 
-            self::register_post($form->getData());
-        } else {
+            $this->registerPost($form->getData());
+        } // else {
             // GET
-        }
+        // }
 
         $this->view_register();
     }
 
-    public function register_post(array $data): void
+    public function registerPost(array $data): void
     {
-        $email = ["email" => $data['email']];
-
         $user = new User();
-
-        if ($user->emailExists($email)) {
-            array_push($_SESSION['error_messages'], "Le mail existe déjà, veuillez rentrer un autre mail");
-            $this->view_register();
-            return;
-        }
-
         $user->setFirstname($data['firstname']);
         $user->setLastname($data['lastname']);
         $user->setEmail($data['email']);
@@ -161,29 +129,149 @@ class Auth
         $user->save();
 
         // Envoi de l'e-mail de validation
-        Mailer::sendMail($user->getEmail(), "validation du compte", "Veuillez validé votre compte: http://localhost:80/confirm?mail=" . $user->getEmail() . '&key=' . $user->getConfirmKey());
+        Mailer::sendMail($user->getEmail(), "validation du compte", "Veuillez validé votre compte: http://localhost:80/confirm?key=" . $user->getConfirmKey());
         //Helper::redirectTo('/login');
-        Helper::successAlert('FEUR');
+        Helper::successAlert('Votre compte a bien été créé, veuillez valider votre compte via le mail qui vous a été envoyé');
+        header('Refresh: 5; URL=/login');
     }
 
-    public function valideToken()
+    public function confirmAccount()
     {
-        $view = new View("Auth/confirm", "front");
-        if (isset($_GET['mail'], $_GET['mail'])) {
-            var_dump($_GET['mail'], $_GET['key']);
-            $user = new User();
-            $getMail = htmlspecialchars(urldecode($_GET['mail']));
-            $getKey = htmlspecialchars($_GET['key']);
-            $response = $user->getToken($getMail, $getKey);
-            $return_value = match ($response['user']) {
-                0 => "Compte inexistant",
-                1 => "sheeeesh",
-                default => "Autre cas"
-            };
-            if ($response['confirm'] == 1) {
-                echo "Votre compte à deja été confirmé ";
-            };
-            $response = $user->confirmAccount($getMail);
+        if (isset($_SESSION['isAuth']) && $_SESSION['isAuth']) {
+            header('Refresh: 0; URL=/');
+            return;
         }
+
+        if (isset($_GET['key'])) {
+
+            $userModel = new User();
+
+            $getKey = htmlspecialchars($_GET['key']);
+
+            $user = $userModel->getUserToConfirm($getKey);
+
+            if (is_array($user)) {
+                if (!$user['confirm']) {
+                    $userModel->confirmAccount($user['id']);
+                    Helper::successAlert('Votre compte a bien été confirmé, vous allez être redirigé vers la page de connexion');
+                    header('Refresh: 5; URL=/login');
+                } else {
+                    array_push($_SESSION['error_messages'], "Compte déja confirmé");
+                }
+            } else {
+                array_push($_SESSION['error_messages'], "Token invalid");
+            }
+        } else {
+            array_push($_SESSION['error_messages'], "Aucun token présent");
+        }
+
+        $this->viewConfirm();
+        $_SESSION['error_messages'] = [];
+    }
+
+    public function viewConfirm(): void
+    {
+        $view = new View("Auth/confirm", "auth");
+        $view->assign("pageName", "Confirmation de compte");
+    }
+
+    public function viewForgotPwd()
+    {
+        $view = new View("Auth/forgotPwd", "auth");
+        $forgotForm = new ForgotPwd();
+        $view->assign("forgotForm", $forgotForm->getConfig());
+        $view->assign("pageName", "Forgot Password");
+    }
+
+    public function forgotPassword()
+    {
+        $forgotForm = new ForgotPwd();
+
+        if (!isset($forgotForm->getData()['emailForgot'])){
+            $error = new Error();
+            $error->error403();
+            exit();
+        }
+
+        if (!$forgotForm->isValid()) {
+            array_push($_SESSION['error_messages'], "Le formulaire n'est pas valide.");
+            $this->viewForgotPwd();
+            return;
+        }
+
+        $emailToSend = $forgotForm->getData()['emailForgot'];
+
+        $_SESSION['error_mail_sent'] = [];
+
+        $user = new User();
+        if (!$user->emailExists($emailToSend)) {
+            $this->viewForgotPwd();
+            return;
+        }
+        $forgotToken = $this->generateToken(32);
+        $tokenExpiration = time() + 300;
+        Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : http://localhost:80/reset-password?mail=" . $emailToSend . "&token=" . $forgotToken . ". La demande expirera dans 5 minutes.");
+        $user->updateForgotToken(['email' => $emailToSend], ['forgot_token' => $forgotToken]);
+        $user->setExpirationTime(['email' => $emailToSend], ['expiration_time' => $tokenExpiration]);
+        $this->viewForgotPwd();
+    }
+
+    public function viewResetPassword()
+    {
+        if (!isset($_GET['mail']) || !isset($_GET['token'])) {
+            $error = new Error();
+            $error->error403();
+            exit();
+        }
+
+        $view = new View("Auth/resetPwd", "auth");
+        $resetForm = new ResetPwd();
+        $view->assign("resetForm", $resetForm->getConfig());
+        $view->assign("pageName", "Reset Password");
+    }
+    public function resetPassword()
+    {
+
+        if (!isset($_GET['mail']) || !isset($_GET['token'])) {
+            $error = new Error();
+            $error->error403();
+            exit();
+        }
+        
+        $user = new User();
+        $tokenValidity = $user->isTokenExpired(['email' => $_GET['mail']]);
+
+        if (Helper::methodUsed() === Helper::POST) {
+            $resetPwd = new ResetPwd();
+
+            if (!$resetPwd->isValid() || !$user->isTokenValid(['email' => $_GET['mail']], ['forgot_token' => $_GET['token']])) {
+                $this->viewResetPassword();
+            } else {
+                if ($tokenValidity === false) {
+                    $user->updateUserPwd(['email' => $_GET['mail']], ['password' => password_hash($resetPwd->getData()['password'], PASSWORD_DEFAULT)]);
+                    $user->updateForgotToken(['email' => $_GET['mail']], ['forgot_token' => null]);
+                    header('Location: /login');
+                } else {
+                    $user->updateForgotToken(['email' => $_GET['mail']], ['forgot_token' => null]);
+                    array_push($_SESSION['error_messages'], "Le token a expiré.");
+                    $this->viewForgotPwd();
+                }
+            }
+        }
+    }
+
+    //Génération Token -> Sécurité Reset password
+    function generateToken($length = 32)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $token = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomIndex = random_int(0, $charactersLength - 1);
+            $token .= $characters[$randomIndex];
+        }
+
+        return $token;
     }
 }

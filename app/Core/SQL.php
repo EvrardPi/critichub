@@ -49,10 +49,10 @@ abstract class SQL
         return $queryPrepared->fetch();
     }
 
-    public function emailExists(array $email): bool
+    public function emailExists(string $email): bool
     {
         $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE email = :email");
-        $queryPrepared->execute(['email' => $email['email']]);
+        $queryPrepared->execute(['email' => $email]);
         $result = $queryPrepared->fetch();
         if ($result) {
             return true;
@@ -61,6 +61,91 @@ abstract class SQL
         }
     }
 
+    public function getUserInfo(array $email): array {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function getMediaInfo(array $id): array {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE id_movie = :id_movie");
+        $queryPrepared->execute(['id_movie' => $id['id_movie']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function getAllMediaIDs(): array {
+        $queryPrepared = $this->pdo->prepare("SELECT id_movie FROM " . $this->table);
+        $queryPrepared->execute();
+        $result = $queryPrepared->fetchAll();
+        return $result;
+    }
+
+    public function updateUserPwd(array $email, array $pwd): array {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET password = :password  WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email'], 'password' => $pwd['password']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function updateForgotToken(array $email, array $tokenForgot): array {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET forgot_token = :forgot_token  WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email'], 'forgot_token' => $tokenForgot['forgot_token']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function setExpirationTime(array $email, array $expiration_time): array {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET expiration_time = :expiration_time  WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email'], 'expiration_time' => $expiration_time['expiration_time']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function isTokenExpired(array $email): bool {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+        $queryPrepared = $this->pdo->prepare("SELECT expiration_time FROM " . $this->table . " WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email']]);
+        $result = $queryPrepared->fetch();
+        if (time() > $result['expiration_time']) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isTokenValid(array $email, array $tokenForgotToVerify): bool {
+        if ($this->emailExists($email['email']) === false) {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+        $queryPrepared = $this->pdo->prepare("SELECT forgot_token FROM " . $this->table . " WHERE email = :email");
+        $queryPrepared->execute(['email' => $email['email']]);
+        $result = $queryPrepared->fetch();
+
+        if ($result['forgot_token'] === $tokenForgotToVerify['forgot_token']) {
+            return true;
+        } else {
+            array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
+            return false;
+        }
+    }
 
 
     public function save(): void
@@ -95,6 +180,30 @@ abstract class SQL
         }
     }
 
+        public function namePictureExists(array $name): bool
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE picture = :picture");
+        $queryPrepared->execute(['picture' => $name['picture']]);
+        $result = $queryPrepared->fetch();
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function nameExists(array $name): bool
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE name = :name");
+        $queryPrepared->execute(['name' => $name['name']]);
+        $result = $queryPrepared->fetch();
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getAll(): array
     {
         $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table);
@@ -102,28 +211,49 @@ abstract class SQL
         return $queryPrepared->fetchAll();
     }
 
-    public function getToken(String $email, String $confirm_key): array
+    public function getUserToConfirm(String $token): mixed
     {
-        $reqConfirm = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE email = ?");
-        $reqConfirm->execute(array($email));
-        $userExist = $reqConfirm->rowCount();
-        $user = $reqConfirm->fetch();
-        $response = [
-            "user" => $userExist,
-            "confirm" => $user['confirm'],
-            "confirm_key" => $user['confirm_key']
-        ];
-        return $response;
-
-        //retourn d'abord si le compte est validé (si confirm est deja égale a 1) 
-        // mais aussi return le userexist si il existe plusieurs fois (donc vérifier si il y a plusieurs confirm_key donc si supérieur a 1 erreur si c'est 0 le mail n'existe pas en bdd donc il doit se connecter)
-        //return array d'un confirl key et user exist
+        $reqConfirm = $this->pdo->prepare("SELECT id, confirm FROM " . $this->table . " WHERE confirm_key = ? LIMIT 1");
+        $reqConfirm->execute(array($token));
+        return $reqConfirm->fetch();
     }
 
-    public function confirmAccount(String $email): void
+    public function confirmAccount(Int $idUser): void
     {
         $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table .
-            " SET confirm = ? WHERE email = ? ");
-        $queryPrepared->execute(array(1, $email));
+            " SET confirm = ? WHERE id = ? ");
+        $queryPrepared->execute(array(1, $idUser));
+    }
+
+    public function getCategoryNameById($categoryId): string
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT name FROM " . $this->table . " WHERE id = :id");
+        $queryPrepared->execute(['id' => $categoryId]);
+        $result = $queryPrepared->fetch();
+        if ($result) {
+            return $result['name'];
+        } else {
+            return '';
+        }
+    }
+
+    public function getCategoryImageNameById($categoryId): string
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT picture FROM " . $this->table . " WHERE id = :id");
+        $queryPrepared->execute(['id' => $categoryId]);
+        $result = $queryPrepared->fetch();
+        if ($result) {
+            return $result['picture'];
+        } else {
+            return '';
+        }
+    }
+
+    public function changeFront($selectedTab,$formdata): void
+    {
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET $selectedTab = :value");
+        $queryPrepared->bindParam(':value', $formdata);
+        $queryPrepared->execute();
+
     }
 }

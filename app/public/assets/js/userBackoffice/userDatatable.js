@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('userDatatable.js chargé');
-    fetch('/read', {
+    fetch('/back-read-user', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(function(data) {
-
-
             // Utilisez les données retournées pour effectuer les actions souhaitées
             var tableData = data.map(function(row) {
 
@@ -22,12 +20,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     email: row.email,
                     role: roleText,
                     button: '<button type="button" class="btn btn-warning update-btn" data-id="' + row.id + '" data-bs-toggle="modal" data-bs-target="#updateModal">Modifier</button>',
-                    button2: '<form method="post" action="delete">' +
+                    button2: '<form method="post" action="back-delete-user">' +
                         '<input type="hidden" name="id" value="' + row.id + '">' +
                         '<button class="btn btn-danger" type="submit">Supprimer</button>' +
                         '</form>'
                 };
             });
+
             // Initialisez le tableau DataTable avec les données récupérées
             $('#myTable').DataTable({
                 data: tableData,
@@ -51,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("marche");
                 let userId = this.getAttribute('data-id');
 
-                fetch('/user?id=' + userId, {
+                fetch('/back-get-user?id=' + userId, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
