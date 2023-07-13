@@ -61,10 +61,7 @@ confirm-reset-password:
   controller: Error
   action: error410
 
-create-review:
-  controller: Cms
-  action: userReview
-
+# Back
 back-read-user:
   controller: Users
   action: readUser
@@ -132,15 +129,13 @@ back-gestion-background:
 back-gestion-picture:
   controller: GestionFronts
   action: createPicture
+
 # Sitemap
 sitemap:
   controller: Sitemap
   action: sitemap
 
-create-review:
-   controller: Main
-   action: createReview
-
+# Footer
 legals:
   controller: Main
   action: legals
@@ -152,3 +147,21 @@ confidentiality:
 about-us:
   controller: Main
   action: aboutUs
+
+# Cms
+elementard-view:
+  controller: Cms
+  action: cmsView
+
+elementard-getdata:
+  controller: Cms
+  action: getAjaxData
+  
+elementard/read:
+  controller: CmsUser
+  action: getListPage
+
+# Memento
+memento:
+  controller: Memento
+  action: mementoView
