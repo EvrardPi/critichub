@@ -403,8 +403,9 @@ document.addEventListener("DOMContentLoaded", function () {
   
     let fontColor = document.querySelector(".prototype");
     fontColor = window.getComputedStyle(fontColor).color;
-  
-    let font = computedStyle.fontFamily;
+
+    let font = document.querySelector(".fontFamily");
+    data.font = font.value;
   
     let selectedOption = document.querySelector(
       'input[name="inlineRadioOptions"]:checked'
@@ -436,7 +437,6 @@ document.addEventListener("DOMContentLoaded", function () {
     data.critiqueBackgroundColor = critiqueDiv;
     data.fontColor = fontColor;
     data.fontTextAreaColor = fontTextAreaColor;
-    data.font = font;
     data.template = selectedOption;
     data.movieName = movieName;
     data.sloganMovie = sloganMovie;
@@ -729,6 +729,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Faites quelque chose avec la réponse
       if (response.success) {
         console.log(response.message);
+        window.location.href = "/";
       } else {
         alert(response.message);
       }

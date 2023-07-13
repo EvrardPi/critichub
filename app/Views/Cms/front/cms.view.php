@@ -51,7 +51,7 @@
             </div>
             <div class="font-family">
                 <h2>Font Family</h2>
-                <select class="form-select" id="fontSelect" aria-label="Default select example">
+                <select class="form-select fontFamily" id="fontSelect" aria-label="Default select example">
                     <option selected value="sans-serif">Sélectionner une font</option>
                     <option value="Montserrat">Montserrat</option>
                     <option value="Roboto">Roboto</option>

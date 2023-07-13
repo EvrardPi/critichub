@@ -30,10 +30,10 @@ class Cms
     {
         $data = json_decode(file_get_contents('php://input'), true);
 
-        function isStringValide($string)
+        function isStringValide($string, $champs)
         {
             if ($string === null || $string === "") {
-                $response = array('success' => false, 'message' => 'Aucune caractère n\'a été entré');
+                $response = array('success' => false, 'message' => 'Aucune caractère n\'a été entré dans le champ' .' '. $champs);
                 echo json_encode($response);
                 exit();
             }
@@ -43,10 +43,10 @@ class Cms
             return $string;
         }
 
-        function isIntValide($integer)
+        function isIntValide($integer, $champs)
         {
             if (!is_numeric($integer)) {
-                $response = array('success' => false, 'message' => 'La valeur n\'est pas un entier valide');
+                $response = array('success' => false, 'message' => 'La valeur n\'est pas un entier valide dans le champ' .' '. $champs);
                 echo json_encode($response);
                 exit();
             }
@@ -59,22 +59,22 @@ class Cms
 
         $newPage = new Elementard();
         //faire des vérifications sur les données string
-        $newPage->setBackground_color(isStringValide($data['backgroundColor']));
-        $newPage->setCategories(isStringValide($data['categories']));
-        $newPage->setCategories_color(isStringValide($data['categoriesColor']));
-        $newPage->setCritique(isStringValide($data['critique']));
-        $newPage->setCritique_background_color(isStringValide($data['critiqueBackgroundColor']));
-        $newPage->setDate_sortie(isIntValide($data['dateSortie']));
-        $newPage->setDirector_name(isStringValide($data['directorName']));
-        $newPage->setFont(isStringValide($data['font']));
-        $newPage->setFont_color(isStringValide($data['fontColor']));
-        $newPage->setFont_textarea_color(isStringValide($data['fontTextAreaColor']));
-        $newPage->setImage_url(isStringValide($data['imageUrl']));
-        $newPage->setMovie_name(isStringValide($data['movieName']));
-        $newPage->setMovie_time(isIntValide($data['movieTime']));
-        $newPage->setNote(isIntValide($data['note']));
-        $newPage->setSlogan_movie(isStringValide($data['sloganMovie']));
-        $newPage->setTemplate(isStringValide($data['template']));
+        $newPage->setBackground_color(isStringValide($data['backgroundColor'], 'background_color'));
+        $newPage->setCategories(isStringValide($data['categories'], 'categories'));
+        $newPage->setCategories_color(isStringValide($data['categoriesColor'], 'categories_color'));
+        $newPage->setCritique(isStringValide($data['critique'], 'critique'));
+        $newPage->setCritique_background_color(isStringValide($data['critiqueBackgroundColor'], 'critique_background_color'));
+        $newPage->setDate_sortie(isIntValide($data['dateSortie'], 'date_sortie'));
+        $newPage->setDirector_name(isStringValide($data['directorName'], 'director_name'));
+        $newPage->setFont(isStringValide($data['font'], 'font'));
+        $newPage->setFont_color(isStringValide($data['fontColor'], 'font_color'));
+        $newPage->setFont_textarea_color(isStringValide($data['fontTextAreaColor'], 'font_textarea_color'));
+        $newPage->setImage_url(isStringValide($data['imageUrl'], 'image_url'));
+        $newPage->setMovie_name(isStringValide($data['movieName'], 'movie_name'));
+        $newPage->setMovie_time(isIntValide($data['movieTime'], 'movie_time'));
+        $newPage->setNote(isIntValide($data['note'], 'note'));
+        $newPage->setSlogan_movie(isStringValide($data['sloganMovie'], 'slogan_movie'));
+        $newPage->setTemplate(isStringValide($data['template'], 'template'));
         $newPage->setNb_vue(0);
         $newPage->setId_user(1);//récupérer l'id de l'admin connecté
 
