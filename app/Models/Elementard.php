@@ -3,21 +3,34 @@
 namespace App\Models;
 
 use App\Core\SQL;
+use App\Core\View;
 
-class UserReview extends SQL
+class Elementard extends SQL
 {
     private int $id = 0;
     protected string $backgroundColor;
+    protected string $categories;
+    protected string $categoriesColor;
     protected string $critique;
     protected string $critiqueBackgroundColor;
+    protected int $dateSortie;
     protected string $critiqueTitle;
+    protected string $directorName;
     protected string $font;
     protected string $fontColor;
-    protected string $movieAffiche;
+    protected string $fontTextAreaColor;
+    protected string $imageUrl;
     protected string $movieName;
-    protected string $movieTopimg;
+    protected int $movieTime;
+    protected int $note;
     protected string $sloganMovie;
     protected string $template;
+    protected int $idUser;
+
+    public function view_elementard() {
+        $view = new View("UserCms/test", "back");
+        $view->assign("newPage", $this);
+    }
 
 
     /**
@@ -56,6 +69,26 @@ class UserReview extends SQL
     public function setBackgroundColor($backgroundColor)
     {
         $this->backgroundColor = $backgroundColor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of categories
+     */ 
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Set the value of categories
+     *
+     * @return  self
+     */ 
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
 
         return $this;
     }
@@ -101,6 +134,26 @@ class UserReview extends SQL
     }
 
     /**
+     * Get the value of dateSortie
+     */ 
+    public function getDateSortie()
+    {
+        return $this->dateSortie;
+    }
+
+    /**
+     * Set the value of dateSortie
+     *
+     * @return  self
+     */ 
+    public function setDateSortie($dateSortie)
+    {
+        $this->dateSortie = $dateSortie;
+
+        return $this;
+    }
+
+    /**
      * Get the value of critiqueTitle
      */ 
     public function getCritiqueTitle()
@@ -116,6 +169,26 @@ class UserReview extends SQL
     public function setCritiqueTitle($critiqueTitle)
     {
         $this->critiqueTitle = $critiqueTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of directorName
+     */ 
+    public function getDirectorName()
+    {
+        return $this->directorName;
+    }
+
+    /**
+     * Set the value of directorName
+     *
+     * @return  self
+     */ 
+    public function setDirectorName($directorName)
+    {
+        $this->directorName = $directorName;
 
         return $this;
     }
@@ -161,21 +234,41 @@ class UserReview extends SQL
     }
 
     /**
-     * Get the value of movieAffiche
+     * Get the value of fontTextAreaColor
      */ 
-    public function getMovieAffiche()
+    public function getFontTextAreaColor()
     {
-        return $this->movieAffiche;
+        return $this->fontTextAreaColor;
     }
 
     /**
-     * Set the value of movieAffiche
+     * Set the value of fontTextAreaColor
      *
      * @return  self
      */ 
-    public function setMovieAffiche($movieAffiche)
+    public function setFontTextAreaColor($fontTextAreaColor)
     {
-        $this->movieAffiche = $movieAffiche;
+        $this->fontTextAreaColor = $fontTextAreaColor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageUrl
+     */ 
+    public function getImageUrl()
+    {
+        return $this->imageUrl;
+    }
+
+    /**
+     * Set the value of imageUrl
+     *
+     * @return  self
+     */ 
+    public function setImageUrl($imageUrl)
+    {
+        $this->imageUrl = $imageUrl;
 
         return $this;
     }
@@ -196,6 +289,46 @@ class UserReview extends SQL
     public function setMovieName($movieName)
     {
         $this->movieName = $movieName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of movieTime
+     */ 
+    public function getMovieTime()
+    {
+        return $this->movieTime;
+    }
+
+    /**
+     * Set the value of movieTime
+     *
+     * @return  self
+     */ 
+    public function setMovieTime($movieTime)
+    {
+        $this->movieTime = $movieTime;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of note
+     */ 
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * Set the value of note
+     *
+     * @return  self
+     */ 
+    public function setNote($note)
+    {
+        $this->note = $note;
 
         return $this;
     }
@@ -241,21 +374,21 @@ class UserReview extends SQL
     }
 
     /**
-     * Get the value of movieTopimg
+     * Get the value of idUser
      */ 
-    public function getMovieTopimg()
+    public function getIdUser()
     {
-        return $this->movieTopimg;
+        return $this->idUser;
     }
 
     /**
-     * Set the value of movieTopimg
+     * Set the value of idUser
      *
      * @return  self
      */ 
-    public function setMovieTopimg($movieTopimg)
+    public function setIdUser($idUser)
     {
-        $this->movieTopimg = $movieTopimg;
+        $this->idUser = $idUser;
 
         return $this;
     }

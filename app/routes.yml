@@ -93,3 +93,15 @@ register:
 confirm:
    controller: Auth
    action: valideToken
+
+elementard-view:
+  controller: Cms
+  action: cmsView
+
+elementard/getdata:
+  controller: CmsUser
+  action: getAjaxData
+  
+elementard/read:
+  controller: CmsUser
+  action: getListPage

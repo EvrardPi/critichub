@@ -84,9 +84,10 @@ class Auth
             return;
         }
 
-        // Connexion réussie
+        // Connexion réussiehttp://localhost/#
         $_SESSION['isAuth'] = true;
         $_SESSION['userId'] = $user->getId();
+        $_SESSION['name'] = $user->getLastname() . " " . $user->getFirstname();
         $_SESSION['email'] = $user->getEmail();
         Helper::generateCSRFToken();
         Helper::redirectTo();
