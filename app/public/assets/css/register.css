@@ -126,6 +126,22 @@ body .form-container .login-form a:hover {
   z-index: 100;
 }
 
+.align-text{
+  text-align: center;
+}
+
+.white-text{
+  color: #fff;
+}
+
+.success{
+  background-color: #008500;
+  color:#fff;
+  text-align:center;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
 @media (max-height: 980px) {
     body .form-container{
         overflow-y: auto;
@@ -149,6 +165,64 @@ body .form-container .login-form a:hover {
 
   }
   
+}
+
+
+.success-message{
+  display:flex;
+  flex-direction:row;
+  border-radius: 1rem;
+  box-shadow: 1px 10px 20px rgba(0,0,0,0.1);
+  text-align:start;
+  width:100%;
+  background-color:white;
+  position:absolute;
+}
+
+/* Classes utilisées lorsque le login est correct */
+.success-message img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4.5vw;
+  height: 4.5vw;
+  left: 9%;
+}
+
+.success-left-icon{
+  background:green;
+  border-radius: 1.5rem 0 0 1.5rem;
+  width:1vw;
+  height:9vw;
+}
+
+.success-navbar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left:15%;
+}
+
+.success-title{
+  font-size:1.5em;
+}
+
+.success-subtitle{
+  color:gray;
+}
+
+.success-close{
+  position:absolute;
+  top:50%;
+  transform: translateY(-50%);
+  right:5%;
+  font-size:1.2rem;
+  color:gray;
+  border:none;
+  background-color:#008500;
+  border-radius:2rem;
+  color:white;
+  padding:0.5rem;
 }
 
 

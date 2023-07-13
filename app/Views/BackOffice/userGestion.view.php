@@ -1,5 +1,17 @@
+<div class="datatables-div">
+<?php if (!empty($errors)): ?>
+    <div class="errors alert alert-danger">
+        <ul>
+            <?php foreach ($errors as $error): ?>
+                <li><?php echo $error; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
+
 <table id="myTable" class="table table-striped" style="width:100%">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" ">
+    <button type="button" class="btn btn-success btn-spacing" data-bs-toggle="modal" data-bs-target="#createModal" ">
     Créer un nouvel utilisateur
     </button>
     <thead>
@@ -13,7 +25,8 @@
     </thead>
     <tbody>
     </tbody>
-</table>
+</table>       
+</div>
 
 <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModal" aria-hidden="true">
     <div class="modal-dialog">
