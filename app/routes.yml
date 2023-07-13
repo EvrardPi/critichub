@@ -94,6 +94,23 @@ back-create-category:
   controller: Categorys
   action: createCategory
 
+
+confirm:
+   controller: Auth
+   action: valideToken
+
+elementard-view:
+  controller: Cms
+  action: cmsView
+
+elementard-getdata:
+  controller: Cms
+  action: getAjaxData
+  
+elementard/read:
+  controller: CmsUser
+  action: getListPage
+
 back-read-category:
   controller: Categorys
   action: readCategory
@@ -148,20 +165,3 @@ about-us:
   controller: Main
   action: aboutUs
 
-# Cms
-elementard-view:
-  controller: Cms
-  action: cmsView
-
-elementard-getdata:
-  controller: Cms
-  action: getAjaxData
-  
-elementard/read:
-  controller: CmsUser
-  action: getListPage
-
-# Memento
-memento:
-  controller: Memento
-  action: mementoView
