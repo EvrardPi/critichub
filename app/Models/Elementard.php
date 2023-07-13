@@ -8,29 +8,32 @@ use App\Core\View;
 class Elementard extends SQL
 {
     private int $id = 0;
-    protected string $backgroundColor;
+    protected string $background_color;
     protected string $categories;
-    protected string $categoriesColor;
+    protected string $categories_color;
     protected string $critique;
-    protected string $critiqueBackgroundColor;
-    protected int $dateSortie;
-    protected string $critiqueTitle;
-    protected string $directorName;
+    protected string $critique_background_color;
+    protected int $date_sortie;
+    protected string $director_name;
     protected string $font;
-    protected string $fontColor;
-    protected string $fontTextAreaColor;
-    protected string $imageUrl;
-    protected string $movieName;
-    protected int $movieTime;
+    protected string $font_color;
+    protected string $font_textarea_color;
+    protected string $image_url;
+    protected string $movie_name;
+    protected int $movie_time;
     protected int $note;
-    protected string $sloganMovie;
+    protected string $slogan_movie;
     protected string $template;
-    protected int $idUser;
+    protected int $nb_vue;
+    protected int $id_user;
+
+
 
     public function view_elementard() {
         $view = new View("UserCms/test", "back");
         $view->assign("newPage", $this);
     }
+
 
 
     /**
@@ -54,21 +57,21 @@ class Elementard extends SQL
     }
 
     /**
-     * Get the value of backgroundColor
+     * Get the value of background_color
      */ 
-    public function getBackgroundColor()
+    public function getBackground_color()
     {
-        return $this->backgroundColor;
+        return $this->background_color;
     }
 
     /**
-     * Set the value of backgroundColor
+     * Set the value of background_color
      *
      * @return  self
      */ 
-    public function setBackgroundColor($backgroundColor)
+    public function setBackground_color($background_color)
     {
-        $this->backgroundColor = $backgroundColor;
+        $this->background_color = $background_color;
 
         return $this;
     }
@@ -94,6 +97,26 @@ class Elementard extends SQL
     }
 
     /**
+     * Get the value of categories_color
+     */ 
+    public function getCategories_color()
+    {
+        return $this->categories_color;
+    }
+
+    /**
+     * Set the value of categories_color
+     *
+     * @return  self
+     */ 
+    public function setCategories_color($categories_color)
+    {
+        $this->categories_color = $categories_color;
+
+        return $this;
+    }
+
+    /**
      * Get the value of critique
      */ 
     public function getCritique()
@@ -114,81 +137,62 @@ class Elementard extends SQL
     }
 
     /**
-     * Get the value of critiqueBackgroundColor
+     * Get the value of critique_background_color
      */ 
-    public function getCritiqueBackgroundColor()
+    public function getCritique_background_color()
     {
-        return $this->critiqueBackgroundColor;
+        return $this->critique_background_color;
     }
 
     /**
-     * Set the value of critiqueBackgroundColor
+     * Set the value of critique_background_color
      *
      * @return  self
      */ 
-    public function setCritiqueBackgroundColor($critiqueBackgroundColor)
+    public function setCritique_background_color($critique_background_color)
     {
-        $this->critiqueBackgroundColor = $critiqueBackgroundColor;
+        $this->critique_background_color = $critique_background_color;
 
         return $this;
     }
 
     /**
-     * Get the value of dateSortie
+     * Get the value of date_sortie
      */ 
-    public function getDateSortie()
+    public function getDate_sortie()
     {
-        return $this->dateSortie;
+        return $this->date_sortie;
     }
 
     /**
-     * Set the value of dateSortie
+     * Set the value of date_sortie
      *
      * @return  self
      */ 
-    public function setDateSortie($dateSortie)
+    public function setDate_sortie($date_sortie)
     {
-        $this->dateSortie = $dateSortie;
+        $this->date_sortie = $date_sortie;
 
         return $this;
     }
 
+
     /**
-     * Get the value of critiqueTitle
+     * Get the value of director_name
      */ 
-    public function getCritiqueTitle()
+    public function getDirector_name()
     {
-        return $this->critiqueTitle;
+        return $this->director_name;
     }
 
     /**
-     * Set the value of critiqueTitle
+     * Set the value of director_name
      *
      * @return  self
      */ 
-    public function setCritiqueTitle($critiqueTitle)
+    public function setDirector_name($director_name)
     {
-        $this->critiqueTitle = $critiqueTitle;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of directorName
-     */ 
-    public function getDirectorName()
-    {
-        return $this->directorName;
-    }
-
-    /**
-     * Set the value of directorName
-     *
-     * @return  self
-     */ 
-    public function setDirectorName($directorName)
-    {
-        $this->directorName = $directorName;
+        $this->director_name = $director_name;
 
         return $this;
     }
@@ -214,101 +218,101 @@ class Elementard extends SQL
     }
 
     /**
-     * Get the value of fontColor
+     * Get the value of font_color
      */ 
-    public function getFontColor()
+    public function getFont_color()
     {
-        return $this->fontColor;
+        return $this->font_color;
     }
 
     /**
-     * Set the value of fontColor
+     * Set the value of font_color
      *
      * @return  self
      */ 
-    public function setFontColor($fontColor)
+    public function setFont_color($font_color)
     {
-        $this->fontColor = $fontColor;
+        $this->font_color = $font_color;
 
         return $this;
     }
 
     /**
-     * Get the value of fontTextAreaColor
+     * Get the value of font_textarea_color
      */ 
-    public function getFontTextAreaColor()
+    public function getFont_textarea_color()
     {
-        return $this->fontTextAreaColor;
+        return $this->font_textarea_color;
     }
 
     /**
-     * Set the value of fontTextAreaColor
+     * Set the value of font_textarea_color
      *
      * @return  self
      */ 
-    public function setFontTextAreaColor($fontTextAreaColor)
+    public function setFont_textarea_color($font_textarea_color)
     {
-        $this->fontTextAreaColor = $fontTextAreaColor;
+        $this->font_textarea_color = $font_textarea_color;
 
         return $this;
     }
 
     /**
-     * Get the value of imageUrl
+     * Get the value of image_url
      */ 
-    public function getImageUrl()
+    public function getImage_url()
     {
-        return $this->imageUrl;
+        return $this->image_url;
     }
 
     /**
-     * Set the value of imageUrl
+     * Set the value of image_url
      *
      * @return  self
      */ 
-    public function setImageUrl($imageUrl)
+    public function setImage_url($image_url)
     {
-        $this->imageUrl = $imageUrl;
+        $this->image_url = $image_url;
 
         return $this;
     }
 
     /**
-     * Get the value of movieName
+     * Get the value of movie_name
      */ 
-    public function getMovieName()
+    public function getMovie_name()
     {
-        return $this->movieName;
+        return $this->movie_name;
     }
 
     /**
-     * Set the value of movieName
+     * Set the value of movie_name
      *
      * @return  self
      */ 
-    public function setMovieName($movieName)
+    public function setMovie_name($movie_name)
     {
-        $this->movieName = $movieName;
+        $this->movie_name = $movie_name;
 
         return $this;
     }
 
     /**
-     * Get the value of movieTime
+     * Get the value of movie_time
      */ 
-    public function getMovieTime()
+    public function getMovie_time()
     {
-        return $this->movieTime;
+        return $this->movie_time;
     }
 
     /**
-     * Set the value of movieTime
+     * Set the value of movie_time
      *
      * @return  self
      */ 
-    public function setMovieTime($movieTime)
+    public function setMovie_time($movie_time)
     {
-        $this->movieTime = $movieTime;
+        $this->movie_time = $movie_time;
 
         return $this;
     }
@@ -334,21 +338,21 @@ class Elementard extends SQL
     }
 
     /**
-     * Get the value of sloganMovie
+     * Get the value of slogan_movie
      */ 
-    public function getSloganMovie()
+    public function getSlogan_movie()
     {
-        return $this->sloganMovie;
+        return $this->slogan_movie;
     }
 
     /**
-     * Set the value of sloganMovie
+     * Set the value of slogan_movie
      *
      * @return  self
      */ 
-    public function setSloganMovie($sloganMovie)
+    public function setSlogan_movie($slogan_movie)
     {
-        $this->sloganMovie = $sloganMovie;
+        $this->slogan_movie = $slogan_movie;
 
         return $this;
     }
@@ -374,21 +378,41 @@ class Elementard extends SQL
     }
 
     /**
-     * Get the value of idUser
+     * Get the value of nb_vue
      */ 
-    public function getIdUser()
+    public function getNb_vue()
     {
-        return $this->idUser;
+        return $this->nb_vue;
     }
 
     /**
-     * Set the value of idUser
+     * Set the value of nb_vue
      *
      * @return  self
      */ 
-    public function setIdUser($idUser)
+    public function setNb_vue($nb_vue)
     {
-        $this->idUser = $idUser;
+        $this->nb_vue = $nb_vue;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id_user
+     */ 
+    public function getId_user()
+    {
+        return $this->id_user;
+    }
+
+    /**
+     * Set the value of id_user
+     *
+     * @return  self
+     */ 
+    public function setId_user($id_user)
+    {
+        $this->id_user = $id_user;
 
         return $this;
     }
