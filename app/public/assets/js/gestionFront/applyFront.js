@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
             var h6Elements = document.querySelectorAll('h6');
             var pElements = document.querySelectorAll('p');
             var aElements = document.querySelectorAll('a');
+            var strongElements = document.querySelectorAll('strong');
+            var spanElements = document.querySelectorAll('span');
 
             // Appliquer les styles en fonction des données à tous les éléments h1
             h1Elements.forEach(function(h1Element) {
@@ -75,6 +77,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 linkElement.style.color = data.link.color;
                 linkElement.style.fontFamily = data.link.police;
                 linkElement.style.fontSize = data.link.size + 'px';
+            });
+
+            // Appliquer les styles en fonction des données à tous les éléments strong
+            strongElements.forEach(function(strongElement) {
+                strongElement.style.color = data.strong.color;
+                strongElement.style.fontFamily = data.strong.police;
+                strongElement.style.fontSize = data.strong.size + 'px';
+            });
+            spanElements.forEach(function(spanElement) {
+                spanElement.style.color = data.span.color;
+                spanElement.style.fontFamily = data.span.police;
+                spanElement.style.fontSize = data.span.size + 'px';
             });
             console.log(data.h1.size);
             document.body.style.backgroundColor = data.background.color;

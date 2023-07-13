@@ -101,6 +101,22 @@ document.addEventListener('DOMContentLoaded', function() {
                         policeInput.value = data.background.police;
                         sizeInput.value = data.background.size;
                         console.log('Changement d\'onglet : targetId est égal à #nav-background');
+                    } else if (targetId === '#nav-strong') {
+                        colorInput = document.querySelector('#nav-strong form #create-form-gestion-front-color');
+                        policeInput = document.querySelector('#nav-strong form #create-form-gestion-front-police');
+                        sizeInput = document.querySelector('#nav-strong form #create-form-gestion-front-size');
+                        colorInput.value = data.strong.color;
+                        policeInput.value = data.strong.police;
+                        sizeInput.value = data.strong.size;
+                        console.log('Changement d\'onglet : targetId est égal à #nav-strong');
+                    }else if (targetId === '#nav-span') {
+                        colorInput = document.querySelector('#nav-span form #create-form-gestion-front-color');
+                        policeInput = document.querySelector('#nav-span form #create-form-gestion-front-police');
+                        sizeInput = document.querySelector('#nav-span form #create-form-gestion-front-size');
+                        colorInput.value = data.span.color;
+                        policeInput.value = data.span.police;
+                        sizeInput.value = data.span.size;
+                        console.log('Changement d\'onglet : targetId est égal à #nav-span');
                     }
                 });
             });
