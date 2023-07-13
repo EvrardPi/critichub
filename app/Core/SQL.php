@@ -211,6 +211,20 @@ abstract class SQL
         return $queryPrepared->fetchAll();
     }
 
+    public function getContentFromMemento($id_memento): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE id_memento = :id_memento");
+        $queryPrepared->execute(['id_memento' => $id_memento]);
+        return $queryPrepared->fetch();
+    }
+
+    public function setContentIntoMemento($content, $id_memento): array
+    {
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET content = :content  WHERE id_memento = :id_memento");
+        $queryPrepared->execute(['content' => $content,'id_memento' => $id_memento]);
+        return $queryPrepared->fetch();
+    }
+
     public function getUserToConfirm(String $token): mixed
     {
         $reqConfirm = $this->pdo->prepare("SELECT id, confirm FROM " . $this->table . " WHERE confirm_key = ? LIMIT 1");

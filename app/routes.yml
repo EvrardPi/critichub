@@ -118,3 +118,8 @@ back-updatetam:
 sitemap:
   controller: Sitemap
   action: sitemap
+
+# Memento
+memento:
+  controller: Memento
+  action: mementoView
