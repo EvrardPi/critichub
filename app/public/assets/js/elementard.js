@@ -369,8 +369,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let btn = document.querySelector(".save");
   btn.addEventListener("click", function () {
     let data = saveData();
-    //sendDataToServer(data);
     console.log(data);
+    sendDataToServer(data);
   });
   
   //######################################################################
@@ -692,3 +692,49 @@ document.addEventListener("DOMContentLoaded", function () {
       checkboxes[i].checked = categoriesSelectionnees.includes(checkboxValue);
     }
   }
+
+
+  //send data to server
+
+  function sendDataToServer(data) {
+  // Créez une Promise pour gérer la requête AJAX de manière asynchrone
+  const sendRequest = new Promise(function (resolve, reject) {
+    // Envoyer les données via AJAX
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "elementard-getdata", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // Réponse avec succès
+        let response = JSON.parse(xhr.responseText);
+        resolve(response);
+      } else {
+        // Erreur lors de la requête
+        reject(new Error("Erreur lors de la requête."));
+      }
+    };
+
+    xhr.onerror = function () {
+      // Erreur lors de la requête
+      reject(new Error("Erreur lors de la requête."));
+    };
+
+    xhr.send(JSON.stringify(data));
+  });
+
+  // Utilisez la Promise pour traiter la réponse de la requête
+  sendRequest
+    .then(function (response) {
+      // Faites quelque chose avec la réponse
+      if (response.success) {
+        console.log(response.message);
+      } else {
+        alert(response.message);
+      }
+    })
+    .catch(function (error) {
+      // Gérez les erreurs de la requête
+      alert(error.message);
+    });
+}

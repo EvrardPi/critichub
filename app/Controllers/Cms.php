@@ -19,7 +19,8 @@ use App\Middlewares\CheckAuth;
 
 
 class Cms
-{    public function cmsView(): void
+{
+    public function cmsView(): void
     {
         $view = new View("Cms/front/cms", "cms");
         $view->assign("pageName", "Elementard");
@@ -42,115 +43,40 @@ class Cms
             return $string;
         }
 
-
-
-        // Afficher ou enregistrer les valeurs des paramètres pour identifier lequel pose problème
-        echo "Valeur de backgroundColor : " . isStringValide($data['backgroundColor']) . "\n";
-        echo "Valeur de critique : " . isStringValide($data['critique']) . "\n";
-        echo "Valeur de critiqueBackgroundColor : " . isStringValide($data['critiqueBackgroundColor']) . "\n";
-        echo "Valeur de critiqueTitle : " . isStringValide($data['critiqueTitle']) . "\n";
-        echo "Valeur de font : " . isStringValide($data['font']) . "\n";
-        echo "Valeur de fontColor : " . isStringValide($data['fontColor']) . "\n";
-        echo "Valeur de movieName : " . isStringValide($data['movieName']) . "\n";
-        echo "Valeur de sloganMovie : " . isStringValide($data['sloganMovie']) . "\n";
-        echo "Valeur de template : " . isStringValide($data['template']) . "\n";
-        echo "Valeur de userId : " . isStringValide($_SESSION['userId']) . "\n";
-
-        // .
-
-
-
-        $newPage = new Elementard();
-
-        //faire des vérifications sur les données string
-
-
-        $newPage->setBackgroundColor(isStringValide($data['backgroundColor']));
-        $newPage->setCritique(isStringValide($data['critique']));
-        $newPage->setCritiqueBackgroundColor(isStringValide($data['critiqueBackgroundColor']));
-        $newPage->setCritiqueTitle(isStringValide($data['critiqueTitle']));
-        $newPage->setFont(isStringValide($data['font']));
-        $newPage->setFontColor(isStringValide($data['fontColor']));
-        $newPage->setMovieName(isStringValide($data['movieName']));
-        $newPage->setSloganMovie(isStringValide($data['sloganMovie']));
-        $newPage->setTemplate(isStringValide($data['template']));
-        $newPage->setUserId(isStringValide($_SESSION['userId']));
-
-
-        // Vérifiez les images movieAffiche et movieTopimg
-
-
-
-        if ($data['movieAffiche'] === null || $data['movieTopimg'] === null) {
-            $response = array('success' => false, 'message' => 'Aucune image n\'a été entré');
-            echo json_encode($response);
-            exit();
-        } else {
-
-            // Définissez la taille maximale de l'image en octets (par exemple, 20 Mo)
-            $maxImageSize = 20 * 1024 * 1024;
-
-            // Traitez l'image movieAffiche
-            $movieAffiche = $data['movieAffiche'];
-            list($type, $movieAffiche) = explode(';', $movieAffiche);
-            list(, $movieAffiche) = explode(',', $movieAffiche);
-            list(, $ext) = explode('/', $type);
-            $ext = $ext === 'jpeg' ? 'jpg' : $ext;
-            if (!in_array($ext, ['png', 'jpg'])) {
-                $response = array('success' => false, 'message' => 'Invalid image format for movieAffiche');
-                echo json_encode($response);
-                exit();
-            }
-            $movieAffiche = base64_decode($movieAffiche);
-
-
-
-            // Traitez l'image movieTopimg
-            $movieTopimg = $data['movieTopimg'];
-            list($type, $movieTopimg) = explode(';', $movieTopimg);
-            list(, $movieTopimg) = explode(',', $movieTopimg);
-            list(, $ext) = explode('/', $type);
-            $ext = $ext === 'jpeg' ? 'jpg' : $ext;
-            if (!in_array($ext, ['png', 'jpg'])) {
-                $response = array('success' => false, 'message' => 'Invalid image format for movieTopimg');
-                echo json_encode($response);
-                exit();
-            }
-            $movieTopimg = base64_decode($movieTopimg);
-
-            // Vérifiez la taille totale des images
-            if (strlen($movieAffiche) + strlen($movieTopimg) > $maxImageSize) {
-                $response = array('success' => false, 'message' => 'The total size of the images is too large');
+        function isIntValide($integer)
+        {
+            if (!is_numeric($integer)) {
+                $response = array('success' => false, 'message' => 'La valeur n\'est pas un entier valide');
                 echo json_encode($response);
                 exit();
             }
 
-            $imagePath1 = 'assets/images/cmsUser/' . uniqid() . '.' . $ext;
-            if (!file_put_contents($imagePath1, $movieAffiche)) {
-                $response = array('success' => false, 'message' => 'Failed to save movieAffiche');
-                echo json_encode($response);
-                exit();
-            }
+            // Autres tests de sécurité spécifiques aux entiers
+            // Par exemple, vous pouvez vérifier si l'entier est dans une plage spécifique
 
-            $imagePath2 = 'assets/images/cmsUser/' . uniqid() . '.' . $ext;
-            if (!file_put_contents($imagePath2, $movieTopimg)) {
-                $response = array('success' => false, 'message' => 'Failed to save movieTopimg');
-                echo json_encode($response);
-                exit();
-            }
+            return $integer;
         }
 
-
-
-
-
-        echo "Valeur de movieAffiche : " . $imagePath1 . "\n";
-        echo "Valeur de movieTopimg : " . $imagePath2 . "\n";
-
-        // Rajouter les chemins des images dans la classe Elementard
-        $newPage->setMovieAffiche($imagePath1);
-        $newPage->setMovieTopImg($imagePath2);
-
+        $newPage = new Elementard();
+        //faire des vérifications sur les données string
+        $newPage->setBackground_color(isStringValide($data['backgroundColor']));
+        $newPage->setCategories(isStringValide($data['categories']));
+        $newPage->setCategories_color(isStringValide($data['categoriesColor']));
+        $newPage->setCritique(isStringValide($data['critique']));
+        $newPage->setCritique_background_color(isStringValide($data['critiqueBackgroundColor']));
+        $newPage->setDate_sortie(isIntValide($data['dateSortie']));
+        $newPage->setDirector_name(isStringValide($data['directorName']));
+        $newPage->setFont(isStringValide($data['font']));
+        $newPage->setFont_color(isStringValide($data['fontColor']));
+        $newPage->setFont_textarea_color(isStringValide($data['fontTextAreaColor']));
+        $newPage->setImage_url(isStringValide($data['imageUrl']));
+        $newPage->setMovie_name(isStringValide($data['movieName']));
+        $newPage->setMovie_time(isIntValide($data['movieTime']));
+        $newPage->setNote(isIntValide($data['note']));
+        $newPage->setSlogan_movie(isStringValide($data['sloganMovie']));
+        $newPage->setTemplate(isStringValide($data['template']));
+        $newPage->setNb_vue(0);
+        $newPage->setId_user(1);//récupérer l'id de l'admin connecté
 
         // Enregistrez les données dans la base de données
         $newPage->save();

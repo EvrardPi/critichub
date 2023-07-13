@@ -98,8 +98,8 @@ elementard-view:
   controller: Cms
   action: cmsView
 
-elementard/getdata:
-  controller: CmsUser
+elementard-getdata:
+  controller: Cms
   action: getAjaxData
   
 elementard/read:
