@@ -1,16 +1,8 @@
-<?php if (!empty($errors)): ?>
-    <div class="errors">
-        <ul>
-            <?php foreach ($errors as $error): ?>
-                <li><?php echo $error; ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-<?php endif; ?>
+
 
 <h1>Gestion du front </h1>
 
-
+<h2>Gestion commune</h2>
 <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <button
             class="nav-link active"
@@ -111,6 +103,31 @@
     </button>
     <button
             class="nav-link"
+            id="nav-strong-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-strong"
+            type="button"
+            role="tab"
+            aria-controls="nav-contact"
+            aria-selected="false"
+    >
+        Strong
+    </button>
+    <button
+            class="nav-link"
+            id="nav-span-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-span"
+            type="button"
+            role="tab"
+            aria-controls="nav-contact"
+            aria-selected="false"
+    >
+        Span
+    </button>
+
+    <button
+            class="nav-link"
             id="nav-background-tab"
             data-bs-toggle="tab"
             data-bs-target="#nav-background"
@@ -121,6 +138,7 @@
     >
         Background
     </button>
+
 </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
@@ -206,7 +224,7 @@
             tabindex="0"
     >
         <?php
-        $createForm['inputs']['selected_tab']['value'] = 'Text';
+            $createForm['inputs']['selected_tab']['value'] = 'Text';
         $this->partial("form", $createForm);
         ?>
     </div>
@@ -224,6 +242,30 @@
     </div>
     <div
             class="tab-pane fade"
+            id="nav-strong"
+            role="tabpanel"
+            aria-labelledby="nav-strong-tab"
+            tabindex="0"
+    >
+        <?php
+        $createForm['inputs']['selected_tab']['value'] = 'strong';
+        $this->partial("form", $createForm);
+        ?>
+    </div>
+    <div
+            class="tab-pane fade"
+            id="nav-span"
+            role="tabpanel"
+            aria-labelledby="nav-span-tab"
+            tabindex="0"
+    >
+        <?php
+        $createForm['inputs']['selected_tab']['value'] = 'span';
+        $this->partial("form", $createForm);
+        ?>
+    </div>
+    <div
+            class="tab-pane fade"
             id="nav-background"
             role="tabpanel"
             aria-labelledby="nav-background-tab"
@@ -235,6 +277,76 @@
         ?>
     </div>
 </div>
+
+
+<h2>Gestion landing page</h2>
+
+<div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button
+            class="nav-link active"
+            id="nav-banniere-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-banniere"
+            type="button"
+            role="tab"
+            aria-controls="nav-banniere"
+            aria-selected="true"
+    >
+        Bannière
+    </button>
+    <button
+            class="nav-link"
+            id="nav-photo-media-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#nav-photo-media"
+            type="button"
+            role="tab"
+            aria-controls="nav-contact"
+            aria-selected="false"
+    >
+        Photo de la liste des médias
+    </button>
+</div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div
+            class="tab-pane fade show active"
+            id="nav-banniere"
+            role="tabpanel"
+            aria-labelledby="nav-banniere-tab"
+            tabindex="0"
+    >
+        <?php
+        $createFormPicture['inputs']['selected_tab']['value'] = 'banner';
+        $this->partial("form", $createFormPicture);
+        ?>
+        <img src="<?php echo $imageBanner; ?>">
+
+    </div>
+
+    <div
+            class="tab-pane fade"
+            id="nav-photo-media"
+            role="tabpanel"
+            aria-labelledby="nav-photo-media-tab"
+            tabindex="0"
+    >
+        <?php
+        $createFormPicture['inputs']['selected_tab']['value'] = 'photo-media';
+        $this->partial("form", $createFormPicture);
+        ?>
+         <img src="<?php echo $imageMedia; ?>">
+    </div>
+
 </div>
 
+<?php if (!empty($errors)): ?>
+    <div class="errors">
+        <ul>
+            <?php foreach ($errors as $error): ?>
+                <li><?php echo $error; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
 <script src="/assets/js/gestionFront/gestionFront.js"></script>

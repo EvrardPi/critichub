@@ -1,6 +1,7 @@
 <section id="banner-image">
     <div class="home-image-banner">
-        <img class="home-image-banner-width" src="/assets/images/welcome.jpg" alt="Image de décor">
+        <img class="home-image-banner-width" src="<?php echo $imageBanner; ?>" alt="Image de décor">
+
     </div>
 
     <div class="home-spacing"></div>
@@ -66,7 +67,7 @@
 
             <button class="button button-event">Accéder à la liste</button>
         </div>
-        <img class="" src="/assets/images/comingOut-bg-1.png" alt="Image de décor">
+        <img class="" src="<?php echo $imageMedia; ?>" alt="Image de décor">
     </div>
 
 </section>

@@ -12,6 +12,59 @@ class GestionFront extends SQL {
     public string $text;
     public string $background;
     public string $link;
+    public string $strong;
+    public string $span;
+    public string $banniere;
+
+    /**
+     * @return string
+     */
+    public function getBanniere(): string
+    {
+        return $this->banniere;
+    }
+
+    /**
+     * @param string $banniere
+     */
+    public function setBanniere(string $banniere): void
+    {
+        $this->banniere = $banniere;
+    }
+
+
+
+    /**
+     * @return string
+     */
+    public function getSpan(): string
+    {
+        return $this->span;
+    }
+
+    /**
+     * @param string $span
+     */
+    public function setSpan(string $span): void
+    {
+        $this->span = $span;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStrong(): string
+    {
+        return $this->strong;
+    }
+
+    /**
+     * @param string $strong
+     */
+    public function setStrong(string $strong): void
+    {
+        $this->strong = $strong;
+    }
 
     /**
      * @return string
