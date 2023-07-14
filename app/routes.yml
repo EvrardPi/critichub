@@ -147,6 +147,22 @@ back-gestion-picture:
   controller: GestionFronts
   action: createPicture
 
+back-view-elementard:
+  controller: Cms
+  action: viewCrud
+
+back-read-elementard:
+  controller: Cms
+  action: readAll
+
+back-delete-cms:
+  controller: Cms
+  action: deleteCms
+
+back-get-cms:
+  controller: Cms
+  action: getCms
+
 # Sitemap
 sitemap:
   controller: Sitemap

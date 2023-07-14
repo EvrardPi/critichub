@@ -242,19 +242,6 @@ class Validator
             return $string;
         }
 
-    public function isIntValide($integer)
-    {
-        if (!is_numeric($integer)) {
-            $response = array('success' => false, 'message' => 'La valeur n\'est pas un entier valide');
-            echo json_encode($response);
-            exit();
-        }
-
-        // Autres tests de sécurité spécifiques aux entiers
-        // Par exemple, vous pouvez vérifier si l'entier est dans une plage spécifique
-
-        return $integer;
-
     public static function loginVerify(Mixed $user, Mixed $password): bool
     {
         if (!$user) {
@@ -274,8 +261,6 @@ class Validator
             array_push($_SESSION['error_messages'], "Compte non confirmé.");
             return false;
         }
-
         return true;
-
     }
 }
