@@ -2,20 +2,12 @@
 
 namespace App\Controllers;
 
-use App\Controllers\EditorMemento;
+use App\Models\Memento as SendMemenToDb;
 
-class History {
-
-    private $mementos = [];
-
-    public function __construct()
-    {
-        $this->mementos = [];
-    }
+class History extends EditorMemento
+{
     
-    public function push(Memento $memento) {
-        $this->mementos[] = $memento;
-    }
+    private $mementos = [];
 
     public function pop() {
         if (empty($this->mementos)) {
@@ -25,16 +17,32 @@ class History {
         return array_pop($this->mementos);
     }
 
-    public function getMementos() {
-    	return $this->mementos;
+    public function pushObj(EditorMemento $memento){
+        if (count($this->mementos) > 0) {
+            $contentTest = $this->mementos[0]->getContent();
+            array_push($contentTest[0], $memento->getContent());
+            $this->mementos[0]->setContent($contentTest);
+        } else {
+            array_push($this->mementos, $memento);
+        }
     }
 
-    public function getMementosContents()
-    {
-        $contents = [];
+    public function getObj() {
+        $content = [];
         foreach ($this->mementos as $memento) {
-            $contents[] = $memento->getContent();
+            if ($memento instanceof EditorMemento) {
+                $content[] = $memento->getContent();
+            }
         }
-        return $contents;
+        return $content;
+    }
+
+    public function pushToDB($memento, $id) {
+        $sendMemento = new SendMemenToDb();
+        $sendMemento->setContentIntoMemento($memento,$id);
+    }
+
+    public function getMementos() {
+    	return $this->mementos;
     }
 }
