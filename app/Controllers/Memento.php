@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Core\View;
-use App\Models\Memento as SendMemenToDb;
 
 class Memento
 {

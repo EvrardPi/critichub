@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Memento as SendMemenToDb;
 class EditorMemento extends Memento{
-    private $content;
+    protected $content;
 
     private $id;
 
@@ -22,7 +22,6 @@ class EditorMemento extends Memento{
             $sendMemento->getContentFromMemento($this->id);
         } catch (\Throwable $th) {
             if (isset($th)){
-            // $sendMemento->setNewMemento('O:29:"App\Controllers\EditorMemento":1:{s:1:"0";s:1:" ";}',$this->id);
             $sendMemento->setNewMemento('O:29:"App\Controllers\EditorMemento":1:{s:7:"content";s:4:"None";}',$this->id);
         }
         }
@@ -40,11 +39,8 @@ class EditorMemento extends Memento{
     	$this->content = $content;
     }
 
-    public function pop() {
-        if (empty($this->content)) {
-            return null;
-        }
-
-        return array_pop($this->content);
+    public function pop(): array
+    {
+        return array_slice($this->content,0, -1);
     }
 }
