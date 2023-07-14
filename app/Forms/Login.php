@@ -22,6 +22,7 @@ class Login extends Validator
                 "enctype" => "",
                 "submit" => "Se connecter",
                 "reset" => "Annuler",
+                "captcha" => true
             ],
             "inputs" => [
                 "email" => [
