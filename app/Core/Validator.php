@@ -39,6 +39,12 @@ class Validator
         return $this->data;
     }
 
+    static function excludeSpecialInput($feur) {
+        // Supprime les champs spéciaux (jeton CSRF, bouton de soumission et captcha)
+        $blackList = ["csrf_token", "submit", "g-recaptcha-response"];
+        return !in_array($feur, $blackList);
+    } 
+
     public function isValid(): bool
     {
         if (isset($this->data['csrf_token'])) {
@@ -48,9 +54,11 @@ class Validator
             } else {
                 unset($_SESSION['csrf_tokens'][array_search($this->data['csrf_token'], $_SESSION['csrf_tokens'])]);
             }
-        } 
+        }
+        
+        $newData = array_filter(array_keys($this->data), "self::excludeSpecialInput");
 
-        if (count($this->config["inputs"]) != count($this->data) - 1) { // -1 pour le jeton CSRF
+        if (count($this->config["inputs"]) != count($newData)) {
             array_push($_SESSION['error_messages'], "Une erreur est survenue");
             return false;
         }
@@ -122,7 +130,7 @@ class Validator
 
                         //Vérification de l'extension du fichier
                         $allowedExtensions = ["png", "jpg", "jpeg"];
-                            $fileExtension = strtolower(pathinfo($value["name"], PATHINFO_EXTENSION));
+                        $fileExtension = strtolower(pathinfo($value["name"], PATHINFO_EXTENSION));
                         if (!in_array($fileExtension, $allowedExtensions)) {
                             $allowedExtensionsString = implode(", ", $allowedExtensions);
                             array_push($_SESSION['error_messages'], "Le fichier doit être de type $allowedExtensionsString");
@@ -227,33 +235,6 @@ class Validator
     {
         return strlen(trim($string)) <= $length;
     }
-
-
-    public function isStringValide($string)
-        {
-            if ($string === null || $string === "") {
-                $response = array('success' => false, 'message' => 'Aucune caractère n\'a été entré');
-                echo json_encode($response);
-                exit();
-            }
-            $string = stripslashes($string); // Supprime les antislashs d'une chaîne
-            $string = htmlspecialchars($string); // Convertit les caractères spéciaux en entités HTML
-            $string = addslashes($string); // Ajoute des antislashes (\) devant les guillemets simples et doubles, aidant ainsi à prévenir les injections SQL.
-            return $string;
-        }
-
-    public function isIntValide($integer)
-    {
-        if (!is_numeric($integer)) {
-            $response = array('success' => false, 'message' => 'La valeur n\'est pas un entier valide');
-            echo json_encode($response);
-            exit();
-        }
-
-        // Autres tests de sécurité spécifiques aux entiers
-        // Par exemple, vous pouvez vérifier si l'entier est dans une plage spécifique
-
-        return $integer;
 
     public static function loginVerify(Mixed $user, Mixed $password): bool
     {

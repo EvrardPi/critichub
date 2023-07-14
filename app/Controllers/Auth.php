@@ -50,6 +50,13 @@ class Auth
 
     public function loginPost(array $data): void
     {
+        $captchaToken = $data['g-recaptcha-response'];
+        if (!Helper::checkCaptcha($captchaToken)) {
+            array_push($_SESSION['error_messages'], "Le captcha n'est pas valide.");
+            $this->viewLogin();
+            return;
+        }
+        
         $email = $data['email'];
         $password = $data['pwd'];
 
@@ -117,6 +124,13 @@ class Auth
 
     public function registerPost(array $data): void
     {
+        $captchaToken = $data['g-recaptcha-response'];
+        if (!Helper::checkCaptcha($captchaToken)) {
+            array_push($_SESSION['error_messages'], "Le captcha n'est pas valide.");
+            $this->view_register();
+            return;
+        }
+
         $user = new User();
         $user->setFirstname($data['firstname']);
         $user->setLastname($data['lastname']);

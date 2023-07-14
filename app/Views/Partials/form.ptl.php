@@ -54,4 +54,8 @@ if (!empty($errors)) print_r($errors); ?>
         <?php endforeach; ?>
     <?php endif; ?>
 
+    <?php if (isset($config["config"]["captcha"])): ?>
+        <div class="g-recaptcha" data-sitekey="<?= $_ENV["CAPTCHA_PUBLIC"] ?>"></div>
+    <?php endif; ?>
+
 </form>
