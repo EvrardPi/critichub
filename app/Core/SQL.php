@@ -263,11 +263,20 @@ abstract class SQL
         }
     }
 
+    public function getCount(string $tableName): int
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT COUNT(*) FROM " . $tableName);
+
+        $queryPrepared->execute();
+        $result = $queryPrepared->fetchColumn();
+
+        return (int) $result;
+    }
+  
     public function changeFront($selectedTab,$formdata): void
     {
         $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET $selectedTab = :value");
         $queryPrepared->bindParam(':value', $formdata);
         $queryPrepared->execute();
-
     }
 }

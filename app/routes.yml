@@ -94,11 +94,6 @@ back-create-category:
   controller: Categorys
   action: createCategory
 
-
-confirm:
-   controller: Auth
-   action: valideToken
-
 elementard-view:
   controller: Cms
   action: cmsView
@@ -146,6 +141,14 @@ back-gestion-background:
 back-gestion-picture:
   controller: GestionFronts
   action: createPicture
+  
+back-view-dashboard:
+  controller: Dashboard
+  action: viewDashboard
+  
+back-testo:
+    controller: Dashboard
+    action: createUserCreationChart
 
 # Sitemap
 sitemap:
@@ -164,4 +167,3 @@ confidentiality:
 about-us:
   controller: Main
   action: aboutUs
-
