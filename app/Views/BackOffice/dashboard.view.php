@@ -24,7 +24,7 @@
         </div>
         <div class="">
             <div class="circle">
-                <span class="number">19865</span><!-- Changer les données brutes pour mettre la variable pour le nombre de vues -->
+                <span class="number"><?php echo $allView; ?></span><!-- Changer les données brutes pour mettre la variable pour le nombre de vues -->
                 <p class="label" style="font-size: 22px;"><b>Vues</b></p>
             </div>
         </div>
@@ -173,17 +173,24 @@
             var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
             chart.draw(data, options);
 
-        var rawData = <?php echo json_encode($bestPreviewsView); ?>;
-        var dataTable = new google.visualization.DataTable();
-        dataTable.addColumn('string', 'Film');
-        dataTable.addColumn('string', 'Rédacteur');
-        dataTable.addColumn('number', 'Nombre de vues');
-        dataTable.addRows(rawData);
+            var rawData = <?php echo json_encode($bestPreviewsView); ?>;
+            console.log(rawData);
 
-        var table = new google.visualization.Table(document.getElementById('table_div'));
-        table.draw(dataTable, { showRowNumber: true });
+            var dataArray = rawData.map(function(movie) {
+                return [movie.movie_name, movie.id_user.toString(), movie.nb_vue];
+            });
 
-        var rawData2 = <?php echo json_encode($bestPreviewsComment); ?>;
+            var dataTable = new google.visualization.DataTable();
+            dataTable.addColumn('string', 'Film');
+            dataTable.addColumn('string', 'Rédacteur');
+            dataTable.addColumn('number', 'Nombre de vues');
+            dataTable.addRows(dataArray);
+
+            var table = new google.visualization.Table(document.getElementById('table_div'));
+            table.draw(dataTable, { showRowNumber: true });
+
+
+            var rawData2 = <?php echo json_encode($bestPreviewsComment); ?>;
         var dataTable2 = new google.visualization.DataTable();
         dataTable2.addColumn('string', 'Film');
         dataTable2.addColumn('string', 'Rédacteur');

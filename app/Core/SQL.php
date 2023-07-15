@@ -279,4 +279,24 @@ abstract class SQL
         $queryPrepared->bindParam(':value', $formdata);
         $queryPrepared->execute();
     }
+
+    public function getBestPreviewsViews(): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " ORDER BY nb_vue DESC LIMIT 10");
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
+    }
+
+    public function getAllViews(): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT SUM(nb_vue) FROM " . $this->table);
+        $queryPrepared->execute();
+
+        return $queryPrepared->fetch();
+
+
+
+    }
+
+
 }

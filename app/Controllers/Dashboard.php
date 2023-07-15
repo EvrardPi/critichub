@@ -4,9 +4,8 @@ namespace App\Controllers;
 
 use App\Core\Validator;
 use App\Core\View;
-use App\Forms\Category\CreateCategory;
-use App\Forms\Category\UpdateCategory;
 use App\Models\Category;
+use App\Models\Elementard;
 use App\Models\User;
 use App\Core\SQL;
 
@@ -42,6 +41,9 @@ class Dashboard
         //Nombre de commentaires à vérifier
         $checkComment = $this->getCheckCommentCount();
         $view->assign("checkComment", $checkComment);
+
+        $allView = $this->getAllViews();
+        $view->assign("allView", $allView);
 
         // Appeler la méthode getUserData et assigner le résultat à la vue
         $userData = $this->getUserData();
@@ -84,24 +86,28 @@ class Dashboard
 
     private function getBestPreviewsView(): array
     {
-        $bestPreviewsView = [
-        ['Spider-Man : Across the Spider-Verse','Youri Ghlis', 10000],
-        ['The Batman','Jean Christophe', 9600],
-        ['The Flash','Pierre Evrard', 9000],
-        ['The Matrix Resurrections','Ash BG', 8777],
-        ['Doctor Strange in the Multiverse of Madness','Arthur Pika', 7655],
-        ['Thor: Love and Thunder','Aurélien crane de sage', 6544],
-        ['Black Panther: Wakanda Forever','Si le prof voit ce commit je peux avoir 1 point en plus ? ', 5433],
-        ['Aquaman and the Lost Kingdom','Le fun', 4322],
-        ['The Marvels','Jaiplus Dinspi', 3211],
-        ['Black Adam','Wouf Waf', 2100]
+        $cms = new Elementard();
+        $getTopTen = $cms->getBestPreviewsViews();
 
-    ];
+        $bestPreviewsView = [];
+
+        foreach ($getTopTen as $preview) {
+            $movie = [
+                'movie_name' => $preview[12],
+                'id_user' => $preview[19],
+                'nb_vue' => $preview[17]
+            ];
+            $bestPreviewsView[] = $movie;
+        }
+
         return $bestPreviewsView;
     }
 
+
+
     private function getBestPreviewsComment(): array
     {
+
         $bestPreviewsComment = [
             ['Spider-Man : Across the Spider-Verse','Youri Ghlis', 10000],
             ['The Batman','Jean Christophe', 9600],
@@ -202,6 +208,19 @@ class Dashboard
             'chartData2022' => $chartData2022,
             'chartData2021' => $chartData2021
         ];
+    }
+
+
+    private function getAllViews(): int
+    {
+        $elementard = new Elementard();
+        $allView = $elementard->getAllViews();
+
+        if (is_array($allView) && count($allView) > 0) {
+            return $allView[0];
+        }
+
+        return 0;
     }
 
 
