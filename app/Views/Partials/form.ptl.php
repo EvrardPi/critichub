@@ -3,6 +3,11 @@ namespace App\Views\Partials;
 
 use App\Helper;
 
+if (!isset($_SESSION['csrf_token_next'] )){
+    header("Location: /");
+}
+
+
 if (!empty($errors)) print_r($errors); ?>
 
 <form method="<?= $config["config"]["method"] ?>"
@@ -14,7 +19,7 @@ if (!empty($errors)) print_r($errors); ?>
     <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token_next'] ?>">
 
     <?php foreach ($config["inputs"] as $name => $configInput): ?>
-        <?php if ($name === "role"): ?>
+        <?php if ($name === "role" || $name === "police"): ?>
             <!-- Code pour le champ "role" -->
             <select name="<?= $name ?>"
                     id="<?= $configInput["id"] ?>"
@@ -47,6 +52,10 @@ if (!empty($errors)) print_r($errors); ?>
                     <?= $configLink["text"] ?>
             </a>
         <?php endforeach; ?>
+    <?php endif; ?>
+
+    <?php if (isset($config["config"]["captcha"])): ?>
+        <div class="g-recaptcha" data-sitekey="<?= $_ENV["CAPTCHA_PUBLIC"] ?>"></div>
     <?php endif; ?>
 
 </form>

@@ -1,3 +1,26 @@
+<?php
+
+namespace App;
+use App\Models\User;
+use App\Controllers\Error;
+
+$error = new Error();
+
+if (!isset($_SESSION['isAuth'])) {
+  $error->error404();
+  exit;
+}
+
+$userLoggedIn = new User();
+$userStatus = $userLoggedIn->getUserInfo(['email' => $_SESSION['email']]);
+
+if($userStatus['role'] != 1) {
+  $error->error404();
+  exit;
+}
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -18,32 +41,11 @@
     </div>
     <div class="menu">
       <div class="item">
-        <a href="#" class="active"><span class="material-symbols-outlined">Dashboard</span>
-
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="sub-btn"><span class="material-symbols-outlined">Table</span>
-
-
-        </a>
+        <a class="active sub-btn"><span class="material-symbols-outlined">Gestion BackOffice</span></a>
         <div class="sub-menu">
-          <a href="#" class="sub-item">Gestion Des Utilisateurs</a>
-          <a href="#" class="sub-item">Sub Titre 2</a>
-          <a href="#" class="sub-item">Sub Titre 3</a>
-        </div>
-      </div>
-      <div class="item">
-        <a href="#" class="norm"><span class="material-symbols-outlined">assignment</span>
-
-        </a>
-      </div>
-      <div class="item">
-        <a href="#" class="sub-btn"><span class="material-symbols-outlined">Settings</span>
-        </a>
-        <div class="sub-menu">
-          <a href="#" class="sub-item">Sub Titre 1</a>
-          <a href="#" class="sub-item">Sub Titre 2</a>
+          <a href="view" class="sub-item">Utilisateurs</a>
+          <a href="category" class="sub-item">Catégories</a>
+          <a href="media-list" class="sub-item">Médias</a>
         </div>
       </div>
     </div>

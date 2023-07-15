@@ -68,6 +68,20 @@ abstract class SQL
         return $result;
     }
 
+    public function getMediaInfo(array $id): array {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE id_movie = :id_movie");
+        $queryPrepared->execute(['id_movie' => $id['id_movie']]);
+        $result = $queryPrepared->fetch();
+        return $result;
+    }
+
+    public function getAllMediaIDs(): array {
+        $queryPrepared = $this->pdo->prepare("SELECT id_movie FROM " . $this->table);
+        $queryPrepared->execute();
+        $result = $queryPrepared->fetchAll();
+        return $result;
+    }
+
     public function updateUserPwd(array $email, array $pwd): array {
         if ($this->emailExists($email['email']) === false) {
             array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
@@ -197,6 +211,20 @@ abstract class SQL
         return $queryPrepared->fetchAll();
     }
 
+    public function getContentFromMemento($id_memento): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE id_memento = :id_memento");
+        $queryPrepared->execute(['id_memento' => $id_memento]);
+        return $queryPrepared->fetch();
+    }
+
+    public function setContentIntoMemento($content, $id_memento): array
+    {
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET content = :content  WHERE id_memento = :id_memento");
+        $queryPrepared->execute(['content' => $content,'id_memento' => $id_memento]);
+        return $queryPrepared->fetch();
+    }
+
     public function getUserToConfirm(String $token): mixed
     {
         $reqConfirm = $this->pdo->prepare("SELECT id, confirm FROM " . $this->table . " WHERE confirm_key = ? LIMIT 1");
@@ -244,12 +272,11 @@ abstract class SQL
 
         return (int) $result;
     }
-
-    public function getCreateAccount(): array
+  
+    public function changeFront($selectedTab,$formdata): void
     {
-        $queryPrepared = $this->pdo->prepare("SELECT creation_date FROM " . $this->table);
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET $selectedTab = :value");
+        $queryPrepared->bindParam(':value', $formdata);
         $queryPrepared->execute();
-
-        return $queryPrepared->fetchAll();
     }
 }

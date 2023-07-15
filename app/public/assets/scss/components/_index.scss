@@ -1,22 +1,62 @@
+// ------------------------------ INDEX ------------------------------
+
+.home{
+// ------------------------------ BANNER IMAGE ------------------------------
+    &-image-banner{
+        background-color: transparent;
+        width:100%;
+        top:-30%;
+        border-radius: 35em/10em;
+        animation:fadeIn 1s ease-in;
+        overflow: hidden;
+        z-index:0;
+        position:absolute;
+
+        &-width{
+            width:100%;
+        }
+    }
+
+    &-spacing{
+        height:50vh;
+    }
+
+    &-slogan{
+        position:relative;
+        display:flex;
+        width:100%;
+        height:45vh;
+        justify-content:center;
+        animation:fadeIn 1s ease-in;
+        z-index:10;
+        font-size:3rem;
+        text-align: center;
+    }
+
+
+
+}
+
 // ------------------------------ HEADER ------------------------------
 header {
     position: sticky;
+    animation:fadeIn 1s ease-in;
     top: 0;
     z-index: 10;
 
     nav {
         position: relative;
-        background-color: $blackFont;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         align-items: center;
         color: white;
-        background-color: rgb(17, 17, 17);
+        background-color: rgba(0,0,0,0.8);
 
         .logo {
             display: flex;
             flex-direction: row;
+            align-items: center;
 
             &-title {
                 font-style: normal;
@@ -61,172 +101,86 @@ header {
         }
     }    
 }
-// ------------------------------ FOOTER ------------------------------
-.footer{
+
+// ------------------------------ MOVIES ------------------------------
+.popular-movies{
     display:flex;
-    flex-direction: row;
-    padding-top: 3rem;
+    flex-direction:column;
 
-    &-left-content{
-        width:25vw;
-        padding-left: 5rem;
-        margin-right:10rem;
+    &-title{
+        font-size:2.25rem;
+        font-weight: 700;
     }
 
-    &-icons{
-        i{
-            background-color: $footer_color;
-            width:2vw;
-            height:2vw;
-            text-align: center;
-            font-size:1.25rem;
-            padding-top: 0.25rem;
-            border-radius: 25%;
-            margin: 0.25rem;
-            color:$blackFont;
-        }
-    }
-
-    .logo-title{
-        margin:0;
-        font-size: 2.5rem;
-    }
-
-    h5{
-        font-size: 0.85rem;
-        line-height: 1.5rem;
-        color: $footer_color;
-
-    }
-
-    &-categories{
-        justify-content: space-evenly;
-        width:100%;
-        span{
-            padding-bottom:1.25rem;
-            color: $footer_color;
-
-        }
-    }
-
-    &-category {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-top: 0;
-        margin-right:5rem;
+    &-list{
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
         
-        a{ 
-            padding:1rem 0;
-            color: $light_gray;
 
+        img{
+            width:15vw;
+            height:40vh;
+            border-radius: 1rem;
         }
     }
 
-    &-follow{
-        padding-top: 3rem;
-        flex-direction: column;
-        a{
-            color: $footer_color;
-            text-align:center;
-            font-size: 1.5rem;
-        }
+    &-element{
+        padding: 0 0.5rem 1.5rem 0;
+        text-align: center;
+        h3{
+            font-size:1.3rem;
+            a{
+                color:$white;
+                transition: all 0.2s ease-in;
+                &:hover{
+                    color:$red;
+                }
+            }
 
-        &-icons{
-            flex-direction: row;
-            justify-content: space-between;
-            padding-top: 1rem;
         }
-    }
-
-    &-parameters{
-        padding-bottom: 5rem;
     }
 }
-
 
 // ------------------------------ EVENTS ------------------------------
-.event-panorama {
-    position: relative;
 
-    img {
-        width:80vw;
-        height:60vh;
-        z-index: -1;
+.event{
+    width:100%;
+    padding: 8rem 0;
+    position:relative;
+    overflow:hidden;
+    &-banner{
+        max-width:600px;
+        position:absolute;
+        left:16%;
+        top:20%;
+        h2{
+            font-size:5rem;
+            font-weight:800;
+            margin-bottom:0.5rem;
+        }
     }
 }
 
-.inside-img {
-    position: absolute;
-    top: 50%; right: 50%;
-    transform: translate(50%,-50%);
 
-    a {
-        font-size: 1.5rem;
-    }
-
-    h2 {
-        color:$white;
-        font-size: 2.5rem;
-    }
-}
-
-.center-button{
-    display:flex;
-    justify-content: center;
-}
-
-.events{
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
-
-
-
-// ------------------------------ NEWS ------------------------------
-.news{
-    display:flex;
-    flex-direction: row;
-    padding:2rem;
-    justify-content: space-between;
-
-    &-card{
-    background-color:$white;
-    width:15vw;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    border-radius:1.5rem;
-    
-    img{
-        width:100%;
-        height:18vh;
-        border-radius:1.5rem 1.5rem 0 0;
-    }
-    
-    &-text{
-        font-size:1rem;
-        padding-top: 1rem;
-        text-align: center;
-    }
-    }
-}
 
 // ------------------------------ REVIEWS ------------------------------
+#popular-reviews{
+    padding-bottom: 7rem;
+}
+
 .review {
     display:flex;
     flex-direction: column;
     flex-wrap: wrap;
-    padding-top:3rem;
+    padding-top:1rem;
     width:20vw;
-
 
     &-profile{
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
+        align-items: start;
     }
     
     img {
@@ -309,4 +263,176 @@ header {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+
+// ------------------------------ SLIDER ------------------------------
+#slider-top{
+    padding-bottom:7rem;
+}
+
+.slider-container{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    img{
+        width:100%;
+    }
+}
+
+
+
+
+// ------------------------------ FOOTER ------------------------------
+
+.logo-title{
+    margin:0;
+    font-size: 2.5rem;
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  background: $gray;
+  min-height: 100px;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.social-icon, .menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  flex-wrap: wrap;
+  
+  &__item{
+    list-style: none;
+  }
+
+  &__link{
+    font-size: 2rem;
+    color: #fff;
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.5s;
+
+    &:hover{
+        transform: translateY(-10px);
+    }
+  }
+}
+
+.menu__link {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0 10px;
+  display: inline-block;
+  transition: 0.5s;
+  text-decoration: none;
+  opacity: 0.75;
+  font-weight: 300;
+}
+
+.menu__link:hover {
+  opacity: 1;
+}
+
+.footer p {
+  color: #fff;
+  margin: 15px 0 10px 0;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.wave {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url("/assets/images/wave.png");
+  background-size: 1000px 100px;
+
+    &#wave1{
+        z-index: 1000;
+        opacity: 1;
+        bottom: 0;
+        animation: animateWaves 4s linear infinite;
+    }
+
+    &#wave2 {
+        z-index: 999;
+        opacity: 0.5;
+        bottom: 10px;
+        animation: animate 4s linear infinite !important;
+    }
+
+    &#wave3 {
+        z-index: 1000;
+        opacity: 0.2;
+        bottom: 15px;
+        animation: animateWaves 3s linear infinite;
+    }
+
+    &#wave4 {
+        z-index: 999;
+        opacity: 0.7;
+        bottom: 20px;
+        animation: animate 3s linear infinite;
+    }
+}
+
+@keyframes animateWaves {
+  0% {
+    background-position-x: 1000px;
+  }
+  100% {
+    background-positon-x: 0px;
+  }
+}
+
+@keyframes animate {
+  0% {
+    background-position-x: -1000px;
+  }
+  100% {
+    background-positon-x: 0px;
+  }
+}
+
+// ------------------------------ LEGALS ------------------------------
+.center-text{
+    text-align: center;
+}
+.legals{
+    background-color: $white;
+    border-radius: 8px;
+    text-align:center;
+
+    h2{
+        background-color: $gray;
+        border-radius: 3rem;
+        margin: 3rem 0 1.5rem 0;
+        color:$white;
+    }
+
+    .row{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-bottom: 3rem;
+        p,li{
+            font-weight: 400;
+            text-align: start;
+            font-size: 0.9rem;
+        }
+        ul, li{
+            list-style: inside;
+        }
+    }
 }

@@ -39,16 +39,26 @@ class Validator
         return $this->data;
     }
 
+    static function excludeSpecialInput($feur) {
+        // Supprime les champs spéciaux (jeton CSRF, bouton de soumission et captcha)
+        $blackList = ["csrf_token", "submit", "g-recaptcha-response"];
+        return !in_array($feur, $blackList);
+    } 
+
     public function isValid(): bool
     {
-        if (!in_array($this->data['csrf_token'], $_SESSION['csrf_tokens'])) {
-            array_push($_SESSION['error_messages'], "Une erreur est survenue");
-            return false;
-        } else {
-            unset($_SESSION['csrf_tokens'][array_search($this->data['csrf_token'], $_SESSION['csrf_tokens'])]);
+        if (isset($this->data['csrf_token'])) {
+            if (!in_array($this->data['csrf_token'], $_SESSION['csrf_tokens'])) {
+                array_push($_SESSION['error_messages'], "Une erreur est survenue");
+                return false;
+            } else {
+                unset($_SESSION['csrf_tokens'][array_search($this->data['csrf_token'], $_SESSION['csrf_tokens'])]);
+            }
         }
+        
+        $newData = array_filter(array_keys($this->data), "self::excludeSpecialInput");
 
-        if (count($this->config["inputs"]) != count($this->data) - 1) { // -1 pour le jeton CSRF
+        if (count($this->config["inputs"]) != count($newData)) {
             array_push($_SESSION['error_messages'], "Une erreur est survenue");
             return false;
         }
@@ -120,21 +130,26 @@ class Validator
 
                         //Vérification de l'extension du fichier
                         $allowedExtensions = ["png", "jpg", "jpeg"];
-                            $fileExtension = strtolower(pathinfo($value["name"], PATHINFO_EXTENSION));
+                        $fileExtension = strtolower(pathinfo($value["name"], PATHINFO_EXTENSION));
                         if (!in_array($fileExtension, $allowedExtensions)) {
                             $allowedExtensionsString = implode(", ", $allowedExtensions);
                             array_push($_SESSION['error_messages'], "Le fichier doit être de type $allowedExtensionsString");
                         }
                         //Vérification de la taille du fichier
-                        $maxFileSize = 5 * 1024 * 1024; // Taille maximale du fichier en octets (ici 5 Mo)
+                        $maxFileSize = 5 * 1024 * 1024;
+                        // Taille maximale du fichier en octets (ici     5 Mo)
                         if ($value["size"] > $maxFileSize) {
                             array_push($_SESSION['error_messages'], "Le fichier ne doit pas dépasser 5 Mo");
                         }
                         // Vérification supplémentaire de l'image
-                        $imageData = file_get_contents($value["tmp_name"]);
-                        $imageSize = getimagesizefromstring($imageData);
-                        if ($imageSize === false || !in_array($imageSize['mime'], ['image/png', 'image/jpeg'])) {
-                            array_push($_SESSION['error_messages'], "Le fichier n'est pas une image valide (PNG ou JPEG).");
+                        if (isset($value["tmp_name"]) && !empty($value["tmp_name"])) {
+                            $imageData = file_get_contents($value["tmp_name"]);
+                            $imageSize = getimagesizefromstring($imageData);
+                            if ($imageSize === false || !in_array($imageSize['mime'], ['image/png', 'image/jpeg'])) {
+                                array_push($_SESSION['error_messages'], "Le fichier n'est pas une image valide (PNG ou JPEG).");
+                            }
+                        } else {
+                            array_push($_SESSION['error_messages'], "Une erreur est survenue lors du téléchargement du fichier.");
                         }
 
                         //Permet de vérifier si la photo de la catégorie existe deja
@@ -242,5 +257,6 @@ class Validator
         }
 
         return true;
+
     }
 }

@@ -9,6 +9,7 @@ use App\Forms\Category\UpdateCategory;
 use App\Models\Category;
 use App\Models\User;
 use App\Core\SQL;
+use App\Controllers\Error;
 
 class Categorys
 {
@@ -68,8 +69,11 @@ class Categorys
     public function updateCategory(): void
     {
         $form = new UpdateCategory();
-        $form->data['id'] = $_POST['id'];
+        if (isset($_POST['id'])) {
+            $form->data['id'] = $_POST['id'];
+        }
         $formdata = $form->data;
+
 
         if (!$form->isValid()) {
             $errors = $_SESSION['error_messages'];
@@ -163,10 +167,26 @@ class Categorys
     public function readCategory(): void
     {
         $category = new Category();
+        $error = new Error();
+
+        if (!isset($_SESSION['isAuth'])) {
+            $error->error404();
+            exit;          
+        }
+          
+          $userLoggedIn = new User();
+          $userStatus = $userLoggedIn->getUserInfo(['email' => $_SESSION['email']]);
+          
+          if($userStatus['role'] != 1) {
+            $error->error404();
+            exit;
+        }
+        
         $rows = $category->getAll();
         header('Content-Type: application/json');
 
         echo json_encode($rows);
+          
     }
 
 

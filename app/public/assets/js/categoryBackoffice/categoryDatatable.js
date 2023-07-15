@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('SHEEEEEESH');
-    fetch('/cateread', {
+    fetch('/back-read-category', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     name: row.name,
                     pictureData: '<img class="categorie-img" src="assets/images/category/' + row.name + ".png" + '" alt="Category Picture">',
                     button: '<button type="button" class="btn btn-warning update-btn" data-id="' + row.id + '" data-bs-toggle="modal" data-bs-target="#updateModal">Modifier</button>',
-                    button2: '<form method="post" action="catedelete">' +
+                    button2: '<form method="post" action="back-delete-category">' +
                         '<input type="hidden" name="id" value="' + row.id + '">' +
                         '<input type="hidden" name="name" value="' + row.name + '">' +
                         '<button class="btn btn-danger" type="submit">Supprimer</button>' +
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("marche");
                 let userId = this.getAttribute('data-id');
 
-                fetch('/tap?id=' + userId, {
+                fetch('/back-get-category?id=' + userId, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'

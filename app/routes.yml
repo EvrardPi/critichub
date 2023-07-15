@@ -1,3 +1,4 @@
+# Main 
 default:
   controller: Main
   action: home
@@ -5,27 +6,8 @@ default:
 media:
   controller: Main
   action: media
-  
-create-review:
-  controller: Cms
-  action: userReview
 
-new-admin-review:
-  controller: Cms
-  action: adminReview
-
-a-propos:
-  controller: Main
-  action: aboutUs
-
-about-us:
-  controller: Main
-  action: aboutUs
-
-contact:
-  controller: Main
-  action: contact
-
+# Authentification
 login:
   controller: Auth
   action: login
@@ -34,13 +16,34 @@ logout:
   controller: Auth
   action: logout
 
-s-inscrire:
+register:
   controller: Auth
-  action: view
+  action: register
 
+confirm:
+  controller: Auth
+  action: confirmAccount
+
+forgot:
+  controller: Auth
+  action: viewForgotPwd
+
+forgot-confirmation:
+  controller: Auth
+  action: forgotPassword
+
+reset-password:
+  controller: Auth
+  action: viewResetPassword
+
+confirm-reset-password:
+  controller: Auth
+  action: resetPassword
+
+# Error pages
 404:
   controller: Error
-  action: error404  
+  action: error404
 
 403:
   controller: Error
@@ -58,87 +61,109 @@ s-inscrire:
   controller: Error
   action: error410
 
-backoffice:
+# Back
+back-read-user:
   controller: Users
   action: readUser
 
-create:
+back-create-user:
   controller: Users
   action: createUser
 
-delete:
+back-delete-user:
   controller: Users
   action: deleteUser
 
-update:
+back-update-user:
   controller: Users
   action: updateUser
 
-user:
+back-get-user:
   controller: Users
   action: getUser
 
-read:
-  controller: Users
-  action: readUser
-
-view:
+back-view-user:
   controller: Users
   action: view
 
-register:
-  controller: Auth
-  action: register
-
-confirm:
-   controller: Auth
-   action: confirmAccount
-   
-category:
+back-view-category:
   controller: Categorys
   action: view
 
-tam:
+back-create-category:
   controller: Categorys
   action: createCategory
 
-cateread:
+elementard-view:
+  controller: Cms
+  action: cmsView
+
+elementard-getdata:
+  controller: Cms
+  action: getAjaxData
+  
+elementard/read:
+  controller: CmsUser
+  action: getListPage
+
+back-read-category:
   controller: Categorys
   action: readCategory
 
-catedelete:
+back-delete-category:
   controller: Categorys
   action: deleteCategory
 
-tap:
-  controller: Categorys
-  action: getCategory
-
-updatetam:
+back-update-category:
   controller: Categorys
   action: updateCategory
 
-forgot:
-   controller: Auth
-   action: view_forgotPwd
+back-get-category:
+  controller: Categorys
+  action: getCategory
 
-forgot-confirmation:
-   controller: Auth
-   action: forgotPassword
+back-view-gestionfront:
+  controller: GestionFronts
+  action: view
 
-reset-password:
-   controller: Auth
-   action: view_resetPassword
+back-create-gestionfront:
+  controller: GestionFronts
+  action: createContent
 
-confirm-reset-password:
-   controller: Auth
-   action: resetPassword
+back-get-content:
+  controller: GestionFronts
+  action: getContent
 
-dashboard:
+back-gestion-background:
+  controller: GestionFronts
+  action: createBackground
+
+back-gestion-picture:
+  controller: GestionFronts
+  action: createPicture
+  
+back-view-dashboard:
   controller: Dashboard
   action: viewDashboard
-
-testo:
+  
+back-testo:
     controller: Dashboard
     action: createUserCreationChart
 
+# Sitemap
+sitemap:
+  controller: Sitemap
+  action: sitemap
+
+# Footer
+legals:
+  controller: Main
+  action: legals
+
+confidentiality:
+  controller: Main
+  action: confidentiality
+
+about-us:
+  controller: Main
+  action: aboutUs

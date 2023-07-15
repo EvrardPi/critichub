@@ -8,6 +8,18 @@
 body{
     margin:0;
     background-color:$blackFont;
+    &::-webkit-scrollbar {
+        width:5px;
+    }
+    cursor:auto;
+    &::-webkit-scrollbar-thumb {
+        background: $light_gray;
+        border-radius: 2rem;
+    }
+}
+
+html{
+    scroll-behavior: smooth;
 }
 
 ul {
@@ -24,8 +36,5 @@ span {
 }
 
 footer {
-    // background-color: $gray;
-    margin-top: 50px !important;
-    background-color: $footer_background_color;
-    border-radius: 4rem 4rem 0 0;
+    margin-top: 200px;
 }
