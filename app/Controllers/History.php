@@ -32,7 +32,7 @@ class History extends EditorMemento
     public function pushToDB($memento, $id) {
         $sendMemento = new SendMemenToDb();
         $sendMemento->setContentIntoMemento($memento,$id);
-        header("Location: /memento");
+        header("Location: /memento?id=".$id);
     }
 
     public function getMementos() {

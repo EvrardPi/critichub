@@ -22,7 +22,7 @@ class EditorMemento extends Memento{
             $sendMemento->getContentFromMemento($this->id);
         } catch (\Throwable $th) {
             if (isset($th)){
-            $sendMemento->setNewMemento('O:29:"App\Controllers\EditorMemento":1:{s:7:"content";s:4:"None";}',$this->id);
+            $sendMemento->setNewMemento('O:29:"App\Controllers\EditorMemento":1:{s:7:"content";a:1:{i:0;s:4:"None";}}',$this->id);
         }
         }
         $mementoContent = new EditorMemento();

@@ -4,7 +4,7 @@ namespace App;
 use App\Controllers\EditorMemento;
 use App\Controllers\History;
 
-$id = 7;
+$id = $_GET['id'];
 
 $history = new History();
 $memento = new EditorMemento();
@@ -29,6 +29,7 @@ if ($action == "save") {
         $mementoToPush = new EditorMemento();
         $mementoToPush->setContent($history->getObj());
         $serializedMemento ='O:29:"App\Controllers\EditorMemento":1:{s:7:"content";' . serialize($mementoToPush->getContent()[0]) . "}";
+        var_dump($serializedMemento);
         $history->pushToDB($serializedMemento,$id);
     }
 }
