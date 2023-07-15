@@ -3,28 +3,38 @@ namespace App;
 
 use App\Controllers\EditorMemento;
 use App\Controllers\History;
+use App\Models\Memento as SendMemenToDb;
 
-$id = $_GET['id'];
-
+//  OBJECT INSTANTIATIONS 
+$countMemento = new SendMemenToDb();
 $history = new History();
 $memento = new EditorMemento();
 
+//  SET ID 
+$id = $_GET['id'];
+
+//  GET ELEMENTS FROM DATABASE TO DISPLAY 
 $memento->setId($id);
 $mementoBuilder = $memento->buildMemento();
 $history->pushObj($mementoBuilder);
 $contentToDisplay = $mementoBuilder->getContent();
-// echo(end($contentToDisplay[0]));
 
-// ------------- RECUP ACTION CLICKED -------------
+
+
+//  RECUP ACTION CLICKED 
 $action = isset($_POST['action']) ? $_POST['action'] : '';
+$version = isset($_POST['selectVersion']) ? $_POST['selectVersion'] : '';
 
+
+// -------------------------- ACTION PUSH --------------------------
 if ($action == "save") {
 
+    //  PUSH CONTENT TO VAR 
     $modifiedMemento = new EditorMemento();
     $modifiedMemento->setContent($_POST['content']);
     $history->pushObj($modifiedMemento);
 
-    // ------------- SAVE INTO DATABASE -------------
+    //  SAVE INTO DATABASE
     if (!is_null($_POST['content'])) {
         $mementoToPush = new EditorMemento();
         $mementoToPush->setContent($history->getObj());
@@ -33,16 +43,10 @@ if ($action == "save") {
         $history->pushToDB($serializedMemento,$id);
     }
 }
-
+// -------------------------- ACTION UNDO --------------------------
 if ($action == "undo") {
-    // array_pop($mementoArray);
-    // $memento->pop();
-
-    var_dump($mementoBuilder->getContent());
-    echo "<br> <br>";
-
-
     if (!is_null($_POST['content'])) {
+        //  POP ELEMENT FROM ARRAY 
         $mementoToPush = new EditorMemento();
         $mementoToPush->setContent($mementoBuilder->pop());
         var_dump($mementoToPush);
@@ -51,21 +55,41 @@ if ($action == "undo") {
     }
 }
 
+// -------------------------- ACTION SELECT VERSION --------------------------
+if (isset($version)) {
+    if (!empty($version)){
+    $selectedVersion = $contentToDisplay[$version];
+    ?>
+    <script>
+        $(document).ready(function() {
+        let textAreaChanger = document.getElementById("contentArea");
+        let textChanger = "<?php echo $selectedVersion; ?>";
+        console.log(textAreaChanger);
+        textAreaChanger.value = textChanger;
+        textAreaChanger.placeholder = textChanger;
+        });
+    </script>
+<?php }} ?>
 
-?>
-
-
+<!-- -------------------------- HTML-------------------------- -->
 <div class="container-60">
     <div class="create-review">
         <h2 class="white-text">Memento Demo View</h2> 
 
 
         <div class="create-review-confirmation-button container-50">
-        <form method="POST" class="container-100" action="">
-            <textarea name="content" style="resize:none; width:100%;" placeholder="<?= gettype($contentToDisplay) === "string" ? $contentToDisplay : end($contentToDisplay)  ?>"><?= gettype($contentToDisplay) === "string" ? $contentToDisplay : end($contentToDisplay)   ?></textarea>
+        <form id="form" method="POST" class="container-100" action="">
+            <textarea id="contentArea" name="content" style="resize:none; width:100%;" placeholder="<?= gettype($contentToDisplay) === "string" ? $contentToDisplay : end($contentToDisplay)  ?>"><?= gettype($contentToDisplay) === "string" ? $contentToDisplay : end($contentToDisplay)   ?></textarea>
             <br>
             <input id="saveInput" type="submit" class="button button-upload-review" name="action" value="save">
             <input id="undoInput" type="submit" class="button button-upload-review" name="action" value="undo">
+            <select id="selectVersionInput" onchange="this.form.submit()"    class="button button-upload-review" name="selectVersion" value="selectVersion">
+                <option value="" disabled selected>Select your version</option>
+                <?php 
+                foreach ($contentToDisplay as $index => $value) {?>
+                     <option value=<?= $index ?>><?= $value ?></option>
+                <?php } ?>
+            </select>
         </form>
         </div>
 
@@ -87,14 +111,12 @@ if ($action == "undo") {
 
 </div>
 
+<!-- -------------------------- JS -------------------------- -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-
-    console.log(window.location.href);
-    // Gestionnaire d'événement pour le bouton Save
+    // -------------------------- SAVE BTN CLICKER --------------------------
     $("#saveInput").click(function(event) {
-        // event.preventDefault();
         $.ajax({
             type: "POST",
             url: window.location.href, 
@@ -107,9 +129,8 @@ $(document).ready(function() {
         });
     });
 
-    // Gestionnaire d'événement pour le bouton Undo
+    // -------------------------- UNDO BTN CLICKER --------------------------
     $("#undoInput").click(function(event) {
-        // event.preventDefault();
         $.ajax({
             type: "POST",
             url: window.location.href,
