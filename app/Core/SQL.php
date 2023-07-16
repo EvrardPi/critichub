@@ -225,6 +225,13 @@ abstract class SQL
         return $queryPrepared->fetch();
     }
 
+    public function setNewMemento($content, $id_memento): array
+    {
+        $queryPrepared = $this->pdo->prepare("INSERT INTO " . $this->table . " (id_memento, content) VALUES (:id_memento,:content)");
+        $queryPrepared->execute(['content' => $content,'id_memento' => $id_memento]);
+        return $queryPrepared->fetch();
+    }
+
     public function getUserToConfirm(String $token): mixed
     {
         $reqConfirm = $this->pdo->prepare("SELECT id, confirm FROM " . $this->table . " WHERE confirm_key = ? LIMIT 1");
