@@ -8,6 +8,7 @@ use App\Forms\User\Create;
 use App\Forms\User\Update;
 use App\Helper;
 use App\Models\User;
+use App\Middlewares\CheckIsAdmin;
 use App\Core\SQL;
 use App\Controllers\Error;
 
@@ -18,6 +19,7 @@ class Users
 
     public function view(array $errors = []): void
     {
+        CheckIsAdmin::isAdmin();
         $view = new View("BackOffice/userGestion", "back");
         $view->assign("pageName", "Backoffice-Utilisateurs");
         $createForm = new Create();
@@ -29,6 +31,7 @@ class Users
 
     public function createUser(): void
     {
+        CheckIsAdmin::isAdmin();
         $form = new Create();
         if (!$form->isValid()){
             $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
@@ -63,13 +66,24 @@ class Users
         $form = new Update();
         if (!$form->isValid()) {
             $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
-            // var_dump($errors, $_SESSION['error_messages'], $form);
             unset($_SESSION['error_messages']);
             $this->view($errors);
             return;
         }
+
         $formdata = $form->data;
-        $user = User::populate($formdata['id']); // Récupérer l'utilisateur à partir de la base de données*/
+        $user = User::populate($formdata['id']); // Récupérer l'utilisateur à partir de la base de données
+
+        // Vérifier si l'email a été modifié
+        if ($user->getEmail() !== $formdata['email']) {
+            if ($user->emailExists($formdata['email'])) {
+                $errors = $_SESSION['error_messages'];
+                $errors[] = "L'email utilisé existe déjà.";
+                $this->view($errors);
+                return;
+            }
+        }
+
         // Mettre à jour les propriétés de l'utilisateur
         $user->setFirstname($formdata['firstname']);
         $user->setLastname($formdata['lastname']);
@@ -77,21 +91,16 @@ class Users
         $user->setRole($formdata['role']);
         $user->setBirthDate($formdata['birth_date']);
 
-        if ($user->emailExists($formdata['email'])) {
-            $errors = $_SESSION['error_messages'];
-            $errors[] = "Le mail utilisé existe déjà.";
-            $this->view($errors);
-            return;
-        }
         // Enregistrer les modifications dans la base de données
-
         $user->save();
         Helper::redirectTo('/back-view-user');
     }
 
+
 //pour l'installer ne pas le faire dans un controller mais le mettre dans le systeme de routing
     public function getUser()
     {
+        CheckIsAdmin::isAdmin();
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
             $id = $_GET['id'];
             $user = new User();

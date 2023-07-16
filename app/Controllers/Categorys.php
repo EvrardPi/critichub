@@ -2,19 +2,19 @@
 
 namespace App\Controllers;
 
-use App\Core\Validator;
+
 use App\Core\View;
 use App\Forms\Category\CreateCategory;
 use App\Forms\Category\UpdateCategory;
+use App\Helper;
 use App\Models\Category;
 use App\Models\User;
-use App\Core\SQL;
-use App\Controllers\Error;
+
 
 class Categorys
 {
 
-    public function view(array $errors = []): void
+    public function viewCategory(array $errors = []): void
     {
         $view = new View("BackOffice/categoryGestion", "back");
         $view->assign("pageName", "Backoffice-Catégories");
@@ -33,13 +33,13 @@ class Categorys
         if (!$form->isValid()){
             $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
             unset($_SESSION['error_messages']); // Supprimer les erreurs de la session
-            $this->view($errors);
+            $this->viewCategory($errors);
             return;
         }
         if(!$form->checkCategoryCreate()){
             $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
             unset($_SESSION['error_messages']); // Supprimer les erreurs de la session
-            $this->view($errors);
+            $this->viewCategory($errors);
             return;
         }
 
@@ -55,14 +55,14 @@ class Categorys
         $destinationPath = $prefix . $nomFichier;
         if (!move_uploaded_file($tempFilePath, $destinationPath)) {
             array_push($_SESSION['error_messages'], "Erreur lors du téléchargement du fichier.");
-            $this->view();
+            Helper::redirectTo('/back-view-category');
             return;
         }
         //Enrengistrement dans la bdd
         $category->setName($formdata['name']);
         $category->setPicture($fileName);
         $category->save();
-        $this->view();
+        Helper::redirectTo('/back-view-category');
     }
 
 
@@ -78,14 +78,14 @@ class Categorys
         if (!$form->isValid()) {
             $errors = $_SESSION['error_messages'];
             unset($_SESSION['error_messages']);
-            $this->view($errors);
+            $this->viewCategory($errors);
             return;
         }
 
         if (!$form->checkCategoryUpdate()) {
             $errors = $_SESSION['error_messages'];
             unset($_SESSION['error_messages']);
-            $this->view($errors);
+            $this->viewCategory($errors);
             return;
         }
 
@@ -96,7 +96,7 @@ class Categorys
         $newName = $formdata['name'];
         if ($newName !== $oldName && $category->nameExists(['name' => $newName])) {
             array_push($_SESSION['error_messages'], "Le nom de la catégorie existe déjà.");
-            $this->view();
+            Helper::redirectTo('/back-view-category');
             return;
         }
 
@@ -118,7 +118,7 @@ class Categorys
             $destinationPath = $prefix . $nomFichier;
             if (!move_uploaded_file($tempFilePath, $destinationPath)) {
                 array_push($_SESSION['error_messages'], "Erreur lors du téléchargement du fichier.");
-                $this->view();
+                Helper::redirectTo('/back-view-category');
                 return;
             }
 
@@ -133,7 +133,7 @@ class Categorys
 
         // Enregistrer les modifications dans la base de données
         $category->save();
-        $this->view();
+        Helper::redirectTo('/back-view-category');
     }
 
 
@@ -161,7 +161,7 @@ class Categorys
             $category = new Category();
             $category->delete($id);
         }
-        $this->view();
+        Helper::redirectTo('/back-view-category');
     }
 
     public function readCategory(): void
