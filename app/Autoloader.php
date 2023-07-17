@@ -35,6 +35,7 @@ class Autoloader
             $uri = "default";
         }
 
+
         if (!file_exists(__DIR__ ."/routes.yml")) {
             $error = new Error();
             $error->error410();
@@ -87,5 +88,9 @@ class Autoloader
         }
 
         $objController->$action();
+
+
     }
+
+
 }

@@ -7,6 +7,7 @@ use App\Core\View;
 use App\Forms\GestionFront\Create;
 use App\Forms\GestionFront\CreatePicture;
 use App\Forms\GestionFront\CreateBackground;
+use App\Helper;
 use App\Models\Category;
 use App\Models\User;
 use App\Core\SQL;
@@ -62,7 +63,7 @@ class GestionFronts
         $gestionFront->$methodName(json_encode($formdata));
         $dataString = json_encode($formdata);
         $gestionFront->changeFront($formdata['selected_tab'], $dataString);
-        $this->view();
+        Helper::redirectTo('/back-view-gestionfront');
     }
 
     public function createBackground(): void
@@ -83,7 +84,7 @@ class GestionFronts
         $gestionFront->$methodName(json_encode($formdata));
         $dataString = json_encode($formdata);
         $gestionFront->changeFront($formdata['selected_tab'], $dataString);
-        $this->view();
+        Helper::redirectTo('/back-view-gestionfront');
     }
 
     public function createPicture(): void
@@ -130,8 +131,7 @@ class GestionFronts
             $this->view();
             return;
         }
-        $this->view();
-        return;
+        Helper::redirectTo('/back-view-gestionfront');
     }
 
     public function getContent()

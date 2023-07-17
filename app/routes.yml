@@ -88,7 +88,7 @@ back-view-user:
 
 back-view-category:
   controller: Categorys
-  action: view
+  action: viewCategory
 
 back-create-category:
   controller: Categorys
