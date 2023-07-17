@@ -8,6 +8,7 @@ use App\Forms\GestionFront\Create;
 use App\Forms\GestionFront\CreatePicture;
 use App\Forms\GestionFront\CreateBackground;
 use App\Helper;
+use App\Middlewares\CheckIsAdmin;
 use App\Models\Category;
 use App\Models\User;
 use App\Core\SQL;
@@ -18,6 +19,7 @@ class GestionFronts
 
     public function view(array $errors = []): void
     {
+        CheckIsAdmin::isAdmin();
         $view = new View("BackOffice/gestionFront", "back");
         $view->assign("pageName", "Backoffice-Gestion du front");
         $createForm = new Create();
@@ -48,48 +50,54 @@ class GestionFronts
 
     public function createContent(): void
     {
-        $form = new Create();
-        if (!$form->isValid()) {
-            $errors = $_SESSION['error_messages'];
-            unset($_SESSION['error_messages']);
-            $this->view($errors);
-            return;
+        CheckIsAdmin::isAdmin();
+        if (Helper::methodUsed() === Helper::POST) {
+            $form = new Create();
+            if (!$form->isValid()) {
+                $errors = $_SESSION['error_messages'];
+                unset($_SESSION['error_messages']);
+                $this->view($errors);
+                return;
+            }
+            $formdata = $form->data;
+            unset($formdata['csrf_token']);
+            $selectedTab = $formdata['selected_tab'];
+            $gestionFront = new GestionFront();
+            $methodName = 'set' . ucfirst($selectedTab);
+            $gestionFront->$methodName(json_encode($formdata));
+            $dataString = json_encode($formdata);
+            $gestionFront->changeFront($formdata['selected_tab'], $dataString);
+            Helper::redirectTo('/back-view-gestionfront');
         }
-        $formdata = $form->data;
-        unset($formdata['csrf_token']);
-        $selectedTab = $formdata['selected_tab'];
-        $gestionFront = new GestionFront();
-        $methodName = 'set' . ucfirst($selectedTab);
-        $gestionFront->$methodName(json_encode($formdata));
-        $dataString = json_encode($formdata);
-        $gestionFront->changeFront($formdata['selected_tab'], $dataString);
-        Helper::redirectTo('/back-view-gestionfront');
     }
 
     public function createBackground(): void
     {
-
-        $form = new CreateBackground();
-        if (!$form->isValid()) {
-            $errors = $_SESSION['error_messages'];
-            unset($_SESSION['error_messages']);
-            $this->view($errors);
-            return;
+        CheckIsAdmin::isAdmin();
+        if (Helper::methodUsed() === Helper::POST) {
+            $form = new CreateBackground();
+            if (!$form->isValid()) {
+                $errors = $_SESSION['error_messages'];
+                unset($_SESSION['error_messages']);
+                $this->view($errors);
+                return;
+            }
+            $formdata = $form->data;
+            unset($formdata['csrf_token']);
+            $selectedTab = $formdata['selected_tab'];
+            $gestionFront = new GestionFront();
+            $methodName = 'set' . ucfirst($selectedTab);
+            $gestionFront->$methodName(json_encode($formdata));
+            $dataString = json_encode($formdata);
+            $gestionFront->changeFront($formdata['selected_tab'], $dataString);
+            Helper::redirectTo('/back-view-gestionfront');
         }
-        $formdata = $form->data;
-        unset($formdata['csrf_token']);
-        $selectedTab = $formdata['selected_tab'];
-        $gestionFront = new GestionFront();
-        $methodName = 'set' . ucfirst($selectedTab);
-        $gestionFront->$methodName(json_encode($formdata));
-        $dataString = json_encode($formdata);
-        $gestionFront->changeFront($formdata['selected_tab'], $dataString);
-        Helper::redirectTo('/back-view-gestionfront');
     }
 
     public function createPicture(): void
     {
-
+        CheckIsAdmin::isAdmin();
+        if (Helper::methodUsed() === Helper::POST) {
             $form = new CreatePicture();
             if (!$form->isValid()) {
                 $errors = $_SESSION['error_messages'];
@@ -98,44 +106,46 @@ class GestionFronts
                 return;
             }
             $formdata = $form->data;
-             $selectedTab = $formdata['selected_tab'];
+            $selectedTab = $formdata['selected_tab'];
 
-             if($selectedTab == "banner") {
-                 //Préparation de l'image
-                 $prefix = "assets/images/gestionFront/banner/";
-                 $uploadedFile = $_FILES['picture'];
-                 $nomFichier = $formdata['picture']['name'];
-                 $tempFilePath = $uploadedFile['tmp_name'];
-
-
-             } else {
-                 //Préparation de l'image
-                 $prefix = "assets/images/gestionFront/picture-media/";
-                 $uploadedFile = $_FILES['picture'];
-                 $nomFichier = $formdata['picture']['name'];
-                 $tempFilePath = $uploadedFile['tmp_name'];
-             }
+            if ($selectedTab == "banner") {
+                //Préparation de l'image
+                $prefix = "assets/images/gestionFront/banner/";
+                $uploadedFile = $_FILES['picture'];
+                $nomFichier = $formdata['picture']['name'];
+                $tempFilePath = $uploadedFile['tmp_name'];
 
 
-        // Supprimer les images existantes dans le dossier
-        $existingFiles = glob($prefix . "*"); // Récupérer tous les fichiers d'images dans le dossier
-        foreach ($existingFiles as $file) {
-            if (is_file($file)) {
-                unlink($file); // Supprimer chaque fichier
+            } else {
+                //Préparation de l'image
+                $prefix = "assets/images/gestionFront/picture-media/";
+                $uploadedFile = $_FILES['picture'];
+                $nomFichier = $formdata['picture']['name'];
+                $tempFilePath = $uploadedFile['tmp_name'];
             }
-        }
+
+
+            // Supprimer les images existantes dans le dossier
+            $existingFiles = glob($prefix . "*"); // Récupérer tous les fichiers d'images dans le dossier
+            foreach ($existingFiles as $file) {
+                if (is_file($file)) {
+                    unlink($file); // Supprimer chaque fichier
+                }
+            }
             //Enrengsitrement de l'image
-        $destinationPath = $prefix . $nomFichier;
-        if (!move_uploaded_file($tempFilePath, $destinationPath)) {
-            array_push($_SESSION['error_messages'], "Erreur lors du téléchargement du fichier.");
-            $this->view();
-            return;
+            $destinationPath = $prefix . $nomFichier;
+            if (!move_uploaded_file($tempFilePath, $destinationPath)) {
+                array_push($_SESSION['error_messages'], "Erreur lors du téléchargement du fichier.");
+                $this->view();
+                return;
+            }
+            Helper::redirectTo('/back-view-gestionfront');
         }
-        Helper::redirectTo('/back-view-gestionfront');
     }
 
     public function getContent()
     {
+        CheckIsAdmin::isAdmin();
         $content = new GestionFront();
         $contentData = $content->getAll();
 

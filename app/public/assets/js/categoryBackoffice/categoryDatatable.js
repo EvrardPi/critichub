@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return {
                     name: row.name,
                     pictureData: '<img class="categorie-img" src="assets/images/category/' + row.name + ".png" + '" alt="Category Picture">',
-                    button: '<button type="button" class="btn btn-warning update-btn" data-id="' + row.id + '" data-bs-toggle="modal" data-bs-target="#updateModal">Modifier</button>',
+                    button: '<button type="button" class="btn btn-warning update-btn" data-id="' + row.id + '" data-bs-toggle="modal" data-bs-target="">Modifier</button>',
                     button2: '<form method="post" action="back-delete-category">' +
                         '<input type="hidden" name="id" value="' + row.id + '">' +
                         '<input type="hidden" name="name" value="' + row.name + '">' +
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         let base64Input = document.getElementById('update-form-category-base64');
                         let idInput = document.getElementById('update-form-id');
 
-                        if (name && idInput) {
+                        if (name && idInput && imagePreview) {
                             name.value = data.name;
                             imagePreview.src = 'assets/images/category/' + data.name + '.png';
                             idInput.value = userId;
@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     };
                                 }
                             });
+
                         } else {
                             console.error('Les éléments du formulaire sont introuvables.');
                         }

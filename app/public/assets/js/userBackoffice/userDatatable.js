@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     name: row.firstname + ' ' + row.lastname,
                     email: row.email,
                     role: roleText,
-                    button: '<button type="button" class="btn btn-warning update-btn" data-id="' + row.id + '" data-bs-toggle="modal" data-bs-target="#updateModal">Modifier</button>',
+                    button: '<button type="button" class="btn btn-warning update-btn" data-id="' + row.id + '" data-bs-toggle="modal" data-bs-target="">Modifier</button>',
                     button2: '<form method="post" action="back-delete-user">' +
                         '<input type="hidden" name="id" value="' + row.id + '">' +
                         '<button class="btn btn-danger" type="submit">Supprimer</button>' +

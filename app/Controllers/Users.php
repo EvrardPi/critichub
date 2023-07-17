@@ -31,69 +31,74 @@ class Users
 
     public function createUser(): void
     {
-        CheckIsAdmin::isAdmin();
-        $form = new Create();
-        if (!$form->isValid()){
-            $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
-            // var_dump($errors, $_SESSION['error_messages'], $form);
-            unset($_SESSION['error_messages']); // Supprimer les erreurs de la session
-            $this->view($errors);
-            return;
-        }
+        if (Helper::methodUsed() === Helper::POST) {
+            CheckIsAdmin::isAdmin();
+            $form = new Create();
+            if (!$form->isValid()) {
+                $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
+                // var_dump($errors, $_SESSION['error_messages'], $form);
+                unset($_SESSION['error_messages']); // Supprimer les erreurs de la session
+                $this->view($errors);
+                return;
+            }
 
-        $formdata = $form->data;
-        $user = new User();
-        if ($user->emailExists($formdata['email'])) {
-            $errors = $_SESSION['error_messages'];
-            $errors[] = "Le mail utilisé existe déjà.";
-            $this->view($errors);
-            return;
+            $formdata = $form->data;
+            $user = new User();
+            if ($user->emailExists($formdata['email'])) {
+                $errors = $_SESSION['error_messages'];
+                $errors[] = "Le mail utilisé existe déjà.";
+                $this->view($errors);
+                return;
+            }
+            $user->setFirstname($formdata['firstname']);
+            $user->setLastname($formdata['lastname']);
+            $user->setEmail($formdata['email']);
+            $user->setPassword($formdata['password']);
+            $user->setBirthDate($formdata['birth_date']);
+            $user->setRole($formdata['role']);
+            $user->setConfirm(1);
+            $user->save();
+            Helper::redirectTo('/back-view-user');
         }
-        $user->setFirstname($formdata['firstname']);
-        $user->setLastname($formdata['lastname']);
-        $user->setEmail($formdata['email']);
-        $user->setPassword($formdata['password']);
-        $user->setBirthDate($formdata['birth_date']);
-        $user->setRole($formdata['role']);
-        $user->setConfirm(1);
-        $user->save();
-        Helper::redirectTo('/back-view-user');
     }
 
 
     public function updateUser(): void
     {
-        $form = new Update();
-        if (!$form->isValid()) {
-            $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
-            unset($_SESSION['error_messages']);
-            $this->view($errors);
-            return;
-        }
-
-        $formdata = $form->data;
-        $user = User::populate($formdata['id']); // Récupérer l'utilisateur à partir de la base de données
-
-        // Vérifier si l'email a été modifié
-        if ($user->getEmail() !== $formdata['email']) {
-            if ($user->emailExists($formdata['email'])) {
-                $errors = $_SESSION['error_messages'];
-                $errors[] = "L'email utilisé existe déjà.";
+        CheckIsAdmin::isAdmin();
+        if (Helper::methodUsed() === Helper::POST) {
+            $form = new Update();
+            if (!$form->isValid()) {
+                $errors = $_SESSION['error_messages']; // Récupérer les erreurs depuis la session
+                unset($_SESSION['error_messages']);
                 $this->view($errors);
                 return;
             }
+
+            $formdata = $form->data;
+            $user = User::populate($formdata['id']); // Récupérer l'utilisateur à partir de la base de données
+
+            // Vérifier si l'email a été modifié
+            if ($user->getEmail() !== $formdata['email']) {
+                if ($user->emailExists($formdata['email'])) {
+                    $errors = $_SESSION['error_messages'];
+                    $errors[] = "L'email utilisé existe déjà.";
+                    $this->view($errors);
+                    return;
+                }
+            }
+
+            // Mettre à jour les propriétés de l'utilisateur
+            $user->setFirstname($formdata['firstname']);
+            $user->setLastname($formdata['lastname']);
+            $user->setEmail($formdata['email']);
+            $user->setRole($formdata['role']);
+            $user->setBirthDate($formdata['birth_date']);
+
+            // Enregistrer les modifications dans la base de données
+            $user->save();
+            Helper::redirectTo('/back-view-user');
         }
-
-        // Mettre à jour les propriétés de l'utilisateur
-        $user->setFirstname($formdata['firstname']);
-        $user->setLastname($formdata['lastname']);
-        $user->setEmail($formdata['email']);
-        $user->setRole($formdata['role']);
-        $user->setBirthDate($formdata['birth_date']);
-
-        // Enregistrer les modifications dans la base de données
-        $user->save();
-        Helper::redirectTo('/back-view-user');
     }
 
 
@@ -113,6 +118,7 @@ class Users
 
     public function deleteUser()
     {
+        CheckIsAdmin::isAdmin();
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 
             $id = intval($_POST['id']);
@@ -124,6 +130,7 @@ class Users
 
     public function readUser(): void
     {
+        CheckIsAdmin::isAdmin();
         $user = new User();
         $error = new Error();
 
