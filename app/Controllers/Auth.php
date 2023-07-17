@@ -12,7 +12,6 @@ use App\Models\User;
 use App\Core\Mailer;
 use App\Helper;
 use App\Middlewares\CheckAuth;
-use App\Controllers\Error;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -70,7 +69,6 @@ class Auth
             return;
         }
 
-        // Connexion réussiehttp://localhost/#
         $_SESSION['isAuth'] = true;
         $_SESSION['userId'] = $user->getId();
         $_SESSION['name'] = $user->getLastname() . " " . $user->getFirstname();
@@ -87,7 +85,7 @@ class Auth
         $view->assign("pageName", "Connexion");
     }
 
-    public function view_register(): void
+    public function viewRegister(): void
     {
         $view = new View("Auth/register", "auth");
         $form = new Register();
@@ -103,23 +101,19 @@ class Auth
             return;
         }
 
-        // Juste la View
         $form = new Register();
 
-        // Puis vérif si POST ou GET
         if (Helper::methodUsed() === Helper::POST) {
 
             if (!$form->isValid()) {
-                $this->view_register();
+                $this->viewRegister();
                 return;
             }
 
             $this->registerPost($form->getData());
-        } // else {
-            // GET
-        // }
+        }
 
-        $this->view_register();
+        $this->viewRegister();
     }
 
     public function registerPost(array $data): void
@@ -127,7 +121,7 @@ class Auth
         $captchaToken = $data['g-recaptcha-response'];
         if (!Helper::checkCaptcha($captchaToken)) {
             array_push($_SESSION['error_messages'], "Le captcha n'est pas valide.");
-            $this->view_register();
+            $this->viewRegister();
             return;
         }
 
@@ -149,7 +143,7 @@ class Auth
         header('Refresh: 5; URL=/login');
     }
 
-    public function confirmAccount()
+    public function confirmAccount(): void
     {
         if (isset($_SESSION['isAuth']) && $_SESSION['isAuth']) {
             header('Refresh: 0; URL=/');
@@ -189,7 +183,7 @@ class Auth
         $view->assign("pageName", "Confirmation de compte");
     }
 
-    public function viewForgotPwd()
+    public function viewForgotPwd(): void
     {
         $view = new View("Auth/forgotPwd", "auth");
         $forgotForm = new ForgotPwd();
@@ -197,7 +191,7 @@ class Auth
         $view->assign("pageName", "Forgot Password");
     }
 
-    public function forgotPassword()
+    public function forgotPassword(): void
     {
         $forgotForm = new ForgotPwd();
 
@@ -230,7 +224,7 @@ class Auth
         $this->viewForgotPwd();
     }
 
-    public function viewResetPassword()
+    public function viewResetPassword(): void
     {
         if (!isset($_GET['mail']) || !isset($_GET['token'])) {
             $error = new Error();
@@ -243,7 +237,7 @@ class Auth
         $view->assign("resetForm", $resetForm->getConfig());
         $view->assign("pageName", "Reset Password");
     }
-    public function resetPassword()
+    public function resetPassword(): void
     {
 
         if (!isset($_GET['mail']) || !isset($_GET['token'])) {
@@ -275,7 +269,7 @@ class Auth
     }
 
     //Génération Token -> Sécurité Reset password
-    function generateToken($length = 32)
+    function generateToken($length = 32): string
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
