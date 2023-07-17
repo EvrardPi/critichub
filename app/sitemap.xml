@@ -2,97 +2,139 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>http://localhost</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/media</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/login</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/logout</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/register</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/confirm</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/forgot</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/forgot-confirmation</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/reset-password</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/confirm-reset-password</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/404</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/403</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/500</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/401</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/410</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://localhost/elementard-view</loc>
+		<lastmod>2023-07-17</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://localhost/elementard-getdata</loc>
+		<lastmod>2023-07-17</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://localhost/elementard/read</loc>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>http://localhost/sitemap</loc>
-		<lastmod>2023-07-12</lastmod>
+		<lastmod>2023-07-17</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://localhost/legals</loc>
+		<lastmod>2023-07-17</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://localhost/confidentiality</loc>
+		<lastmod>2023-07-17</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://localhost/about-us</loc>
+		<lastmod>2023-07-17</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>http://localhost/memento</loc>
+		<lastmod>2023-07-17</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>

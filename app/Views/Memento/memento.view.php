@@ -10,16 +10,11 @@ $countMemento = new SendMemenToDb();
 $history = new History();
 $memento = new EditorMemento();
 
-//  SET ID 
-$id = $_GET['id'];
-
 //  GET ELEMENTS FROM DATABASE TO DISPLAY 
 $memento->setId($id);
 $mementoBuilder = $memento->buildMemento();
 $history->pushObj($mementoBuilder);
 $contentToDisplay = $mementoBuilder->getContent();
-
-
 
 //  RECUP ACTION CLICKED 
 $action = isset($_POST['action']) ? $_POST['action'] : '';
