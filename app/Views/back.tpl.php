@@ -2,7 +2,7 @@
 
 namespace App;
 use App\Models\User;
-use App\Controllers\Error;
+use App\Middlewares\Error;
 
 $error = new Error();
 

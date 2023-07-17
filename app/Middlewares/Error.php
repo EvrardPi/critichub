@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Middlewares;
 
 use App\Core\View;
 

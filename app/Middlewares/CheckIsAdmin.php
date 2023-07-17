@@ -2,7 +2,7 @@
 
 namespace App\Middlewares;
 
-use App\Controllers\Error;
+use App\Middlewares\Error;
 use App\Models\User;
 
 class CheckIsAdmin

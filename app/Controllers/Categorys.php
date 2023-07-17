@@ -9,7 +9,7 @@ use App\Forms\Category\UpdateCategory;
 use App\Helper;
 use App\Models\Category;
 use App\Models\User;
-
+use App\Middlewares\Error;
 
 class Categorys
 {

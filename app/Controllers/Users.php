@@ -10,7 +10,7 @@ use App\Helper;
 use App\Models\User;
 use App\Middlewares\CheckIsAdmin;
 use App\Core\SQL;
-use App\Controllers\Error;
+use App\Middlewares\Error;
 
 
 
