@@ -146,3 +146,10 @@ confidentiality:
 about-us:
   controller: Main
   action: aboutUs
+
+# Memento
+memento:
+  controller: Memento
+  action: mementoView
+
+
