@@ -10,7 +10,7 @@ use App\Helper;
 use App\Middlewares\CheckIsAdmin;
 use App\Models\Category;
 use App\Models\User;
-
+use App\Middlewares\Error;
 
 class Categorys
 {

@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Core\Mailer;
 use App\Helper;
 use App\Middlewares\CheckAuth;
+use App\Middlewares\Error;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 

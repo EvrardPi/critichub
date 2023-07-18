@@ -40,27 +40,6 @@ confirm-reset-password:
   controller: Auth
   action: resetPassword
 
-# Error pages
-404:
-  controller: Error
-  action: error404
-
-403:
-  controller: Error
-  action: error403
-
-500:
-  controller: Error
-  action: error500
-
-401:
-  controller: Error
-  action: error401
-
-410:
-  controller: Error
-  action: error410
-
 # Back
 back-read-user:
   controller: Users
