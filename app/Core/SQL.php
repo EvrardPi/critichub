@@ -13,7 +13,7 @@ abstract class SQL
         //Connexion à la bdd
         //SINGLETON à réaliser
         try {
-            $this->pdo = new \PDO("pgsql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'] . ";port=" . $_ENV['DB_PORT'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
+            $this->pdo = new \PDO("pgsql:host=" . constant('DB_HOST') . ";dbname=" . constant('DB_NAME') . ";port=" . constant('DB_PORT'), constant('DB_USER'), constant('DB_PASSWORD'));
         } catch (\Exception $e) {
             die("Erreur SQL : " . $e->getMessage());
         }

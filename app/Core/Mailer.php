@@ -53,14 +53,14 @@ class Mailer
         $mail->Port = "587";
 
         // set gmail username
-        $mail->Username = "OfficialCritichub@outlook.fr";
+        $mail->Username = constant("MAILER_MAIL");
 
         // set gmail password
-        $mail->Password = "Paya2023";
+        $mail->Password = constant("MAILER_PASSWORD");
 
         $mail->SMTPDebug = 0;
 
-        $mail->setFrom("OfficialCritichub@outlook.fr");
+        $mail->setFrom(constant("MAILER_MAIL"));
 
         return $mail;
     }

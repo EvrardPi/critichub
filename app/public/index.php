@@ -9,6 +9,8 @@ $_SESSION['error_messages'] = [];
 // On importe l'Autoloader
 require_once '../Autoloader.php';
 
+require_once '../config.php';
+
 Autoloader::registerAutoload();
 
 $_SESSION['csrf_token_next'] = Helper::generateCSRFToken();
