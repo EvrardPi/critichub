@@ -137,7 +137,7 @@ class Auth
         $user->save();
 
         // Envoi de l'e-mail de validation
-        Mailer::sendMail($user->getEmail(), "validation du compte", "Veuillez validé votre compte: http://localhost:80/confirm?key=" . $user->getConfirmKey());
+        Mailer::sendMail($user->getEmail(), "validation du compte", "Veuillez validé votre compte: https://critichub.fr/confirm?key=" . $user->getConfirmKey());
         //Helper::redirectTo('/login');
         Helper::successAlert('Votre compte a bien été créé, veuillez valider votre compte via le mail qui vous a été envoyé');
         header('Refresh: 5; URL=/login');
@@ -218,7 +218,7 @@ class Auth
         }
         $forgotToken = $this->generateToken(32);
         $tokenExpiration = time() + 300;
-        Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : http://localhost:80/reset-password?mail=" . $emailToSend . "&token=" . $forgotToken . ". La demande expirera dans 5 minutes.");
+        Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : https://critichub.fr/reset-password?mail=" . $emailToSend . "&token=" . $forgotToken . ". La demande expirera dans 5 minutes.");
         $user->updateForgotToken(['email' => $emailToSend], ['forgot_token' => $forgotToken]);
         $user->setExpirationTime(['email' => $emailToSend], ['expiration_time' => $tokenExpiration]);
         $this->viewForgotPwd();
