@@ -1,6 +1,9 @@
 <?php
 
 namespace App;
+// On inclut le fichier de configuration des constantes
+require_once '../config.php';
+
 
 class Helper
 {

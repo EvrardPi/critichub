@@ -3,6 +3,9 @@ namespace App\Views\Partials;
 
 use App\Helper;
 
+// On inclut le fichier de configuration des constantes
+require_once '../config.php';
+
 if (!isset($_SESSION['csrf_token_next'] )){
     header("Location: /");
 }

@@ -5,6 +5,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+// On inclut le fichier de configuration des constantes
+require_once '../config.php';
+
 class Mailer
 {
     static function sendMail(String $to, $subject, $message, $from = ""):void

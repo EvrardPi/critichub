@@ -2,6 +2,9 @@
 
 namespace App\Core;
 
+// On inclut le fichier de configuration des constantes
+require_once '../config.php';
+
 abstract class SQL
 {
     private static $instance;
