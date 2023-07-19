@@ -1,7 +1,6 @@
 <section id="banner-image">
     <div class="home-image-banner">
         <img class="home-image-banner-width" src="<?php echo $imageBanner; ?>" alt="Image de décor">
-
     </div>
 
     <div class="home-spacing"></div>
@@ -12,48 +11,31 @@
 </section>
 
 <section id="popular-movies">
-    <div class="popular-movies container-65">
-        <h2 class="popular-movies-title white-text">DERNIÈRES SORTIES</h2>
+    <div class="popular-movies container-90">
+        <h2 class="popular-movies-title white-text">Dernières Critiques</h2>
 
         <div class="popular-movies-list">
 
-            <div class="popular-movies-element">
-                <figure>
-                <a href="/media?id=6"><img src="/assets/images/tlou-front-pic.png" alt="Image du film"></a>
-                <figcaption class="white-text"><a href="/media?id=6">The Last Of Us</a></figcaption>
-                </figure>
-            </div>
-
-            <div class="popular-movies-element">
-                <a href="/media?id=10"><img src="/assets/images/tlou-front-pic.png" alt="Image du film"></a>
-                <figcaption class="white-text"><a href="/media?id=6">The Last Of Us</a></figcaption>
-            </div>
-            <div class="popular-movies-element">
-                <figure>
-                    <a href="/media?id=6"><img src="/assets/images/tlou-front-pic.png" alt="Image du film"></a>
-                    <figcaption class="white-text"><a href="/media?id=6">The Last Of Us</a></figcaption>
-                </figure>
-            </div>
-            <div class="popular-movies-element">
-                <figure>
-                    <a href="/media?id=6"><img src="/assets/images/tlou-front-pic.png" alt="Image du film"></a>
-                    <figcaption class="white-text"><a href="/media?id=6">The Last Of Us</a></figcaption>
-                </figure>
-            </div>
-            <div class="popular-movies-element">
-                <figure>
-                    <a href="/media?id=6"><img src="/assets/images/tlou-front-pic.png" alt="Image du film"></a>
-                    <figcaption class="white-text"><a href="/media?id=6">The Last Of Us</a></figcaption>
-                </figure>
-            </div>
-            <div class="popular-movies-element">
-                <figure>
-                    <a href="/media?id=6"><img src="/assets/images/tlou-front-pic.png" alt="Image du film"></a>
-                    <figcaption class="white-text"><a href="/media?id=6">The Last Of Us</a></figcaption>
-                </figure>
-            </div>
-            </div>
+            <!-- <a href="/media?id=1">
+                <div class="popular-movies-element">
+                    <img class="movie-img" src="/assets/images/tlou-front-pic.png" alt="Image du film">
+                    <h3 class="movie-title">The Last Of Us</h3>
+                </div>
+            </a> -->
+            <a href="/media?id=2">
+                <div class="popular-movies-element">
+                    <img class="movie-img" src="/assets/images/tlou-front-pic.png" alt="Image du film">
+                    <h3 class="movie-title">The Last Of Us</h3>
+                </div>
+            </a>
+            <a href="/media?id=3">
+                <div class="popular-movies-element">
+                    <img class="movie-img" src="/assets/images/tlou-front-pic.png" alt="Image du film">
+                    <h3 class="movie-title">The Last Of Us</h3>
+                </div>
+            </a>
         </div>
+    </div>
     </div>
 
 </section>
@@ -63,7 +45,7 @@
     <div class="event">
         <div class="event-banner">
             <h3 class="white-text">Liste des médias</h3>
-            <small class="light-gray-text">Vous cherchez un film en particulier ?  C'est ici que ça se passe !</small>
+            <small class="light-gray-text">Vous cherchez un film en particulier ? C'est ici que ça se passe !</small>
 
             <button class="button button-event">Accéder à la liste</button>
         </div>
@@ -73,4 +55,4 @@
 </section>
 
 <script type="module" src="/assets/js/gestionFront/applyFront.js"></script>
-
+<script type="module" src="/assets/js/home.js"></script>

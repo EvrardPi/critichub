@@ -18,6 +18,7 @@ class Register extends Validator
                 "class"=>"register",
                 "enctype"=>"",
                 "submit"=>"Créer",
+                "captcha" => true
             ],
             "inputs"=>[
                 "firstname"=>[

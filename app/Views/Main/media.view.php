@@ -1,6 +1,6 @@
 <?php 
 namespace App;
-use App\Controllers\Error;
+use App\Middlewares\Error;
 
     $allMediaIDs = $medias->getAllMediaIDs();
     $foundId = false;
@@ -13,7 +13,7 @@ use App\Controllers\Error;
     }
 
     if ($foundId === false) {
-        // $error = new Error();
+        $error = new Error();
         header("Location: 404");
     }
 

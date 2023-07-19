@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <?= $pageName ?>
+    </title>
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/cms-generation.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
     <link rel="stylesheet"
@@ -12,48 +18,45 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500&family=Roboto&display=swap"
         rel="stylesheet" />
-    <?php include("includes.tpl.php"); ?>
 </head>
 
 <body>
-    <main>
-        <div id="up-page"></div>
-        <header id="navbar">
-            <nav class="header">
-                <div class="logo">
-                    <img src="/assets/images/logo.svg" alt="logo">
-                    <a href="/">
-                        <h1 class="logo-title">Critic<span class="red-text">Hub</span></h1>
-                    </a>
-                </div>
 
-                <ul class="list-of-medias">
-                    <li><a href="#" class="white-text">MOVIES</a></li>
-                    <li><a href="#" class="white-text">SERIES</a></li>
-                    <li><a href="#" class="white-text">TV</a></li>
-                    <li><a href="#" class="white-text">CARTOON</a></li>
-                </ul>
+    <header id="navbar">
+        <nav class="header">
+            <div class="logo">
+                <img src="/assets/images/logo.svg" alt="logo">
+                <a href="/">
+                    <h1 class="logo-title">Critic<span class="red-text">Hub</span></h1>
+                </a>
+            </div>
 
-                <ul class="menu-nav">
-                    <?php if (isset($_SESSION['isAuth']) && $_SESSION['isAuth'] === true) : ?>
-                        <li><a href="#" class="white-text button button-register">Mon compte</a></li>
-                        <li><a href="logout" class="white-text button button-login">Déconnexion</a></li>
+            <ul class="list-of-medias">
+                <li><a href="#" class="white-text">MOVIES</a></li>
+                <li><a href="#" class="white-text">SERIES</a></li>
+                <li><a href="#" class="white-text">TV</a></li>
+                <li><a href="#" class="white-text">CARTOON</a></li>
+            </ul>
 
-                    <?php else : ?>
+            <ul class="menu-nav">
+                <?php if (isset($_SESSION['isAuth']) && $_SESSION['isAuth'] === true): ?>
+                    <li><a href="#" class="white-text button button-register">Mon compte</a></li>
+                    <li><a href="logout" class="white-text button button-login">Déconnexion</a></li>
 
-                        <li><a href="/register" class="button button-register">Inscription</a></li>
-                        <li class="login"><a href="/login" class="button button-login">Connexion</a></li>
-                    <?php endif; ?>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+                <?php else: ?>
 
-        <!-- inclure la vue -->
-        <?php include $this->view; ?>
+                    <li><a href="/register" class="button button-register">Inscription</a></li>
+                    <li class="login"><a href="/login" class="button button-login">Connexion</a></li>
+                <?php endif; ?>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
+    <!-- inclure la vue -->
+    <?php include $this->view; ?>
 
-        <footer class="footer">
+    <footer class="footer">
             <div class="waves">
                 <div class="wave" id="wave1"></div>
                 <div class="wave" id="wave2"></div>
@@ -96,9 +99,12 @@
 
             </ul>
         </footer>
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <script src="assets/js/media.js"></script>
 </body>
 
 </html>

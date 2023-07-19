@@ -10,7 +10,7 @@ class Sitemap
             die("L'extension YAML pour PHP est requise.");
         }
 
-        $baseURL = "http://localhost";
+        $baseURL = "https://critichub.fr";
         $routesFile = "../routes.yml";
         $sitemapFile = "../sitemap.xml";
 

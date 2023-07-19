@@ -4,8 +4,8 @@ default:
   action: home
 
 media:
-  controller: Main
-  action: media
+  controller: Media
+  action: mediaView
 
 # Authentification
 login:
@@ -40,27 +40,6 @@ confirm-reset-password:
   controller: Auth
   action: resetPassword
 
-# Error pages
-404:
-  controller: Error
-  action: error404
-
-403:
-  controller: Error
-  action: error403
-
-500:
-  controller: Error
-  action: error500
-
-401:
-  controller: Error
-  action: error401
-
-410:
-  controller: Error
-  action: error410
-
 # Back
 back-read-user:
   controller: Users
@@ -88,16 +67,11 @@ back-view-user:
 
 back-view-category:
   controller: Categorys
-  action: view
+  action: viewCategory
 
 back-create-category:
   controller: Categorys
   action: createCategory
-
-
-confirm:
-   controller: Auth
-   action: valideToken
 
 elementard-view:
   controller: Cms
@@ -114,6 +88,10 @@ elementard/read:
 media-getdata:
   controller: Media
   action: getMediaByID
+
+back-read-six-elementard:
+  controller: Cms
+  action: getSix
 
 back-read-category:
   controller: Categorys
@@ -150,6 +128,14 @@ back-gestion-background:
 back-gestion-picture:
   controller: GestionFronts
   action: createPicture
+  
+back-view-dashboard:
+  controller: Dashboard
+  action: viewDashboard
+  
+back-testo:
+    controller: Dashboard
+    action: createUserCreationChart
 
 back-view-elementard:
   controller: Cms
@@ -184,4 +170,10 @@ confidentiality:
 about-us:
   controller: Main
   action: aboutUs
+
+# Memento
+memento:
+  controller: Memento
+  action: mementoView
+
 
