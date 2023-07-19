@@ -9,10 +9,11 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500&family=Roboto&display=swap"
-        rel="stylesheet" />
-    <meta name="description" content="Découvrez les critiques de films, séries, TV et dessins animés sur CriticHub. Inscrivez-vous dès maintenant pour donner votre avis et partager vos recommandations.">
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Montserrat:ital@1&family=Playfair+Display&family=Roboto&display=swap"
+        rel="stylesheet">
     <?php include("includes.tpl.php"); ?>
 </head>
 
@@ -22,31 +23,26 @@
         <header id="navbar">
             <nav class="header">
                 <div class="logo">
-                    <img src="/assets/images/logo.svg" alt="logo">
                     <a href="/">
-                        <h1 class="logo-title">Critic<span class="red-text">Hub</span></h1>
+                        <img src="/assets/images/logo.png" alt="logo">
                     </a>
                 </div>
+                <div class="list-of-medias">
+                    <a href="#">Accueil</a>
+                    <a href="#">Catégorie</a>
+                    <a href="#">Reviews</a>
+                </div>
 
-                <ul class="list-of-medias">
-                    <li><a href="#" class="white-text">MOVIES</a></li>
-                    <li><a href="#" class="white-text">SERIES</a></li>
-                    <li><a href="#" class="white-text">TV</a></li>
-                    <li><a href="#" class="white-text">CARTOON</a></li>
-                </ul>
-
-                <ul class="menu-nav">
-                    <?php if (isset($_SESSION['isAuth']) && $_SESSION['isAuth'] === true) : ?>
+                <div class="menu-nav">
+                    <?php if (isset($_SESSION['isAuth']) && $_SESSION['isAuth'] === true): ?>
                         <li><a href="#" class="white-text button button-register">Mon compte</a></li>
                         <li><a href="logout" class="white-text button button-login">Déconnexion</a></li>
-
-                    <?php else : ?>
-
+                    <?php else: ?>
                         <li><a href="/register" class="button button-register">Inscription</a></li>
                         <li class="login"><a href="/login" class="button button-login">Connexion</a></li>
                     <?php endif; ?>
                     </li>
-                </ul>
+                </div>
             </nav>
         </header>
 
@@ -91,7 +87,8 @@
                 <li class="menu__item"><span class="white-text">•</span></li>
                 <li class="menu__item"><a class="menu__link" href="/legals">Mentions légales</a></li>
                 <li class="menu__item"><span class="white-text">•</span></li>
-                <li class="menu__item"><a class="menu__link" href="/confidentiality">Politique de confidentialité</a></li>
+                <li class="menu__item"><a class="menu__link" href="/confidentiality">Politique de confidentialité</a>
+                </li>
                 <li class="menu__item"><span class="white-text">•</span></li>
                 <li class="menu__item"><a class="menu__link" href="/sitemap">Sitemap</a></li>
 

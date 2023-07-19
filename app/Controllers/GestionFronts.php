@@ -145,7 +145,7 @@ class GestionFronts
 
     public function getContent()
     {
-
+        
         $content = new GestionFront();
         $contentData = $content->getAll();
 

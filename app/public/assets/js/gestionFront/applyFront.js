@@ -93,6 +93,4 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(data.h1.size);
       document.body.style.backgroundColor = data.background.color;
     });
-
-
 });

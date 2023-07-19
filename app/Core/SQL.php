@@ -298,7 +298,7 @@ abstract class SQL
 
     public function getLastSix(): array
     {
-        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " ORDER BY id DESC LIMIT 6");
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " ORDER BY id DESC LIMIT 10");
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }

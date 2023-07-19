@@ -1,5 +1,11 @@
 <div class="side-bar">
     <div class="side-bar-header">
+        <div class="close-elementard">
+            <span class="material-symbols-outlined">
+                cancel
+            </span>
+            <h3>Quitter</h3>
+        </div>
         <span class="material-symbols-outlined"> document_scanner </span>
         <h2>ELEMENTARD</h2>
     </div>
@@ -92,12 +98,6 @@
                     <button onclick="execCmd('bold')">Bold</button>
                     <button onclick="execCmd('italic')">Italic</button>
                     <button onclick="execCmd('underline')">Underline</button>
-                    <button onclick="execCmd('insertOrderedList')">
-                        Numbered List
-                    </button>
-                    <button onclick="execCmd('insertUnorderedList')">
-                        Bullet List
-                    </button>
                 </div>
                 <div class="editor" contenteditable="true" data-placeholder="Entrez votre Critique ici..."></div>
             </div>
