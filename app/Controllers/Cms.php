@@ -26,6 +26,24 @@ class Cms
         $view->assign("pageName", "Elementard");
     }
 
+    // public function readAll()
+    // {
+    //     $cms = new Elementard();
+    //     $rows = $cms->getAll();
+    //     header('Content-Type: application/json');
+    //     echo json_encode($rows);
+    // }
+    
+    public function getSix()
+    {
+        $cms = new Elementard();
+        $rows = $cms->getLastSix();
+        header('Content-Type: application/json');
+        echo json_encode($rows);
+    }
+
+
+
     public function getAjaxData()
     {
         $data = json_decode(file_get_contents('php://input'), true);

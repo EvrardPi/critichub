@@ -416,4 +416,28 @@ class Elementard extends SQL
 
         return $this;
     }
+
+    public function getAllParametres(): array
+{
+    return [
+        'background_color' => $this->background_color,
+        'categories' => $this->categories,
+        'categories_color' => $this->categories_color,
+        'critique' => $this->critique,
+        'critique_background_color' => $this->critique_background_color,
+        'date_sortie' => $this->date_sortie,
+        'director_name' => $this->director_name,
+        'font' => $this->font,
+        'font_color' => $this->font_color,
+        'font_textarea_color' => $this->font_textarea_color,
+        'image_url' => $this->image_url,
+        'movie_name' => $this->movie_name,
+        'movie_time' => $this->movie_time,
+        'note' => $this->note,
+        'slogan_movie' => $this->slogan_movie,
+        'template' => $this->template,
+        'nb_vue' => $this->nb_vue,
+        'id_user' => $this->id_user,
+    ];
+}
 }
