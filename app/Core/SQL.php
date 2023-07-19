@@ -311,4 +311,3 @@ abstract class SQL
         return $queryPrepared->fetch();
     }
 }
-}
