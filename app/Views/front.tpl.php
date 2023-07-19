@@ -12,6 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500&family=Roboto&display=swap"
         rel="stylesheet" />
+    <meta name="description" content="Découvrez les critiques de films, séries, TV et dessins animés sur CriticHub. Inscrivez-vous dès maintenant pour donner votre avis et partager vos recommandations.">
     <?php include("includes.tpl.php"); ?>
 </head>
 

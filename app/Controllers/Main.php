@@ -13,7 +13,7 @@ class Main
     public function home(): void
     {
         $view = new View("Main/home", "front");
-        $view->assign("pageName", "CriticHub");
+        $view->assign("pageName", "CriticHub - Critiques de films, séries, TV et dessins animés");
         // Récupérer l'image dans le répertoire "assets/images/gestionFront/banner/"
         $imagePath = "assets/images/gestionFront/banner/";
         $imagesBanner = glob($imagePath . "*");
