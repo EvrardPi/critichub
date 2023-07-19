@@ -223,14 +223,14 @@ footer {
   width: 100%;
 }
 .button-upload-review {
-  background: transparent;
+  background: #000;
   border: 1px solid #ffffff;
   border-radius: 8px;
   transition: all 0.3s ease;
 }
-.button-upload-review:hover {
-  background-color: #ffffff;
-  color: #111111;
+
+.memento-preview ul{
+    list-style: inside;
 }
 
 .cmsArea {

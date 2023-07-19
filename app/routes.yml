@@ -157,6 +157,10 @@ back-get-cms:
   controller: Cms
   action: getCms
 
+back-create-comments:
+  controller: Comments
+  action: createComments
+
 # Sitemap
 sitemap:
   controller: Sitemap
