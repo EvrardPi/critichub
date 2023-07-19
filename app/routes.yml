@@ -93,7 +93,6 @@ back-read-six-elementard:
   controller: Cms
   action: getSix
 
-
 back-read-category:
   controller: Categorys
   action: readCategory
@@ -137,6 +136,22 @@ back-view-dashboard:
 back-testo:
     controller: Dashboard
     action: createUserCreationChart
+
+back-view-elementard:
+  controller: Cms
+  action: viewCrud
+
+back-read-elementard:
+  controller: Cms
+  action: readAll
+
+back-delete-cms:
+  controller: Cms
+  action: deleteCms
+
+back-get-cms:
+  controller: Cms
+  action: getCms
 
 # Sitemap
 sitemap:

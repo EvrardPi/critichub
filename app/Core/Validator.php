@@ -235,9 +235,20 @@ class Validator
     {
         return strlen(trim($string)) <= $length;
     }
-  
-  
-  
+
+    public function isStringValide($string)
+        {
+            if ($string === null || $string === "") {
+                $response = array('success' => false, 'message' => 'Aucune caractère n\'a été entré');
+                echo json_encode($response);
+                exit();
+            }
+            $string = stripslashes($string); // Supprime les antislashs d'une chaîne
+            $string = htmlspecialchars($string); // Convertit les caractères spéciaux en entités HTML
+            $string = addslashes($string); // Ajoute des antislashes (\) devant les guillemets simples et doubles, aidant ainsi à prévenir les injections SQL.
+            return $string;
+        }
+
     public static function loginVerify(Mixed $user, Mixed $password): bool
     {
         if (!$user) {
@@ -257,8 +268,6 @@ class Validator
             array_push($_SESSION['error_messages'], "Compte non confirmé.");
             return false;
         }
-
         return true;
-
     }
 }

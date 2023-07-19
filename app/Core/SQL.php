@@ -304,10 +304,11 @@ abstract class SQL
     }
 
     public function getById($id): mixed
-{
-    $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE id = :id");
-    $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, get_called_class());
-    $queryPrepared->execute(['id' => $id]);
-    return $queryPrepared->fetch();
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE id = :id");
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute(['id' => $id]);
+        return $queryPrepared->fetch();
+    }
 }
 }

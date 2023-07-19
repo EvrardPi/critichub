@@ -77,6 +77,12 @@ class Cms
 
         $newPage = new Elementard();
         //faire des vérifications sur les données string
+
+        if(isset($data['id'])){
+            $newPage->setId($data['id']);
+        }
+
+
         $newPage->setBackground_color(isStringValide($data['backgroundColor'], 'background_color'));
         $newPage->setCategories(isStringValide($data['categories'], 'categories'));
         $newPage->setCategories_color(isStringValide($data['categoriesColor'], 'categories_color'));
@@ -102,6 +108,45 @@ class Cms
         // renvoyer une réponse au format JSON
         $response = array('success' => true, 'message' => 'Données enregistrées avec succès');
         echo json_encode($response);
+    }
+
+    public function viewCrud(): void
+    {
+        $view = new View("Backoffice/cmsGestion", "back");
+        $view->assign("pageName", "Backoffice-Cms");
+    }
+
+    public function readAll()
+    {
+        $cms = new Elementard();
+        $rows = $cms->getAll();
+        header('Content-Type: application/json');
+        echo json_encode($rows);
+    }
+
+    public function deleteCms()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+
+            $id = intval($_POST['id']);
+            $cms = new Elementard();
+            $cms->delete($id);
+        }
+        $this->viewCrud();
+    }
+
+    public function getCms()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $cms = new Elementard();
+            $where = ['id' => $id];
+            $cmsData = $cms->getOneWhere($where);
+            var_dump($cmsData);
+            die();
+            header('Content-Type: application/json');
+            echo json_encode($cmsData);
+        }
     }
 
 }
