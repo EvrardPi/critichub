@@ -7,7 +7,7 @@ use App\Core\View;
 
 class Elementard extends SQL
 {
-    protected int $id = 0;
+    private int $id = 0;
     protected string $background_color;
     protected string $categories;
     protected string $categories_color;

@@ -145,7 +145,6 @@ class GestionFronts
 
     public function getContent()
     {
-        CheckIsAdmin::isAdmin();
         $content = new GestionFront();
         $contentData = $content->getAll();
 

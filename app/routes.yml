@@ -80,6 +80,10 @@ elementard-view:
 elementard-getdata:
   controller: Cms
   action: getAjaxData
+
+elementard-getall:
+  controller: Cms
+  action: readAll
   
 elementard/read:
   controller: CmsUser
