@@ -56,7 +56,15 @@ document.addEventListener('DOMContentLoaded', function() {
             // Ajout du console.log lors de l'appui sur le bouton "Modifier"
             $('#myTable').on('click', '.update-btn', function() {
                 var id = $(this).data('id');
-                console.log(id);
+                console.log("Clicked ID:", id);
+
+                // Stocker la valeur dans la session
+                sessionStorage.setItem("id", id);
+
+                // Vérifier si la valeur est bien stockée dans la session
+                var storedId = sessionStorage.getItem("id");
+                console.log("Stored ID:", storedId);
+                window.location.href = '/elementard-view?id=' + storedId;
+            })
             });
         });
-});

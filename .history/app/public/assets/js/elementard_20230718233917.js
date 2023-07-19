@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  update();
   editorInit();
   inputControl();
-
+  update();
 
   //colorpicker
   const colorPicker = document.getElementById("colorPicker");
@@ -98,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let data = saveData();
         prototypeDiv.innerHTML = "";
         createTemplateHTMLPoto1();
-        afficherBadges();
         setData(data);
         editorInit();
         inputControl();
@@ -107,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let data = saveData();
         prototypeDiv.innerHTML = "";
         createTemplateHTMLPoto2();
-        afficherBadges();
         setData(data);
         editorInit();
         inputControl();
@@ -118,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let data = saveData();
         prototypeDiv.innerHTML = "";
         createTemplateHTMLPoto3();
-        afficherBadges();
         setData(data);
         editorInit();
         inputControl();
@@ -369,7 +365,14 @@ function createTemplateHTMLPoto3() {
   document.querySelector(".prototype").innerHTML = generatedHTML;
 }
 
+//Button save #########################################################
 
+let btn = document.querySelector(".save");
+btn.addEventListener("click", function () {
+  let data = saveData();
+  console.log(data);
+  sendDataToServer(data);
+});
 
 //######################################################################
 
@@ -454,30 +457,27 @@ function saveData() {
 }
 
 function setData(data) {
-  let backgroundColor = document.body.style.backgroundColor = data.backgroundColor;
-  let colorPicker = document.getElementById("colorPicker").value = rgbToHex(data.backgroundColor);
-
+  let backgroundColor = document.body.backgroundColor;
+  backgroundColor = data.backgroundColor;
 
   let critiqueDiv = document.querySelector(".critique");
 
   critiqueDiv.style.backgroundColor = data.critiqueBackgroundColor;
-  let colorPickerTwo = document.getElementById("colorPickerTwo").value = rgbToHex(data.critiqueBackgroundColor);
 
   let fontColor = document.querySelector(".prototype");
   fontColor = data.fontColor;
-
 
   let font = document.body.fontFamily;
   font = data.font;
 
   let fontTextAreaColor = document.querySelector(".critique");
   fontTextAreaColor = data.fontTextAreaColor;
+
   let movieName = document.querySelector(".movie-title"); //a gerer en api
   movieName.textContent = data.movieName;
 
   let sloganMovie = document.querySelector(".movie-slogan");
   sloganMovie.textContent = data.sloganMovie;
-  let sloganFilmInput = document.getElementById("movie-slogan").value = data.sloganMovie;
 
   let critique = document.querySelector(".critique");
   critique.innerHTML = data.critique;
@@ -493,10 +493,6 @@ function setData(data) {
 
   let note = document.querySelector(".note");
   note.textContent = data.note;
-
-  selectNote(data.note);
-
-
 
 
   let directorName = document.querySelector(".nameOfDirector");
@@ -536,7 +532,6 @@ async function getMovies(query) {
   const data = await response.json();
 
   displayResults(data.results);
-
 }
 
 function displayResults(movies) {
@@ -747,133 +742,9 @@ function sendDataToServer(data) {
 }
 
 function update() {
-  // Récupérer la valeur 'id' de l'URL
-  let url = new URL(window.location.href);
-  let id = url.searchParams.get("id");
-  console.log('mon id = ', id);
+  var storedId = sessionStorage.getItem("id");
+  if (storedId) {
 
-
-  // Préparer les données à envoyer
-  let mydata = { id: id };
-
-  // Envoie de la requête POST
-  let xhr = new XMLHttpRequest();
-
-  xhr.open("POST", "/media-getdata", true);
-
-  xhr.setRequestHeader("Content-Type", "application/json");
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      let data = JSON.parse(xhr.responseText);
-      console.log("Données reçues avec succès:", data);
-      displayMovieDetailsSpe(data);
-      let dataCamelCase = snakeToCamelCase(data);
-      setCategoriesSelectionnees(data.categories.split(","));
-      afficherBadges();
-      setData(dataCamelCase)
-      let critiqueTable = document.querySelector('.editor').innerHTML = data.critique;
-      editorInit();
-      inputControl();
-
-
-    } else if (xhr.readyState === 4) {
-      console.error(
-          "Une erreur est survenue: HTTP error! status: " + xhr.status
-      );
-    }
-  };
-
-  xhr.send(JSON.stringify(mydata));
-}
-
-
-function displayMovieDetailsSpe(data) {
-  let inputApi = document.querySelector("#search");
-  let movieTitle = document.getElementById("movie-name");
-  let movieTitleElement = document.querySelector(".movie-title");
-  let img_background = document.querySelector(".movie-img");
-  let img_backgroundTwo = document.querySelector(".img-background");
-  let directorName = document.querySelector(".nameOfDirector");
-  let dateSortie = document.querySelector("#date-sortie");
-  let movieTime = document.querySelector("#movie-time");
-
-  movieTime.textContent = `${data.movie_time} minutes`;
-
-  inputApi.value = data.movie_name;
-  movieTitle.value = data.movie_name;
-  movieTitleElement.textContent = data.movie_name;
-
-  dateSortie.textContent = data.date_sortie;
-
-  directorName.textContent = `${data.director_name}`;
-  img_background.src = data.image_url;
-  img_backgroundTwo.src = data.image_url;
-
-  // Append these to your DOM somewhere
-}
-
-
-function selectNote(valeur) {
-  // Supposons que vous ayez la valeur à sélectionner
-  var valueToSelect = valeur.toString();
-
-// Sélectionnez l'élément 'select' en utilisant son ID
-  var selectElement = document.getElementById('note');
-
-// Parcourez les options de l'élément 'select'
-  for (var i = 0; i < selectElement.options.length; i++) {
-    var option = selectElement.options[i];
-
-    // Vérifiez si la valeur de l'option correspond à la valeur à sélectionner
-    if (option.value === valueToSelect) {
-      // Définissez l'option sélectionnée
-      option.selected = true;
-      break;
-    }
   }
 }
 
-function snakeToCamelCase(data) {
-  let new_data = {};
-  for (let key in data) {
-    let words = key.split('_');
-    let new_key = words[0] + words.slice(1).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
-    new_data[new_key] = data[key];
-  }
-  return new_data;
-}
-
-
-function rgbToHex(rgb){
-  let sep = rgb.indexOf(",") > -1 ? "," : " ";
-  rgb = rgb.substr(4).split(")")[0].split(sep);
-
-  let r = (+rgb[0]).toString(16),
-      g = (+rgb[1]).toString(16),
-      b = (+rgb[2]).toString(16);
-
-  if (r.length == 1)
-    r = "0" + r;
-  if (g.length == 1)
-    g = "0" + g;
-  if (b.length == 1)
-    b = "0" + b;
-
-  return "#" + r + g + b;
-}
-
-
-//Button save #########################################################
-
-let btn = document.querySelector(".save");
-btn.addEventListener("click", function () {
-  let data = saveData();
-  let url = new URL(window.location.href);
-  let id = url.searchParams.get("id");
-  if (id) {
-    data.id = id;
-  }
-  console.log(data);
-  sendDataToServer(data);
-});

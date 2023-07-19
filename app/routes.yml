@@ -111,6 +111,10 @@ elementard/read:
   controller: CmsUser
   action: getListPage
 
+media-getdata:
+  controller: Media
+  action: getMediaByID
+
 back-read-category:
   controller: Categorys
   action: readCategory

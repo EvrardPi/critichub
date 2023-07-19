@@ -59,6 +59,12 @@ class Cms
 
         $newPage = new Elementard();
         //faire des vérifications sur les données string
+
+        if(isset($data['id'])){
+            $newPage->setId($data['id']);
+        }
+
+
         $newPage->setBackground_color(isStringValide($data['backgroundColor'], 'background_color'));
         $newPage->setCategories(isStringValide($data['categories'], 'categories'));
         $newPage->setCategories_color(isStringValide($data['categoriesColor'], 'categories_color'));
