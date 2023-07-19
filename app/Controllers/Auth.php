@@ -12,7 +12,7 @@ use App\Models\User;
 use App\Core\Mailer;
 use App\Helper;
 use App\Middlewares\CheckAuth;
-use App\Controllers\Error;
+use App\Middlewares\Error;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -50,6 +50,13 @@ class Auth
 
     public function loginPost(array $data): void
     {
+        $captchaToken = $data['g-recaptcha-response'];
+        if (!Helper::checkCaptcha($captchaToken)) {
+            array_push($_SESSION['error_messages'], "Le captcha n'est pas valide.");
+            $this->viewLogin();
+            return;
+        }
+        
         $email = $data['email'];
         $password = $data['pwd'];
 
@@ -63,7 +70,6 @@ class Auth
             return;
         }
 
-        // Connexion réussiehttp://localhost/#
         $_SESSION['isAuth'] = true;
         $_SESSION['userId'] = $user->getId();
         $_SESSION['name'] = $user->getLastname() . " " . $user->getFirstname();
@@ -80,7 +86,7 @@ class Auth
         $view->assign("pageName", "Connexion");
     }
 
-    public function view_register(): void
+    public function viewRegister(): void
     {
         $view = new View("Auth/register", "auth");
         $form = new Register();
@@ -96,27 +102,30 @@ class Auth
             return;
         }
 
-        // Juste la View
         $form = new Register();
 
-        // Puis vérif si POST ou GET
         if (Helper::methodUsed() === Helper::POST) {
 
             if (!$form->isValid()) {
-                $this->view_register();
+                $this->viewRegister();
                 return;
             }
 
             $this->registerPost($form->getData());
-        } // else {
-            // GET
-        // }
+        }
 
-        $this->view_register();
+        $this->viewRegister();
     }
 
     public function registerPost(array $data): void
     {
+        $captchaToken = $data['g-recaptcha-response'];
+        if (!Helper::checkCaptcha($captchaToken)) {
+            array_push($_SESSION['error_messages'], "Le captcha n'est pas valide.");
+            $this->viewRegister();
+            return;
+        }
+
         $user = new User();
         $user->setFirstname($data['firstname']);
         $user->setLastname($data['lastname']);
@@ -129,13 +138,13 @@ class Auth
         $user->save();
 
         // Envoi de l'e-mail de validation
-        Mailer::sendMail($user->getEmail(), "validation du compte", "Veuillez validé votre compte: http://localhost:80/confirm?key=" . $user->getConfirmKey());
+        Mailer::sendMail($user->getEmail(), "validation du compte", "Veuillez validé votre compte: https://critichub.fr/confirm?key=" . $user->getConfirmKey());
         //Helper::redirectTo('/login');
         Helper::successAlert('Votre compte a bien été créé, veuillez valider votre compte via le mail qui vous a été envoyé');
         header('Refresh: 5; URL=/login');
     }
 
-    public function confirmAccount()
+    public function confirmAccount(): void
     {
         if (isset($_SESSION['isAuth']) && $_SESSION['isAuth']) {
             header('Refresh: 0; URL=/');
@@ -175,7 +184,7 @@ class Auth
         $view->assign("pageName", "Confirmation de compte");
     }
 
-    public function viewForgotPwd()
+    public function viewForgotPwd(): void
     {
         $view = new View("Auth/forgotPwd", "auth");
         $forgotForm = new ForgotPwd();
@@ -183,7 +192,7 @@ class Auth
         $view->assign("pageName", "Forgot Password");
     }
 
-    public function forgotPassword()
+    public function forgotPassword(): void
     {
         $forgotForm = new ForgotPwd();
 
@@ -210,13 +219,13 @@ class Auth
         }
         $forgotToken = $this->generateToken(32);
         $tokenExpiration = time() + 300;
-        Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : http://localhost:80/reset-password?mail=" . $emailToSend . "&token=" . $forgotToken . ". La demande expirera dans 5 minutes.");
+        Mailer::sendMail($emailToSend, "Modification du mot de passe", "Nous vous avons envoyé ce mail car une demande de réinitialisation de mot de passe a été demandée. Vous pouvez le modifier via ce lien : https://critichub.fr/reset-password?mail=" . $emailToSend . "&token=" . $forgotToken . ". La demande expirera dans 5 minutes.");
         $user->updateForgotToken(['email' => $emailToSend], ['forgot_token' => $forgotToken]);
         $user->setExpirationTime(['email' => $emailToSend], ['expiration_time' => $tokenExpiration]);
         $this->viewForgotPwd();
     }
 
-    public function viewResetPassword()
+    public function viewResetPassword(): void
     {
         if (!isset($_GET['mail']) || !isset($_GET['token'])) {
             $error = new Error();
@@ -229,7 +238,7 @@ class Auth
         $view->assign("resetForm", $resetForm->getConfig());
         $view->assign("pageName", "Reset Password");
     }
-    public function resetPassword()
+    public function resetPassword(): void
     {
 
         if (!isset($_GET['mail']) || !isset($_GET['token'])) {
@@ -261,7 +270,7 @@ class Auth
     }
 
     //Génération Token -> Sécurité Reset password
-    function generateToken($length = 32)
+    function generateToken($length = 32): string
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);

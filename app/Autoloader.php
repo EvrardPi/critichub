@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Controllers\Error;
+use App\Middlewares\Error;
 
 class Autoloader
 {
@@ -35,6 +35,7 @@ class Autoloader
             $uri = "default";
         }
 
+
         if (!file_exists(__DIR__ ."/routes.yml")) {
             $error = new Error();
             $error->error410();
@@ -62,7 +63,7 @@ class Autoloader
         $controllerPath = str_replace("-", "/", $controller); // converti - en /
 
         if (!file_exists(__DIR__ ."/Controllers/" . $controllerPath . ".php")) {
-            $error = new Controllers\Error();
+            $error = new Error();
             $error->error500();
             exit;
             // die("Le fichier Controllers/".$controller.".php n'existe pas");
@@ -87,5 +88,9 @@ class Autoloader
         }
 
         $objController->$action();
+
+
     }
+
+
 }

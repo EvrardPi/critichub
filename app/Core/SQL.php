@@ -233,7 +233,15 @@ abstract class SQL
         return $queryPrepared->fetch();
     }
 
-    public function getUserToConfirm(string $token): mixed
+
+    public function setNewMemento($content, $id_memento): array
+    {
+        $queryPrepared = $this->pdo->prepare("INSERT INTO " . $this->table . " (id_memento, content) VALUES (:id_memento,:content)");
+        $queryPrepared->execute(['content' => $content,'id_memento' => $id_memento]);
+        return $queryPrepared->fetch();
+    }
+
+    public function getUserToConfirm(String $token): mixed
     {
         $reqConfirm = $this->pdo->prepare("SELECT id, confirm FROM " . $this->table . " WHERE confirm_key = ? LIMIT 1");
         $reqConfirm->execute(array($token));
@@ -271,12 +279,21 @@ abstract class SQL
         }
     }
 
-    public function changeFront($selectedTab, $formdata): void
+    public function getCount(string $tableName): int
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT COUNT(*) FROM " . $tableName);
+
+        $queryPrepared->execute();
+        $result = $queryPrepared->fetchColumn();
+
+        return (int) $result;
+    }
+  
+    public function changeFront($selectedTab,$formdata): void
     {
         $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET $selectedTab = :value");
         $queryPrepared->bindParam(':value', $formdata);
         $queryPrepared->execute();
-
     }
 
     public function getLastSix(): array
