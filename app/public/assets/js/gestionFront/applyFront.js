@@ -93,19 +93,4 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(data.h1.size);
       document.body.style.backgroundColor = data.background.color;
     });
-
-  let movie = document.querySelectorAll(".popular-movies-element");
-  movie.forEach(function (movieElement) {
-    movieElement.addEventListener("click", function () {
-      let imgElement = movieElement.querySelector(".movie-img");
-      let imgSrc = imgElement.getAttribute("src");
-
-      let h3Element = movieElement.querySelector(".movie-title");
-      let h3Content = h3Element.innerHTML;
-      sessionStorage.setItem("id", id);
-      sessionStorage.setItem("movie-title", h3Content);
-      //let valeur = sessionStorage.getItem("step1");
-      //let valeur = sessionStorage.getItem("step1");
-    });
-  });
 });

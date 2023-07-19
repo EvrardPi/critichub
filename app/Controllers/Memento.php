@@ -3,13 +3,17 @@
 namespace App\Controllers;
 
 use App\Core\View;
+use App\Middlewares\Error;
+use App\Models\User;
 
 class Memento
 {
     //PARTIE VUE
     public function mementoView()
     {
-        if (!isset($_GET['id'])) {
+        $user = new User();
+        $userRole = $user->getUserInfo(['email' => $_SESSION['email']]);
+        if (!isset($_GET['id']) || !isset($_SESSION['userId']) || $userRole['role'] != 1) {
             $error = new Error();
             $error->error403();
             exit();

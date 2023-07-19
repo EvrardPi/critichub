@@ -1,7 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-  update();
+  let url = new URL(window.location.href);
+  let id = url.searchParams.get("id");
+  if (id) {
+    update();
+  }
   editorInit();
   inputControl();
+  goOutElementard();
 
 
   //colorpicker
@@ -237,16 +242,12 @@ function createTemplateHTMLPoto1() {
             </div>
             <div class="social">
               <div class="social-layout">
-                <span class="material-symbols-outlined icon"> favorite </span>
-                <span>Nombre de like</span>
-              </div>
-              <div class="social-layout">
                 <span class="material-symbols-outlined icon"> comment </span>
                 <span>Nombre de commentaire</span>
               </div>
               <div class="social-layout">
                   <div class="noteContainer"><h2 class="note">4</h2><h2>/5</h2></div>
-                  <span>Note des utilisateurs</span>
+                  <span>Note du rédacteur</span>
                 </div>
             </div>
             <div class="director">
@@ -288,16 +289,12 @@ function createTemplateHTMLPoto2() {
               </div>
               <div class="social">
                 <div class="social-layout">
-                  <span class="material-symbols-outlined icon"> favorite </span>
-                  <span>Nombre de like</span>
-                </div>
-                <div class="social-layout">
                   <span class="material-symbols-outlined icon"> comment </span>
                   <span>Nombre de commentaire</span>
                 </div>
                 <div class="social-layout">
                   <div class="noteContainer"><h2 class="note">4</h2><h2>/5</h2></div>
-                  <span>Note des utilisateurs</span>
+                  <span>Note du rédacteur</span>
                 </div>
               </div>
               <div class="director">
@@ -323,27 +320,26 @@ function createTemplateHTMLPoto3() {
   function generateHTML() {
     var html = '<div class="protopage-3">';
     html += '<div class="top">';
-    html += '<img class="img-background" src="assets/images/elementard/wireframe.jpg" alt="image" />';
+    html +=
+      '<img class="img-background" src="assets/images/elementard/wireframe.jpg" alt="image" />';
     html += '<div class="overlay"></div>';
     html += '<div class="container">';
-    html += '<img class="movie-img" src="assets/images/elementard/wireframe.jpg" alt="image-movie" />';
+    html +=
+      '<img class="movie-img" src="assets/images/elementard/wireframe.jpg" alt="image-movie" />';
     html += '<div class="content">';
     html += '<h2 class="movie-title">Nom Du Film</h2>';
     html += '<div class="mini-data">';
-    html += '<h4>Date de sortie:</h4>';
+    html += "<h4>Date de sortie:</h4>";
     html += '<span id="date-sortie"></span>';
-    html += '<h4>Durée du film:</h4>';
+    html += "<h4>Durée du film:</h4>";
     html += '<span id="movie-time"></span>';
     html += '<div id="badgesContainer"></div>';
     html += "</div>";
     html += '<div class="social">';
     html += '<div class="social-layout">';
-    html += '<div class="noteContainer"><h2 class="note">4</h2><h2>/5</h2></div>';
-    html += "<span>Note des utilisateurs</span>";
-    html += "</div>";
-    html += '<div class="social-layout">';
-    html += '<span class="material-symbols-outlined icon"> favorite </span>';
-    html += "<span>Nombre de like</span>";
+    html +=
+      '<div class="noteContainer"><h2 class="note">4</h2><h2>/5</h2></div>';
+    html += "<span>Note du rédacteur</span>";
     html += "</div>";
     html += '<div class="social-layout">';
     html += '<span class="material-symbols-outlined icon"> comment </span>';
@@ -369,8 +365,6 @@ function createTemplateHTMLPoto3() {
   document.querySelector(".prototype").innerHTML = generatedHTML;
 }
 
-
-
 //######################################################################
 
 function saveData() {
@@ -390,7 +384,7 @@ function saveData() {
     note: 1,
     directorName: "",
     dateSortie: 1,
-    movieTime: 1
+    movieTime: 1,
   };
 
   let computedStyle = getComputedStyle(document.body);
@@ -423,13 +417,9 @@ function saveData() {
 
   let note = document.querySelector(".note");
 
-
   let directorName = document.querySelector(".nameOfDirector");
   let dateSortie = document.querySelector("#date-sortie");
   let movieTime = document.querySelector("#movie-time");
-
-
-
 
   data.backgroundColor = backgroundColor;
   data.critiqueBackgroundColor = critiqueDiv;
@@ -454,18 +444,20 @@ function saveData() {
 }
 
 function setData(data) {
-  let backgroundColor = document.body.style.backgroundColor = data.backgroundColor;
-  let colorPicker = document.getElementById("colorPicker").value = rgbToHex(data.backgroundColor);
-
+  let backgroundColor = (document.body.style.backgroundColor =
+    data.backgroundColor);
+  let colorPicker = (document.getElementById("colorPicker").value = rgbToHex(
+    data.backgroundColor
+  ));
 
   let critiqueDiv = document.querySelector(".critique");
 
   critiqueDiv.style.backgroundColor = data.critiqueBackgroundColor;
-  let colorPickerTwo = document.getElementById("colorPickerTwo").value = rgbToHex(data.critiqueBackgroundColor);
+  let colorPickerTwo = (document.getElementById("colorPickerTwo").value =
+    rgbToHex(data.critiqueBackgroundColor));
 
   let fontColor = document.querySelector(".prototype");
   fontColor = data.fontColor;
-
 
   let font = document.body.fontFamily;
   font = data.font;
@@ -477,11 +469,11 @@ function setData(data) {
 
   let sloganMovie = document.querySelector(".movie-slogan");
   sloganMovie.textContent = data.sloganMovie;
-  let sloganFilmInput = document.getElementById("movie-slogan").value = data.sloganMovie;
+  let sloganFilmInput = (document.getElementById("movie-slogan").value =
+    data.sloganMovie);
 
   let critique = document.querySelector(".critique");
   critique.innerHTML = data.critique;
-
 
   setCategoriesSelectionnees(data.categories.split(","));
 
@@ -496,9 +488,6 @@ function setData(data) {
 
   selectNote(data.note);
 
-
-
-
   let directorName = document.querySelector(".nameOfDirector");
   directorName.textContent = data.directorName;
 
@@ -507,7 +496,6 @@ function setData(data) {
 
   let movieTime = document.querySelector("#movie-time");
   movieTime.textContent = data.movieTime;
-
 }
 
 //API ################################################################
@@ -536,7 +524,6 @@ async function getMovies(query) {
   const data = await response.json();
 
   displayResults(data.results);
-
 }
 
 function displayResults(movies) {
@@ -599,7 +586,7 @@ function displayMovieDetails(movie, director, duration) {
   img_background.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   img_backgroundTwo.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
-  // Append these to your DOM somewhere
+  compare(movie.title);
 }
 
 //gestion des categories #######################################################
@@ -699,7 +686,6 @@ function setCategoriesSelectionnees(categoriesSelectionnees) {
   }
 }
 
-
 //send data to server
 
 function sendDataToServer(data) {
@@ -750,8 +736,7 @@ function update() {
   // Récupérer la valeur 'id' de l'URL
   let url = new URL(window.location.href);
   let id = url.searchParams.get("id");
-  console.log('mon id = ', id);
-
+  console.log("mon id = ", id);
 
   // Préparer les données à envoyer
   let mydata = { id: id };
@@ -771,22 +756,20 @@ function update() {
       let dataCamelCase = snakeToCamelCase(data);
       setCategoriesSelectionnees(data.categories.split(","));
       afficherBadges();
-      setData(dataCamelCase)
-      let critiqueTable = document.querySelector('.editor').innerHTML = data.critique;
+      setData(dataCamelCase);
+      let critiqueTable = (document.querySelector(".editor").innerHTML =
+        data.critique);
       editorInit();
       inputControl();
-
-
     } else if (xhr.readyState === 4) {
       console.error(
-          "Une erreur est survenue: HTTP error! status: " + xhr.status
+        "Une erreur est survenue: HTTP error! status: " + xhr.status
       );
     }
   };
 
   xhr.send(JSON.stringify(mydata));
 }
-
 
 function displayMovieDetailsSpe(data) {
   let inputApi = document.querySelector("#search");
@@ -813,15 +796,14 @@ function displayMovieDetailsSpe(data) {
   // Append these to your DOM somewhere
 }
 
-
 function selectNote(valeur) {
   // Supposons que vous ayez la valeur à sélectionner
   var valueToSelect = valeur.toString();
 
-// Sélectionnez l'élément 'select' en utilisant son ID
-  var selectElement = document.getElementById('note');
+  // Sélectionnez l'élément 'select' en utilisant son ID
+  var selectElement = document.getElementById("note");
 
-// Parcourez les options de l'élément 'select'
+  // Parcourez les options de l'élément 'select'
   for (var i = 0; i < selectElement.options.length; i++) {
     var option = selectElement.options[i];
 
@@ -837,31 +819,72 @@ function selectNote(valeur) {
 function snakeToCamelCase(data) {
   let new_data = {};
   for (let key in data) {
-    let words = key.split('_');
-    let new_key = words[0] + words.slice(1).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
+    let words = key.split("_");
+    let new_key =
+      words[0] +
+      words
+        .slice(1)
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join("");
     new_data[new_key] = data[key];
   }
   return new_data;
 }
 
-
-function rgbToHex(rgb){
+function rgbToHex(rgb) {
   let sep = rgb.indexOf(",") > -1 ? "," : " ";
   rgb = rgb.substr(4).split(")")[0].split(sep);
 
   let r = (+rgb[0]).toString(16),
-      g = (+rgb[1]).toString(16),
-      b = (+rgb[2]).toString(16);
+    g = (+rgb[1]).toString(16),
+    b = (+rgb[2]).toString(16);
 
-  if (r.length == 1)
-    r = "0" + r;
-  if (g.length == 1)
-    g = "0" + g;
-  if (b.length == 1)
-    b = "0" + b;
+  if (r.length == 1) r = "0" + r;
+  if (g.length == 1) g = "0" + g;
+  if (b.length == 1) b = "0" + b;
 
   return "#" + r + g + b;
 }
+
+//see if we have already a movie review
+
+function compare(nameOfMovie) {
+  var request = new XMLHttpRequest();
+
+  request.open("GET", "/elementard-getall", true);
+  request.setRequestHeader("Content-Type", "application/json");
+  request.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log("Youri a dit wouf wouf wouf");
+      let data = JSON.parse(this.responseText);
+      let mediaList = [];
+
+      data.forEach(function (obj) {
+        let media = {
+          movie_name: obj.movie_name,
+        };
+        mediaList.push(media);
+
+        // Compare movie_name with nameOfMovie
+        if (media.movie_name.toLowerCase() === nameOfMovie.toLowerCase()) {
+          alert("Le film: " + media.movie_name + " possede deja une critique. !");
+        }
+      });
+    }
+  };
+  request.onerror = function () {
+    console.error("Erreur lors de la requête de comparaison des noms de film.");
+  };
+  request.send();
+}
+
+function goOutElementard() {
+  let goOutElementardBtn = document.querySelector(".close-elementard"); 
+  goOutElementardBtn.addEventListener("click", function () {
+    window.location.href = "/";
+  });
+}
+
 
 
 //Button save #########################################################
@@ -874,6 +897,5 @@ btn.addEventListener("click", function () {
   if (id) {
     data.id = id;
   }
-  console.log(data);
   sendDataToServer(data);
 });

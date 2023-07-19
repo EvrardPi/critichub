@@ -116,6 +116,8 @@ class Users
         }
     }
 
+
+
     public function deleteUser()
     {
         CheckIsAdmin::isAdmin();

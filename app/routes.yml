@@ -84,6 +84,10 @@ elementard-view:
 elementard-getdata:
   controller: Cms
   action: getAjaxData
+
+elementard-getall:
+  controller: Cms
+  action: readAll
   
 elementard/read:
   controller: CmsUser
@@ -156,6 +160,10 @@ back-delete-cms:
 back-get-cms:
   controller: Cms
   action: getCms
+
+back-create-comments:
+  controller: Comments
+  action: createComments
 
 # Sitemap
 sitemap:

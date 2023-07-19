@@ -33,7 +33,7 @@ class Cms
     //     header('Content-Type: application/json');
     //     echo json_encode($rows);
     // }
-    
+
     public function getSix()
     {
         $cms = new Elementard();
@@ -51,20 +51,18 @@ class Cms
         function isStringValide($string, $champs)
         {
             if ($string === null || $string === "") {
-                $response = array('success' => false, 'message' => 'Aucune caractère n\'a été entré dans le champ' .' '. $champs);
+                $response = array('success' => false, 'message' => 'Aucune caractère n\'a été entré dans le champ' . ' ' . $champs);
                 echo json_encode($response);
                 exit();
             }
             $string = stripslashes($string); // Supprime les antislashs d'une chaîne
-            $string = htmlspecialchars($string); // Convertit les caractères spéciaux en entités HTML
-            $string = addslashes($string); // Ajoute des antislashes (\) devant les guillemets simples et doubles, aidant ainsi à prévenir les injections SQL.
             return $string;
         }
 
         function isIntValide($integer, $champs)
         {
             if (!is_numeric($integer)) {
-                $response = array('success' => false, 'message' => 'La valeur n\'est pas un entier valide dans le champ' .' '. $champs);
+                $response = array('success' => false, 'message' => 'La valeur n\'est pas un entier valide dans le champ' . ' ' . $champs);
                 echo json_encode($response);
                 exit();
             }
@@ -78,9 +76,11 @@ class Cms
         $newPage = new Elementard();
         //faire des vérifications sur les données string
 
-        if(isset($data['id'])){
+        if (isset($data['id']) && $data['id'] !== null) {
             $newPage->setId($data['id']);
         }
+        ;
+
 
 
         $newPage->setBackground_color(isStringValide($data['backgroundColor'], 'background_color'));
@@ -100,7 +100,7 @@ class Cms
         $newPage->setSlogan_movie(isStringValide($data['sloganMovie'], 'slogan_movie'));
         $newPage->setTemplate(isStringValide($data['template'], 'template'));
         $newPage->setNb_vue(0);
-        $newPage->setId_user(1);//récupérer l'id de l'admin connecté
+        $newPage->setId_user(1); //récupérer l'id de l'admin connecté
 
         // Enregistrez les données dans la base de données
         $newPage->save();
@@ -112,7 +112,7 @@ class Cms
 
     public function viewCrud(): void
     {
-        $view = new View("Backoffice/cmsGestion", "back");
+        $view = new View("BackOffice/cmsGestion", "back");
         $view->assign("pageName", "Backoffice-Cms");
     }
 

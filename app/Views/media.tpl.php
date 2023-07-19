@@ -22,36 +22,31 @@
 
 <body>
 
-    <header id="navbar">
-        <nav class="header">
-            <div class="logo">
-                <img src="/assets/images/logo.svg" alt="logo">
-                <a href="/">
-                    <h1 class="logo-title">Critic<span class="red-text">Hub</span></h1>
-                </a>
-            </div>
+<header id="navbar">
+            <nav class="header">
+                <div class="logo">
+                    <a href="/">
+                        <img src="/assets/images/logo.png" alt="logo">
+                    </a>
+                </div>
+                <div class="list-of-medias">
+                    <a href="#">Accueil</a>
+                    <a href="#">Catégorie</a>
+                    <a href="#">Reviews</a>
+                </div>
 
-            <ul class="list-of-medias">
-                <li><a href="#" class="white-text">MOVIES</a></li>
-                <li><a href="#" class="white-text">SERIES</a></li>
-                <li><a href="#" class="white-text">TV</a></li>
-                <li><a href="#" class="white-text">CARTOON</a></li>
-            </ul>
-
-            <ul class="menu-nav">
-                <?php if (isset($_SESSION['isAuth']) && $_SESSION['isAuth'] === true): ?>
-                    <li><a href="#" class="white-text button button-register">Mon compte</a></li>
-                    <li><a href="logout" class="white-text button button-login">Déconnexion</a></li>
-
-                <?php else: ?>
-
-                    <li><a href="/register" class="button button-register">Inscription</a></li>
-                    <li class="login"><a href="/login" class="button button-login">Connexion</a></li>
-                <?php endif; ?>
-                </li>
-            </ul>
-        </nav>
-    </header>
+                <div class="menu-nav">
+                    <?php if (isset($_SESSION['isAuth']) && $_SESSION['isAuth'] === true): ?>
+                        <li><a href="#" class="white-text button button-register">Mon compte</a></li>
+                        <li><a href="logout" class="white-text button button-login">Déconnexion</a></li>
+                    <?php else: ?>
+                        <li><a href="/register" class="button button-register">Inscription</a></li>
+                        <li class="login"><a href="/login" class="button button-login">Connexion</a></li>
+                    <?php endif; ?>
+                    </li>
+                </div>
+            </nav>
+        </header>
 
     <!-- inclure la vue -->
     <?php include $this->view; ?>

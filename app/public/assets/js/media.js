@@ -80,16 +80,12 @@ function createTemplateHTMLPoto1() {
             </div>
             <div class="social">
               <div class="social-layout">
-                <span class="material-symbols-outlined icon"> favorite </span>
-                <span>Nombre de like</span>
-              </div>
-              <div class="social-layout">
                 <span class="material-symbols-outlined icon"> comment </span>
                 <span>Nombre de commentaire</span>
               </div>
               <div class="social-layout">
                   <div class="noteContainer"><h2 class="note">4</h2><h2>/5</h2></div>
-                  <span>Note des utilisateurs</span>
+                  <span>Note du rédacteur</span>
                 </div>
             </div>
             <div class="director">
@@ -131,16 +127,12 @@ function createTemplateHTMLPoto2() {
               </div>
               <div class="social">
                 <div class="social-layout">
-                  <span class="material-symbols-outlined icon"> favorite </span>
-                  <span>Nombre de like</span>
-                </div>
-                <div class="social-layout">
                   <span class="material-symbols-outlined icon"> comment </span>
                   <span>Nombre de commentaire</span>
                 </div>
                 <div class="social-layout">
                   <div class="noteContainer"><h2 class="note">4</h2><h2>/5</h2></div>
-                  <span>Note des utilisateurs</span>
+                  <span>Note du rédacteur</span>
                 </div>
               </div>
               <div class="director">
@@ -185,11 +177,7 @@ function createTemplateHTMLPoto3() {
     html += '<div class="social-layout">';
     html +=
       '<div class="noteContainer"><h2 class="note">4</h2><h2>/5</h2></div>';
-    html += "<span>Note des utilisateurs</span>";
-    html += "</div>";
-    html += '<div class="social-layout">';
-    html += '<span class="material-symbols-outlined icon"> favorite </span>';
-    html += "<span>Nombre de like</span>";
+    html += "<span>Note du rédacteur</span>";
     html += "</div>";
     html += '<div class="social-layout">';
     html += '<span class="material-symbols-outlined icon"> comment </span>';

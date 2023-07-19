@@ -298,7 +298,7 @@ abstract class SQL
 
     public function getLastSix(): array
     {
-        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " ORDER BY id DESC LIMIT 6");
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " ORDER BY id DESC LIMIT 10");
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
@@ -310,4 +310,13 @@ abstract class SQL
         $queryPrepared->execute(['id' => $id]);
         return $queryPrepared->fetch();
     }
+
+    public function getByIdMedia($id): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE id_review = :id AND status = 2");
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute(['id' => $id]);
+        return $queryPrepared->fetchAll();
+    }
+
 }
