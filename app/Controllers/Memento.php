@@ -3,12 +3,15 @@
 namespace App\Controllers;
 
 use App\Core\View;
+use App\Middlewares\Error;
+use App\Middlewares\CheckIsAdmin;
 
 class Memento
 {
     //PARTIE VUE
     public function mementoView()
     {
+        CheckIsAdmin::isAdmin();
         if (!isset($_GET['id'])) {
             $error = new Error();
             $error->error403();

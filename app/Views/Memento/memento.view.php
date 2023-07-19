@@ -58,7 +58,7 @@ if (isset($version)) {
     <script>
         $(document).ready(function() {
         let textAreaChanger = document.getElementById("contentArea");
-        let textChanger = "<?php echo $selectedVersion; ?>";
+        let textChanger = "<?php echo trim($selectedVersion); ?>";
         console.log(textAreaChanger);
         textAreaChanger.value = textChanger;
         textAreaChanger.placeholder = textChanger;
@@ -78,7 +78,7 @@ if (isset($version)) {
             <br>
             <input id="saveInput" type="submit" class="button button-upload-review" name="action" value="save">
             <input id="undoInput" type="submit" class="button button-upload-review" name="action" value="undo">
-            <select id="selectVersionInput" onchange="this.form.submit()"    class="button button-upload-review" name="selectVersion" value="selectVersion">
+            <select id="selectVersionInput" onchange="this.form.submit()"    class="button button-upload-review" name="selectVersion" value="selectVersion" style="width:30vw;">
                 <option value="" disabled selected>Select your version</option>
                 <?php 
                 foreach ($contentToDisplay as $index => $value) {?>
@@ -88,18 +88,17 @@ if (isset($version)) {
         </form>
         </div>
 
-        <div class="preview button-create-review container-50">
+        <div class="memento-preview button-create-review container-50">
         <br>
-        <h2 class="white-text">
+        <ul class="white-text">
         <?php
         if (gettype($contentToDisplay) === "array") {
             foreach ($contentToDisplay as $memento) {
-                echo $memento;
-                echo "<br>";
+                echo "<li>" . $memento;
             }
         }
         ?>
-        </h2>
+        </ul>
         </div>
 
     </div>
@@ -139,3 +138,6 @@ $(document).ready(function() {
     });
 });
 </script>
+
+
+<script type="module" src="/assets/js/gestionFront/applyFront.js"></script>
