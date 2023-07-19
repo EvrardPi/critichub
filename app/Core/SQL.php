@@ -30,7 +30,7 @@ abstract class SQL
         return self::$instance;
     }
 
-    public static function populate(Int $id): object
+    public static function populate(int $id): object
     {
         $class = get_called_class();
         $objet = new $class();
@@ -61,28 +61,32 @@ abstract class SQL
         }
     }
 
-    public function getUserInfo(array $email): array {
+    public function getUserInfo(array $email): array
+    {
         $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE email = :email");
         $queryPrepared->execute(['email' => $email['email']]);
         $result = $queryPrepared->fetch();
         return $result;
     }
 
-    public function getMediaInfo(array $id): array {
+    public function getMediaInfo(array $id): array
+    {
         $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE id_movie = :id_movie");
         $queryPrepared->execute(['id_movie' => $id['id_movie']]);
         $result = $queryPrepared->fetch();
         return $result;
     }
 
-    public function getAllMediaIDs(): array {
+    public function getAllMediaIDs(): array
+    {
         $queryPrepared = $this->pdo->prepare("SELECT id_movie FROM " . $this->table);
         $queryPrepared->execute();
         $result = $queryPrepared->fetchAll();
         return $result;
     }
 
-    public function updateUserPwd(array $email, array $pwd): array {
+    public function updateUserPwd(array $email, array $pwd): array
+    {
         if ($this->emailExists($email['email']) === false) {
             array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
             return false;
@@ -93,7 +97,8 @@ abstract class SQL
         return $result;
     }
 
-    public function updateForgotToken(array $email, array $tokenForgot): array {
+    public function updateForgotToken(array $email, array $tokenForgot): array
+    {
         if ($this->emailExists($email['email']) === false) {
             array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
             return false;
@@ -104,7 +109,8 @@ abstract class SQL
         return $result;
     }
 
-    public function setExpirationTime(array $email, array $expiration_time): array {
+    public function setExpirationTime(array $email, array $expiration_time): array
+    {
         if ($this->emailExists($email['email']) === false) {
             array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
             return false;
@@ -115,7 +121,8 @@ abstract class SQL
         return $result;
     }
 
-    public function isTokenExpired(array $email): bool {
+    public function isTokenExpired(array $email): bool
+    {
         if ($this->emailExists($email['email']) === false) {
             array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
             return false;
@@ -130,7 +137,8 @@ abstract class SQL
         }
     }
 
-    public function isTokenValid(array $email, array $tokenForgotToVerify): bool {
+    public function isTokenValid(array $email, array $tokenForgotToVerify): bool
+    {
         if ($this->emailExists($email['email']) === false) {
             array_push($_SESSION['error_messages'], "Un problème avec votre compte est survenu.");
             return false;
@@ -171,7 +179,7 @@ abstract class SQL
         $queryPrepared->execute($columns);
     }
 
-    public function delete(Int $id): void
+    public function delete(int $id): void
     {
 
         if (is_numeric($id) && $id > 0) {
@@ -180,7 +188,7 @@ abstract class SQL
         }
     }
 
-        public function namePictureExists(array $name): bool
+    public function namePictureExists(array $name): bool
     {
         $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE picture = :picture");
         $queryPrepared->execute(['picture' => $name['picture']]);
@@ -221,9 +229,10 @@ abstract class SQL
     public function setContentIntoMemento($content, $id_memento): array
     {
         $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET content = :content  WHERE id_memento = :id_memento");
-        $queryPrepared->execute(['content' => $content,'id_memento' => $id_memento]);
+        $queryPrepared->execute(['content' => $content, 'id_memento' => $id_memento]);
         return $queryPrepared->fetch();
     }
+
 
     public function setNewMemento($content, $id_memento): array
     {
@@ -239,7 +248,7 @@ abstract class SQL
         return $reqConfirm->fetch();
     }
 
-    public function confirmAccount(Int $idUser): void
+    public function confirmAccount(int $idUser): void
     {
         $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table .
             " SET confirm = ? WHERE id = ? ");
@@ -286,4 +295,19 @@ abstract class SQL
         $queryPrepared->bindParam(':value', $formdata);
         $queryPrepared->execute();
     }
+
+    public function getLastSix(): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " ORDER BY id DESC LIMIT 6");
+        $queryPrepared->execute();
+        return $queryPrepared->fetchAll();
+    }
+
+    public function getById($id): mixed
+{
+    $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE id = :id");
+    $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, get_called_class());
+    $queryPrepared->execute(['id' => $id]);
+    return $queryPrepared->fetch();
+}
 }

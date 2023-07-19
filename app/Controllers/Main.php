@@ -19,16 +19,16 @@ class Main
         $imagesBanner = glob($imagePath . "*");
         $imageBanner = reset($imagesBanner); // Utiliser $imagesBanner ici
 
-// Ajouter le chemin de l'image à la vue
+        // Ajouter le chemin de l'image à la vue
         $view->assign("imageBanner", $imageBanner);
 
 
-// Récupérer l'image dans le répertoire "assets/images/gestionFront/picture-media/"
+        // Récupérer l'image dans le répertoire "assets/images/gestionFront/picture-media/"
         $imagePath = "assets/images/gestionFront/picture-media/";
         $imagesMedia = glob($imagePath . "*");
         $imageMedia = reset($imagesMedia); // Utiliser $imagesMedia ici
 
-// Ajouter le chemin de l'image à la vue
+        // Ajouter le chemin de l'image à la vue
         $view->assign("imageMedia", $imageMedia);
     }
 

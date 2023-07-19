@@ -235,7 +235,9 @@ class Validator
     {
         return strlen(trim($string)) <= $length;
     }
-
+  
+  
+  
     public static function loginVerify(Mixed $user, Mixed $password): bool
     {
         if (!$user) {

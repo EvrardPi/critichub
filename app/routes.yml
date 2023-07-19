@@ -4,8 +4,8 @@ default:
   action: home
 
 media:
-  controller: Main
-  action: media
+  controller: Media
+  action: mediaView
 
 # Authentification
 login:
@@ -84,6 +84,15 @@ elementard-getdata:
 elementard/read:
   controller: CmsUser
   action: getListPage
+
+media-getdata:
+  controller: Media
+  action: getMediaByID
+
+back-read-six-elementard:
+  controller: Cms
+  action: getSix
+
 
 back-read-category:
   controller: Categorys
