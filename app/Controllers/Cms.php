@@ -112,7 +112,7 @@ class Cms
 
     public function viewCrud(): void
     {
-        $view = new View("Backoffice/cmsGestion", "back");
+        $view = new View("BackOffice/cmsGestion", "back");
         $view->assign("pageName", "Backoffice-Cms");
     }
 
