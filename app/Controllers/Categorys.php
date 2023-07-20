@@ -185,14 +185,7 @@ class Categorys
             $error->error404();
             exit;          
         }
-          $userLoggedIn = new User();
-          $userStatus = $userLoggedIn->getUserInfo(['email' => $_SESSION['email']]);
-          
-          if($userStatus['role'] != 1) {
-            $error->error404();
-            exit;
-        }
-        
+
         $rows = $category->getAll();
         header('Content-Type: application/json');
 
