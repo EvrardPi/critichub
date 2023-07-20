@@ -1,0 +1,91 @@
+.unselectable {
+    -webkit-user-select: none;
+    /* Chrome/Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+ */
+    user-select: none;
+    cursor: pointer;
+}
+
+div::-webkit-scrollbar
+{
+height:7px;
+width:10px;
+
+}
+div::-webkit-scrollbar-track
+{
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+div::-webkit-scrollbar-thumb
+{
+    background-color: #8a8a8a;
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+  
+div::-webkit-scrollbar-thumb:active
+{
+    background-color: #434343;
+}
+
+/* Hide any table row with the class "hidden" */
+.hidden {
+    display: none;
+}
+
+.description {
+    display: table-cell;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table th:first-child {
+    border-radius: 8px 0 0 0 ;
+}
+
+.table th:last-child {
+    border-radius: 0 8px 0 0 ;
+}
+
+.table th {
+    background-color: #494949;
+    color: white;
+}
+
+.table td {
+    border: 1px solid #dcdcdc;
+    background-color: transparent;
+    padding: 50px 75px;
+}
+
+.table td:last-child {
+    border-right: none;
+}
+
+.table td:nth-child(4){
+    overflow-x: hidden;
+}
+
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:nth-child(odd) {
+    background-color: white;
+}
+
+tr:last-child td:first-child {
+    border-radius: 0 0 0 15px;
+    border: none;
+}
+
+tr:last-child td:last-child {
+    border-radius: 0 0 15px 0;
+    border: none;
+}
