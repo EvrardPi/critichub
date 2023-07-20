@@ -61,7 +61,7 @@ div::-webkit-scrollbar-thumb:active
 .table td {
     border: 1px solid #dcdcdc;
     background-color: transparent;
-    padding: 50px 75px;
+    padding: 15px 75px;
 }
 
 .table td:last-child {
@@ -69,9 +69,12 @@ div::-webkit-scrollbar-thumb:active
 }
 
 .table td:nth-child(4){
-    overflow-x: hidden;
+    font-weight:500;
 }
 
+.table td:nth-child(5){
+    font-weight:500;
+}
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
@@ -88,4 +91,72 @@ tr:last-child td:first-child {
 tr:last-child td:last-child {
     border-radius: 0 0 15px 0;
     border: none;
+}
+
+.table-responsive {
+    height:65vh;
+}
+
+.table-elements{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+input {
+    border:none;
+    background-color: #f33434;
+    box-shadow: 0 5px 20px #ff7c7c, 0 0 0 10px #ffffffeb;
+    color: white;
+    padding: 5px 5px;
+    border-radius: 7px;
+    font-size:24px; 
+    font-weight:500;
+
+}
+
+input:focus {
+    outline: none;
+}
+
+input::placeholder{
+    color: #ffffffeb;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-weight:500;
+
+}
+
+.input-cover{
+    padding:10px;
+    border-radius:15px;
+}
+
+select{
+    position: relative;
+    border: 4px solid #333333;
+    background-color: transparent;
+    color: #333333;
+    padding: 15px 15px;
+    font-weight: 700;
+    line-height: 20px;
+    font-size: 20px;
+    outline: none;
+    border-radius: 0;
+    text-align: start;    
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+select option{
+    font-weight:500;
+}
+
+footer{
+    margin-top: 500px;
+}
+
+.mrg-rgt-search {
+    margin-right: 10rem;
 }

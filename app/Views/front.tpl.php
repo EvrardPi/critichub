@@ -28,9 +28,8 @@
                     </a>
                 </div>
                 <div class="list-of-medias">
-                    <a href="#">Accueil</a>
-                    <a href="#">Catégorie</a>
-                    <a href="#">Reviews</a>
+                    <a href="/">Accueil</a>
+                    <a href="reviews">Critiques</a>
                 </div>
 
                 <div class="menu-nav">
