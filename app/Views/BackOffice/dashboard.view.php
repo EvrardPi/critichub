@@ -41,7 +41,8 @@
                 <?php echo $checkComment; ?>
             </span>
         </p>
-        <a href="#" class="card-link">Aller gérer les commentaires -></a>
+        <a href="/back-view-comments" class="card-link">Aller gérer les commentaires -></a>
+
     </div>
 
     <!-- Statistique affichage de graphique -->

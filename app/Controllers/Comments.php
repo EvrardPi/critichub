@@ -60,6 +60,7 @@ class Comments
         // Récupérer les commentaires vérifiés
         $rows = $comments->getAllCommentsToVerify();
 
+
         // Créer un tableau pour stocker les données des commentaires
         $commentData = [];
 
