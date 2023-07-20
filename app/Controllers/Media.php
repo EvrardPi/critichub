@@ -23,20 +23,29 @@ class Media
         $user = new User();
 
         $commentData = [];
-        foreach ($commentsData as $comment) {
-            $userId = $comment->getIdUser();
-            $userInfo = $user->getById($userId);
-            $firstName = $userInfo->getFirstName();
-            $lastName = $userInfo->getLastName();
-            $content = $comment->getContent();
-            $createdAt = $comment->getCreatedAt();
+        if ($commentsData !== null) {
+            $user = new User();
+            foreach ($commentsData as $comment) {
+                $userId = $comment->getIdUser();
+                $userInfo = $userId ? $user->getById($userId) : null;
+                $firstName = $userInfo ? $userInfo->getFirstName() : null;
+                $lastName = $userInfo ? $userInfo->getLastName() : null;
+                $content = $comment->getContent();
+                $createdAt = $comment->getCreatedAt();
 
-            $commentData[] = [
-                'firstName' => $firstName,
-                'lastName' => $lastName,
-                'content' => $content,
-                'createdAt' => $createdAt
-            ];
+                // Si $userId est null, on remplace $firstName et $lastName par "Anonyme"
+                if ($userId === null) {
+                    $firstName = "Anonyme";
+                    $lastName = "";
+                }
+
+                $commentData[] = [
+                    'firstName' => $firstName,
+                    'lastName' => $lastName,
+                    'content' => $content,
+                    'createdAt' => $createdAt,
+                ];
+            }
         }
 
         $view->assign("commentData", $commentData);
@@ -55,9 +64,30 @@ class Media
         $id = $postData['id'];
       
         $data = $media->getById($id);
-
+    
         // Envoyer les données en réponse
         header('Content-Type: application/json');
         echo json_encode($data->getAllParametres());
+    }
+    
+    public function addVue()
+    {
+        $media = new Elementard();
+
+        // Récupérer les données JSON envoyées
+        $json = file_get_contents('php://input');
+        // Décoder les données JSON en tableau
+        $postData = json_decode($json, true);
+
+        $id = $postData['id'];
+      
+        $media->incrementViews($id);
+
+        // Envoyer les données en réponse
+        header('Content-Type: application/json');
+
+         // renvoyer une réponse au format JSON
+         $response = array('success' => true, 'message' => 'vue Incrementé');
+         echo json_encode($response);
     }
 }

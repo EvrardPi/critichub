@@ -14,6 +14,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Montserrat:ital@1&family=Playfair+Display&family=Roboto&display=swap"
         rel="stylesheet">
+    <meta name="description" content="Découvrez les meilleures critiques de films sur Critichub. Consultez les avis des utilisateurs et partagez vos propres critiques. Rejoignez la communauté cinéphile dès maintenant.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="critiques de films, avis, cinéphile, critiques en ligne, films, cinéma">
+    <meta name="author" content="CriticHub">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Critichub - Votre plateforme de critiques de films en ligne">
+    <meta property="og:description" content="Découvrez les meilleures critiques de films sur Critichub. Consultez les avis des utilisateurs et partagez vos propres critiques. Rejoignez la communauté cinéphile dès maintenant.">
+    <meta property="og:image" content="https://www.votresite.com/assets/images/logo.svg">
+    <meta property="og:url" content="https://critichub.fr">
+
     <?php include("includes.tpl.php"); ?>
 </head>
 
@@ -28,9 +38,8 @@
                     </a>
                 </div>
                 <div class="list-of-medias">
-                    <a href="#">Accueil</a>
-                    <a href="#">Catégorie</a>
-                    <a href="#">Reviews</a>
+                    <a href="/">Accueil</a>
+                    <a href="reviews">Critiques</a>
                 </div>
 
                 <div class="menu-nav">

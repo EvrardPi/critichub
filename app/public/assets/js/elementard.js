@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (id) {
     update();
   }
+  getCategorie();
   editorInit();
   inputControl();
   goOutElementard();
@@ -387,13 +388,12 @@ function saveData() {
   };
 
   let computedStyle = getComputedStyle(document.body);
-  let backgroundColor = computedStyle.backgroundColor;
+ 
 
-  let critiqueDiv = document.querySelector(".critique");
-  critiqueDiv = window.getComputedStyle(critiqueDiv).backgroundColor;
 
-  let fontColor = document.querySelector(".prototype");
-  fontColor = window.getComputedStyle(fontColor).color;
+ 
+
+
 
   let font = document.querySelector(".fontFamily");
   data.font = font.value;
@@ -402,8 +402,7 @@ function saveData() {
     'input[name="inlineRadioOptions"]:checked'
   ).value;
 
-  let fontTextAreaColor = document.querySelector(".critique");
-  fontTextAreaColor = window.getComputedStyle(fontTextAreaColor).color;
+ 
 
   let movieName = document.querySelector(".movie-title").textContent;
   let sloganMovie = document.querySelector(".movie-slogan").textContent;
@@ -420,18 +419,24 @@ function saveData() {
   let dateSortie = document.querySelector("#date-sortie");
   let movieTime = document.querySelector("#movie-time");
 
-  data.backgroundColor = backgroundColor;
-  data.critiqueBackgroundColor = critiqueDiv;
-  data.fontColor = fontColor;
-  data.fontTextAreaColor = fontTextAreaColor;
+  let colorPicker = document.getElementById("colorPicker");
+  let colorPickerTwo = document.getElementById("colorPickerTwo");
+  let colorPickerThree = document.getElementById("colorPickerThree");
+  let colorPickerFour = document.getElementById("colorPickerFour");
+  let colorPickerFive = document.getElementById("colorPickerFive");
+
+
+  data.backgroundColor = colorPicker.value;
+  data.critiqueBackgroundColor = colorPickerTwo.value;
+  data.fontColor = colorPickerThree.value;
+  data.fontTextAreaColor = colorPickerFour.value;
   data.template = selectedOption;
   data.movieName = movieName;
   data.sloganMovie = sloganMovie;
   data.critique = critique;
+  data.categoriesColor = colorPickerFive.value;
   if (categoriesSelectionnees.length > 0) {
     data.categories = categoriesSelectionnees.join(",");
-    let badges = document.querySelectorAll(".badge");
-    data.categoriesColor = window.getComputedStyle(badges[0]).backgroundColor;
   }
   data.imageUrl = img_background.src;
   data.note = parseInt(note.textContent);
@@ -590,17 +595,42 @@ function displayMovieDetails(movie, director, duration) {
 
 //gestion des categories #######################################################
 
-var categories = {
-  action: "Action",
-  comedy: "Comedy",
-  drama: "Drama",
-  thriller: "Thriller",
-  horror: "Horror",
-  romance: "Romance",
-  western: "Western",
-  animation: "Animation",
-  documentary: "Documentary",
-};
+function getCategorie() {
+  var request = new XMLHttpRequest();
+
+  request.open("GET", "/back-read-category", true);
+  request.setRequestHeader("Content-Type", "application/json");
+  request.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let data = JSON.parse(this.responseText);
+      var categoryFix = createCategoryObject(getCategoryNames(data));
+      var optionsHtml = genererOptionsCategories(categoryFix);
+      document.getElementById("optionsCategories").innerHTML = optionsHtml;
+      // Écoutez les événements de changement de coche pour mettre à jour les badges
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener("change", afficherBadges);
+      }
+    }
+  };
+  request.onerror = function () {
+    console.error("An error occurred during the transaction");
+  };
+  request.send();
+}
+
+function getCategoryNames(dataArray) {
+  return dataArray.map((item) => item.name);
+}
+
+function createCategoryObject(categoryNames) {
+  let categories = {};
+  categoryNames.forEach((name) => {
+    let key = name.toLowerCase().replace(/ /g, "-"); // convertir en minuscules et remplacer les espaces par des tirets
+    categories[key] = name;
+  });
+  return categories;
+}
 
 function genererOptionsCategories(categories) {
   var optionsHtml = "";
@@ -625,9 +655,6 @@ function genererOptionsCategories(categories) {
 
   return optionsHtml;
 }
-
-var optionsHtml = genererOptionsCategories(categories);
-document.getElementById("optionsCategories").innerHTML = optionsHtml;
 
 function genererBadges(options) {
   var badgesHtml = "";
@@ -655,12 +682,6 @@ function afficherBadges() {
 
   var badgesContainer = document.getElementById("badgesContainer");
   badgesContainer.innerHTML = genererBadges(options);
-}
-
-// Écoutez les événements de changement de coche pour mettre à jour les badges
-var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-for (var i = 0; i < checkboxes.length; i++) {
-  checkboxes[i].addEventListener("change", afficherBadges);
 }
 
 function getCategoriesSelectionnees() {
