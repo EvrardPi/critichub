@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Récupérer la valeur 'id' de l'URL
   let url = new URL(window.location.href);
   let id = url.searchParams.get("id");
-  
 
   // Préparer les données à envoyer
   let mydata = { id: id };
@@ -20,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       let data = JSON.parse(xhr.responseText);
       console.log("Données reçues avec succès:", data);
-      generate(data)
+      generate(data);
     } else if (xhr.readyState === 4) {
       console.error(
         "Une erreur est survenue: HTTP error! status: " + xhr.status
@@ -49,7 +48,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     setData(mediaLoad);
+    nombreDeCommentaires();
   }
+
+  // sélectionner le bouton et le champ de texte du commentaire
+  const commentButton = document.querySelector(".btn-comment");
+  const commentInput = document.querySelector(".add_comment");
+
+  // sélectionner l'input et le bouton du formulaire
+  const formInput = document.querySelector("#create-form-comment-content");
+  const formButton = document.querySelector(".submit");
+
+  console.log(commentButton, commentInput, formInput, formButton);
+  // Ajouter un écouteur d'événement pour le bouton du commentaire
+  commentButton.addEventListener("click", function () {
+    // Copier le texte du commentaire dans le formulaire
+    formInput.value = commentInput.value;
+
+    alert("Votre commentaire a bien été ajouté et en attente de validation");
+    // Simuler un clic sur le bouton du formulaire
+    formButton.click();
+  });
 });
 
 function createTemplateHTMLPoto1() {
@@ -81,7 +100,7 @@ function createTemplateHTMLPoto1() {
             <div class="social">
               <div class="social-layout">
                 <span class="material-symbols-outlined icon"> comment </span>
-                <span>Nombre de commentaire</span>
+                <span id="nbrComment">Nombre de commentaire</span>
               </div>
               <div class="social-layout">
                   <div class="noteContainer"><h2 class="note">4</h2><h2>/5</h2></div>
@@ -128,7 +147,7 @@ function createTemplateHTMLPoto2() {
               <div class="social">
                 <div class="social-layout">
                   <span class="material-symbols-outlined icon"> comment </span>
-                  <span>Nombre de commentaire</span>
+                  <span id="nbrComment">Nombre de commentaire</span>
                 </div>
                 <div class="social-layout">
                   <div class="noteContainer"><h2 class="note">4</h2><h2>/5</h2></div>
@@ -181,7 +200,7 @@ function createTemplateHTMLPoto3() {
     html += "</div>";
     html += '<div class="social-layout">';
     html += '<span class="material-symbols-outlined icon"> comment </span>';
-    html += "<span>Nombre de commentaire</span>";
+    html += "<span id='nbrComment'>Nombre de commentaire</span>";
     html += "</div>";
     html += "</div>";
     html += '<h3 class="movie-slogan">Slogan du film</h3>';
@@ -204,8 +223,7 @@ function createTemplateHTMLPoto3() {
 }
 
 function setData(data) {
-
- document.body.style.backgroundColor = data.background_color;
+  document.body.style.backgroundColor = data.background_color;
 
   let critiqueDiv = document.querySelector(".critique");
 
@@ -252,10 +270,26 @@ function setData(data) {
 }
 
 function setCategoriesSelectionnees(categoriesSelectionnees) {
-    var checkboxes = document.querySelectorAll(".category");
-  
-    for (var i = 0; i < checkboxes.length; i++) {
-      var checkboxValue = checkboxes[i].value;
-      checkboxes[i].checked = categoriesSelectionnees.includes(checkboxValue);
-    }
+  var checkboxes = document.querySelectorAll(".category");
+
+  for (var i = 0; i < checkboxes.length; i++) {
+    var checkboxValue = checkboxes[i].value;
+    checkboxes[i].checked = categoriesSelectionnees.includes(checkboxValue);
   }
+}
+
+function nombreDeCommentaires() {
+  // Sélectionner tous les éléments de classe 'commentaire-content'
+  const commentElements = document.querySelectorAll(".commentaire-content");
+
+  // Compter le nombre d'éléments de commentaire
+  const commentCount = commentElements.length;
+
+  // Sélectionner l'élément qui affichera le nombre de commentaires
+  const displayElement = document.querySelector("#nbrComment");
+
+  console.log(displayElement);
+
+  // Mettre à jour le contenu de l'élément avec le nombre de commentaires
+  displayElement.innerHTML = commentCount;
+}
