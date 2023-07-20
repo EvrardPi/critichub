@@ -82,7 +82,6 @@ class Cms
         ;
 
 
-
         $newPage->setBackground_color(isStringValide($data['backgroundColor'], 'background_color'));
         $newPage->setCategories(isStringValide($data['categories'], 'categories'));
         $newPage->setCategories_color(isStringValide($data['categoriesColor'], 'categories_color'));
@@ -100,7 +99,7 @@ class Cms
         $newPage->setSlogan_movie(isStringValide($data['sloganMovie'], 'slogan_movie'));
         $newPage->setTemplate(isStringValide($data['template'], 'template'));
         $newPage->setNb_vue(0);
-        $newPage->setId_user(1); //récupérer l'id de l'admin connecté
+        $newPage->setId_user($_SESSION['userId']); //récupérer l'id de l'admin connecté
 
         // Enregistrez les données dans la base de données
         $newPage->save();
