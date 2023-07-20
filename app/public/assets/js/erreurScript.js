@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let x = (window.innerWidth - e.pageX * speed) / 100
         let y = (window.innerHeight - e.pageY * speed) / 100
         img.style.transform = `translate(${x}px,${y}px)`
-      })
+      })  
     }
     document.addEventListener('mousemove', mouseAnimation)
   });

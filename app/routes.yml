@@ -1,31 +1,26 @@
+# Main 
 default:
   controller: Main
   action: home
 
 media:
-  controller: Main
-  action: media
-  
-create-review:
+  controller: Media
+  action: mediaView
+
+reviews:
+  controller: Reviews
+  action: allReviews
+
+# API
+read-ten-elementard:
   controller: Cms
-  action: userReview
+  action: getTen
 
-new-admin-review:
-  controller: Cms
-  action: adminReview
+media-getdata:
+  controller: Media
+  action: getMediaByID
 
-a-propos:
-  controller: Main
-  action: aboutUs
-
-about-us:
-  controller: Main
-  action: aboutUs
-
-contact:
-  controller: Main
-  action: contact
-
+# Authentification
 login:
   controller: Auth
   action: login
@@ -34,65 +29,181 @@ logout:
   controller: Auth
   action: logout
 
-s-inscrire:
-  controller: Auth
-  action: view
-
-404:
-  controller: Error
-  action: error404  
-
-403:
-  controller: Error
-  action: error403
-
-500:
-  controller: Error
-  action: error500
-
-401:
-  controller: Error
-  action: error401
-
-410:
-  controller: Error
-  action: error410
-
-backoffice:
-  controller: Users
-  action: readUser
-
-create:
-  controller: Users
-  action: createUser
-
-delete:
-  controller: Users
-  action: deleteUser
-
-update:
-  controller: Users
-  action: updateUser
-
-user:
-  controller: Users
-  action: getUser
-
-read:
-  controller: Users
-  action: readUser
-
-view:
-  controller: Users
-  action: view
-
 register:
   controller: Auth
   action: register
 
 confirm:
-   controller: Auth
-   action: valideToken
+  controller: Auth
+  action: confirmAccount
+
+forgot:
+  controller: Auth
+  action: viewForgotPwd
+
+forgot-confirmation:
+  controller: Auth
+  action: forgotPassword
+
+reset-password:
+  controller: Auth
+  action: viewResetPassword
+
+confirm-reset-password:
+  controller: Auth
+  action: resetPassword
+
+# Back
+back-read-user:
+  controller: Users
+  action: readUser
+
+back-create-user:
+  controller: Users
+  action: createUser
+
+back-delete-user:
+  controller: Users
+  action: deleteUser
+
+back-update-user:
+  controller: Users
+  action: updateUser
+
+back-get-user:
+  controller: Users
+  action: getUser
+
+back-view-user:
+  controller: Users
+  action: view
+
+back-view-category:
+  controller: Categorys
+  action: viewCategory
+
+back-create-category:
+  controller: Categorys
+  action: createCategory
+
+back-create-elementard:
+  controller: Cms
+  action: cmsView
+
+back-getdata-elementard:
+  controller: Cms
+  action: getAjaxData
+
+back-getall-elementard:
+  controller: Cms
+  action: readAll
+
+back-read-category:
+  controller: Categorys
+  action: readCategory
+
+back-delete-category:
+  controller: Categorys
+  action: deleteCategory
+
+back-update-category:
+  controller: Categorys
+  action: updateCategory
+
+back-get-category:
+  controller: Categorys
+  action: getCategory
+
+back-view-gestionfront:
+  controller: GestionFronts
+  action: view
+
+back-create-gestionfront:
+  controller: GestionFronts
+  action: createContent
+
+back-get-content:
+  controller: GestionFronts
+  action: getContent
+
+back-gestion-background:
+  controller: GestionFronts
+  action: createBackground
+
+back-gestion-picture:
+  controller: GestionFronts
+  action: createPicture
+  
+back-view-dashboard:
+  controller: Dashboard
+  action: viewDashboard
+  
+back-testo:
+    controller: Dashboard
+    action: createUserCreationChart
+
+back-view-elementard:
+  controller: Cms
+  action: viewCrud
+
+back-read-elementard:
+  controller: Cms
+  action: readAll
+
+back-delete-cms:
+  controller: Cms
+  action: deleteCms
+
+back-get-cms:
+  controller: Cms
+  action: getCms
+
+back-create-comments:
+  controller: Comments
+  action: createComments
+
+back-view-comments:
+  controller: Comments
+  action: viewComments
+
+back-read-comments:
+  controller: Comments
+  action: readComments
+
+back-read-valid-comments:
+  controller: Comments
+  action: readValidComments
+
+back-delete-comments:
+  controller: Comments
+  action: deleteComments
+
+back-publish-comments:
+  controller: Comments
+  action: publishComments
+
+# Sitemap
+sitemap:
+  controller: Sitemap
+  action: sitemap
+
+# Footer
+legals:
+  controller: Main
+  action: legals
+
+confidentiality:
+  controller: Main
+  action: confidentiality
+
+about-us:
+  controller: Main
+  action: aboutUs
+
+# Memento
+memento:
+  controller: Memento
+  action: mementoView
 
 installer/setdata:
   controller: Installer

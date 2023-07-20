@@ -28,9 +28,9 @@ RUN usermod -u 1000 www-data && a2enmod rewrite
 #USER www-data
 #RUN composer install
 
-WORKDIR /var/www/html
+WORKDIR /var/www
 
-COPY --chown=www-data:www-data app/* .
+COPY --chown=www-data:www-data app html
 
 #USER root
 # Réglage des droits utilisateurs du projet

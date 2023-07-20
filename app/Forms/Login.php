@@ -22,6 +22,7 @@ class Login extends Validator
                 "enctype" => "",
                 "submit" => "Se connecter",
                 "reset" => "Annuler",
+                "captcha" => true
             ],
             "inputs" => [
                 "email" => [
@@ -40,6 +41,18 @@ class Login extends Validator
                     "error" => "Connexion échouée",
                     "required" => true
                 ],
+            ],
+            "links" => [
+                "forgot" => [
+                    "class" => "button-link-forgot",
+                    "href" => "/forgot",
+                    "text" => "Mot de passe oublié ?",
+                ],
+                "register" => [
+                    "class" => "button-link-register",
+                    "href" => "/register",
+                    "text" => "S'incrire",
+                ]
             ]
         ];
     }

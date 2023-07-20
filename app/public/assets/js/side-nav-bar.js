@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         menu.style.maxHeight = "0px";
         menu.previousElementSibling
           .querySelector(".drop")
-          .classList.remove("rotate");
+          ;
       });
     }
 
@@ -18,14 +18,12 @@ document.addEventListener("DOMContentLoaded", function () {
         btn.addEventListener("click", function () {
           let subMenu = this.nextElementSibling;
           let isHidden = window.getComputedStyle(subMenu).maxHeight === "0px";
-          let leftArrow = this.querySelector(".drop");
           closeOpenSubMenus();
           if (isHidden) {
             subMenu.style.maxHeight = subMenu.scrollHeight + "px";
-            leftArrow.classList.add("rotate");
           } else {
             subMenu.style.maxHeight = "0px";
-            leftArrow.classList.remove("rotate");
+            
           }
         });
       });

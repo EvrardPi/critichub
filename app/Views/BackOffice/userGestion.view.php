@@ -1,5 +1,21 @@
-<table id="myTable" class="table table-striped" style="width:100%">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" ">
+<div class="userGestionContainer">
+    <div class="userGestion">
+        <?php if (!empty($errors)): ?>
+            <div class="errors alert alert-danger">
+                <ul>
+                    <?php foreach ($errors as $error): ?>
+                        <li>
+                            <?php echo $error; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+
+        <table id="myTable" class="table table-striped" style="width:100%">
+            <button type="button" class="btn btn-success btn-spacing" data-bs-toggle="modal"
+                data-bs-target="#createModal" ">
     Créer un nouvel utilisateur
     </button>
     <thead>
@@ -13,31 +29,33 @@
     </thead>
     <tbody>
     </tbody>
-</table>
-
-<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Création d'un utilisateur</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <?php $this->partial("form", $createForm) ?>
-            </div>
-        </div>
-    </div>
+</table>       
 </div>
 
-<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <?php $this->partial("form", $updateForm) ?>
+<div class=" modal fade" id="createModal" tabindex="-1" aria-labelledby="createModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Création d'un utilisateur</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <?php $this->partial("form", $createForm) ?>
+                        </div>
+                    </div>
+                </div>
+    </div>
+
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php $this->partial("form", $updateForm) ?>
+                </div>
             </div>
         </div>
     </div>
@@ -52,6 +70,5 @@
 
 
 </body>
+
 </html>
-
-
