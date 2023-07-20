@@ -30,6 +30,10 @@ if($userStatus['role'] != 1) {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
   <link rel="stylesheet" href="/assets/css/side-nav-bar.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+  <link rel="stylesheet" href="/assets/css/gestionFront.css">
+  <link rel="stylesheet" href="/assets/css/mediaBack.css">
+  <link rel="stylesheet" href="/assets/css/userGestion.css">
   <?php include("includes.tpl.php"); ?>
 </head>
 

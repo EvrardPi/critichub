@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   inputControl();
   goOutElementard();
 
-
   //colorpicker
   const colorPicker = document.getElementById("colorPicker");
   colorPicker.addEventListener("change", function () {
@@ -693,7 +692,7 @@ function sendDataToServer(data) {
   const sendRequest = new Promise(function (resolve, reject) {
     // Envoyer les données via AJAX
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "elementard-getdata", true);
+    xhr.open("POST", "back-getdata-elementard", true);
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onload = function () {
@@ -851,7 +850,7 @@ function rgbToHex(rgb) {
 function compare(nameOfMovie) {
   var request = new XMLHttpRequest();
 
-  request.open("GET", "/elementard-getall", true);
+  request.open("GET", "/back-getall-elementard", true);
   request.setRequestHeader("Content-Type", "application/json");
   request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -867,7 +866,9 @@ function compare(nameOfMovie) {
 
         // Compare movie_name with nameOfMovie
         if (media.movie_name.toLowerCase() === nameOfMovie.toLowerCase()) {
-          alert("Le film: " + media.movie_name + " possede deja une critique. !");
+          alert(
+            "Le film: " + media.movie_name + " possede deja une critique. !"
+          );
         }
       });
     }
@@ -879,13 +880,11 @@ function compare(nameOfMovie) {
 }
 
 function goOutElementard() {
-  let goOutElementardBtn = document.querySelector(".close-elementard"); 
+  let goOutElementardBtn = document.querySelector(".close-elementard");
   goOutElementardBtn.addEventListener("click", function () {
     window.location.href = "/";
   });
 }
-
-
 
 //Button save #########################################################
 
