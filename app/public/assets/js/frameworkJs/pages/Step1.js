@@ -14,7 +14,13 @@ export default function Step1() {
             },
           },
           { type: "title", children: ["Installer"] },
-          { type: "link", attributes: { rel: "stylesheet", href: "/assets/css/installer.css" } },
+          {
+            type: "link",
+            attributes: {
+              rel: "stylesheet",
+              href: "/assets/css/installer.css",
+            },
+          },
           {
             type: "link",
             attributes: {
@@ -33,8 +39,7 @@ export default function Step1() {
           {
             type: "link",
             attributes: {
-              href:
-                "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500&family=Roboto&display=swap",
+              href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500&family=Roboto&display=swap",
               rel: "stylesheet",
             },
           },
@@ -42,8 +47,7 @@ export default function Step1() {
             type: "link",
             attributes: {
               rel: "stylesheet",
-              href:
-                "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
+              href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200",
             },
           },
         ],
@@ -88,7 +92,7 @@ export default function Step1() {
                     type: "h3",
                     children: [
                       { type: "span", children: ["Étape 1:"] },
-                      " Entrer les informations de votre base de données",
+                      " Entrer les informations",
                     ],
                   },
                   {
@@ -96,7 +100,10 @@ export default function Step1() {
                     attributes: { class: "form-input" },
                     children: [
                       { type: "span", children: ["DB_HOST:"] },
-                      { type: "input", attributes: { type: "text", placeholder: "DB_HOST" } },
+                      {
+                        type: "input",
+                        attributes: { type: "text", placeholder: "DB_HOST" },
+                      },
                     ],
                   },
                   {
@@ -104,7 +111,10 @@ export default function Step1() {
                     attributes: { class: "form-input" },
                     children: [
                       { type: "span", children: ["DB_PORT:"] },
-                      { type: "input", attributes: { type: "text", placeholder: "DB_PORT" } },
+                      {
+                        type: "input",
+                        attributes: { type: "text", placeholder: "DB_PORT" },
+                      },
                     ],
                   },
                   {
@@ -112,7 +122,10 @@ export default function Step1() {
                     attributes: { class: "form-input" },
                     children: [
                       { type: "span", children: ["DB_NAME:"] },
-                      { type: "input", attributes: { type: "text", placeholder: "DB_NAME" } },
+                      {
+                        type: "input",
+                        attributes: { type: "text", placeholder: "DB_NAME" },
+                      },
                     ],
                   },
                   {
@@ -120,7 +133,10 @@ export default function Step1() {
                     attributes: { class: "form-input" },
                     children: [
                       { type: "span", children: ["DB_USER:"] },
-                      { type: "input", attributes: { type: "text", placeholder: "DB_USER" } },
+                      {
+                        type: "input",
+                        attributes: { type: "text", placeholder: "DB_USER" },
+                      },
                     ],
                   },
                   {
@@ -128,7 +144,41 @@ export default function Step1() {
                     attributes: { class: "form-input" },
                     children: [
                       { type: "span", children: ["DB_PASSWORD:"] },
-                      { type: "input", attributes: { type: "password", placeholder: "DB_PASSWORD" } },
+                      {
+                        type: "input",
+                        attributes: {
+                          type: "password",
+                          placeholder: "DB_PASSWORD",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    type: "div",
+                    attributes: { class: "form-input" },
+                    children: [
+                      { type: "span", children: ["CAPTCHA_PUBLIC:"] },
+                      {
+                        type: "input",
+                        attributes: {
+                          type: "text",
+                          placeholder: "CAPTCHA_PUBLIC",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    type: "div",
+                    attributes: { class: "form-input" },
+                    children: [
+                      { type: "span", children: ["CAPTCHA_SECRET:"] },
+                      {
+                        type: "input",
+                        attributes: {
+                          type: "password",
+                          placeholder: "CAPTCHA_SECRET",
+                        },
+                      },
                     ],
                   },
                 ],
@@ -138,6 +188,5 @@ export default function Step1() {
         ],
       },
     ],
+  };
 }
-}
-    

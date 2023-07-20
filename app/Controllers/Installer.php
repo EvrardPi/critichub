@@ -42,7 +42,8 @@ class Installer
         $dbName = self::isStringValid($data['DB_NAME']);
         $dbUser = self::isStringValid($data['DB_USER']);
         $dbPassword = self::isStringValid($data['DB_PASSWORD']);
-
+        $captchaPublic = self::isStringValid($data['CAPTCHA_PUBLIC']);
+        $captchaPrivate = self::isStringValid($data['CAPTCHA_SECRET']);
 
         // Répertoire cible où vous voulez créer le fichier
         $repertoire = '/var/www/html';
@@ -53,8 +54,9 @@ class Installer
             . "define('DB_PORT', '$dbPort');\n"
             . "define('DB_NAME', '$dbName');\n"
             . "define('DB_USER', '$dbUser');\n"
-            . "define('DB_PASSWORD', '$dbPassword');\n";
-
+            . "define('DB_PASSWORD', '$dbPassword');\n"
+            . "define('CAPTCHA_PUBLIC', '$captchaPublic');\n"
+            . "define('CAPTCHA_SECRET', '$captchaPrivate');\n";
         // Chemin complet du fichier config.php
         $cheminFichier = $repertoire . '/config.php';
 
@@ -81,11 +83,9 @@ class Installer
                 $initializer->initializeDatabase('/var/www/html/initDB.sql'); //le fichier de configuration de la base de données
                 $response = array('success' => true, 'message' => 'La base de données a été créée avec succès.');
             } catch (\PDOException $e) {
-                echo "Erreur SQL : " . $e->getMessage() . "<br/>";
-                $response = array('success' => false, 'message' => 'Erreur de connexion à la base de données. Veuillez vérifier les informations de connexion.');
+                $response = array('success' => false, 'message' => 'Erreur de connexion à la base de données. Veuillez vérifier les informations de connexion.'. ' ' . $e->getMessage());
             }catch (\Exception $e) {
-                echo "Erreur SQL : " . $e->getMessage() . "<br/>";
-                $response = array('success' => false, 'message' => 'Une erreur s\'est produite lors de la création de la base de données.');
+                $response = array('success' => false, 'message' => 'Une erreur s\'est produite lors de la création de la base de données.'. ' ' . $e->getMessage());
             }
         } else {
             $response = array('success' => false, 'message' => 'Une erreur s\'est produite lors de la création de la base de données.');
