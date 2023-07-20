@@ -6,7 +6,7 @@ class Comment extends SQL {
     private int $id = 0;
     protected string $content;
     protected int $status;
-    protected int $id_user;
+    protected ?int $id_user;
     protected int $id_review;
     private ?string $created_at;
 
@@ -43,9 +43,9 @@ class Comment extends SQL {
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getIdUser(): int
+    public function getIdUser(): ?int
     {
         return $this->id_user;
     }
