@@ -7,6 +7,10 @@ media:
   controller: Media
   action: mediaView
 
+reviews:
+  controller: Reviews
+  action: allReviews
+
 # Authentification
 login:
   controller: Auth
@@ -160,6 +164,28 @@ back-get-cms:
 back-create-comments:
   controller: Comments
   action: createComments
+
+back-view-comments:
+  controller: Comments
+  action: viewComments
+
+back-read-comments:
+  controller: Comments
+  action: readComments
+
+back-read-valid-comments:
+  controller: Comments
+  action: readValidComments
+
+back-delete-comments:
+  controller: Comments
+  action: deleteComments
+
+back-publish-comments:
+  controller: Comments
+  action: publishComments
+
+
 
 # Sitemap
 sitemap:
