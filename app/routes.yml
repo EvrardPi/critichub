@@ -11,6 +11,15 @@ reviews:
   controller: Reviews
   action: allReviews
 
+# API
+read-ten-elementard:
+  controller: Cms
+  action: getTen
+
+media-getdata:
+  controller: Media
+  action: getMediaByID
+
 # Authentification
 login:
   controller: Auth
@@ -77,29 +86,17 @@ back-create-category:
   controller: Categorys
   action: createCategory
 
-elementard-view:
+back-create-elementard:
   controller: Cms
   action: cmsView
 
-elementard-getdata:
+back-getdata-elementard:
   controller: Cms
   action: getAjaxData
 
-elementard-getall:
+back-getall-elementard:
   controller: Cms
   action: readAll
-  
-elementard/read:
-  controller: CmsUser
-  action: getListPage
-
-media-getdata:
-  controller: Media
-  action: getMediaByID
-
-back-read-six-elementard:
-  controller: Cms
-  action: getSix
 
 back-read-category:
   controller: Categorys
@@ -185,8 +182,6 @@ back-publish-comments:
   controller: Comments
   action: publishComments
 
-
-
 # Sitemap
 sitemap:
   controller: Sitemap
@@ -209,5 +204,3 @@ about-us:
 memento:
   controller: Memento
   action: mementoView
-
-

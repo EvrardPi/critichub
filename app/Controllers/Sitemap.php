@@ -25,8 +25,8 @@ class Sitemap
 
         foreach ($yaml as $slug => $route) {
 
-            if(strpos($slug, 'back-') === 0) {
-                continue; // Ignore les routes qui commencent par "back-..."
+            if(strpos($slug, 'back-') === 0 || $slug == 'read-ten-elementard' || $slug == 'media-getdata') {
+                continue; // Ignore les routes qui commencent par "back-...", 'read-ten-elementard' et 'media-getdata'
             }
             
             $sitemap .= "\t<url>" . PHP_EOL;

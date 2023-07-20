@@ -2,139 +2,97 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://critichub.fr</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/media</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>https://critichub.fr/reviews</loc>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/login</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/logout</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/register</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/confirm</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/forgot</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/forgot-confirmation</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/reset-password</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/confirm-reset-password</loc>
-		<lastmod>2023-07-18</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://critichub.fr/404</loc>
-		<lastmod>2023-07-18</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://critichub.fr/403</loc>
-		<lastmod>2023-07-18</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://critichub.fr/500</loc>
-		<lastmod>2023-07-18</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://critichub.fr/401</loc>
-		<lastmod>2023-07-18</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://critichub.fr/410</loc>
-		<lastmod>2023-07-18</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://critichub.fr/elementard-view</loc>
-		<lastmod>2023-07-18</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://critichub.fr/elementard-getdata</loc>
-		<lastmod>2023-07-18</lastmod>
-		<changefreq>daily</changefreq>
-		<priority>0.5</priority>
-	</url>
-	<url>
-		<loc>https://critichub.fr/elementard/read</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/sitemap</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/legals</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/confidentiality</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/about-us</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
 	<url>
 		<loc>https://critichub.fr/memento</loc>
-		<lastmod>2023-07-18</lastmod>
+		<lastmod>2023-07-20</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.5</priority>
 	</url>
