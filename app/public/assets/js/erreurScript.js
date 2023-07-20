@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Handler when the DOM is fully loaded
     function mouseAnimation(e) {
       let mouseMovingImg = document.querySelectorAll('.para');
-      console.log(mouseMovingImg);
       mouseMovingImg.forEach((img) => {
         let speed = img.getAttribute('speed')
         let x = (window.innerWidth - e.pageX * speed) / 100

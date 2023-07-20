@@ -2,20 +2,25 @@
 
 namespace App\Core;
 
+require_once '/var/www/html/config.php';
+
 abstract class SQL
 {
     private static $instance;
-    private $pdo;
+    protected $pdo;
     private $table;
 
     public function __construct()
     {
         //Connexion à la bdd
         //SINGLETON à réaliser
+       
         try {
-            $this->pdo = new \PDO("pgsql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'] . ";port=" . $_ENV['DB_PORT'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
+            $this->pdo = new \PDO("pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";port=" . DB_PORT, DB_USER, DB_PASSWORD);
         } catch (\Exception $e) {
-            die("Erreur SQL : " . $e->getMessage());
+            //die("Erreur SQL : " . $e->getMessage());
+            // Laisser la gestion de l'erreur à l'appelant
+            throw $e;
         }
 
         //$this->table = static::class;
