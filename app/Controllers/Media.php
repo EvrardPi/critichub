@@ -64,7 +64,7 @@ class Media
         $id = $postData['id'];
       
         $data = $media->getById($id);
-
+    
         // Envoyer les données en réponse
         header('Content-Type: application/json');
         echo json_encode($data->getAllParametres());

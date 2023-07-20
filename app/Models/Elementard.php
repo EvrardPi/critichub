@@ -25,7 +25,7 @@ class Elementard extends SQL
     protected string $slogan_movie;
     protected string $template;
     protected int $nb_vue;
-    protected int $id_user;
+    protected ?int $id_user;
 
 
 

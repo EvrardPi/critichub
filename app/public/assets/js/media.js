@@ -196,32 +196,36 @@ function createTemplateHTMLPoto3() {
 }
 
 function setData(data) {
+
+  let categoriesList = data.categories.split(",");
+  afficherBadges(categoriesList);
+  
   document.body.style.backgroundColor = data.background_color;
 
-  let critiqueDiv = document.querySelector(".critique");
+  document.querySelector(".critique").style.backgroundColor = data.critique_background_color;
 
-  critiqueDiv.style.backgroundColor = data.critique_background_color;
 
-  let fontColor = document.querySelector(".prototype");
-  fontColor = data.font_color;
+  document.querySelectorAll('.badge').forEach((badge) => {
+    badge.style.backgroundColor = data.categories_color;
+  });
 
-  let font = document.body.fontFamily;
-  font = data.font;
+  document.querySelector(".prototype").style.color = data.font_color;
+  
 
-  let fontTextAreaColor = document.querySelector(".critique");
-  fontTextAreaColor = data.font_textarea_color;
+  document.body.fontFamily = data.font;
 
-  let movieName = document.querySelector(".movie-title"); //a gerer en api
-  movieName.textContent = data.movie_name;
+  document.querySelector(".critique").style.color = data.font_textarea_color;
+  
 
-  let sloganMovie = document.querySelector(".movie-slogan");
-  sloganMovie.textContent = data.slogan_movie;
+  document.querySelector(".movie-title").textContent = data.movie_name;
+
+  document.querySelector(".movie-slogan").textContent = data.slogan_movie;
+  
 
   let critique = document.querySelector(".critique");
   critique.innerHTML = data.critique;
 
-  let categoriesList = data.categories.split(",");
-  afficherBadges(categoriesList);
+  
 
   let img_background = document.querySelector(".movie-img");
   img_background.src = data.image_url;
@@ -242,14 +246,7 @@ function setData(data) {
   movieTime.textContent = data.movie_time;
 }
 
-function setCategoriesSelectionnees(categoriesSelectionnees) {
-  var checkboxes = document.querySelectorAll(".category");
 
-  for (var i = 0; i < checkboxes.length; i++) {
-    var checkboxValue = checkboxes[i].value;
-    checkboxes[i].checked = categoriesSelectionnees.includes(checkboxValue);
-  }
-}
 
 function nombreDeCommentaires() {
   // Sélectionner tous les éléments de classe 'commentaire-content'
@@ -273,7 +270,7 @@ function genererBadges(options) {
   for (var i = 0; i < options.length; i++) {
     var option = options[i];
     badgesHtml +=
-      '<span class="badge badge-primary badge-pill text-bg-dark">' +
+      '<span class="badge badge-primary badge-pill">' +
       option +
       "</span> ";
   }

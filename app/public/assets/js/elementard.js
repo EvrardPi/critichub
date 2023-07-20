@@ -388,13 +388,12 @@ function saveData() {
   };
 
   let computedStyle = getComputedStyle(document.body);
-  let backgroundColor = computedStyle.backgroundColor;
+ 
 
-  let critiqueDiv = document.querySelector(".critique");
-  critiqueDiv = window.getComputedStyle(critiqueDiv).backgroundColor;
 
-  let fontColor = document.querySelector(".prototype");
-  fontColor = window.getComputedStyle(fontColor).color;
+ 
+
+
 
   let font = document.querySelector(".fontFamily");
   data.font = font.value;
@@ -403,8 +402,7 @@ function saveData() {
     'input[name="inlineRadioOptions"]:checked'
   ).value;
 
-  let fontTextAreaColor = document.querySelector(".critique");
-  fontTextAreaColor = window.getComputedStyle(fontTextAreaColor).color;
+ 
 
   let movieName = document.querySelector(".movie-title").textContent;
   let sloganMovie = document.querySelector(".movie-slogan").textContent;
@@ -421,18 +419,24 @@ function saveData() {
   let dateSortie = document.querySelector("#date-sortie");
   let movieTime = document.querySelector("#movie-time");
 
-  data.backgroundColor = backgroundColor;
-  data.critiqueBackgroundColor = critiqueDiv;
-  data.fontColor = fontColor;
-  data.fontTextAreaColor = fontTextAreaColor;
+  let colorPicker = document.getElementById("colorPicker");
+  let colorPickerTwo = document.getElementById("colorPickerTwo");
+  let colorPickerThree = document.getElementById("colorPickerThree");
+  let colorPickerFour = document.getElementById("colorPickerFour");
+  let colorPickerFive = document.getElementById("colorPickerFive");
+
+
+  data.backgroundColor = colorPicker.value;
+  data.critiqueBackgroundColor = colorPickerTwo.value;
+  data.fontColor = colorPickerThree.value;
+  data.fontTextAreaColor = colorPickerFour.value;
   data.template = selectedOption;
   data.movieName = movieName;
   data.sloganMovie = sloganMovie;
   data.critique = critique;
+  data.categoriesColor = colorPickerFive.value;
   if (categoriesSelectionnees.length > 0) {
     data.categories = categoriesSelectionnees.join(",");
-    let badges = document.querySelectorAll(".badge");
-    data.categoriesColor = window.getComputedStyle(badges[0]).backgroundColor;
   }
   data.imageUrl = img_background.src;
   data.note = parseInt(note.textContent);
