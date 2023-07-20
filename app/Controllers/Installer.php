@@ -81,8 +81,10 @@ class Installer
                 $initializer->initializeDatabase('/var/www/html/initDB.sql'); //le fichier de configuration de la base de données
                 $response = array('success' => true, 'message' => 'La base de données a été créée avec succès.');
             } catch (\PDOException $e) {
+                echo "Erreur SQL : " . $e->getMessage() . "<br/>";
                 $response = array('success' => false, 'message' => 'Erreur de connexion à la base de données. Veuillez vérifier les informations de connexion.');
             }catch (\Exception $e) {
+                echo "Erreur SQL : " . $e->getMessage() . "<br/>";
                 $response = array('success' => false, 'message' => 'Une erreur s\'est produite lors de la création de la base de données.');
             }
         } else {

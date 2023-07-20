@@ -14,7 +14,7 @@ abstract class SQL
     {
         //Connexion à la bdd
         //SINGLETON à réaliser
-
+       
         try {
             $this->pdo = new \PDO("pgsql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";port=" . DB_PORT, DB_USER, DB_PASSWORD);
         } catch (\Exception $e) {

@@ -1,12 +1,16 @@
 import BrowserRouter from "./components/BrowserRouter.js";
 import routes from "./routes.js";
 
+
 let leftClickListener;
 let rightClickListener;
 
 window.history.pushState(null, null, "setup1"); // Set the URL to /setup1 after les modifications
 
 BrowserRouter(routes, document);
+
+
+
 
 navigation();
 arrowHandle();
@@ -86,7 +90,7 @@ function saveData() {
   let url = "";
 
   // Sélectionnez tous les éléments input de type texte
-  let inputs = document.querySelectorAll('input');
+  let inputs = document.querySelectorAll("input");
 
   // Parcourez chaque input et ajoutez sa valeur à l'objet data
   inputs.forEach(function (input) {
@@ -111,7 +115,7 @@ function saveData() {
     sessionStorage.setItem("step3", JSON.stringify(data));
     url = "installer/mailerconfig";
   }
-  
+
   if (etape.innerHTML === "Étape 4:") {
     sessionStorage.setItem("step4", JSON.stringify(data));
     url = "installer/createadmin";
@@ -195,9 +199,7 @@ function saveData() {
         }
         if (etape.innerHTML === "Étape 4:") {
           alert(
-            "Erreur lors de la création de l'admin" +
-              "\n" +
-              response.message
+            "Erreur lors de la création de l'admin" + "\n" + response.message
           );
         }
       }
