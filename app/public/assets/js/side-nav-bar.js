@@ -57,7 +57,27 @@ document.addEventListener("DOMContentLoaded", function () {
     closeSubMenusOnClick();
     verticalMenuAnimation();
     activeClasse();
+
+    navRoute();
+    
   }
 
   verticalSlider();
 });
+
+function navRoute()  {
+  var url = window.location.href; // Récupère l'URL actuelle
+  var menuItems = document.querySelectorAll('.item a'); // Sélectionne tous les liens dans le menu
+
+  menuItems.forEach(function(item) {
+    var href = item.getAttribute('href');
+    // Vérifie si l'URL correspond au href de cet élément
+    if (url.includes(href)) {
+      // Ajoute la classe 'active' à l'élément si l'URL correspond
+      item.classList.add('active');
+    } else {
+      // Sinon, supprime la classe 'active' (si elle existe)
+      item.classList.remove('active');
+    }
+  });
+};

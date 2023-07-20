@@ -1,0 +1,16 @@
+.category-container {
+    margin-left: 220px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 70%;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+#myTable_wrapper {
+    width: 100%;
+    padding: 20px;
+}

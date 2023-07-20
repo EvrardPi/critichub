@@ -40,11 +40,13 @@
                 <div class="list-of-medias">
                     <a href="/">Accueil</a>
                     <a href="reviews">Critiques</a>
+                    <?php if (isset($_SESSION['isAuth']) && $_SESSION['isAuth'] === true):?>
+                        <a href="back-view-dashboard">Dashboard</a>
+                    <?php endif; ?>
                 </div>
 
                 <div class="menu-nav">
                     <?php if (isset($_SESSION['isAuth']) && $_SESSION['isAuth'] === true): ?>
-                        <li><a href="#" class="white-text button button-register">Mon compte</a></li>
                         <li><a href="logout" class="white-text button button-login">Déconnexion</a></li>
                     <?php else: ?>
                         <li><a href="/register" class="button button-register">Inscription</a></li>
