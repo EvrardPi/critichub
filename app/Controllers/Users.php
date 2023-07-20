@@ -111,6 +111,9 @@ class Users
             $user = new User();
             $where = ['id' => $id];
             $userData = $user->getOneWhere($where);
+
+
+
             header('Content-Type: application/json');
             echo json_encode($userData);
         }

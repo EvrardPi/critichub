@@ -319,4 +319,31 @@ abstract class SQL
         return $queryPrepared->fetchAll();
     }
 
+    public function getAllCommentsToVerify(): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE status = 1");
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute();
+
+        return $queryPrepared->fetchAll();
+    }
+
+    public function getValidComments(): array
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE status = 2");
+        $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, get_called_class());
+        $queryPrepared->execute();
+
+        return $queryPrepared->fetchAll();
+    }
+
+        public function publish(int $id): void
+    {
+        $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET status = 2 WHERE id = :id");
+        $queryPrepared->bindValue(':id', $id, \PDO::PARAM_INT);
+        $queryPrepared->execute();
+    }
+
+
+
 }

@@ -11,3 +11,25 @@
     <hr>
 <?php endforeach; ?>
 
+
+<script>
+    console.log('test');
+    const input = document.getElementById('create-form-comment-content');
+
+    input.addEventListener('input', (event) => {
+        const text = event.target.value;
+        const maxLength = 80;
+
+        if (text.length > maxLength) {
+            const lines = Math.ceil(text.length / maxLength);
+            let formattedText = '';
+
+            for (let i = 0; i < lines; i++) {
+                formattedText += text.substr(i * maxLength, maxLength) + '\n';
+            }
+
+            event.target.value = formattedText.trim();
+        }
+    });
+</script>
+
