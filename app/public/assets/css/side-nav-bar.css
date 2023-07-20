@@ -5,12 +5,8 @@
 }
 
 body {
-  min-height: 100vh;
   background-color: rgb(226, 226, 226);
   font-family: "Montserrat", sans-serif;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
 }
 
 .material-symbols-outlined {
@@ -21,7 +17,7 @@ body {
   background-color: rgb(44, 44, 44);
   backdrop-filter: blur(15px);
   width: 200px;
-  height: 150%;
+  height: 100% !important;
   position:absolute;
   top:0;
   overflow-y: auto;

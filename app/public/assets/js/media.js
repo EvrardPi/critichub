@@ -1,9 +1,21 @@
+ // Récupérer la valeur 'id' de l'URL
+ let url = new URL(window.location.href);
+ let id = url.searchParams.get("id");
+
+ if (!id) {
+   window.location.href = "/reviews";
+ }
+
 document.addEventListener("DOMContentLoaded", function () {
   //API call to get the media data
 
   // Récupérer la valeur 'id' de l'URL
   let url = new URL(window.location.href);
   let id = url.searchParams.get("id");
+
+  if (!id) {
+    window.location.href = "/reviews";
+  }
 
   // Préparer les données à envoyer
   let mydata = { id: id };

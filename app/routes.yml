@@ -77,29 +77,26 @@ back-create-category:
   controller: Categorys
   action: createCategory
 
-elementard-view:
+back-create-elementard:
   controller: Cms
   action: cmsView
 
-elementard-getdata:
+back-getdata-elementard:
   controller: Cms
   action: getAjaxData
 
-elementard-getall:
+back-getall-elementard:
   controller: Cms
   action: readAll
-  
-elementard/read:
-  controller: CmsUser
-  action: getListPage
+
 
 media-getdata:
   controller: Media
   action: getMediaByID
 
-back-read-six-elementard:
+read-ten-elementard:
   controller: Cms
-  action: getSix
+  action: getTen
 
 back-read-category:
   controller: Categorys

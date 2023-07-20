@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("Youri a dit wouf wouf");
   var request = new XMLHttpRequest();
 
-  request.open("GET", "/back-read-six-elementard", true);
+  request.open("GET", "/read-ten-elementard", true);
   request.setRequestHeader("Content-Type", "application/json");
   request.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -26,14 +26,16 @@ document.addEventListener("DOMContentLoaded", function () {
         let newMovieDiv = `
       <a href="/media?id=${media.media_id}">
           <div class="popular-movies-element">
-              <img class="movie-img" src="${
-                media.image_url
-              }" alt="Image du film">
+              <img class="movie-img" src="${media.image_url}" alt="Image du film">
               <h3 class="movie-title">${media.movie_name}</h3>
           </div>
       </a>`;
         movieListDiv.insertAdjacentHTML("beforeend", newMovieDiv);
       });
+      let imgElements = document.querySelectorAll(".movie-img"); // sélectionnez toutes les images par leur identifiant ou leur classe
+      for (let i = 0; i < imgElements.length; i++) {
+        checkImageSrc(imgElements[i]);
+      }
     }
   };
   request.onerror = function () {
@@ -41,3 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   request.send();
 });
+
+function checkImageSrc(imageElement) {
+  if (imageElement.src.includes("null")) {
+    imageElement.src = "assets/images/Broken.jpg"; // Remplacez 'default.jpg' par le lien de votre image par défaut
+  }
+}

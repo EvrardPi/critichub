@@ -1,0 +1,21 @@
+.mediaBack {
+  margin-left: 220px;
+  border-radius: 5px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 80%;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.mediaBack .mediaBackContent{
+ width: 100%;
+ padding: 5px;
+}
+.mediaBack .mediaBackContent .table td{
+ width: 500px !important;
+ word-break: break-all;
+}
