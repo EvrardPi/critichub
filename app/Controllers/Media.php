@@ -23,20 +23,29 @@ class Media
         $user = new User();
 
         $commentData = [];
-        foreach ($commentsData as $comment) {
-            $userId = $comment->getIdUser();
-            $userInfo = $user->getById($userId);
-            $firstName = $userInfo->getFirstName();
-            $lastName = $userInfo->getLastName();
-            $content = $comment->getContent();
-            $createdAt = $comment->getCreatedAt();
+        if ($commentsData !== null) {
+            $user = new User();
+            foreach ($commentsData as $comment) {
+                $userId = $comment->getIdUser();
+                $userInfo = $userId ? $user->getById($userId) : null;
+                $firstName = $userInfo ? $userInfo->getFirstName() : null;
+                $lastName = $userInfo ? $userInfo->getLastName() : null;
+                $content = $comment->getContent();
+                $createdAt = $comment->getCreatedAt();
 
-            $commentData[] = [
-                'firstName' => $firstName,
-                'lastName' => $lastName,
-                'content' => $content,
-                'createdAt' => $createdAt
-            ];
+                // Si $userId est null, on remplace $firstName et $lastName par "Anonyme"
+                if ($userId === null) {
+                    $firstName = "Anonyme";
+                    $lastName = "";
+                }
+
+                $commentData[] = [
+                    'firstName' => $firstName,
+                    'lastName' => $lastName,
+                    'content' => $content,
+                    'createdAt' => $createdAt,
+                ];
+            }
         }
 
         $view->assign("commentData", $commentData);
