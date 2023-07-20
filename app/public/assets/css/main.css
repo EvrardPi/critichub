@@ -472,6 +472,7 @@ header nav .list-of-medias a {
   border-radius: 15px;
   transition: all 0.3s ease;
   text-decoration: none;
+  color: white !important;
 }
 header nav .list-of-medias a:hover {
   background-color: #ff1b1b;
