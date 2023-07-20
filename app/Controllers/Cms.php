@@ -34,7 +34,7 @@ class Cms
     //     echo json_encode($rows);
     // }
 
-    public function getSix()
+    public function getTen()
     {
         $cms = new Elementard();
         $rows = $cms->getLastSix();

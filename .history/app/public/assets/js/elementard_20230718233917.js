@@ -319,22 +319,25 @@ function createTemplateHTMLPoto3() {
   function generateHTML() {
     var html = '<div class="protopage-3">';
     html += '<div class="top">';
-    html += '<img class="img-background" src="assets/images/elementard/wireframe.jpg" alt="image" />';
+    html +=
+      '<img class="img-background" src="assets/images/elementard/wireframe.jpg" alt="image" />';
     html += '<div class="overlay"></div>';
     html += '<div class="container">';
-    html += '<img class="movie-img" src="assets/images/elementard/wireframe.jpg" alt="image-movie" />';
+    html +=
+      '<img class="movie-img" src="assets/images/elementard/wireframe.jpg" alt="image-movie" />';
     html += '<div class="content">';
     html += '<h2 class="movie-title">Nom Du Film</h2>';
     html += '<div class="mini-data">';
-    html += '<h4>Date de sortie:</h4>';
+    html += "<h4>Date de sortie:</h4>";
     html += '<span id="date-sortie"></span>';
-    html += '<h4>Durée du film:</h4>';
+    html += "<h4>Durée du film:</h4>";
     html += '<span id="movie-time"></span>';
     html += '<div id="badgesContainer"></div>';
     html += "</div>";
     html += '<div class="social">';
     html += '<div class="social-layout">';
-    html += '<div class="noteContainer"><h2 class="note">4</h2><h2>/5</h2></div>';
+    html +=
+      '<div class="noteContainer"><h2 class="note">4</h2><h2>/5</h2></div>';
     html += "<span>Note des utilisateurs</span>";
     html += "</div>";
     html += '<div class="social-layout">';
@@ -393,7 +396,7 @@ function saveData() {
     note: 1,
     directorName: "",
     dateSortie: 1,
-    movieTime: 1
+    movieTime: 1,
   };
 
   let computedStyle = getComputedStyle(document.body);
@@ -426,13 +429,9 @@ function saveData() {
 
   let note = document.querySelector(".note");
 
-
   let directorName = document.querySelector(".nameOfDirector");
   let dateSortie = document.querySelector("#date-sortie");
   let movieTime = document.querySelector("#movie-time");
-
-
-
 
   data.backgroundColor = backgroundColor;
   data.critiqueBackgroundColor = critiqueDiv;
@@ -482,7 +481,6 @@ function setData(data) {
   let critique = document.querySelector(".critique");
   critique.innerHTML = data.critique;
 
-
   setCategoriesSelectionnees(data.categories.split(","));
 
   let img_background = document.querySelector(".movie-img");
@@ -494,7 +492,6 @@ function setData(data) {
   let note = document.querySelector(".note");
   note.textContent = data.note;
 
-
   let directorName = document.querySelector(".nameOfDirector");
   directorName.textContent = data.directorName;
 
@@ -503,7 +500,6 @@ function setData(data) {
 
   let movieTime = document.querySelector("#movie-time");
   movieTime.textContent = data.movieTime;
-
 }
 
 //API ################################################################
@@ -694,7 +690,6 @@ function setCategoriesSelectionnees(categoriesSelectionnees) {
   }
 }
 
-
 //send data to server
 
 function sendDataToServer(data) {
@@ -702,7 +697,7 @@ function sendDataToServer(data) {
   const sendRequest = new Promise(function (resolve, reject) {
     // Envoyer les données via AJAX
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "elementard-getdata", true);
+    xhr.open("POST", "back-getdata-elementard", true);
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onload = function () {
@@ -744,7 +739,5 @@ function sendDataToServer(data) {
 function update() {
   var storedId = sessionStorage.getItem("id");
   if (storedId) {
-
   }
 }
-
