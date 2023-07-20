@@ -18,10 +18,10 @@ class Autoloader
             $classForm = $class . ".form.php";
             $class = $class . ".php";
             //$class = Core/View.php
-            if (file_exists(__DIR__."/".$class)) {
-                include __DIR__."/".$class;
+            if (file_exists(__DIR__ . "/" . $class)) {
+                include __DIR__ . "/" . $class;
             } else if (file_exists($classForm)) {
-                include __DIR__."/".$classForm;
+                include __DIR__ . "/" . $classForm;
             }
         });
 
@@ -30,6 +30,7 @@ class Autoloader
         $uri = $_SERVER["REQUEST_URI"];
         $uriExploded = explode("?", $uri);
         $uri = strtolower(trim($uriExploded[0], "/"));
+
 
         if (empty($uri)) {
             $uri = "default";
@@ -42,7 +43,13 @@ class Autoloader
             exit;
         }
 
-        $routes = yaml_parse_file(__DIR__ ."/routes.yml");
+        $routes = yaml_parse_file(__DIR__ . "/routes.yml");
+
+        if (!file_exists(__DIR__ . "/config.php") && !str_contains($uri, "installer")) {
+             $uri = "setup"; // Redirection vers l'URL de l'installer
+        }
+
+
 
         if (empty($routes[$uri])) {
             $error = new Error();

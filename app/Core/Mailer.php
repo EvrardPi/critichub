@@ -5,6 +5,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+require_once '/var/www/html/config.php';
+
 class Mailer
 {
     static function sendMail(String $to, $subject, $message, $from = ""):void
@@ -53,14 +55,16 @@ class Mailer
         $mail->Port = "587";
 
         // set gmail username
-        $mail->Username = "OfficialCritichub@outlook.fr";
+        //$mail->Username = "OfficialCritichub@outlook.fr";
+        $mail->Username = MAILER_MAIL;
 
         // set gmail password
-        $mail->Password = "Paya2023";
+        //$mail->Password = "Paya2023";
+        $mail->Password = MAILER_PASSWORD;
 
         $mail->SMTPDebug = 0;
 
-        $mail->setFrom("OfficialCritichub@outlook.fr");
+        $mail->setFrom(MAILER_MAIL);
 
         return $mail;
     }

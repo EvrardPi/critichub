@@ -2,6 +2,8 @@
 namespace App\Views\Partials;
 
 use App\Helper;
+require_once '/var/www/html/config.php';
+
 
 if (!isset($_SESSION['csrf_token_next'] )){
     header("Location: /");
@@ -55,7 +57,7 @@ if (!empty($errors)) print_r($errors); ?>
     <?php endif; ?>
 
     <?php if (isset($config["config"]["captcha"])): ?>
-        <div class="g-recaptcha" data-sitekey="<?= $_ENV["CAPTCHA_PUBLIC"] ?>"></div>
+        <div class="g-recaptcha" data-sitekey="<?= CAPTCHA_PUBLIC ?>"></div>
     <?php endif; ?>
 
 </form>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+require_once '/var/www/html/config.php';
 
 class Helper
 {
@@ -82,7 +83,7 @@ class Helper
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
             // Construction de la requête POST à envoyer à l'API  
-            'secret' => $_ENV['CAPTCHA_SECRET'],
+            'secret' => CAPTCHA_SECRET,
             'response' => $token, // La réponse du reCAPTCHA
             'remoteip' => $_SERVER['REMOTE_ADDR'] // Adresse IP de l'utilisateur qui remplit le formulaire (pour que Google puisse vérifier que ce n'est pas un robot)
         ]));

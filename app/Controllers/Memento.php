@@ -12,8 +12,14 @@ class Memento
     public function mementoView()
     {
         $user = new User();
+        if (!isset($_GET['id']) || !isset($_SESSION['userId'])) {
+            $error = new Error();
+            $error->error403();
+            exit();
+        }
+
         $userRole = $user->getUserInfo(['email' => $_SESSION['email']]);
-        if (!isset($_GET['id']) || !isset($_SESSION['userId']) || $userRole['role'] != 1) {
+        if($userRole['role'] != 1) {
             $error = new Error();
             $error->error403();
             exit();

@@ -34,8 +34,9 @@ if ($action == "save") {
         $mementoToPush = new EditorMemento();
         $mementoToPush->setContent($history->getObj());
         $serializedMemento ='O:29:"App\Controllers\EditorMemento":1:{s:7:"content";' . serialize($mementoToPush->getContent()[0]) . "}";
-        var_dump($serializedMemento);
         $history->pushToDB($serializedMemento,$id);
+        $history->redirect("http://localhost/memento?id=".$_GET['id']);
+
     }
 }
 // -------------------------- ACTION UNDO --------------------------
@@ -44,9 +45,10 @@ if ($action == "undo") {
         //  POP ELEMENT FROM ARRAY 
         $mementoToPush = new EditorMemento();
         $mementoToPush->setContent($mementoBuilder->pop());
-        var_dump($mementoToPush);
         $serializedMemento ='O:29:"App\Controllers\EditorMemento":1:{s:7:"content";' . serialize($mementoToPush->getContent()) . "}";
         $history->pushToDB($serializedMemento,$id);
+        $history->redirect("http://localhost/memento?id=".$_GET['id']);
+
     }
 }
 

@@ -3,3 +3,4 @@
 .idea/
 app/.sass-cache
 app/Assets/.sass-cache
+app/config.php

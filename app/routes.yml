@@ -208,3 +208,39 @@ about-us:
 memento:
   controller: Memento
   action: mementoView
+
+installer/setdata:
+  controller: Installer
+  action: getAjaxData
+
+installer/initdatabase:
+  controller: Installer
+  action: initDataBase
+
+installer/mailerconfig:
+  controller: Installer
+  action: mailerConfig
+
+installer/createadmin:
+  controller: Installer
+  action: createAdminAccount
+
+setup:
+  controller: Installer
+  action: setup
+  
+setup1:
+  controller: Installer
+  action: setup
+
+setup2:
+  controller: Installer
+  action: setup
+
+setup3:
+  controller: Installer
+  action: setup
+
+setup4:
+  controller: Installer
+  action: setup
