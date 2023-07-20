@@ -4,9 +4,11 @@
 
     <div class="home-slogan" style="margin-top: 3%;display: grid">
 
-        <div style="font-size: 20px;margin-bottom: 3%">
+        <div class="table-elements" style="font-size: 20px;margin-bottom: 3%">
 
-            <input onkeyup="searchCatalog(event)" id="idrecherche" placeholder="Rechercher un nom de film" type="text">
+        <div class="input-cover mrg-rgt-search">
+            <input onkeyup="searchCatalog(event)" id="idrecherche" placeholder="Recherche" type="text">
+        </div>
 
             <select id="category-select">
                 <option value="all">Toutes les catégories</option>
