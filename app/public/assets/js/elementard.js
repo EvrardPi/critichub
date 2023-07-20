@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (id) {
     update();
   }
+  getCategorie();
   editorInit();
   inputControl();
   goOutElementard();
@@ -590,17 +591,42 @@ function displayMovieDetails(movie, director, duration) {
 
 //gestion des categories #######################################################
 
-var categories = {
-  action: "Action",
-  comedy: "Comedy",
-  drama: "Drama",
-  thriller: "Thriller",
-  horror: "Horror",
-  romance: "Romance",
-  western: "Western",
-  animation: "Animation",
-  documentary: "Documentary",
-};
+function getCategorie() {
+  var request = new XMLHttpRequest();
+
+  request.open("GET", "/back-read-category", true);
+  request.setRequestHeader("Content-Type", "application/json");
+  request.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let data = JSON.parse(this.responseText);
+      var categoryFix = createCategoryObject(getCategoryNames(data));
+      var optionsHtml = genererOptionsCategories(categoryFix);
+      document.getElementById("optionsCategories").innerHTML = optionsHtml;
+      // Écoutez les événements de changement de coche pour mettre à jour les badges
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].addEventListener("change", afficherBadges);
+      }
+    }
+  };
+  request.onerror = function () {
+    console.error("An error occurred during the transaction");
+  };
+  request.send();
+}
+
+function getCategoryNames(dataArray) {
+  return dataArray.map((item) => item.name);
+}
+
+function createCategoryObject(categoryNames) {
+  let categories = {};
+  categoryNames.forEach((name) => {
+    let key = name.toLowerCase().replace(/ /g, "-"); // convertir en minuscules et remplacer les espaces par des tirets
+    categories[key] = name;
+  });
+  return categories;
+}
 
 function genererOptionsCategories(categories) {
   var optionsHtml = "";
@@ -625,9 +651,6 @@ function genererOptionsCategories(categories) {
 
   return optionsHtml;
 }
-
-var optionsHtml = genererOptionsCategories(categories);
-document.getElementById("optionsCategories").innerHTML = optionsHtml;
 
 function genererBadges(options) {
   var badgesHtml = "";
@@ -655,12 +678,6 @@ function afficherBadges() {
 
   var badgesContainer = document.getElementById("badgesContainer");
   badgesContainer.innerHTML = genererBadges(options);
-}
-
-// Écoutez les événements de changement de coche pour mettre à jour les badges
-var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-for (var i = 0; i < checkboxes.length; i++) {
-  checkboxes[i].addEventListener("change", afficherBadges);
 }
 
 function getCategoriesSelectionnees() {

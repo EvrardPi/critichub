@@ -60,4 +60,25 @@ class Media
         header('Content-Type: application/json');
         echo json_encode($data->getAllParametres());
     }
+    
+    public function addVue()
+    {
+        $media = new Elementard();
+
+        // Récupérer les données JSON envoyées
+        $json = file_get_contents('php://input');
+        // Décoder les données JSON en tableau
+        $postData = json_decode($json, true);
+
+        $id = $postData['id'];
+      
+        $media->incrementViews($id);
+
+        // Envoyer les données en réponse
+        header('Content-Type: application/json');
+
+         // renvoyer une réponse au format JSON
+         $response = array('success' => true, 'message' => 'vue Incrementé');
+         echo json_encode($response);
+    }
 }
