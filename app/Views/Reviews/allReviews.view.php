@@ -1,37 +1,4 @@
-<style>
-    .unselectable {
-        -webkit-user-select: none;
-        /* Chrome/Safari */
-        -moz-user-select: none;
-        /* Firefox */
-        -ms-user-select: none;
-        /* IE10+ */
-        user-select: none;
-        cursor: pointer;
-    }
-
-    /* Hide any table row with the class "hidden" */
-    .hidden {
-        display: none;
-    }
-
-    .description {
-        display: table-cell;
-        max-width: 300px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .table td {
-        border-right: 1px solid;
-        border-color: inherit;
-    }
-
-    .table td:last-child {
-        border-right: none;
-    }
-</style>
+<link rel="stylesheet" href="/assets/css/reviews.css">
 
 <section id="banner-image">
 
@@ -67,55 +34,17 @@
                             <td>
                                 <img style="width: 5rem;" src="<?= $review['image_url'] ?>" alt="Affiche <?= $review['movie_name'] ?>">
                             </td>
-                            <td><?= $review['movie_name'] ?></td>
-                            <td><?= $review['categories'] ?></td>
+                            <td class="description"><?= $review['movie_name'] ?></td>
+                            <td class="description"><?= $review['categories'] ?></td>
                             <td class="description"><?= $review['critique'] ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
-
-        <script>
-            $(document).ready(function() { // code dans $(document) exécuté lorsque DOM (Document Object Model) est entièrement chargé
-
-                $('tr[data-href]').on("click", function() { // Attache événements click à toutes les lignes data-href
-                    document.location = $(this).data('href');
-                });
-
-                // Attache filterTable() aux événements change de category-select et keyup de l'élément idrecherche
-                $('#category-select').on('change', filterTable);
-                $('#idrecherche').on('keyup', filterTable);
-
-                function filterTable(event) { // appelée lorsque l'utilisateur change le select ou tape dans l'input de search
-                    const selectedCategory = $('#category-select').val();
-                    const searchValue = $('#idrecherche').val();
-                    const regex = new RegExp(searchValue, "i");
-                    // Crée expression régulière à partir du champ de recherche
-                    // i = expression régulière insensible à la casse.
-
-                    $('tbody tr').each(function() { // Parcourt toutes les lignes de la table
-
-                        var categories = $(this).data('categories').split(',');
-                        var movieName = $(this).find('td').eq(2).text();
-
-                        // SI catégorie sélectionnée = all 
-                        // OU incluse dans les catégories 
-                        // ET champ de recherche est vide 
-                        // OU nom du film = valeur du champ de recherche
-                        if ((selectedCategory === 'all' || categories.includes(selectedCategory)) &&
-                            (!searchValue || regex.test(movieName))) {
-                            $(this).removeClass('hidden');
-                        } else {
-                            $(this).addClass('hidden');
-                        }
-                    });
-                };
-            });
-        </script>
-
     </div>
 </section>
 
 <script type="module" src="/assets/js/gestionFront/applyFront.js"></script>
 <script type="module" src="/assets/js/home.js"></script>
+<script type="module" src="/assets/js/reviews/reviews.js"></script>
