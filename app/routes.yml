@@ -7,7 +7,9 @@ media:
   controller: Media
   action: mediaView
 
-
+reviews:
+  controller: Reviews
+  action: allReviews
 
 # Authentification
 login:
