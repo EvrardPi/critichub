@@ -10,7 +10,6 @@
             <p class="label" style="font-size: 22px;"><b>Comptes</b></p>
         </div>
 
-
         <div class="circle">
             <span class="number">
                 <?php echo $categoryCount; ?>
@@ -18,36 +17,32 @@
             <p class="label" style="font-size: 22px;"><b>Catégories</b></p>
         </div>
 
-
         <div class="circle">
-            <span
-                class="number">189</span><!-- Changer les données brutes pour mettre la variable pour le nombre de previews -->
+            <span class="number"><?php echo $previewCount; ?></span>
             <p class="label" style="font-size: 22px;"><b>Previews</b></p>
         </div>
 
-
         <div class="circle">
-            <span
-                class="number">19865</span><!-- Changer les données brutes pour mettre la variable pour le nombre de vues -->
+            <span class="number"><?php echo $sumViews; ?></span>
             <p class="label" style="font-size: 22px;"><b>Vues</b></p>
         </div>
 
-
         <div class="circle">
-            <span
-                class="number">985</span><!-- Changer les données brutes pour mettre la variable pour le nombre de commentaires -->
+            <span class="number"><?php echo $allComment; ?></span>
             <p class="label" style="font-size: 22px;"><b>Commentaires</b></p>
         </div>
 
     </div>
+
     <div class="card-body">
         <h5 class="card-title"><b>Commentaires à gérer</b></h5>
-        <p class="card-text"><span style="font-weight: bold; font-size: 45px;">
+        <p class="card-text">
+            <span style="font-weight: bold; font-size: 45px;">
                 <?php echo $checkComment; ?>
-            </span></p>
+            </span>
+        </p>
         <a href="#" class="card-link">Aller gérer les commentaires -></a>
     </div>
-
 
     <!-- Statistique affichage de graphique -->
     <div class="graph">
@@ -67,22 +62,17 @@
         </div>
     </div>
 
-
     <!-- Statistique affichage de tableau -->
     <div class="stat">
-
         <h5>Top 10 des previews les plus vues</h5>
         <div id="table_div"></div>
-
     </div>
-    <div class="stat">
 
+    <div class="stat">
         <h5>Top 10 des previews les plus commentés</h5>
         <div id="table_div2"></div>
-
     </div>
 </div>
-
 
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
@@ -91,8 +81,6 @@
     google.charts.setOnLoadCallback(function () {
         drawCharts('2023'); // Utilisez l'année par défaut ici
     });
-
-
 
     function updateChart() {
         var yearSelect = document.getElementById('yearSelect');
@@ -103,8 +91,6 @@
 
         drawCharts(selectedYear);
     }
-
-
 
     function drawCharts(year) {
         var data;
@@ -131,7 +117,6 @@
         var rawData = <?php echo json_encode($bestPreviewsView); ?>;
         var dataTable = new google.visualization.DataTable();
         dataTable.addColumn('string', 'Film');
-        dataTable.addColumn('string', 'Rédacteur');
         dataTable.addColumn('number', 'Nombre de vues');
         dataTable.addRows(rawData);
 
@@ -141,7 +126,6 @@
         var rawData2 = <?php echo json_encode($bestPreviewsComment); ?>;
         var dataTable2 = new google.visualization.DataTable();
         dataTable2.addColumn('string', 'Film');
-        dataTable2.addColumn('string', 'Rédacteur');
         dataTable2.addColumn('number', 'Nombre de commentaires');
         dataTable2.addRows(rawData2);
 

@@ -287,12 +287,29 @@ abstract class SQL
     public function getCount(string $tableName): int
     {
         $queryPrepared = $this->pdo->prepare("SELECT COUNT(*) FROM " . $tableName);
-
         $queryPrepared->execute();
         $result = $queryPrepared->fetchColumn();
 
         return (int) $result;
     }
+
+    public function getSumViews(string $tableName): int
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT SUM(nb_vue) FROM " . $tableName);
+        $queryPrepared->execute();
+        $result = $queryPrepared->fetchColumn();
+        return (int) $result;
+    }
+
+    public function getCountWithStatus(string $tableName, int $status): int
+    {
+        $query = "SELECT COUNT(*) FROM {$tableName} WHERE status = :status"; // Il faut utiliser $query au lieu de $queryPrepared
+        $statement = $this->pdo->prepare($query);
+        $statement->execute(['status' => $status]); // Utilisez $statement pour exécuter la requête préparée
+        $result = $statement->fetchColumn();
+        return (int) $result;
+    }
+
 
     public function changeFront($selectedTab, $formdata): void
     {
@@ -307,6 +324,32 @@ abstract class SQL
         $queryPrepared->execute();
         return $queryPrepared->fetchAll();
     }
+
+    public function getTopTenReviewsByOccurrences(): array
+    {
+        $query = "SELECT id_review, COUNT(id_review) as occurrences 
+          FROM " . $this->table . " 
+          GROUP BY id_review 
+          ORDER BY occurrences DESC 
+          LIMIT 10";
+
+        $statement = $this->pdo->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
+    public function getTopTenReviewsByViews(): array
+    {
+        $query = "SELECT movie_name, nb_vue
+              FROM " . $this->table . "
+              ORDER BY nb_vue DESC
+              LIMIT 10";
+
+        $statement = $this->pdo->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
 
     public function getById($id): mixed
     {
@@ -354,6 +397,16 @@ abstract class SQL
         $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET nb_vue = nb_vue + 1 WHERE id = :id");
         $queryPrepared->bindValue(':id', $id, \PDO::PARAM_INT);
         $queryPrepared->execute();
+    }
+
+    public function getMovieNameByIdReview($idReview): string
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT movie_name FROM " . $this->table . " WHERE id = :id");
+        $queryPrepared->execute(['id' => $idReview]);
+        $result = $queryPrepared->fetch();
+
+        // Si la requête renvoie toujours une ligne, vous pouvez retourner directement le nom du film
+        return $result['movie_name'];
     }
 
 

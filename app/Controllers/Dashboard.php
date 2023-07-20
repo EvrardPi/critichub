@@ -9,6 +9,9 @@ use App\Forms\Category\UpdateCategory;
 use App\Models\Category;
 use App\Models\User;
 use App\Core\SQL;
+use App\Models\Comment;
+use App\Models\Elementard;
+
 
 class Dashboard
 {
@@ -35,13 +38,21 @@ class Dashboard
         $bestPreviewsComment = $this->getBestPreviewsComment();
         $view->assign("bestPreviewsComment", $bestPreviewsComment);
 
-        //Nombre de signalement à vérifier
-        $reporting = $this->getReportingCount();
-        $view->assign("reporting", $reporting);
+        //Nombre de commentaires
+        $allComment = $this->getCommentCount();
+        $view->assign("allComment", $allComment);
+
+        //Nombre de vues
+        $sumViews = $this->getSumViews();
+        $view->assign("sumViews", $sumViews);
 
         //Nombre de commentaires à vérifier
         $checkComment = $this->getCheckCommentCount();
         $view->assign("checkComment", $checkComment);
+
+        //Nombre de préviews
+        $previewCount = $this->getPreviewCount();
+        $view->assign("previewCount", $previewCount);
 
         // Appeler la méthode getUserData et assigner le résultat à la vue
         $userData = $this->getUserData();
@@ -66,57 +77,78 @@ class Dashboard
         return $category->getCount('paya4_category');
     }
 
-    private function getReportingCount(): int
+    private function getSumViews(): int
     {
-        //$reporting = new Category();
-       // return $reporting->getCount('paya4_category');
-        $reporting = 2;
-        return $reporting;
+        $elementard = new Elementard();
+        $sumViews = $elementard->getSumViews('paya4_elementard','views');
+        return $sumViews;
     }
+
 
     private function getCheckCommentCount(): int
     {
-        //$category = new Category();
-       // return $category->getCount('paya4_category');
-        $checkComment = 59;
+        $comment = new Comment();
+        $status = 1;
+        $checkComment = $comment->getCountWithStatus('paya4_comment',$status);
         return $checkComment;
+    }
+
+    private function getCommentCount(): int
+    {
+        $comment = new Comment();
+        $allComment = $comment->getCount('paya4_category');
+
+        return $allComment;
+    }
+
+    private function getPreviewCount(): int
+    {
+       $elementard = new Elementard();
+         $previewCount = $elementard->getCount('paya4_elementard');
+        return $previewCount;
     }
 
     private function getBestPreviewsView(): array
     {
-        $bestPreviewsView = [
-        ['Spider-Man : Across the Spider-Verse','Youri Ghlis', 10000],
-        ['The Batman','Jean Christophe', 9600],
-        ['The Flash','Pierre Evrard', 9000],
-        ['The Matrix Resurrections','Ash BG', 8777],
-        ['Doctor Strange in the Multiverse of Madness','Arthur Pika', 7655],
-        ['Thor: Love and Thunder','Aurélien crane de sage', 6544],
-        ['Black Panther: Wakanda Forever','Si le prof voit ce commit je peux avoir 1 point en plus ? ', 5433],
-        ['Aquaman and the Lost Kingdom','Le fun', 4322],
-        ['The Marvels','Jaiplus Dinspi', 3211],
-        ['Black Adam','Wouf Waf', 2100]
+        // Utiliser la méthode du modèle pour récupérer les données depuis la base de données
+        $elementard = new Elementard();
+        $topTenReviews = $elementard->getTopTenReviewsByViews();
 
-    ];
+
+        // Mettre en forme les données dans le format souhaité (film, nombre de vues)
+        $bestPreviewsView = [];
+        foreach ($topTenReviews as $review) {
+            $movieName = $review['movie_name'];
+            $viewCount = $review['nb_vue'];
+            $bestPreviewsView[] = [$movieName, $viewCount];
+        }
         return $bestPreviewsView;
     }
 
     private function getBestPreviewsComment(): array
     {
-        $bestPreviewsComment = [
-            ['Spider-Man : Across the Spider-Verse','Youri Ghlis', 10000],
-            ['The Batman','Jean Christophe', 9600],
-            ['The Flash','Pierre Evrard', 9000],
-            ['The Matrix Resurrections','Ash BG', 8777],
-            ['Doctor Strange in the Multiverse of Madness','Arthur Pika', 7655],
-            ['Thor: Love and Thunder','Aurélien crane de sage', 6544],
-            ['Black Panther: Wakanda Forever','Si le prof voit ce commit je peux avoir 1 point en plus ? ', 5433],
-            ['Aquaman and the Lost Kingdom','Le fun', 4322],
-            ['The Marvels','Jaiplus Dinspi', 3211],
-            ['Black Adam','Wouf Waf', 2100]
+        $comment = new Comment();
+        // Récupérer les dix meilleurs prévisions les plus commentées à partir de la base de données
+        $topTenReviews = $comment->getTopTenReviewsByOccurrences();
 
-        ];
+        // Mettre en forme les données dans le format souhaité (film, rédacteur, nombre de commentaires)
+        $bestPreviewsComment = [];
+        $elementard = new Elementard();
+        foreach ($topTenReviews as $review) {
+            $reviewId = $review['id_review']; // Id de la prévision
+
+            // Récupérer les informations du film à partir de la base de données en utilisant l'id de la prévision
+            $filmName = $elementard->getMovieNameByIdReview($reviewId);
+
+            // Récupérer les informations de l'utilisateur/rédacteur à partir de la base de données en utilisant l'id de la prévision
+
+            $commentCount = $review['occurrences']; // Nombre de commentaires
+
+            $bestPreviewsComment[] = [$filmName, $commentCount];
+        }
         return $bestPreviewsComment;
     }
+
 
     private function createUserCreationChart(): array
     {
