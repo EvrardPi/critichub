@@ -372,7 +372,6 @@ abstract class SQL
         $queryPrepared = $this->pdo->prepare("SELECT * FROM " . $this->table . " WHERE status = 1");
         $queryPrepared->setFetchMode(\PDO::FETCH_CLASS, get_called_class());
         $queryPrepared->execute();
-
         return $queryPrepared->fetchAll();
     }
 
