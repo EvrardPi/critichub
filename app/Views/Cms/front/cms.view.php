@@ -187,7 +187,7 @@
                             <h2 class="note">4</h2>
                             <h2>/5</h2>
                         </div>
-                        <span>Note des utilisateurs</span>
+                        <span>Note du rédacteur</span>
                     </div>
                 </div>
                 <div class="director">

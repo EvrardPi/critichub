@@ -20,6 +20,10 @@ media-getdata:
   controller: Media
   action: getMediaByID
 
+media-addvue:
+  controller: Media
+  action: addVue
+
 # Authentification
 login:
   controller: Auth

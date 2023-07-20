@@ -1,10 +1,10 @@
- // Récupérer la valeur 'id' de l'URL
- let url = new URL(window.location.href);
- let id = url.searchParams.get("id");
+// Récupérer la valeur 'id' de l'URL
+let url = new URL(window.location.href);
+let id = url.searchParams.get("id");
 
- if (!id) {
-   window.location.href = "/reviews";
- }
+if (!id) {
+  window.location.href = "/reviews";
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   //API call to get the media data
@@ -13,55 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
   let url = new URL(window.location.href);
   let id = url.searchParams.get("id");
 
-  if (!id) {
-    window.location.href = "/reviews";
-  }
-
   // Préparer les données à envoyer
   let mydata = { id: id };
 
-  // Envoie de la requête POST
-  let xhr = new XMLHttpRequest();
+  addVue(mydata);
+  getMediaData(mydata);
 
-  xhr.open("POST", "/media-getdata", true);
 
-  xhr.setRequestHeader("Content-Type", "application/json");
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      let data = JSON.parse(xhr.responseText);
-      console.log("Données reçues avec succès:", data);
-      generate(data);
-    } else if (xhr.readyState === 4) {
-      console.error(
-        "Une erreur est survenue: HTTP error! status: " + xhr.status
-      );
-    }
-  };
-
-  xhr.send(JSON.stringify(mydata));
   //############################################################################################
 
-  //genreation of the front of media
-
-  function generate(data) {
-    let mediaLoad = data;
-    let prototypeDiv = document.querySelector(".prototype");
-    prototypeDiv.innerHTML = "";
-
-    if (mediaLoad.template === "option1") {
-      createTemplateHTMLPoto1();
-    } else if (mediaLoad.template === "option2") {
-      createTemplateHTMLPoto2();
-    } else if (mediaLoad.template === "option3") {
-      createTemplateHTMLPoto3();
-    } else {
-      console.log("YOURI", mediaLoad.template);
-    }
-
-    setData(mediaLoad);
-    nombreDeCommentaires();
-  }
+  
 
   // sélectionner le bouton et le champ de texte du commentaire
   const commentButton = document.querySelector(".btn-comment");
@@ -235,32 +196,36 @@ function createTemplateHTMLPoto3() {
 }
 
 function setData(data) {
+
+  let categoriesList = data.categories.split(",");
+  afficherBadges(categoriesList);
+  
   document.body.style.backgroundColor = data.background_color;
 
-  let critiqueDiv = document.querySelector(".critique");
+  document.querySelector(".critique").style.backgroundColor = data.critique_background_color;
 
-  critiqueDiv.style.backgroundColor = data.critique_background_color;
 
-  let fontColor = document.querySelector(".prototype");
-  fontColor = data.font_color;
+  document.querySelectorAll('.badge').forEach((badge) => {
+    badge.style.backgroundColor = data.categories_color;
+  });
 
-  let font = document.body.fontFamily;
-  font = data.font;
+  document.querySelector(".prototype").style.color = data.font_color;
+  
 
-  let fontTextAreaColor = document.querySelector(".critique");
-  fontTextAreaColor = data.font_textarea_color;
+  document.body.fontFamily = data.font;
 
-  let movieName = document.querySelector(".movie-title"); //a gerer en api
-  movieName.textContent = data.movie_name;
+  document.querySelector(".critique").style.color = data.font_textarea_color;
+  
 
-  let sloganMovie = document.querySelector(".movie-slogan");
-  sloganMovie.textContent = data.slogan_movie;
+  document.querySelector(".movie-title").textContent = data.movie_name;
+
+  document.querySelector(".movie-slogan").textContent = data.slogan_movie;
+  
 
   let critique = document.querySelector(".critique");
   critique.innerHTML = data.critique;
 
-  console.log(data.categories.split(","));
-  setCategoriesSelectionnees(data.categories.split(","));
+  
 
   let img_background = document.querySelector(".movie-img");
   img_background.src = data.image_url;
@@ -281,14 +246,7 @@ function setData(data) {
   movieTime.textContent = data.movie_time;
 }
 
-function setCategoriesSelectionnees(categoriesSelectionnees) {
-  var checkboxes = document.querySelectorAll(".category");
 
-  for (var i = 0; i < checkboxes.length; i++) {
-    var checkboxValue = checkboxes[i].value;
-    checkboxes[i].checked = categoriesSelectionnees.includes(checkboxValue);
-  }
-}
 
 function nombreDeCommentaires() {
   // Sélectionner tous les éléments de classe 'commentaire-content'
@@ -304,4 +262,88 @@ function nombreDeCommentaires() {
 
   // Mettre à jour le contenu de l'élément avec le nombre de commentaires
   displayElement.innerHTML = commentCount;
+}
+
+function genererBadges(options) {
+  var badgesHtml = "";
+
+  for (var i = 0; i < options.length; i++) {
+    var option = options[i];
+    badgesHtml +=
+      '<span class="badge badge-primary badge-pill">' +
+      option +
+      "</span> ";
+  }
+
+  return badgesHtml;
+}
+
+function afficherBadges(categorie) {
+  var badgesContainer = document.getElementById("badgesContainer");
+  badgesContainer.innerHTML = genererBadges(categorie);
+}
+
+function getMediaData(mydata) {
+  // Envoie de la requête POST
+  let xhr = new XMLHttpRequest();
+
+  xhr.open("POST", "/media-getdata", true);
+
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      let data = JSON.parse(xhr.responseText);
+      console.log("Données reçues avec succès:", data);
+      generate(data);
+    } else if (xhr.readyState === 4) {
+      console.error(
+        "Une erreur est survenue: HTTP error! status: " + xhr.status
+      );
+    }
+  };
+
+  xhr.send(JSON.stringify(mydata));
+}
+function addVue(mydata) {
+  // Envoie de la requête POST
+  let xhr = new XMLHttpRequest();
+
+  xhr.open("POST", "/media-addvue", true);
+
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      let data = JSON.parse(xhr.responseText);
+      console.log("Données reçues avec succès:", data);
+    } else if (xhr.readyState === 4) {
+      console.error(
+        "Une erreur est survenue: HTTP error! status: " + xhr.status
+      );
+    }
+  };
+
+  xhr.send(JSON.stringify(mydata));
+}
+
+//genreation of the front of media
+
+function generate(data) {
+  let mediaLoad = data;
+  let prototypeDiv = document.querySelector(".prototype");
+  prototypeDiv.innerHTML = "";
+
+  if (mediaLoad.template === "option1") {
+    createTemplateHTMLPoto1();
+  } else if (mediaLoad.template === "option2") {
+    createTemplateHTMLPoto2();
+  } else if (mediaLoad.template === "option3") {
+    createTemplateHTMLPoto3();
+  } else {
+    console.log("YOURI", mediaLoad.template);
+  }
+
+  setData(mediaLoad);
+  nombreDeCommentaires();
 }
