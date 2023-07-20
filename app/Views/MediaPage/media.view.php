@@ -8,7 +8,7 @@
 <div class="commentaire-section">
     <h2>Commentaires</h2>
     <label for="content">Écrit ton commentaire:</label>
-    <textarea class="add_comment" rows="5" name="content" placeholder="Enter votre commentaire ?"></textarea>
+    <textarea class="add_comment" rows="5" name="content" placeholder="Entrer votre commentaire ?"></textarea>
     <button class="btn-comment">Envoyer</button>
     <div class="scroll-comment">
     <?php foreach (array_reverse($commentData) as $comment): ?>

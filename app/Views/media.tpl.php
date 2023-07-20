@@ -18,91 +18,94 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@500&family=Roboto&display=swap"
         rel="stylesheet" />
-    <meta name="description" content="Découvrez les meilleures critiques de films sur Critichub. Consultez les avis des utilisateurs et partagez vos propres critiques. Rejoignez la communauté cinéphile dès maintenant.">
+    <meta name="description"
+        content="Découvrez les meilleures critiques de films sur Critichub. Consultez les avis des utilisateurs et partagez vos propres critiques. Rejoignez la communauté cinéphile dès maintenant.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="critiques de films, avis, cinéphile, critiques en ligne, films, cinéma">
     <meta name="author" content="CriticHub">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Critichub - Votre plateforme de critiques de films en ligne">
-    <meta property="og:description" content="Découvrez les meilleures critiques de films sur Critichub. Consultez les avis des utilisateurs et partagez vos propres critiques. Rejoignez la communauté cinéphile dès maintenant.">
+    <meta property="og:description"
+        content="Découvrez les meilleures critiques de films sur Critichub. Consultez les avis des utilisateurs et partagez vos propres critiques. Rejoignez la communauté cinéphile dès maintenant.">
     <meta property="og:image" content="https://www.votresite.com/assets/images/logo.svg">
     <meta property="og:url" content="https://critichub.fr">
 </head>
 
 <body>
 
-<header id="navbar">
-            <nav class="header">
-                <div class="logo">
-                    <a href="/">
-                        <img src="/assets/images/logo.png" alt="logo">
-                    </a>
-                </div>
-                <div class="list-of-medias">
-                    <a href="#">Accueil</a>
-                    <a href="#">Catégorie</a>
-                    <a href="#">Reviews</a>
-                </div>
+    <header id="navbar">
+        <nav class="header">
+            <div class="logo">
+                <a href="/">
+                    <img src="/assets/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="list-of-medias">
+                <a href="/">Accueil</a>
+                <a href="reviews">Critiques</a>
+                <?php if (isset($_SESSION['isAuth']) && $_SESSION['isAuth'] === true): ?>
+                    <a href="back-view-dashboard">Dashboard</a>
+                <?php endif; ?>
+            </div>
 
-                <div class="menu-nav">
-                    <?php if (isset($_SESSION['isAuth']) && $_SESSION['isAuth'] === true): ?>
-                        <li><a href="#" class="white-text button button-register">Mon compte</a></li>
-                        <li><a href="logout" class="white-text button button-login">Déconnexion</a></li>
-                    <?php else: ?>
-                        <li><a href="/register" class="button button-register">Inscription</a></li>
-                        <li class="login"><a href="/login" class="button button-login">Connexion</a></li>
-                    <?php endif; ?>
-                    </li>
-                </div>
-            </nav>
-        </header>
+            <div class="menu-nav">
+                <?php if (isset($_SESSION['isAuth']) && $_SESSION['isAuth'] === true): ?>
+                    <li><a href="logout" class="white-text button button-login">Déconnexion</a></li>
+                <?php else: ?>
+                    <li><a href="/register" class="button button-register">Inscription</a></li>
+                    <li class="login"><a href="/login" class="button button-login">Connexion</a></li>
+                <?php endif; ?>
+                </li>
+            </div>
+        </nav>
+    </header>
 
     <!-- inclure la vue -->
     <?php include $this->view; ?>
 
     <footer class="footer">
-            <div class="waves">
-                <div class="wave" id="wave1"></div>
-                <div class="wave" id="wave2"></div>
-                <div class="wave" id="wave3"></div>
-                <div class="wave" id="wave4"></div>
-            </div>
-            <div class="footer footer-name">
-                <p class="logo-title">Critic<span class="red-text">Hub</span></p>
-            </div>
-            <ul class="social-icon">
-                <li class="social-icon__item"><a class="social-icon__link" href="https://facebook.com">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a></li>
-                <li class="social-icon__item"><a class="social-icon__link" href="https://twitter.com">
-                        <ion-icon name="logo-twitter"></ion-icon>
-                    </a></li>
-                <li class="social-icon__item"><a class="social-icon__link" href="https://linkedin.com">
-                        <ion-icon name="logo-linkedin"></ion-icon>
-                    </a></li>
-                <li class="social-icon__item"><a class="social-icon__link" href="https://instagram.com">
-                        <ion-icon name="logo-instagram"></ion-icon>
-                    </a></li>
-                <li class="social-icon__item"><a class="social-icon__link" href="https://github.com">
-                        <ion-icon name="logo-github"></ion-icon>
-                    </a></li>
-                <li class="social-icon__item"><a class="social-icon__link" href="https://gitlab.com">
-                        <ion-icon name="logo-gitlab"></ion-icon>
-                    </a></li>
-            </ul>
-            <ul class="menu">
-                <li class="menu__item"><a class="menu__link" href="#up-page">Haut de page</a></li>
-                <li class="menu__item"><span class="white-text">•</span></li>
-                <li class="menu__item"><a class="menu__link" href="/">Accueil</a></li>
-                <li class="menu__item"><span class="white-text">•</span></li>
-                <li class="menu__item"><a class="menu__link" href="/legals">Mentions légales</a></li>
-                <li class="menu__item"><span class="white-text">•</span></li>
-                <li class="menu__item"><a class="menu__link" href="/confidentiality">Politique de confidentialité</a></li>
-                <li class="menu__item"><span class="white-text">•</span></li>
-                <li class="menu__item"><a class="menu__link" href="/sitemap">Sitemap</a></li>
+        <div class="waves">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+        </div>
+        <div class="footer footer-name">
+            <p class="logo-title">Critic<span class="red-text">Hub</span></p>
+        </div>
+        <ul class="social-icon">
+            <li class="social-icon__item"><a class="social-icon__link" href="https://facebook.com">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </a></li>
+            <li class="social-icon__item"><a class="social-icon__link" href="https://twitter.com">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                </a></li>
+            <li class="social-icon__item"><a class="social-icon__link" href="https://linkedin.com">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                </a></li>
+            <li class="social-icon__item"><a class="social-icon__link" href="https://instagram.com">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </a></li>
+            <li class="social-icon__item"><a class="social-icon__link" href="https://github.com">
+                    <ion-icon name="logo-github"></ion-icon>
+                </a></li>
+            <li class="social-icon__item"><a class="social-icon__link" href="https://gitlab.com">
+                    <ion-icon name="logo-gitlab"></ion-icon>
+                </a></li>
+        </ul>
+        <ul class="menu">
+            <li class="menu__item"><a class="menu__link" href="#up-page">Haut de page</a></li>
+            <li class="menu__item"><span class="white-text">•</span></li>
+            <li class="menu__item"><a class="menu__link" href="/">Accueil</a></li>
+            <li class="menu__item"><span class="white-text">•</span></li>
+            <li class="menu__item"><a class="menu__link" href="/legals">Mentions légales</a></li>
+            <li class="menu__item"><span class="white-text">•</span></li>
+            <li class="menu__item"><a class="menu__link" href="/confidentiality">Politique de confidentialité</a></li>
+            <li class="menu__item"><span class="white-text">•</span></li>
+            <li class="menu__item"><a class="menu__link" href="/sitemap">Sitemap</a></li>
 
-            </ul>
-        </footer>
+        </ul>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

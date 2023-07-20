@@ -34,6 +34,7 @@ if($userStatus['role'] != 1) {
   <link rel="stylesheet" href="/assets/css/gestionFront.css">
   <link rel="stylesheet" href="/assets/css/mediaBack.css">
   <link rel="stylesheet" href="/assets/css/userGestion.css">
+  <link rel="stylesheet" href="/assets/css/categoryGestion.css">
   <?php include("includes.tpl.php"); ?>
     <meta name="description" content="Découvrez les meilleures critiques de films sur Critichub. Consultez les avis des utilisateurs et partagez vos propres critiques. Rejoignez la communauté cinéphile dès maintenant.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,12 +55,12 @@ if($userStatus['role'] != 1) {
     </div>
     <div class="menu">
       <div class="item">
-        <a class="active sub-btn"><span class="material-symbols-outlined">Gestion BackOffice</span></a>
-        <div class="sub-menu">
-          <a href="view" class="sub-item">Utilisateurs</a>
-          <a href="category" class="sub-item">Catégories</a>
-          <a href="media-list" class="sub-item">Médias</a>
-        </div>
+        <a class="active" href="back-view-dashboard"><span class="material-symbols-outlined">Statistiques du site</span></a>
+        <a class="" href="back-view-elementard"><span class="material-symbols-outlined">Gestions des reviews</span></a>
+        <a class="" href="back-view-user"><span class="material-symbols-outlined">Gestion des utilisateurs</span></a>
+        <a class="" href="back-view-category"><span class="material-symbols-outlined">Gestion des catégories</span></a>
+        <a class="" href="back-view-comments"><span class="material-symbols-outlined">Gestion des commentaires</span></a>
+        <a class="" href="back-view-gestionFront"><span class="material-symbols-outlined">Gestion du front</span></a>
       </div>
     </div>
   </div>

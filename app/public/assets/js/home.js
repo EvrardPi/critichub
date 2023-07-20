@@ -49,3 +49,8 @@ function checkImageSrc(imageElement) {
     imageElement.src = "assets/images/Broken.jpg"; // Remplacez 'default.jpg' par le lien de votre image par défaut
   }
 }
+
+ let imgElements = document.querySelectorAll("td img"); // sélectionnez toutes les images par leur identifiant ou leur classe
+      for (let i = 0; i < imgElements.length; i++) {
+        checkImageSrc(imgElements[i]);
+      }
