@@ -1,0 +1,420 @@
+@charset "UTF-8";
+// ------------------------------ CHARSET UTF-8 ------------------------------
+
+// ------------------------------ ANIMATION OPACITY ------------------------------
+@keyframes fadeIn {
+    from { 
+      opacity:0;
+    }
+    to {
+      opacity:1;
+    }
+}
+
+
+// ------------------------------ MEDIA PAGE BANNER ------------------------------
+.banner {
+    box-shadow: inset 0 0 250px 200px $blackFont;
+
+    &-image {
+        position: relative;
+        width: 100%;
+        height: 80vh;
+        filter: brightness(70%);
+        animation:fadeIn 1s ease-in;
+        z-index: -1;
+
+    }
+    &-logo {
+        position:relative;
+        width:100%;
+        z-index:1;
+    }
+}
+
+.inside-img {
+    position: absolute;
+    top: 75%; right: 75%;
+    transform: translate(50%,-50%);
+    text-shadow: 2px 3px 6px black;
+    animation:fadeIn 1s ease-in;
+    h2{
+        margin:0;
+        font-size:2.5rem;
+    }
+    h4{
+        margin: 1rem 0;
+    }
+}
+
+.img-position{
+    position: absolute;
+    top: 25%; right: 25%;
+    width:25vh;
+    transform: translate(50%,-50%);  
+    animation:fadeIn 1s ease-in;
+}
+
+
+// ------------------------------ MEDIA DESCRIPTION ------------------------------
+.description {
+    display: flex;
+    align-items: center; 
+    flex-direction: column; 
+    text-align: center;
+
+    &-title{
+        font-size:3.5rem;
+        padding:3rem 0;
+    }
+
+    &-subtext{
+        font-size:1.2rem;
+        padding:1rem 0;
+        padding-bottom: 4rem;
+    }
+}
+
+// ------------------------------ ACTORS LIST ------------------------------
+.horizontal-line {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    padding-bottom:5rem;
+
+    img {
+        border-radius: 0.8rem;
+        margin: 0 2rem;
+    }
+
+
+    &-movies {
+        img {
+            width: 10vw;
+            height: 30vh;
+            filter: brightness(100%);
+            transition: all 0.5s ease;
+
+            &:hover {
+                filter: brightness(40%);
+            }
+        }
+    }
+
+    &-categories {
+
+        img {
+            width: 25vw;
+            height: 25vh;
+        }
+
+        .category {
+            position: relative;
+
+            &-text {
+                position: absolute;
+                bottom: 0;
+                left: 1vw;
+                font-size: 1.2rem;
+            }
+        }
+
+    }
+
+}
+
+.main-actors{
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+
+
+// ------------------------------ CRITICS ------------------------------
+.critics {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    &-reviews{
+        &-title{
+            font-size:1.5rem;
+        }
+
+        &-leftside{
+            display:flex;
+            flex-direction: column;
+        }
+    
+        &-stars{
+            background-color: $white;
+            height: 300px;
+            border-radius:1rem;
+            padding:1.5rem 1.5rem;
+            margin: 0;
+            width:80%;
+
+            &-numbers{
+                display:flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 1rem 0;
+                font-size:2rem;
+
+                div{
+                    padding: 0 0.75rem;
+                    font-size:1rem;
+                    padding-top:1rem;
+                    color: $red;
+                }
+                .number-reviews{
+                    padding-top:1rem;
+                    font-size:0.9rem;
+                    color:$gray;
+                }
+            }
+        }
+
+        &-progress{
+            display:flex;
+            flex-direction: column;
+            progress {
+                width:70%;
+                border: 0;
+                height: 20px;
+            }
+            progress::-webkit-progress-bar {
+                border: 0;
+                height: 20px;
+                border-radius: 7px;
+                background-color: rgb(226, 225, 228);
+             }
+             progress::-webkit-progress-value {
+                border: 0;
+                height: 20px;
+                border-radius: 7px;
+             }
+             progress::-moz-progress-bar {
+                border: 0;
+                height: 20px;
+                border-radius: 7px;
+                background-color: rgb(226, 225, 228);
+             }
+
+
+            &-element{
+                display:flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding-bottom:2%;
+                label{
+                    color:$gray;
+                    font-weight: 500;
+                    width:5%;
+                }
+
+                span{
+                    width:10%;
+                }
+
+                .star{
+                    &-5{
+                        &::-webkit-progress-value {
+                        background-color: $five_stars;
+                        }
+                    }
+                    &-4{
+                        &::-webkit-progress-value {
+                        background-color: $four_stars;
+                        }
+                    }
+                    &-3{
+                        &::-webkit-progress-value {
+                        background-color: $three_stars;
+                        }
+                    }
+                    &-2{
+                        &::-webkit-progress-value {
+                        background-color: $two_stars;
+                        }
+                    }
+                    &-1{
+                        &::-webkit-progress-value {
+                        background-color: $one_star;
+                        }
+                    }
+                }
+            }
+        }
+
+        &-create-review{
+            display:flex;
+            flex-direction: column;
+            color:white;
+            width:80%;
+            hr{
+                width:100%;
+                margin: 3rem 0;
+            }
+            h3{
+                margin: 0;
+            }
+
+            span{
+                margin: 1rem 0;
+            }
+
+        }
+
+        &-element{
+            display:flex;
+            flex-direction: column;
+            padding-top:3rem;
+            img{
+                width:40px;
+                height:40px;
+            }
+
+            .user-profile{
+                display:flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-around;
+                width:20%;
+            }
+
+            .stars{
+                display:flex;
+                align-items: center;
+                flex-direction: row;
+                padding: 0.3rem 0;
+                &-5{
+                    color:$five_stars;
+                }
+                &-4{
+                    color:$four_stars;
+                }
+                &-3{
+                    color:$three_stars;
+                }
+                &-2{
+                    color:$two_stars;
+                }
+                &-1{
+                    color:$one_star
+                }
+                span{
+                    padding-left: 1rem;
+                }
+            }
+            .sub-text{
+                color:$gray;
+            }
+
+            &-content{
+                padding-top: 0.5rem;
+            }
+
+            &-buttons{
+                display:flex;
+                flex-direction: row;
+                width:20%;
+            }
+        }
+    }
+}
+
+
+// ------------------------------ CREATE REVIEW PAGE ------------------------------
+.create-review{
+    display: flex;
+    flex-direction: column;
+    margin-top: 6rem;
+
+    &-mark{
+        padding-top:4rem;
+    }
+
+    &-description{
+        padding: 2rem 0;
+
+        button{
+            margin:1rem 0;
+        }
+
+
+        textarea{
+            resize: none;
+            width:100%;
+            height:10rem;
+            border-radius:8px;
+            font-size:1.25rem;
+            font-weight:500;
+            padding:1.5rem;
+            &::placeholder{
+                font-style: italic;
+                font-weight:500;
+                font-size: 1.25rem;
+            }
+        }
+    }
+
+    &-preview{
+        border: 1px solid $white;
+        width:100%;
+        border-radius:8px;
+        height:10rem;
+        font-size:1.25rem;
+        font-weight:500;
+    }
+
+    &-confirmation-button{
+        display:flex;
+        justify-content:center;
+    }
+}
+
+// STAR RATING
+*{
+    margin: 0;
+    padding: 0;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ' ;
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}

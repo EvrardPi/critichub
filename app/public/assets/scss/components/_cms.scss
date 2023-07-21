@@ -1,0 +1,204 @@
+
+// ------------------------------ USER CMS ------------------------------
+.cmsArea{
+    text-align: center;
+
+    &-title {
+        .empty{
+            width:17vw;
+        }
+    }
+
+    &-description {
+        .empty{
+            width:20vw;
+            height:25vh;
+        }
+    }
+
+    &-around{
+        background-color: $light_gray;
+        padding: 2rem;
+        border:3px solid $dark_gray;
+    }
+}
+
+.elementscms{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+// ------------------------------ CONTAINER WITH EMPTY SPACES TO PUT ELEMENTS IN ------------------------------
+.container {
+    position:relative;
+    max-width: 75rem;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(5, auto);
+    &-display {grid-template-columns: repeat(1, auto);}
+    
+ }
+ 
+ .empty {
+    height: 8rem;
+    width:10vw;
+    border: 1px solid red;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+ }
+ 
+ .fill {
+    cursor: grab;
+
+    textarea{
+        resize:none;
+    }
+
+    img{
+        width:5vw;
+        height:5vw;
+    }
+ }
+ 
+ .hidden {
+    visibility: hidden;
+ }
+
+
+// ------------------------------ PARAMETERS FROM USER CMS ------------------------------
+ .parameters {
+    background-color:$light_gray;
+    display:flex;
+    flex-direction: column;
+    width:15vw;
+    border:2px solid gray;
+    margin:0.25rem;
+
+    &-elements{
+        background-color:$white;
+        h6{
+            padding: 0.5rem;
+        }
+        &-icons{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+
+            i{
+                border: 1px solid $blackFont;
+                padding:0.5rem;
+            }
+        }
+
+        &-font{
+            display:flex;
+            flex-direction: column;
+            padding:0.5rem;    
+            &-case{
+                flex-direction: row;
+                justify-content:space-evenly;
+            }
+            
+            &-size{
+                align-items:flex-start;
+            }
+        }
+
+        &-colors{
+            &-dots{
+                padding-top:0.5rem;
+                display:flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+            }
+        }
+
+        &-end{
+            display:flex;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+    }
+
+    &-navbar{
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1rem 0.75rem;
+
+        hr{
+            margin:0;
+        }
+        &-text{
+            display:flex;
+            width:60%;
+            justify-content: space-around;
+        }
+    }
+ }
+
+
+ .circle{
+    width:2vw;
+    height:2vw;
+    border-radius:100%;
+    border:1px solid $blackFont;
+    &-1{
+        background-color: $red;
+    }
+    &-2{
+        background-color: $light_gray;
+    }
+    &-3{
+        background-color: $gray;
+    }
+    &-4{
+        background-color: $dark_gray;
+    }
+    &-5{
+        background-color: $blackFont;
+    }
+}
+
+.closeParamaters{
+  cursor:pointer;
+}
+
+// ------------------------------ ADMIN CMS ------------------------------
+.new-admin {
+    textarea{
+        resize: none;
+        background-color:transparent;
+        border:none;
+        color:white;
+    }
+
+    &-inside-img{
+        position: absolute;
+        top: 50%; right: 50%;
+        transform: translate(50%,-50%);
+        background-color: transparent;
+        border: none;
+    }
+    &-prompt{
+        border-radius: 2rem;
+    }
+
+    &-logo{
+      img{
+        width:8vw;
+      }
+    }
+
+    &-actor{
+      img{
+        width:10vw;
+        height:30vh;
+      }
+    }
+
+}

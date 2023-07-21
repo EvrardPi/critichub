@@ -1,0 +1,12 @@
+AddType application/javascript .js
+Options -Indexes
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK|OPTIONS|CUSTOM) 
+RewriteRule .* - [F]
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule  ^(.*)$ /index.php [L,QSA]

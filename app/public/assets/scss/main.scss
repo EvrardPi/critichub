@@ -1,0 +1,14 @@
+// PARTIALS -> PARAMETERS USED IN ALL FRONT FILES
+@import "partials/colors";
+@import "partials/globals";
+
+// ELEMENTS -> FROM SCRATCH ELEMENTS USED IN CODE
+@import "elements/container";
+@import "elements/button";
+
+// COMPONENTS -> CODED ELEMENTS TO INPUT
+@import "components/cms";
+@import "components/index";
+@import "components/medias";
+@import "components/ratings";
+@import "components/slider";

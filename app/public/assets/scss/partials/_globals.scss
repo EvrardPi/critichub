@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+    padding-left:0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+body{
+    margin:0;
+    background-color:$blackFont;
+    &::-webkit-scrollbar {
+        width:5px;
+    }
+    cursor:auto;
+    &::-webkit-scrollbar-thumb {
+        background: $light_gray;
+        border-radius: 2rem;
+    }
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+span {
+    font-weight:400;
+}
+
+footer {
+    margin-top: 200px;
+}

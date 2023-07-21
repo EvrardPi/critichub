@@ -1,0 +1,230 @@
+body {
+  background-color: #000000;
+  height: 100vh;
+}
+body video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+body .form-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  z-index: 10;
+}
+body .form-container .login-form {
+  width: 500px;
+  background-color: rgba(0, 0, 0, 0.6431372549);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 10px;
+  padding: 30px;
+}
+body .form-container .login-form .form-logo {
+  margin: 30px 0;
+  width: 100%;
+
+}
+body .form-container .login-form h2 {
+  color: #fff;
+  font-size: 40px;
+  font-weight: 700;
+  margin: 25px 0;
+}
+body .form-container .login-form .register {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+body .form-container .login-form .register .form-input {
+  text-align: center;
+}
+body .form-container .login-form .login-form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+body .form-container .login-form .login-form .form-input {
+  text-align: center;
+}
+body .form-container .login-form input {
+  background-color: #332d2d;
+  height: 51px;
+  width: 336px;
+  margin: 5px;
+  border: none;
+  font-weight: 400;
+  font-size: 25px;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px;
+}
+body .form-container .login-form input::placeholder {
+  text-align: center;
+  font-weight: 400;
+  font-size: 20px;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+body .form-container .login-form .submit {
+  cursor: pointer;
+  margin: 30px 0;
+  height: 51px;
+  width: 336px;
+  border: #fff solid 1px;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+}
+body .form-container .login-form .submit:hover {
+  background-color: #e9dede;
+  color: #000;
+  transition: all 0.3s ease;
+}
+body .form-container .login-form a {
+  text-decoration: none;
+  color: #fff;
+  margin: 3px;
+}
+body .form-container .login-form a:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.register-alert {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  z-index: 100;
+}
+
+.align-text{
+  text-align: center;
+}
+
+.white-text{
+  color: #fff;
+}
+
+.success{
+  background-color: #008500;
+  color:#fff;
+  text-align:center;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+@media (max-height: 980px) {
+    body .form-container{
+        overflow-y: auto;
+    }
+  body .form-container .login-form .form-logo {
+    margin: 0;
+  }
+  body .form-container .login-form {
+    width: 450px;
+    padding: 20px;
+  }
+
+  body .form-container .login-form input {
+    height: 40px;
+  }
+
+  body .form-container .login-form .submit {
+    cursor: pointer;
+    margin: 10px;
+    height: 40px;
+
+  }
+  
+}
+
+
+.success-message{
+  display:flex;
+  flex-direction:row;
+  border-radius: 1rem;
+  box-shadow: 1px 10px 20px rgba(0,0,0,0.1);
+  text-align:start;
+  width:100%;
+  background-color:white;
+  position:absolute;
+}
+
+/* Classes utilisées lorsque le login est correct */
+.success-message img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4.5vw;
+  height: 4.5vw;
+  left: 9%;
+}
+
+.success-left-icon{
+  background:green;
+  border-radius: 1.5rem 0 0 1.5rem;
+  width:1vw;
+  height:9vw;
+}
+
+.success-navbar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left:15%;
+}
+
+.success-title{
+  font-size:1.5em;
+}
+
+.success-subtitle{
+  color:gray;
+}
+
+.success-close{
+  position:absolute;
+  top:50%;
+  transform: translateY(-50%);
+  right:5%;
+  font-size:1.2rem;
+  color:gray;
+  border:none;
+  background-color:#008500;
+  border-radius:2rem;
+  color:white;
+  padding:0.5rem;
+}
+
+

@@ -1,0 +1,84 @@
+
+.button {
+    color:$white;
+    padding: 0.75rem 1.5rem;
+    font-size: 17px;
+
+    &-register {
+        background-color:$red;
+        border-radius : 25px;
+        transition: all 0.3s ease;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &-login {
+        background-color: transparent;
+        border: 1px solid $red;
+        border-radius : 25px;
+        transition: all 0.3s ease;
+        &:hover {
+            background-color: $red;
+            opacity: 0.8;
+        }
+    }
+
+    &-review{
+        color:$white;
+        background-color: $red;
+        border-radius: 10px;
+    }
+
+    &-event{
+        border-radius: 1rem;
+        background-color: $blackFont;
+        border:none;
+        box-shadow: 0 100px 100px -100px $blue_slider inset;
+        transition: all 0.2s ease-in-out;
+        &:hover{
+
+            box-shadow: 0 100px 100px -100px $white inset;
+        }
+    }
+
+    &-reset{
+        border-radius:8px;
+        border:solid 2px $blackFont;
+        color:$blackFont;
+        padding: 0.3rem 1rem;
+    }
+
+    &-submit{
+        display: flex;
+        justify-content: center;
+    }
+
+    &-moderate{
+        background:transparent;
+        border:none;
+        border-radius: 8px;
+        font-size:0.8rem;
+        padding: 0.5rem 1rem;
+    }
+
+    &-create-review{
+        background: transparent;
+        border: 1px solid $white;
+        border-radius: 8px;
+        #create-preview{width:100%;}
+    }
+
+    &-upload-review{
+        background: transparent;
+        border: 1px solid $white;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        &:hover{
+            background-color: $white;
+            color:$blackFont;
+        }
+    }
+
+
+}

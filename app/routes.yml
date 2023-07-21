@@ -1,0 +1,246 @@
+# Main 
+default:
+  controller: Main
+  action: home
+
+media:
+  controller: Media
+  action: mediaView
+
+reviews:
+  controller: Reviews
+  action: allReviews
+
+# API
+read-ten-elementard:
+  controller: Cms
+  action: getTen
+
+media-getdata:
+  controller: Media
+  action: getMediaByID
+
+media-addvue:
+  controller: Media
+  action: addVue
+
+# Authentification
+login:
+  controller: Auth
+  action: login
+
+logout:
+  controller: Auth
+  action: logout
+
+register:
+  controller: Auth
+  action: register
+
+confirm:
+  controller: Auth
+  action: confirmAccount
+
+forgot:
+  controller: Auth
+  action: viewForgotPwd
+
+forgot-confirmation:
+  controller: Auth
+  action: forgotPassword
+
+reset-password:
+  controller: Auth
+  action: viewResetPassword
+
+confirm-reset-password:
+  controller: Auth
+  action: resetPassword
+
+# Back
+back-read-user:
+  controller: Users
+  action: readUser
+
+back-create-user:
+  controller: Users
+  action: createUser
+
+back-delete-user:
+  controller: Users
+  action: deleteUser
+
+back-update-user:
+  controller: Users
+  action: updateUser
+
+back-get-user:
+  controller: Users
+  action: getUser
+
+back-view-user:
+  controller: Users
+  action: view
+
+back-view-category:
+  controller: Categorys
+  action: viewCategory
+
+back-create-category:
+  controller: Categorys
+  action: createCategory
+
+back-create-elementard:
+  controller: Cms
+  action: cmsView
+
+back-getdata-elementard:
+  controller: Cms
+  action: getAjaxData
+
+back-getall-elementard:
+  controller: Cms
+  action: readAll
+
+back-read-category:
+  controller: Categorys
+  action: readCategory
+
+back-delete-category:
+  controller: Categorys
+  action: deleteCategory
+
+back-update-category:
+  controller: Categorys
+  action: updateCategory
+
+back-get-category:
+  controller: Categorys
+  action: getCategory
+
+back-view-gestionfront:
+  controller: GestionFronts
+  action: view
+
+back-create-gestionfront:
+  controller: GestionFronts
+  action: createContent
+
+back-get-content:
+  controller: GestionFronts
+  action: getContent
+
+back-gestion-background:
+  controller: GestionFronts
+  action: createBackground
+
+back-gestion-picture:
+  controller: GestionFronts
+  action: createPicture
+  
+back-view-dashboard:
+  controller: Dashboard
+  action: viewDashboard
+  
+back-testo:
+    controller: Dashboard
+    action: createUserCreationChart
+
+back-view-elementard:
+  controller: Cms
+  action: viewCrud
+
+back-read-elementard:
+  controller: Cms
+  action: readAll
+
+back-delete-cms:
+  controller: Cms
+  action: deleteCms
+
+back-get-cms:
+  controller: Cms
+  action: getCms
+
+back-create-comments:
+  controller: Comments
+  action: createComments
+
+back-view-comments:
+  controller: Comments
+  action: viewComments
+
+back-read-comments:
+  controller: Comments
+  action: readComments
+
+back-read-valid-comments:
+  controller: Comments
+  action: readValidComments
+
+back-delete-comments:
+  controller: Comments
+  action: deleteComments
+
+back-publish-comments:
+  controller: Comments
+  action: publishComments
+
+# Sitemap
+sitemap:
+  controller: Sitemap
+  action: sitemap
+
+# Footer
+legals:
+  controller: Main
+  action: legals
+
+confidentiality:
+  controller: Main
+  action: confidentiality
+
+about-us:
+  controller: Main
+  action: aboutUs
+
+# Memento
+memento:
+  controller: Memento
+  action: mementoView
+
+installer/setdata:
+  controller: Installer
+  action: getAjaxData
+
+installer/initdatabase:
+  controller: Installer
+  action: initDataBase
+
+installer/mailerconfig:
+  controller: Installer
+  action: mailerConfig
+
+installer/createadmin:
+  controller: Installer
+  action: createAdminAccount
+
+setup:
+  controller: Installer
+  action: setup
+  
+setup1:
+  controller: Installer
+  action: setup
+
+setup2:
+  controller: Installer
+  action: setup
+
+setup3:
+  controller: Installer
+  action: setup
+
+setup4:
+  controller: Installer
+  action: setup
