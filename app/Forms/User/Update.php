@@ -69,7 +69,7 @@ class Update extends Validator
                     "required"=>true,
                     "options" => [
                         "1" => "Administrateur",
-                        "2" => "Utilisateur"
+                        "3" => "Utilisateur"
                     ],
                     "value"=>""
                 ],
