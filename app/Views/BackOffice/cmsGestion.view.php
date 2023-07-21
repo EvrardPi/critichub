@@ -15,9 +15,8 @@
 
 
         <table id="myTable" class="table table-striped ml-5" style="width:100%">
-            <button type="button" class="btn btn-success btn-spacing" data-bs-toggle="modal"
-                data-bs-target="#createModal">
-                Créer une nouvelle catégorie
+            <button id="btnCreate" type="button" class="btn btn-success btn-spacing" >
+                Créer une nouvelle review
             </button>
             <thead>
                 <tr>

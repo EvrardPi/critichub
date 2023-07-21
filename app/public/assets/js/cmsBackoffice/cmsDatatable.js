@@ -67,6 +67,11 @@ document.addEventListener("DOMContentLoaded", function () {
           ],
         });
 
+        let btnCreate = document.querySelector("#btnCreate");
+        btnCreate.addEventListener("click", function () {
+            window.location.href = "/back-create-elementard";
+        }),
+
         // Ajout du console.log lors de l'appui sur le bouton "Modifier"
         $("#myTable").on("click", ".update-btn", function () {
           var id = $(this).data("id");

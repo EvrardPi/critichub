@@ -61,6 +61,7 @@ if($userStatus['role'] != 1) {
         <a class="" href="back-view-category"><span class="material-symbols-outlined">Gestion des catégories</span></a>
         <a class="" href="back-view-comments"><span class="material-symbols-outlined">Gestion des commentaires</span></a>
         <a class="" href="back-view-gestionFront"><span class="material-symbols-outlined">Gestion du front</span></a>
+          <a class="" href="/"><span class="material-symbols-outlined">Retour à l'accueil</span></a>
       </div>
     </div>
   </div>
